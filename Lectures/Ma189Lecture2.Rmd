@@ -67,6 +67,9 @@ Our study is comprised of 1236 babies:
 3. All lived at least 28 days
 
 ```{r}
-setwd()
+setwd("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data")
+baby <- read.table("babies.dat")
+dim(baby)
+head(baby)
 ```
 
