@@ -1,0 +1,52 @@
+---
+title: "Math 189 Schedule"
+author: "Tucker McElroy"
+date: "12/7/2020"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Schedule
+Each 50-minute lesson will cover theoretical material in an R Notebook (which will be posted on the GitHub), allowing us to click through code that demonstrates the mathematics.
+
+1. **Introduction** (January 4, 2021) Policies and course goals.  Discussion of languages (R and Python), IDE (RStudio and PyCharm), generating reports (R Markdown), and GitHub.
+2. **Case Study 1** (January 6, 2021) Random variables and random vectors.  Demo in R/Python.
+3. **Case Study 1** (January 8, 2021) Mean and Covariance.  Demo in R/Python. 
+4. **Case Study 1** (January 11, 2021) Inference and hypotheses.  Downloading from American Factfinder.
+5. **Case Study 1** (January 13, 2021) Order statistics and ranking.    
+6. **Case Study 1** (January 15, 2021)
+Normal Approximations.   
+7. **MLK Holiday** (January 18, 2021)
+8. **Case Study 2** (January 20, 2021)
+9. **Case Study 2** (January 22, 2021)
+10. **Case Study 2** (January 25, 2021)
+11. **Case Study 2** (January 27, 2021)
+12. **Case Study 2** (January 29, 2021)
+13. **Case Study 2** (February 1, 2021)
+14. **Case Study 3** (February 3, 2021)
+15. **Case Study 3** (February 5, 2021)
+16. **Case Study 3** (February 8, 2021)
+17. **Case Study 3** (February 10, 2021)
+18. **Case Study 3** (February 12, 2021)
+19. **President's Day Holiday** (February 15, 2021)
+20. **Case Study 3** (February 17, 2021)
+21. **Case Study 4** (February 19, 2021)
+22. **Case Study 4** (February 22, 2021)
+23. **Case Study 4** (February 24, 2021)
+24. **Case Study 4** (February 26, 2021)
+25. **Case Study 4** (March 1, 2021)
+26. **Case Study 4** (March 3, 2021)
+27. **Final Project** (March 5, 2021)
+28. **Final Project** (March 8, 2021)
+29. **Final Project** (March 10, 2021)
+30. **Final Project** (March 12, 2021)
+  
+
+
+  
+

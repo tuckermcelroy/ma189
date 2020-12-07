@@ -1,7 +1,7 @@
 ---
 # title: "Math 189 Syllabus"
 # author: "Tucker McElroy"
-# date: "11/28/2020"
+# date: "12/7/2020"
 output: 
   html_document:
     keep_md: true
@@ -38,8 +38,6 @@ At the completion of the course, students will acquire the following skills:
 
 ### Instructor
  Tucker S. McElroy
- <!-- Research and Methodology Directorate, U.S. Census Bureau   -->
- <!-- 4600 Silver Hill Road, Washington, D.C. 20233-9100   -->
  <!-- tucker.s.mcelroy@census.gov    -->
  
  Office Hours: ???
@@ -49,10 +47,13 @@ At the completion of the course, students will acquire the following skills:
  Phone: 240-695-3610
  
  Tucker S. McElroy is Senior Time Series Mathematical Statistician at the U.S. Census Bureau, where he has contributed to developing time series research and software for the last 17 years. Before Census, Tucker was a faculty fellow at UCSD, after receiving his PhD in mathematics in 2001. 
- <!-- He has published more than 80 papers and is a recipient of the Arthur S. Flemming award (2011). -->
- 
+
 ### Text
-There is no required text.  The bookstore has copies available of the introductory text *Exploratory Data Analysis with R*, by Roger D. Peng.  Also available at https://bookdown.org/rdpeng/exdata/
+There is no required text.  Recommended texts:
+
+1. *Exploratory Data Analysis with R*, by Roger D. Peng.  Also available at https://bookdown.org/rdpeng/exdata/
+2. *R Programming for Data Science,* by Roger D. Peng.  A 2015 version is available from
+https://math189.edublogs.org/files/2016/01/R-programming-for-Data-Science-2iehm2j.pdf
  
 ### Grading
 40% homework, 20% quiz, 40% final project.
@@ -63,24 +64,14 @@ There is no required text.  The bookstore has copies available of the introducto
 
 *Project*: Students will work alone on a final project, analyzing a data set and summarizing results in an R Markdown report.
 
-### Course website
-All the lecture notes and class information will be available through the instructor's GitHub: https://github.com/tuckermcelroy.  We will be using Piazza for forum-type discussions throughout the quarter. All posts will be anonymous to the student users but not the TAs and the instructor.
+### Course materials
+All the lecture notes and class information will be available through the instructor's GitHub: https://github.com/tuckermcelroy/ma189.  We will be using Piazza for forum-type discussions throughout the quarter. All posts will be anonymous to the student users but not the TAs and the instructor.
  
+### Course structure
+The course is centered around 4 case studies.  Each case study involves a data set and various scientific questions for investigation.  The instructor will use class time to teach statistical concepts, and illustrate using R/Python.  
 
-### Schedule
-Each 50-minute lesson will cover theoretical material in an R Notebook (which will be posted on the GitHub), allowing us to click through code that demonstrates the mathematics.
+1. Case Study 1 Concepts: mean, variance, kurtosis, quantile-quantile plots, normal approximations
+2. Case study 2 Concepts: survey methodology, simple random and stratified sampling, confidence intervals, bootstrap, finite sample population, confidence intervals, classification tree
+3. Case study 3 Concepts: poisson process, estimation and testing, goodness of fit test, two-sample testing, information, asymptotic variance
+4. Case study 4 Concepts: regression, longitudinal data, prediction, confidence intervals, testing
 
-1. **Introduction** Policies and course goals.  Discussion of languages (R and Python), IDE (RStudio and PyCharm), generating reports (R Markdown), and GitHub.
-2. **Case Study 1** Random variables and random vectors.  Demo in R/Python.
-3. **Case Study 1** Mean and Covariance.  Demo in R/Python. 
-4. **Case Study 1** Inference and hypotheses.  Downloading from American Factfinder.
-5. **Case Study 1** Order statistics and ranking.    
-6. **Case Study 1** Normal Approximations.   
-7. **MLK Holiday**
-
-  
-<!-- 3 Case study 2: survey methodology, simple random and stratified sampling, confidence intervals, bootstrap, finite sample population, confidence intervals, classification tree -->
-<!-- 3 Case study 4: poisson process, estimation and testing, goodness of fit test, twosample testing, information, asymptotic variance -->
-<!-- 4 Case study 5: regression, longitudinal data, prediction, confidence intervals, testing -->
-
-  

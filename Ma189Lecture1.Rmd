@@ -1,0 +1,19 @@
+---
+title: "Math 189: Introduction"
+output: html_notebook
+---
+
+## Syllabus
+Instructor goes through syllabus on GitHub.
+
+## What is GitHub?
+Course material will be on https://github.com/tuckermcelroy/ma189. This is a *repository* where you can view files (like Markdown files) and download to your PC. Click *Raw* to view underyling R Markdown source file - this is how you learn!
+
+## Background
+Here is some background reading.
+
+1. Writing Data Analysis Reports.  
+2. 
+ 
+
+https://math189.edublogs.org/files/2018/01/Statistics-and-Data-Science-1vh53fi-1ylpezs.pdf
