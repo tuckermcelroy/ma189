@@ -6,14 +6,25 @@ output: html_notebook
 ## Syllabus
 Instructor goes through syllabus on GitHub.
 
+## What is R?
+R is a computer language for doing statistical analysis. It is command-line style, so no compilation is needed before running (unlike C, Fortran, etc.). R is free, and you should install it on your PC. Your TA (as well as the instructor) can help with R; also see this tutorials: *An Introduction to R*. https://cran.r-project.org/doc/manuals/R-intro.pdf
+
+## What is RStudio?
+RStudio is an IDE (Integrated Development Environment), which allows you to write and execute R code, participate in projects, view output, and more. This is free; please download and install.
+
+## What is Python?
+Python is also a command-line style language, and can be downloaded for free. For production-quality code, it is superior to R. PyCharm is a Python IDE. The class will be taught in R.
+
+## What is R Markdown?
+Markdown is a *plain text formatting syntax*.  You will use this to generate reports for your group homeworks and final project.  R Markdown extends Markdown by embedding R code.
+
 ## What is GitHub?
-Course material will be on https://github.com/tuckermcelroy/ma189. This is a *repository* where you can view files (like Markdown files) and download to your PC. Click *Raw* to view underyling R Markdown source file - this is how you learn!
+Course material will be on https://github.com/tuckermcelroy/ma189. This is a *repository* where you can view files (like Markdown files and data sets) and download them to your PC. Click *Raw* to view underyling R Markdown source file.
 
-## Background
-Here is some background reading.
+## First Tasks
+Install R and RStudio, and get familiar with accessing files on GitHub. Review the background reading:
 
-1. Writing Data Analysis Reports.  
-2. 
- 
-
+1. Writing Data Analysis Reports: *WritingReports.md* 
+2. Some slides by Jonathan Taylor at Stanford Statistics Department, giving a constrast of *Statistics* and *Data Science*.
 https://math189.edublogs.org/files/2018/01/Statistics-and-Data-Science-1vh53fi-1ylpezs.pdf
+
