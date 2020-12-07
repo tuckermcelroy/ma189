@@ -1,0 +1,72 @@
+---
+title: "Math 189: Descriptive Statistics"
+output: html_notebook
+---
+
+# Maternal Smoking and Infant Death
+ 
+## Introduction
+
+### Exploratory Data Analysis
+First examine your data.
+
+1. Catch mistakes in how data was entered
+2. Discern patterns in the data
+3. Check model assumptions
+4. Generate working hypotheses
+
+### Infant Death Tied to Premature Births
+ 
+Surgeon General warning:
+
+*'Smoking by pregnant women may result in fetal injury, premature birth and
+low birth weight.'*
+
+**Objective**: Evaluate the surgeon general warning by comparing the birth weights of
+babies born to smokers and to non-smokers.
+
+**Primary Data**: From the Child Health and Development Studies (CHDS).  Data is
+collected for pregnancies that occurred between 1960 and 1967 among women in
+Kaiser Health Plan of the San Francisco region.
+
+**Notes**: This data is known for its unexpected finding that ounce for ounce babies of
+smokers did not have a higher death rate than the babies of nonsmokers. Despite the surgeon general working: 15% of pregnant women smoke during pregnancy (study performed in 1996).
+
+
+### Prior Knowledge
+
+Epidemiological studies indicate that smoking is responsible for 150g of reduction in birth weight.
+
+Epidemiological studies indicate that smoking mothers are twice as likely as non-smoking mothers to have a low-birth-weight baby (under 2500g).
+
+Baby maturity is measured by **birth weight** and **baby’s gestational age**.
+
+Babies both early and born small have lower survival rates.
+
+
+## Data
+
+### Paradata (Facts About the Data)
+
+Data collected for our study is enlarged portion of the mentioned CHDS data.
+
+The data consists of all pregnancies that occurred between 1960 and 1967 among women in Kaiser Health Plan in Oakland, California.
+
+The women in the study are all those that:
+
+1. Were enrolled in Kaiser Heath Plan
+2. Had obtained prenatal care in San Francisco area
+3. Were delivered in any of the Kaiser hospitals in Northen California
+
+At birth measurements are obtained: **length**, **weight**, and **head circumference**.
+
+Our study is comprised of 1236 babies:
+
+1. All the same gender: boys
+2. Single births (no twins)
+3. All lived at least 28 days
+
+```{r}
+setwd()
+```
+
