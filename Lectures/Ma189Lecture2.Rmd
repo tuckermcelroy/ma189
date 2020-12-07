@@ -66,10 +66,71 @@ Our study is comprised of 1236 babies:
 2. Single births (no twins)
 3. All lived at least 28 days
 
+### Data Matrix
+
+Rows are babies, columns are variables
+
 ```{r}
-setwd("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data")
-baby <- read.table("babies.dat")
+baby <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\babies.dat",header=TRUE)
 dim(baby)
-head(baby)
+head(baby[,c(1,7)])
 ```
+
+### Types of Variables
+
+1. Baby Weight (**bwt**): in ounces
+2. Smoking Status (**smoke**): 1 for smoker, 0 for non-smoker
+
+## Background
+
+### Fetal Development
+
+- The typical gestational period for a baby is 40 weeks.
+
+- Preterm delivery: baby born before 37 weeks.
+
+- Some babies stay in utero up to 42 weeks.
+
+- At 28 weeks, the fetus weights about 4 to 5 pounds and is about 40cm long.
+
+- At 32 weeks, the fetus weights about 5 to 5.5 pounds and is about 45cm long.
+
+- In the final weeks, baby gains 0.2 pounds a week.
+
+- Most newborns range from 45 to 55cm in length and from 5.5 to 8.8 pounds.
+
+- Babies born at term that weigh less than 5.5 pounds are considered small for their gestational age.
+
+### Confounding 
+
+**Confounder**: Another variable that can mask the affect of smoking on fetal death rate?
+
+What if older mothers are more likely to smoke?  Then apparent association between smoking and death rate is really a result of association between higher maternal age and death rate.
+ 
+### A Physical Model
+
+- It is commonly thought that carbon monoxide in cigarette smoke reduces the oxygen supplied to the fetus.
+
+- The physiological effects of a decreased oxygen supply on fetal development are not completely understood.
+
+- Steady supply of oxygen is critical for the developing baby.
+
+- It is hypothesized that to compensate for a decreased supply of oxygen, the placenta increases in surface area and in the number of blood vessels. This is believed to lead to 'abruptia placenta', where the placenta breaks away from the uterine wall, resulting in a pre-term delivery and fetal death.
+
+ 
+### What Questions to Ask
+
+- Do birth weight differences - between those born to smokers and those born to non-smokers - impact the death rate?
+ 
+- There are four different death rates: fetal (die before born), neonatal (die within first 28 days after birth), perinatal (combined fetal and neonatal) and infant.
+
+- Previous studies show that although low birth weights are associated with an increase in the numbers of death shortly after birth, the babies of smokers tended to have much lower death rates than the babies of non-smokers.
+ 
+- One could group babies by their gestational age, or by their relative birth weight (which is birthweight - average birth weight of its group).
+
+- Because babies born to smokers tend to be smaller, the mortality curve is shifted to the right relative to the non-smokers’ curve.
+
+- If the babies born to smokers are smaller but otherwise as healthy as babies born to non-smokers, then the two curves in standard units should coincide.
+
+- Prior studies found that the mortality rate of the smokers is higher.
 

@@ -15,11 +15,11 @@ knitr::opts_chunk$set(echo = TRUE)
 Each 50-minute lesson will cover theoretical material in an R Notebook (which will be posted on the GitHub), allowing us to click through code that demonstrates the mathematics.
 
 1. **Introduction** (January 4, 2021) Policies and course goals.  Discussion of languages (R and Python), IDE (RStudio and PyCharm), generating reports (R Markdown), and GitHub.
-2. **Case Study 1** (January 6, 2021) Random variables and random vectors.  Demo in R/Python.
-3. **Case Study 1** (January 8, 2021) Mean and Covariance.  Demo in R/Python. 
+2. **Case Study 1** (January 6, 2021) Random variables and random vectors.
+3. **Case Study 1** (January 8, 2021) Mean and Covariance.
 4. **Case Study 1** (January 11, 2021) Inference and hypotheses.  Downloading from American Factfinder.
 5. **Case Study 1** (January 13, 2021) Order statistics and ranking.    
-6. **Case Study 1** (January 15, 2021)
+6. **Case Study 1** (January 15, 2021) 
 Normal Approximations.   
 7. **MLK Holiday** (January 18, 2021)
 8. **Case Study 2** (January 20, 2021)

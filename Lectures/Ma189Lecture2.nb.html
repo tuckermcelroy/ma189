@@ -1798,22 +1798,76 @@ summary {
 <li>Single births (no twins)</li>
 <li>All lived at least 28 days</li>
 </ol>
+</div>
+<div id="data-matrix" class="section level3">
+<h3>Data Matrix</h3>
+<p>Rows are babies, columns are variables</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJDOlxcXFxVc2Vyc1xcXFxuZWlkZVxcXFxEb2N1bWVudHNcXFxcR2l0SHViXFxcXG1hMTg5XFxcXERhdGFcIilcbmJhYnkgPC0gcmVhZC50YWJsZShcImJhYmllcy5kYXRcIilcbmRpbShiYWJ5KVxuaGVhZChiYWJ5KVxuYGBgIn0= -->
-<pre class="r"><code>setwd(&quot;C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data&quot;)
-baby &lt;- read.table(&quot;babies.dat&quot;)
-dim(baby)
-head(baby)</code></pre>
-<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVF5MjdDTUJCY095UVZsdnFRK2gxRUFzUVh0QjlROWNUVkJMZU5NRFpOaktqVUM4ZCtOZTA0OFVyRmxrYmVIZS9NN3ZyMWViMVVhMFZFQlJVVlVDS2s2dWxsdmxndGlDWVNtYUFKVGVQOWhhcEhCSkc4aldVQU9Qb0V6c0EzWUlHZmYrOTh4UFY5WlZ3NnZUYzlnb2ZCZkNTTHpTbndlNy8zTzVPSnBwMC8xU3lNM2VSNXRLNXk5OGJxbnQyWlZGc2RkUDNXUVkvc2trbHUvQ0cwM2tFazQ3NWxKaFpkUnR3ZlhaeGtPMnMram00M1c4VUdhVmVScGhQcFB6aVdZMHY1bTZ6S1pGVVo5OTQ2dzdOYnZURTJKWGZZZUZpNFBuU3Q0ODlSWVBzNitLQzVUalhlTWpQc1JwYy9LTVpwZmVjQkFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["bwt"],"name":[1],"type":["int"],"align":["right"]},{"label":["smoke"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"120","2":"0","_rn_":"1"},{"1":"113","2":"0","_rn_":"2"},{"1":"128","2":"1","_rn_":"3"},{"1":"123","2":"0","_rn_":"4"},{"1":"108","2":"1","_rn_":"5"},{"1":"136","2":"0","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="types-of-variables" class="section level3">
+<h3>Types of Variables</h3>
+<ol style="list-style-type: decimal">
+<li>Baby Weight (<strong>bwt</strong>): in ounces</li>
+<li>Smoking Status (<strong>smoke</strong>): 1 for smoker, 0 for non-smoker</li>
+</ol>
+</div>
+</div>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<div id="fetal-development" class="section level3">
+<h3>Fetal Development</h3>
+<ul>
+<li><p>The typical gestational period for a baby is 40 weeks.</p></li>
+<li><p>Preterm delivery: baby born before 37 weeks.</p></li>
+<li><p>Some babies stay in utero up to 42 weeks.</p></li>
+<li><p>At 28 weeks, the fetus weights about 4 to 5 pounds and is about 40cm long.</p></li>
+<li><p>At 32 weeks, the fetus weights about 5 to 5.5 pounds and is about 45cm long.</p></li>
+<li><p>In the final weeks, baby gains 0.2 pounds a week.</p></li>
+<li><p>Most newborns range from 45 to 55cm in length and from 5.5 to 8.8 pounds.</p></li>
+<li><p>Babies born at term that weigh less than 5.5 pounds are considered small for their gestational age.</p></li>
+</ul>
+</div>
+<div id="confounding" class="section level3">
+<h3>Confounding</h3>
+<p><strong>Confounder</strong>: Another variable that can mask the affect of smoking on fetal death rate?</p>
+<p>What if older mothers are more likely to smoke? Then apparent association between smoking and death rate is really a result of association between higher maternal age and death rate.</p>
+</div>
+<div id="a-physical-model" class="section level3">
+<h3>A Physical Model</h3>
+<ul>
+<li><p>It is commonly thought that carbon monoxide in cigarette smoke reduces the oxygen supplied to the fetus.</p></li>
+<li><p>The physiological effects of a decreased oxygen supply on fetal development are not completely understood.</p></li>
+<li><p>Steady supply of oxygen is critical for the developing baby.</p></li>
+<li><p>It is hypothesized that to compensate for a decreased supply of oxygen, the placenta increases in surface area and in the number of blood vessels. This is believed to lead to ‘abruptia placenta’, where the placenta breaks away from the uterine wall, resulting in a pre-term delivery and fetal death.</p></li>
+</ul>
+</div>
+<div id="what-questions-to-ask" class="section level3">
+<h3>What Questions to Ask</h3>
+<ul>
+<li><p>Do birth weight differences - between those born to smokers and those born to non-smokers - impact the death rate?</p></li>
+<li><p>There are four different death rates: fetal (die before born), neonatal (die within first 28 days after birth), perinatal (combined fetal and neonatal) and infant.</p></li>
+<li><p>Previous studies show that although low birth weights are associated with an increase in the numbers of death shortly after birth, the babies of smokers tended to have much lower death rates than the babies of non-smokers.</p></li>
+<li><p>One could group babies by their gestational age, or by their relative birth weight (which is birthweight - average birth weight of its group).</p></li>
+<li><p>Because babies born to smokers tend to be smaller, the mortality curve is shifted to the right relative to the non-smokers’ curve.</p></li>
+<li><p>If the babies born to smokers are smaller but otherwise as healthy as babies born to non-smokers, then the two curves in standard units should coincide.</p></li>
+<li><p>Prior studies found that the mortality rate of the smokers is higher.</p></li>
+</ul>
 <!-- rnb-text-end -->
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBEZXNjcmlwdGl2ZSBTdGF0aXN0aWNzIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyBNYXRlcm5hbCBTbW9raW5nIGFuZCBJbmZhbnQgRGVhdGgNCiANCiMjIEludHJvZHVjdGlvbg0KDQojIyMgRXhwbG9yYXRvcnkgRGF0YSBBbmFseXNpcw0KRmlyc3QgZXhhbWluZSB5b3VyIGRhdGEuDQoNCjEuIENhdGNoIG1pc3Rha2VzIGluIGhvdyBkYXRhIHdhcyBlbnRlcmVkDQoyLiBEaXNjZXJuIHBhdHRlcm5zIGluIHRoZSBkYXRhDQozLiBDaGVjayBtb2RlbCBhc3N1bXB0aW9ucw0KNC4gR2VuZXJhdGUgd29ya2luZyBoeXBvdGhlc2VzDQoNCiMjIyBJbmZhbnQgRGVhdGggVGllZCB0byBQcmVtYXR1cmUgQmlydGhzDQogDQpTdXJnZW9uIEdlbmVyYWwgd2FybmluZzoNCg0KKidTbW9raW5nIGJ5IHByZWduYW50IHdvbWVuIG1heSByZXN1bHQgaW4gZmV0YWwgaW5qdXJ5LCBwcmVtYXR1cmUgYmlydGggYW5kDQpsb3cgYmlydGggd2VpZ2h0LicqDQoNCioqT2JqZWN0aXZlKio6IEV2YWx1YXRlIHRoZSBzdXJnZW9uIGdlbmVyYWwgd2FybmluZyBieSBjb21wYXJpbmcgdGhlIGJpcnRoIHdlaWdodHMgb2YNCmJhYmllcyBib3JuIHRvIHNtb2tlcnMgYW5kIHRvIG5vbi1zbW9rZXJzLg0KDQoqKlByaW1hcnkgRGF0YSoqOiBGcm9tIHRoZSBDaGlsZCBIZWFsdGggYW5kIERldmVsb3BtZW50IFN0dWRpZXMgKENIRFMpLiAgRGF0YSBpcw0KY29sbGVjdGVkIGZvciBwcmVnbmFuY2llcyB0aGF0IG9jY3VycmVkIGJldHdlZW4gMTk2MCBhbmQgMTk2NyBhbW9uZyB3b21lbiBpbg0KS2Fpc2VyIEhlYWx0aCBQbGFuIG9mIHRoZSBTYW4gRnJhbmNpc2NvIHJlZ2lvbi4NCg0KKipOb3RlcyoqOiBUaGlzIGRhdGEgaXMga25vd24gZm9yIGl0cyB1bmV4cGVjdGVkIGZpbmRpbmcgdGhhdCBvdW5jZSBmb3Igb3VuY2UgYmFiaWVzIG9mDQpzbW9rZXJzIGRpZCBub3QgaGF2ZSBhIGhpZ2hlciBkZWF0aCByYXRlIHRoYW4gdGhlIGJhYmllcyBvZiBub25zbW9rZXJzLiBEZXNwaXRlIHRoZSBzdXJnZW9uIGdlbmVyYWwgd29ya2luZzogMTUlIG9mIHByZWduYW50IHdvbWVuIHNtb2tlIGR1cmluZyBwcmVnbmFuY3kgKHN0dWR5IHBlcmZvcm1lZCBpbiAxOTk2KS4NCg0KDQojIyMgUHJpb3IgS25vd2xlZGdlDQoNCkVwaWRlbWlvbG9naWNhbCBzdHVkaWVzIGluZGljYXRlIHRoYXQgc21va2luZyBpcyByZXNwb25zaWJsZSBmb3IgMTUwZyBvZiByZWR1Y3Rpb24gaW4gYmlydGggd2VpZ2h0Lg0KDQpFcGlkZW1pb2xvZ2ljYWwgc3R1ZGllcyBpbmRpY2F0ZSB0aGF0IHNtb2tpbmcgbW90aGVycyBhcmUgdHdpY2UgYXMgbGlrZWx5IGFzIG5vbi1zbW9raW5nIG1vdGhlcnMgdG8gaGF2ZSBhIGxvdy1iaXJ0aC13ZWlnaHQgYmFieSAodW5kZXIgMjUwMGcpLg0KDQpCYWJ5IG1hdHVyaXR5IGlzIG1lYXN1cmVkIGJ5ICoqYmlydGggd2VpZ2h0KiogYW5kICoqYmFieeKAmXMgZ2VzdGF0aW9uYWwgYWdlKiouDQoNCkJhYmllcyBib3RoIGVhcmx5IGFuZCBib3JuIHNtYWxsIGhhdmUgbG93ZXIgc3Vydml2YWwgcmF0ZXMuDQoNCg0KIyMgRGF0YQ0KDQojIyMgUGFyYWRhdGEgKEZhY3RzIEFib3V0IHRoZSBEYXRhKQ0KDQpEYXRhIGNvbGxlY3RlZCBmb3Igb3VyIHN0dWR5IGlzIGVubGFyZ2VkIHBvcnRpb24gb2YgdGhlIG1lbnRpb25lZCBDSERTIGRhdGEuDQoNClRoZSBkYXRhIGNvbnNpc3RzIG9mIGFsbCBwcmVnbmFuY2llcyB0aGF0IG9jY3VycmVkIGJldHdlZW4gMTk2MCBhbmQgMTk2NyBhbW9uZyB3b21lbiBpbiBLYWlzZXIgSGVhbHRoIFBsYW4gaW4gT2FrbGFuZCwgQ2FsaWZvcm5pYS4NCg0KVGhlIHdvbWVuIGluIHRoZSBzdHVkeSBhcmUgYWxsIHRob3NlIHRoYXQ6DQoNCjEuIFdlcmUgZW5yb2xsZWQgaW4gS2Fpc2VyIEhlYXRoIFBsYW4NCjIuIEhhZCBvYnRhaW5lZCBwcmVuYXRhbCBjYXJlIGluIFNhbiBGcmFuY2lzY28gYXJlYQ0KMy4gV2VyZSBkZWxpdmVyZWQgaW4gYW55IG9mIHRoZSBLYWlzZXIgaG9zcGl0YWxzIGluIE5vcnRoZW4gQ2FsaWZvcm5pYQ0KDQpBdCBiaXJ0aCBtZWFzdXJlbWVudHMgYXJlIG9idGFpbmVkOiAqKmxlbmd0aCoqLCAqKndlaWdodCoqLCBhbmQgKipoZWFkIGNpcmN1bWZlcmVuY2UqKi4NCg0KT3VyIHN0dWR5IGlzIGNvbXByaXNlZCBvZiAxMjM2IGJhYmllczoNCg0KMS4gQWxsIHRoZSBzYW1lIGdlbmRlcjogYm95cw0KMi4gU2luZ2xlIGJpcnRocyAobm8gdHdpbnMpDQozLiBBbGwgbGl2ZWQgYXQgbGVhc3QgMjggZGF5cw0KDQpgYGB7cn0NCnNldHdkKCJDOlxcVXNlcnNcXG5laWRlXFxEb2N1bWVudHNcXEdpdEh1YlxcbWExODlcXERhdGEiKQ0KYmFieSA8LSByZWFkLnRhYmxlKCJiYWJpZXMuZGF0IikNCmRpbShiYWJ5KQ0KaGVhZChiYWJ5KQ0KYGBgDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBEZXNjcmlwdGl2ZSBTdGF0aXN0aWNzIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyBNYXRlcm5hbCBTbW9raW5nIGFuZCBJbmZhbnQgRGVhdGgNCiANCiMjIEludHJvZHVjdGlvbg0KDQojIyMgRXhwbG9yYXRvcnkgRGF0YSBBbmFseXNpcw0KRmlyc3QgZXhhbWluZSB5b3VyIGRhdGEuDQoNCjEuIENhdGNoIG1pc3Rha2VzIGluIGhvdyBkYXRhIHdhcyBlbnRlcmVkDQoyLiBEaXNjZXJuIHBhdHRlcm5zIGluIHRoZSBkYXRhDQozLiBDaGVjayBtb2RlbCBhc3N1bXB0aW9ucw0KNC4gR2VuZXJhdGUgd29ya2luZyBoeXBvdGhlc2VzDQoNCiMjIyBJbmZhbnQgRGVhdGggVGllZCB0byBQcmVtYXR1cmUgQmlydGhzDQogDQpTdXJnZW9uIEdlbmVyYWwgd2FybmluZzoNCg0KKidTbW9raW5nIGJ5IHByZWduYW50IHdvbWVuIG1heSByZXN1bHQgaW4gZmV0YWwgaW5qdXJ5LCBwcmVtYXR1cmUgYmlydGggYW5kDQpsb3cgYmlydGggd2VpZ2h0LicqDQoNCioqT2JqZWN0aXZlKio6IEV2YWx1YXRlIHRoZSBzdXJnZW9uIGdlbmVyYWwgd2FybmluZyBieSBjb21wYXJpbmcgdGhlIGJpcnRoIHdlaWdodHMgb2YNCmJhYmllcyBib3JuIHRvIHNtb2tlcnMgYW5kIHRvIG5vbi1zbW9rZXJzLg0KDQoqKlByaW1hcnkgRGF0YSoqOiBGcm9tIHRoZSBDaGlsZCBIZWFsdGggYW5kIERldmVsb3BtZW50IFN0dWRpZXMgKENIRFMpLiAgRGF0YSBpcw0KY29sbGVjdGVkIGZvciBwcmVnbmFuY2llcyB0aGF0IG9jY3VycmVkIGJldHdlZW4gMTk2MCBhbmQgMTk2NyBhbW9uZyB3b21lbiBpbg0KS2Fpc2VyIEhlYWx0aCBQbGFuIG9mIHRoZSBTYW4gRnJhbmNpc2NvIHJlZ2lvbi4NCg0KKipOb3RlcyoqOiBUaGlzIGRhdGEgaXMga25vd24gZm9yIGl0cyB1bmV4cGVjdGVkIGZpbmRpbmcgdGhhdCBvdW5jZSBmb3Igb3VuY2UgYmFiaWVzIG9mDQpzbW9rZXJzIGRpZCBub3QgaGF2ZSBhIGhpZ2hlciBkZWF0aCByYXRlIHRoYW4gdGhlIGJhYmllcyBvZiBub25zbW9rZXJzLiBEZXNwaXRlIHRoZSBzdXJnZW9uIGdlbmVyYWwgd29ya2luZzogMTUlIG9mIHByZWduYW50IHdvbWVuIHNtb2tlIGR1cmluZyBwcmVnbmFuY3kgKHN0dWR5IHBlcmZvcm1lZCBpbiAxOTk2KS4NCg0KDQojIyMgUHJpb3IgS25vd2xlZGdlDQoNCkVwaWRlbWlvbG9naWNhbCBzdHVkaWVzIGluZGljYXRlIHRoYXQgc21va2luZyBpcyByZXNwb25zaWJsZSBmb3IgMTUwZyBvZiByZWR1Y3Rpb24gaW4gYmlydGggd2VpZ2h0Lg0KDQpFcGlkZW1pb2xvZ2ljYWwgc3R1ZGllcyBpbmRpY2F0ZSB0aGF0IHNtb2tpbmcgbW90aGVycyBhcmUgdHdpY2UgYXMgbGlrZWx5IGFzIG5vbi1zbW9raW5nIG1vdGhlcnMgdG8gaGF2ZSBhIGxvdy1iaXJ0aC13ZWlnaHQgYmFieSAodW5kZXIgMjUwMGcpLg0KDQpCYWJ5IG1hdHVyaXR5IGlzIG1lYXN1cmVkIGJ5ICoqYmlydGggd2VpZ2h0KiogYW5kICoqYmFieeKAmXMgZ2VzdGF0aW9uYWwgYWdlKiouDQoNCkJhYmllcyBib3RoIGVhcmx5IGFuZCBib3JuIHNtYWxsIGhhdmUgbG93ZXIgc3Vydml2YWwgcmF0ZXMuDQoNCg0KIyMgRGF0YQ0KDQojIyMgUGFyYWRhdGEgKEZhY3RzIEFib3V0IHRoZSBEYXRhKQ0KDQpEYXRhIGNvbGxlY3RlZCBmb3Igb3VyIHN0dWR5IGlzIGVubGFyZ2VkIHBvcnRpb24gb2YgdGhlIG1lbnRpb25lZCBDSERTIGRhdGEuDQoNClRoZSBkYXRhIGNvbnNpc3RzIG9mIGFsbCBwcmVnbmFuY2llcyB0aGF0IG9jY3VycmVkIGJldHdlZW4gMTk2MCBhbmQgMTk2NyBhbW9uZyB3b21lbiBpbiBLYWlzZXIgSGVhbHRoIFBsYW4gaW4gT2FrbGFuZCwgQ2FsaWZvcm5pYS4NCg0KVGhlIHdvbWVuIGluIHRoZSBzdHVkeSBhcmUgYWxsIHRob3NlIHRoYXQ6DQoNCjEuIFdlcmUgZW5yb2xsZWQgaW4gS2Fpc2VyIEhlYXRoIFBsYW4NCjIuIEhhZCBvYnRhaW5lZCBwcmVuYXRhbCBjYXJlIGluIFNhbiBGcmFuY2lzY28gYXJlYQ0KMy4gV2VyZSBkZWxpdmVyZWQgaW4gYW55IG9mIHRoZSBLYWlzZXIgaG9zcGl0YWxzIGluIE5vcnRoZW4gQ2FsaWZvcm5pYQ0KDQpBdCBiaXJ0aCBtZWFzdXJlbWVudHMgYXJlIG9idGFpbmVkOiAqKmxlbmd0aCoqLCAqKndlaWdodCoqLCBhbmQgKipoZWFkIGNpcmN1bWZlcmVuY2UqKi4NCg0KT3VyIHN0dWR5IGlzIGNvbXByaXNlZCBvZiAxMjM2IGJhYmllczoNCg0KMS4gQWxsIHRoZSBzYW1lIGdlbmRlcjogYm95cw0KMi4gU2luZ2xlIGJpcnRocyAobm8gdHdpbnMpDQozLiBBbGwgbGl2ZWQgYXQgbGVhc3QgMjggZGF5cw0KDQojIyMgRGF0YSBNYXRyaXgNCg0KUm93cyBhcmUgYmFiaWVzLCBjb2x1bW5zIGFyZSB2YXJpYWJsZXMNCg0KYGBge3J9DQpiYWJ5IDwtIHJlYWQudGFibGUoIkM6XFxVc2Vyc1xcbmVpZGVcXERvY3VtZW50c1xcR2l0SHViXFxtYTE4OVxcRGF0YVxcYmFiaWVzLmRhdCIsaGVhZGVyPVRSVUUpDQpkaW0oYmFieSkNCmhlYWQoYmFieVssYygxLDcpXSkNCmBgYA0KDQojIyMgVHlwZXMgb2YgVmFyaWFibGVzDQoNCjEuIEJhYnkgV2VpZ2h0ICgqKmJ3dCoqKTogaW4gb3VuY2VzDQoyLiBTbW9raW5nIFN0YXR1cyAoKipzbW9rZSoqKTogMSBmb3Igc21va2VyLCAwIGZvciBub24tc21va2VyDQoNCiMjIEJhY2tncm91bmQNCg0KIyMjIEZldGFsIERldmVsb3BtZW50DQoNCi0gVGhlIHR5cGljYWwgZ2VzdGF0aW9uYWwgcGVyaW9kIGZvciBhIGJhYnkgaXMgNDAgd2Vla3MuDQoNCi0gUHJldGVybSBkZWxpdmVyeTogYmFieSBib3JuIGJlZm9yZSAzNyB3ZWVrcy4NCg0KLSBTb21lIGJhYmllcyBzdGF5IGluIHV0ZXJvIHVwIHRvIDQyIHdlZWtzLg0KDQotIEF0IDI4IHdlZWtzLCB0aGUgZmV0dXMgd2VpZ2h0cyBhYm91dCA0IHRvIDUgcG91bmRzIGFuZCBpcyBhYm91dCA0MGNtIGxvbmcuDQoNCi0gQXQgMzIgd2Vla3MsIHRoZSBmZXR1cyB3ZWlnaHRzIGFib3V0IDUgdG8gNS41IHBvdW5kcyBhbmQgaXMgYWJvdXQgNDVjbSBsb25nLg0KDQotIEluIHRoZSBmaW5hbCB3ZWVrcywgYmFieSBnYWlucyAwLjIgcG91bmRzIGEgd2Vlay4NCg0KLSBNb3N0IG5ld2Jvcm5zIHJhbmdlIGZyb20gNDUgdG8gNTVjbSBpbiBsZW5ndGggYW5kIGZyb20gNS41IHRvIDguOCBwb3VuZHMuDQoNCi0gQmFiaWVzIGJvcm4gYXQgdGVybSB0aGF0IHdlaWdoIGxlc3MgdGhhbiA1LjUgcG91bmRzIGFyZSBjb25zaWRlcmVkIHNtYWxsIGZvciB0aGVpciBnZXN0YXRpb25hbCBhZ2UuDQoNCiMjIyBDb25mb3VuZGluZyANCg0KKipDb25mb3VuZGVyKio6IEFub3RoZXIgdmFyaWFibGUgdGhhdCBjYW4gbWFzayB0aGUgYWZmZWN0IG9mIHNtb2tpbmcgb24gZmV0YWwgZGVhdGggcmF0ZT8NCg0KV2hhdCBpZiBvbGRlciBtb3RoZXJzIGFyZSBtb3JlIGxpa2VseSB0byBzbW9rZT8gIFRoZW4gYXBwYXJlbnQgYXNzb2NpYXRpb24gYmV0d2VlbiBzbW9raW5nIGFuZCBkZWF0aCByYXRlIGlzIHJlYWxseSBhIHJlc3VsdCBvZiBhc3NvY2lhdGlvbiBiZXR3ZWVuIGhpZ2hlciBtYXRlcm5hbCBhZ2UgYW5kIGRlYXRoIHJhdGUuDQogDQojIyMgQSBQaHlzaWNhbCBNb2RlbA0KDQotIEl0IGlzIGNvbW1vbmx5IHRob3VnaHQgdGhhdCBjYXJib24gbW9ub3hpZGUgaW4gY2lnYXJldHRlIHNtb2tlIHJlZHVjZXMgdGhlIG94eWdlbiBzdXBwbGllZCB0byB0aGUgZmV0dXMuDQoNCi0gVGhlIHBoeXNpb2xvZ2ljYWwgZWZmZWN0cyBvZiBhIGRlY3JlYXNlZCBveHlnZW4gc3VwcGx5IG9uIGZldGFsIGRldmVsb3BtZW50IGFyZSBub3QgY29tcGxldGVseSB1bmRlcnN0b29kLg0KDQotIFN0ZWFkeSBzdXBwbHkgb2Ygb3h5Z2VuIGlzIGNyaXRpY2FsIGZvciB0aGUgZGV2ZWxvcGluZyBiYWJ5Lg0KDQotIEl0IGlzIGh5cG90aGVzaXplZCB0aGF0IHRvIGNvbXBlbnNhdGUgZm9yIGEgZGVjcmVhc2VkIHN1cHBseSBvZiBveHlnZW4sIHRoZSBwbGFjZW50YSBpbmNyZWFzZXMgaW4gc3VyZmFjZSBhcmVhIGFuZCBpbiB0aGUgbnVtYmVyIG9mIGJsb29kIHZlc3NlbHMuIFRoaXMgaXMgYmVsaWV2ZWQgdG8gbGVhZCB0byAnYWJydXB0aWEgcGxhY2VudGEnLCB3aGVyZSB0aGUgcGxhY2VudGEgYnJlYWtzIGF3YXkgZnJvbSB0aGUgdXRlcmluZSB3YWxsLCByZXN1bHRpbmcgaW4gYSBwcmUtdGVybSBkZWxpdmVyeSBhbmQgZmV0YWwgZGVhdGguDQoNCiANCiMjIyBXaGF0IFF1ZXN0aW9ucyB0byBBc2sNCg0KLSBEbyBiaXJ0aCB3ZWlnaHQgZGlmZmVyZW5jZXMgLSBiZXR3ZWVuIHRob3NlIGJvcm4gdG8gc21va2VycyBhbmQgdGhvc2UgYm9ybiB0byBub24tc21va2VycyAtIGltcGFjdCB0aGUgZGVhdGggcmF0ZT8NCiANCi0gVGhlcmUgYXJlIGZvdXIgZGlmZmVyZW50IGRlYXRoIHJhdGVzOiBmZXRhbCAoZGllIGJlZm9yZSBib3JuKSwgbmVvbmF0YWwgKGRpZSB3aXRoaW4gZmlyc3QgMjggZGF5cyBhZnRlciBiaXJ0aCksIHBlcmluYXRhbCAoY29tYmluZWQgZmV0YWwgYW5kIG5lb25hdGFsKSBhbmQgaW5mYW50Lg0KDQotIFByZXZpb3VzIHN0dWRpZXMgc2hvdyB0aGF0IGFsdGhvdWdoIGxvdyBiaXJ0aCB3ZWlnaHRzIGFyZSBhc3NvY2lhdGVkIHdpdGggYW4gaW5jcmVhc2UgaW4gdGhlIG51bWJlcnMgb2YgZGVhdGggc2hvcnRseSBhZnRlciBiaXJ0aCwgdGhlIGJhYmllcyBvZiBzbW9rZXJzIHRlbmRlZCB0byBoYXZlIG11Y2ggbG93ZXIgZGVhdGggcmF0ZXMgdGhhbiB0aGUgYmFiaWVzIG9mIG5vbi1zbW9rZXJzLg0KIA0KLSBPbmUgY291bGQgZ3JvdXAgYmFiaWVzIGJ5IHRoZWlyIGdlc3RhdGlvbmFsIGFnZSwgb3IgYnkgdGhlaXIgcmVsYXRpdmUgYmlydGggd2VpZ2h0ICh3aGljaCBpcyBiaXJ0aHdlaWdodCAtIGF2ZXJhZ2UgYmlydGggd2VpZ2h0IG9mIGl0cyBncm91cCkuDQoNCi0gQmVjYXVzZSBiYWJpZXMgYm9ybiB0byBzbW9rZXJzIHRlbmQgdG8gYmUgc21hbGxlciwgdGhlIG1vcnRhbGl0eSBjdXJ2ZSBpcyBzaGlmdGVkIHRvIHRoZSByaWdodCByZWxhdGl2ZSB0byB0aGUgbm9uLXNtb2tlcnPigJkgY3VydmUuDQoNCi0gSWYgdGhlIGJhYmllcyBib3JuIHRvIHNtb2tlcnMgYXJlIHNtYWxsZXIgYnV0IG90aGVyd2lzZSBhcyBoZWFsdGh5IGFzIGJhYmllcyBib3JuIHRvIG5vbi1zbW9rZXJzLCB0aGVuIHRoZSB0d28gY3VydmVzIGluIHN0YW5kYXJkIHVuaXRzIHNob3VsZCBjb2luY2lkZS4NCg0KLSBQcmlvciBzdHVkaWVzIGZvdW5kIHRoYXQgdGhlIG1vcnRhbGl0eSByYXRlIG9mIHRoZSBzbW9rZXJzIGlzIGhpZ2hlci4NCg0K</div>
 
 
 
