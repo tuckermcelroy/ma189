@@ -4,7 +4,7 @@ output: html_notebook
 ---
 
 ## Syllabus
-Instructor goes through syllabus on GitHub.
+Instructor goes through syllabus.
 
 ## What is R?
 R is a computer language for doing statistical analysis. It is command-line style, so no compilation is needed before running (unlike C, Fortran, etc.). R is free, and you should install it on your PC. Your TA (as well as the instructor) can help with R; also see this tutorials: *An Introduction to R*. https://cran.r-project.org/doc/manuals/R-intro.pdf
@@ -27,4 +27,3 @@ Install R and RStudio, and get familiar with accessing files on GitHub. Review t
 1. Writing Data Analysis Reports: *WritingReports.md* 
 2. Some slides by Jonathan Taylor at Stanford Statistics Department, giving a constrast of *Statistics* and *Data Science*.
 https://math189.edublogs.org/files/2018/01/Statistics-and-Data-Science-1vh53fi-1ylpezs.pdf
-

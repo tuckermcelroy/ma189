@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Schedule
-Each 50-minute lesson will cover theoretical material in an R Notebook (which will be posted on the GitHub), allowing us to click through code that demonstrates the mathematics.
+Each 50-minute lesson will cover theoretical material in an R Markdown Notebook (which will be posted on Canvas and GitHub), allowing us to click through code that demonstrates the methodology.
 
 1. **Introduction** (January 4, 2021) Policies and course goals.  Discussion of languages (R and Python), IDE (RStudio and PyCharm), generating reports (R Markdown), and GitHub.
 2. **Case Study 1** (January 6, 2021) Random variables and random vectors.
