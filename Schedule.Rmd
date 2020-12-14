@@ -14,16 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Schedule
 Each 50-minute lesson will cover theoretical material in an R Markdown Notebook (which will be posted on Canvas and GitHub), allowing us to click through code that demonstrates the methodology.
 
-1. **Introduction** (January 4, 2021) Policies and course goals.  Discussion of languages (R and Python), IDE (RStudio and PyCharm), generating reports (R Markdown), and GitHub.
-2. **Case Study 1** (January 6, 2021) Random variables and random vectors.
-3. **Case Study 1** (January 8, 2021) Mean and Covariance.
-4. **Case Study 1** (January 11, 2021) Inference and hypotheses.  Downloading from American Factfinder.
-5. **Case Study 1** (January 13, 2021) Order statistics and ranking.    
-6. **Case Study 1** (January 15, 2021) 
-Normal Approximations.   
+1. **Introduction** (January 4, 2021) Policies and course goals.  Discussion of languages (R and Python), IDE (RStudio and PyCharm), generating reports (R Markdown), and GitHub.  Demo with Weekly Claims.
+2. **Matrix Algebra** (January 6, 2021) Multivariate data. Demo with ???
+3. **Exploratory Data Analysis I** (January 8, 2021)  Loading, Visualizing, Cleaning.
+4. **Exploratory Data Analysis II** (January 11, 2021)  Random vectors, Central tendency.
+5. **Exploratory Data Analysis III** (January 13, 2021)  Dispersion, Correlation.
+6. **Data Analysis and Inference I** (January 15, 2021) Inference for Mean, Central Limit Theorem.    
 7. **MLK Holiday** (January 18, 2021)
-8. **Case Study 2** (January 20, 2021)
-9. **Case Study 2** (January 22, 2021)
+8. **Data Analysis and Inference II** (January 20, 2021) Hypothesis Testing, Inference, Decision Rules.
+9. **Multiple Testing I** (January 22, 2021) Family-Wise Error Rate, False Discovery Rate.
 10. **Case Study 2** (January 25, 2021)
 11. **Case Study 2** (January 27, 2021)
 12. **Case Study 2** (January 29, 2021)

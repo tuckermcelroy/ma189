@@ -1749,6 +1749,8 @@ summary {
 
 
 <!-- rnb-text-begin -->
+<div id="i.-overview" class="section level1">
+<h1>I. Overview</h1>
 <div id="syllabus" class="section level2">
 <h2>Syllabus</h2>
 <p>Instructor goes through syllabus.</p>
@@ -1771,19 +1773,66 @@ summary {
 </div>
 <div id="what-is-github" class="section level2">
 <h2>What is GitHub?</h2>
-<p>Course material will be on <a href="https://github.com/tuckermcelroy/ma189" class="uri">https://github.com/tuckermcelroy/ma189</a>. This is a <em>repository</em> where you can view files (like Markdown files and data sets) and download them to your PC. Click <em>Raw</em> to view underyling R Markdown source file.</p>
+<p>Course material will be on <a href="https://github.com/tuckermcelroy/ma189" class="uri">https://github.com/tuckermcelroy/ma189</a> (as well as Canvas). This is a <em>repository</em> where you can view files (like Markdown files and data sets) and download them to your PC. Click <em>Raw</em> to view underyling R Markdown source file.</p>
 </div>
 <div id="first-tasks" class="section level2">
 <h2>First Tasks</h2>
-<p>Install R and RStudio, and get familiar with accessing files on GitHub. Review the background reading:</p>
+<p>Install R and RStudio, and get familiar with accessing files on Canvas and GitHub. Review the background reading:</p>
 <ol style="list-style-type: decimal">
 <li>Writing Data Analysis Reports: <em>WritingReports.md</em></li>
 <li>Some slides by Jonathan Taylor at Stanford Statistics Department, giving a constrast of <em>Statistics</em> and <em>Data Science</em>. <a href="https://math189.edublogs.org/files/2018/01/Statistics-and-Data-Science-1vh53fi-1ylpezs.pdf" class="uri">https://math189.edublogs.org/files/2018/01/Statistics-and-Data-Science-1vh53fi-1ylpezs.pdf</a></li>
 </ol>
+</div>
+</div>
+<div id="ii.-national-unemployment-insurance-weekly-claims-data" class="section level1">
+<h1>II. National Unemployment Insurance Weekly Claims Data</h1>
+<div id="unemployment-claims-surge-due-to-covid-19" class="section level2">
+<h2>Unemployment Claims Surge due to Covid-19</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xhaW1zIDwtIHJlYWQudGFibGUoXCJDOlxcXFxVc2Vyc1xcXFxuZWlkZVxcXFxEb2N1bWVudHNcXFxcR2l0SHViXFxcXG1hMTg5XFxcXERhdGFcXFxcSW5pdGlhbENsYWltcy5kYXRcIilcbnBlcmlvZCA8LSAzNjUuMjUvN1xuY2xhaW1zIDwtIHRzKGNsYWltcywgc3RhcnQgPSBjKDE5NjcsMSksIGZyZXF1ZW5jeSA9IHBlcmlvZClcbnBsb3QoY2xhaW1zKVxucGxvdChsb2coY2xhaW1zKSlcblxuYGBgIn0= -->
+<pre class="r"><code>claims &lt;- read.table(&quot;C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\InitialClaims.dat&quot;)
+period &lt;- 365.25/7
+claims &lt;- ts(claims, start = c(1967,1), frequency = period)
+plot(claims)
+plot(log(claims))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="exploratory-data-analysis" class="section level2">
+<h2>Exploratory Data Analysis</h2>
+<p>First examine your data.</p>
+<ol style="list-style-type: decimal">
+<li>Catch mistakes in how data was entered</li>
+<li>Discern patterns in the data</li>
+<li>Check model assumptions</li>
+<li>Generate working hypotheses</li>
+</ol>
+</div>
+<div id="prior-knowledge" class="section level2">
+<h2>Prior Knowledge</h2>
+<p>New plague strikes the world with vast repercussions to health and the economy. Unemployment in certain sectors rises in response to government lockdowns.</p>
+</div>
+<div id="paradata-facts-about-the-data" class="section level2">
+<h2>Paradata (Facts About the Data)</h2>
+<p>Data collected by Bureau of Labor Statistics: <a href="https://oui.doleta.gov/unemploy/claims.asp" class="uri">https://oui.doleta.gov/unemploy/claims.asp</a></p>
+<p>“The Unemployment Insurance weekly claims data are used in current economic analysis of unemployment trends in the nation, and in each state. Initial claims measure emerging unemployment and continued weeks claimed measure the number of persons claiming unemployment benefits.”</p>
+<p>Covers Week 1 of 1967 through week 46 of 2020.</p>
+</div>
+<div id="what-questions-to-ask" class="section level2">
+<h2>What Questions to Ask</h2>
+<ul>
+<li><p>How are claims impacted by the pandemic?</p></li>
+<li><p>When did the effect begin? Has it ended?</p></li>
+<li><p>How do we model this effect?</p></li>
+</ul>
 <!-- rnb-text-end -->
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBJbnRyb2R1Y3Rpb24iDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIyBTeWxsYWJ1cw0KSW5zdHJ1Y3RvciBnb2VzIHRocm91Z2ggc3lsbGFidXMuDQoNCiMjIFdoYXQgaXMgUj8NClIgaXMgYSBjb21wdXRlciBsYW5ndWFnZSBmb3IgZG9pbmcgc3RhdGlzdGljYWwgYW5hbHlzaXMuIEl0IGlzIGNvbW1hbmQtbGluZSBzdHlsZSwgc28gbm8gY29tcGlsYXRpb24gaXMgbmVlZGVkIGJlZm9yZSBydW5uaW5nICh1bmxpa2UgQywgRm9ydHJhbiwgZXRjLikuIFIgaXMgZnJlZSwgYW5kIHlvdSBzaG91bGQgaW5zdGFsbCBpdCBvbiB5b3VyIFBDLiBZb3VyIFRBIChhcyB3ZWxsIGFzIHRoZSBpbnN0cnVjdG9yKSBjYW4gaGVscCB3aXRoIFI7IGFsc28gc2VlIHRoaXMgdHV0b3JpYWxzOiAqQW4gSW50cm9kdWN0aW9uIHRvIFIqLiBodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9kb2MvbWFudWFscy9SLWludHJvLnBkZg0KDQojIyBXaGF0IGlzIFJTdHVkaW8/DQpSU3R1ZGlvIGlzIGFuIElERSAoSW50ZWdyYXRlZCBEZXZlbG9wbWVudCBFbnZpcm9ubWVudCksIHdoaWNoIGFsbG93cyB5b3UgdG8gd3JpdGUgYW5kIGV4ZWN1dGUgUiBjb2RlLCBwYXJ0aWNpcGF0ZSBpbiBwcm9qZWN0cywgdmlldyBvdXRwdXQsIGFuZCBtb3JlLiBUaGlzIGlzIGZyZWU7IHBsZWFzZSBkb3dubG9hZCBhbmQgaW5zdGFsbC4NCg0KIyMgV2hhdCBpcyBQeXRob24/DQpQeXRob24gaXMgYWxzbyBhIGNvbW1hbmQtbGluZSBzdHlsZSBsYW5ndWFnZSwgYW5kIGNhbiBiZSBkb3dubG9hZGVkIGZvciBmcmVlLiBGb3IgcHJvZHVjdGlvbi1xdWFsaXR5IGNvZGUsIGl0IGlzIHN1cGVyaW9yIHRvIFIuIFB5Q2hhcm0gaXMgYSBQeXRob24gSURFLiBUaGUgY2xhc3Mgd2lsbCBiZSB0YXVnaHQgaW4gUi4NCg0KIyMgV2hhdCBpcyBSIE1hcmtkb3duPw0KTWFya2Rvd24gaXMgYSAqcGxhaW4gdGV4dCBmb3JtYXR0aW5nIHN5bnRheCouICBZb3Ugd2lsbCB1c2UgdGhpcyB0byBnZW5lcmF0ZSByZXBvcnRzIGZvciB5b3VyIGdyb3VwIGhvbWV3b3JrcyBhbmQgZmluYWwgcHJvamVjdC4gIFIgTWFya2Rvd24gZXh0ZW5kcyBNYXJrZG93biBieSBlbWJlZGRpbmcgUiBjb2RlLg0KDQojIyBXaGF0IGlzIEdpdEh1Yj8NCkNvdXJzZSBtYXRlcmlhbCB3aWxsIGJlIG9uIGh0dHBzOi8vZ2l0aHViLmNvbS90dWNrZXJtY2Vscm95L21hMTg5LiBUaGlzIGlzIGEgKnJlcG9zaXRvcnkqIHdoZXJlIHlvdSBjYW4gdmlldyBmaWxlcyAobGlrZSBNYXJrZG93biBmaWxlcyBhbmQgZGF0YSBzZXRzKSBhbmQgZG93bmxvYWQgdGhlbSB0byB5b3VyIFBDLiBDbGljayAqUmF3KiB0byB2aWV3IHVuZGVyeWxpbmcgUiBNYXJrZG93biBzb3VyY2UgZmlsZS4NCg0KIyMgRmlyc3QgVGFza3MNCkluc3RhbGwgUiBhbmQgUlN0dWRpbywgYW5kIGdldCBmYW1pbGlhciB3aXRoIGFjY2Vzc2luZyBmaWxlcyBvbiBHaXRIdWIuIFJldmlldyB0aGUgYmFja2dyb3VuZCByZWFkaW5nOg0KDQoxLiBXcml0aW5nIERhdGEgQW5hbHlzaXMgUmVwb3J0czogKldyaXRpbmdSZXBvcnRzLm1kKiANCjIuIFNvbWUgc2xpZGVzIGJ5IEpvbmF0aGFuIFRheWxvciBhdCBTdGFuZm9yZCBTdGF0aXN0aWNzIERlcGFydG1lbnQsIGdpdmluZyBhIGNvbnN0cmFzdCBvZiAqU3RhdGlzdGljcyogYW5kICpEYXRhIFNjaWVuY2UqLg0KaHR0cHM6Ly9tYXRoMTg5LmVkdWJsb2dzLm9yZy9maWxlcy8yMDE4LzAxL1N0YXRpc3RpY3MtYW5kLURhdGEtU2NpZW5jZS0xdmg1M2ZpLTF5bHBlenMucGRmDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBJbnRyb2R1Y3Rpb24iDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIEkuIE92ZXJ2aWV3DQoNCiMjIFN5bGxhYnVzDQpJbnN0cnVjdG9yIGdvZXMgdGhyb3VnaCBzeWxsYWJ1cy4NCg0KIyMgV2hhdCBpcyBSPw0KUiBpcyBhIGNvbXB1dGVyIGxhbmd1YWdlIGZvciBkb2luZyBzdGF0aXN0aWNhbCBhbmFseXNpcy4gSXQgaXMgY29tbWFuZC1saW5lIHN0eWxlLCBzbyBubyBjb21waWxhdGlvbiBpcyBuZWVkZWQgYmVmb3JlIHJ1bm5pbmcgKHVubGlrZSBDLCBGb3J0cmFuLCBldGMuKS4gUiBpcyBmcmVlLCBhbmQgeW91IHNob3VsZCBpbnN0YWxsIGl0IG9uIHlvdXIgUEMuIFlvdXIgVEEgKGFzIHdlbGwgYXMgdGhlIGluc3RydWN0b3IpIGNhbiBoZWxwIHdpdGggUjsgYWxzbyBzZWUgdGhpcyB0dXRvcmlhbHM6ICpBbiBJbnRyb2R1Y3Rpb24gdG8gUiouIGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL2RvYy9tYW51YWxzL1ItaW50cm8ucGRmDQoNCiMjIFdoYXQgaXMgUlN0dWRpbz8NClJTdHVkaW8gaXMgYW4gSURFIChJbnRlZ3JhdGVkIERldmVsb3BtZW50IEVudmlyb25tZW50KSwgd2hpY2ggYWxsb3dzIHlvdSB0byB3cml0ZSBhbmQgZXhlY3V0ZSBSIGNvZGUsIHBhcnRpY2lwYXRlIGluIHByb2plY3RzLCB2aWV3IG91dHB1dCwgYW5kIG1vcmUuIFRoaXMgaXMgZnJlZTsgcGxlYXNlIGRvd25sb2FkIGFuZCBpbnN0YWxsLg0KDQojIyBXaGF0IGlzIFB5dGhvbj8NClB5dGhvbiBpcyBhbHNvIGEgY29tbWFuZC1saW5lIHN0eWxlIGxhbmd1YWdlLCBhbmQgY2FuIGJlIGRvd25sb2FkZWQgZm9yIGZyZWUuIEZvciBwcm9kdWN0aW9uLXF1YWxpdHkgY29kZSwgaXQgaXMgc3VwZXJpb3IgdG8gUi4gUHlDaGFybSBpcyBhIFB5dGhvbiBJREUuIFRoZSBjbGFzcyB3aWxsIGJlIHRhdWdodCBpbiBSLg0KDQojIyBXaGF0IGlzIFIgTWFya2Rvd24/DQpNYXJrZG93biBpcyBhICpwbGFpbiB0ZXh0IGZvcm1hdHRpbmcgc3ludGF4Ki4gIFlvdSB3aWxsIHVzZSB0aGlzIHRvIGdlbmVyYXRlIHJlcG9ydHMgZm9yIHlvdXIgZ3JvdXAgaG9tZXdvcmtzIGFuZCBmaW5hbCBwcm9qZWN0LiAgUiBNYXJrZG93biBleHRlbmRzIE1hcmtkb3duIGJ5IGVtYmVkZGluZyBSIGNvZGUuDQoNCiMjIFdoYXQgaXMgR2l0SHViPw0KQ291cnNlIG1hdGVyaWFsIHdpbGwgYmUgb24gaHR0cHM6Ly9naXRodWIuY29tL3R1Y2tlcm1jZWxyb3kvbWExODkgKGFzIHdlbGwgYXMgQ2FudmFzKS4gVGhpcyBpcyBhICpyZXBvc2l0b3J5KiB3aGVyZSB5b3UgY2FuIHZpZXcgZmlsZXMgKGxpa2UgTWFya2Rvd24gZmlsZXMgYW5kIGRhdGEgc2V0cykgYW5kIGRvd25sb2FkIHRoZW0gdG8geW91ciBQQy4gQ2xpY2sgKlJhdyogdG8gdmlldyB1bmRlcnlsaW5nIFIgTWFya2Rvd24gc291cmNlIGZpbGUuDQoNCiMjIEZpcnN0IFRhc2tzDQpJbnN0YWxsIFIgYW5kIFJTdHVkaW8sIGFuZCBnZXQgZmFtaWxpYXIgd2l0aCBhY2Nlc3NpbmcgZmlsZXMgb24gQ2FudmFzIGFuZCBHaXRIdWIuIFJldmlldyB0aGUgYmFja2dyb3VuZCByZWFkaW5nOg0KDQoxLiBXcml0aW5nIERhdGEgQW5hbHlzaXMgUmVwb3J0czogKldyaXRpbmdSZXBvcnRzLm1kKiANCjIuIFNvbWUgc2xpZGVzIGJ5IEpvbmF0aGFuIFRheWxvciBhdCBTdGFuZm9yZCBTdGF0aXN0aWNzIERlcGFydG1lbnQsIGdpdmluZyBhIGNvbnN0cmFzdCBvZiAqU3RhdGlzdGljcyogYW5kICpEYXRhIFNjaWVuY2UqLg0KaHR0cHM6Ly9tYXRoMTg5LmVkdWJsb2dzLm9yZy9maWxlcy8yMDE4LzAxL1N0YXRpc3RpY3MtYW5kLURhdGEtU2NpZW5jZS0xdmg1M2ZpLTF5bHBlenMucGRmDQoNCg0KIyBJSS4gIE5hdGlvbmFsIFVuZW1wbG95bWVudCBJbnN1cmFuY2UgV2Vla2x5IENsYWltcyBEYXRhDQoNCiMjIFVuZW1wbG95bWVudCBDbGFpbXMgU3VyZ2UgZHVlIHRvIENvdmlkLTE5IA0KDQpgYGB7cn0NCmNsYWltcyA8LSByZWFkLnRhYmxlKCJDOlxcVXNlcnNcXG5laWRlXFxEb2N1bWVudHNcXEdpdEh1YlxcbWExODlcXERhdGFcXEluaXRpYWxDbGFpbXMuZGF0IikNCnBlcmlvZCA8LSAzNjUuMjUvNw0KY2xhaW1zIDwtIHRzKGNsYWltcywgc3RhcnQgPSBjKDE5NjcsMSksIGZyZXF1ZW5jeSA9IHBlcmlvZCkNCnBsb3QoY2xhaW1zKQ0KcGxvdChsb2coY2xhaW1zKSkNCg0KYGBgDQogDQoNCiMjIEV4cGxvcmF0b3J5IERhdGEgQW5hbHlzaXMNCkZpcnN0IGV4YW1pbmUgeW91ciBkYXRhLg0KDQoxLiBDYXRjaCBtaXN0YWtlcyBpbiBob3cgZGF0YSB3YXMgZW50ZXJlZA0KMi4gRGlzY2VybiBwYXR0ZXJucyBpbiB0aGUgZGF0YQ0KMy4gQ2hlY2sgbW9kZWwgYXNzdW1wdGlvbnMNCjQuIEdlbmVyYXRlIHdvcmtpbmcgaHlwb3RoZXNlcw0KDQojIyBQcmlvciBLbm93bGVkZ2UNCg0KTmV3IHBsYWd1ZSBzdHJpa2VzIHRoZSB3b3JsZCB3aXRoIHZhc3QgcmVwZXJjdXNzaW9ucyB0byBoZWFsdGggYW5kIHRoZSBlY29ub215LiBVbmVtcGxveW1lbnQgaW4gY2VydGFpbiBzZWN0b3JzIHJpc2VzIGluIHJlc3BvbnNlIHRvIGdvdmVybm1lbnQgbG9ja2Rvd25zLg0KIA0KIyMgUGFyYWRhdGEgKEZhY3RzIEFib3V0IHRoZSBEYXRhKQ0KDQpEYXRhIGNvbGxlY3RlZCBieSBCdXJlYXUgb2YgTGFib3IgU3RhdGlzdGljczogaHR0cHM6Ly9vdWkuZG9sZXRhLmdvdi91bmVtcGxveS9jbGFpbXMuYXNwDQoNCiJUaGUgVW5lbXBsb3ltZW50IEluc3VyYW5jZSB3ZWVrbHkgY2xhaW1zIGRhdGEgYXJlIHVzZWQgaW4gY3VycmVudCBlY29ub21pYyBhbmFseXNpcyBvZiB1bmVtcGxveW1lbnQgdHJlbmRzIGluIHRoZSBuYXRpb24sIGFuZCBpbiBlYWNoIHN0YXRlLiBJbml0aWFsIGNsYWltcyBtZWFzdXJlIGVtZXJnaW5nIHVuZW1wbG95bWVudCBhbmQgY29udGludWVkIHdlZWtzIGNsYWltZWQgbWVhc3VyZSB0aGUgbnVtYmVyIG9mIHBlcnNvbnMgY2xhaW1pbmcgdW5lbXBsb3ltZW50IGJlbmVmaXRzLiINCiANCkNvdmVycyBXZWVrIDEgb2YgMTk2NyB0aHJvdWdoIHdlZWsgNDYgb2YgMjAyMC4gIA0KICAgIA0KIyMgV2hhdCBRdWVzdGlvbnMgdG8gQXNrDQoNCi0gSG93IGFyZSBjbGFpbXMgaW1wYWN0ZWQgYnkgdGhlIHBhbmRlbWljPw0KDQotIFdoZW4gZGlkIHRoZSBlZmZlY3QgYmVnaW4/IEhhcyBpdCBlbmRlZD8gIA0KDQotIEhvdyBkbyB3ZSBtb2RlbCB0aGlzIGVmZmVjdD8NCg==</div>
 
 
 
