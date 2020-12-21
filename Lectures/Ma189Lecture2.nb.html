@@ -1749,9 +1749,387 @@ summary {
 
 
 <!-- rnb-text-begin -->
+<div id="i.-multivariate-data" class="section level1">
+<h1>I. Multivariate Data</h1>
+<div id="matrix-formulation" class="section level2">
+<h2>Matrix Formulation</h2>
+<p>In multivariate analysis, we are interested in jointly analyzing multiple dependent variables.</p>
+<ul>
+<li><p>These variables can be represented using matrices and vectors.</p></li>
+<li><p>The benefits of matrix form:</p></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Simplicity in notation</li>
+<li>Expressing important formulas in readable format</li>
+</ol>
+</div>
+<div id="example-1-multivariate-data-of-infant-death" class="section level2">
+<h2>Example 1: Multivariate Data of Infant Death</h2>
+<p>Data records several variables for a baby at birth:</p>
+<!-- bwt        Baby’s weight at birth, to the nearest ounce -->
+<!-- gestation      Duration of the pregnancy in days, calculated from the first day of the last normal menstrual period. -->
+<!-- parity     Indicator for whether the baby is the first born (1) or not (0). -->
+<!-- age        Mother’s age at the time of conception, in years -->
+<!-- height     Height of the mother, in inches -->
+<!-- weight     Mother’s prepregnancy weight, in pounds -->
+<!-- smoking    Indicator for whether the mother smokes (1) or not (0). -->
+<ol style="list-style-type: decimal">
+<li>Baby Weight (<strong>bwt</strong>): in ounces</li>
+<li>Gestation (<strong>gestation</strong>): in days</li>
+</ol>
+<p>Rows are babies, columns are variables</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFRVTdETUJEY09FMVFMQlVxOVlDRUVEOW9wS2JxQytBQmlGT3ZibXBLaExIYnhGV1J1SERrcC95aU1FNXNVWHdZZVhiczJkbjEwOE5xd1ZlY2lGSktjeUFEcGZ6K2NWNHRLNklSUTVYUWlBcDN2dVBWRk1TSlkvY01nRVo3NEJQNEFCVHc5WGVmM0FJM3dEVzgzNTdmUlkwekxkNWtCekxwbXc5aXVqNWFUNHV0N0t5d2pkR1JzV2pOc1F4bWw4amNHRVB5LzRSYWlTNGtCSkZ2aEJYbGN3cy9xbE5rdVRBN2x3Z1RjenRua1RscEkrSHFvTjBrbTFuOWN0Q3ZzOG9GOU5jRHh2N016emdiSXRtUGI1WDVWcm5VMjBiTE1Mc1NhNmw4Y1ltTis0WExYZHZvOEVFY2FsZGFZMFY0eDJ1amd0THZScWRmM1Y3ZkR1c0JBQUE9In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["bwt"],"name":[1],"type":["int"],"align":["right"]},{"label":["gestation"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"120","2":"284","_rn_":"1"},{"1":"113","2":"282","_rn_":"2"},{"1":"128","2":"279","_rn_":"3"},{"1":"123","2":"999","_rn_":"4"},{"1":"108","2":"282","_rn_":"5"},{"1":"136","2":"286","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><strong>Notice anything weird?!</strong></p>
+<p><em>Source</em>: The Child Health and Development Studies (CHDS) data are presented in <em>Stat Labs: Mathematical Statistics Through Applications</em> by Deborah Nolan and Terry Speed (Springer).</p>
+</div>
+<div id="math-notation" class="section level2">
+<h2>Math Notation</h2>
+<p>Let <span class="math inline">\(\underline{x} = [ x_1, x_2 ]&#39;\)</span> denote the <span style="color: red;">column</span> vector of <strong>bwt</strong> and <strong>gestation</strong>. <span class="math display">\[
+ \underline{x} = \left[ \begin{array}{c} x_1 \\ x_2 \end{array} \right]
+ = \left[ \begin{array}{c} \mbox{bwt} \\ \mbox{gestation} \end{array} \right]. 
+\]</span> So <span class="math inline">\(\underline{x} \in {\mathbb R}^2\)</span>.</p>
+<p>There are <span class="math inline">\(n=1236\)</span> babies. Let <span class="math inline">\(\underline{x}_i\)</span> for <span class="math inline">\(1 \leq i \leq 1236\)</span> denote both variables for baby <span class="math inline">\(i\)</span>, i.e., <span class="math display">\[
+  \underline{x}_1  = \left[ \begin{array}{c} 120  \\ 284 \end{array} \right], \quad
+  \underline{x}_2  = \left[ \begin{array}{c} 113  \\ 282 \end{array} \right], \quad
+    \underline{x}_3  = \left[ \begin{array}{c} 128  \\ 279 \end{array} \right],\, \cdots 
+\]</span> This is called the <strong>record</strong> for the <span class="math inline">\(i\)</span>th baby (or unit). Let <span class="math inline">\(i\)</span> index baby, and <span class="math inline">\(j = 1, 2\)</span> index variable. Then <span class="math inline">\(x_{i,j}\)</span> is <strong>bwt</strong> (<span class="math inline">\(j=1\)</span>) or <strong>gestation</strong> (<span class="math inline">\(j=2\)</span>) for baby <span class="math inline">\(i\)</span>. Gestation for the fourth baby is <span class="math inline">\(x_{4,2} =\)</span> 999.</p>
+<p>A data matrix consists of all <strong>records</strong> as <span style="color: blue;">row</span> vectors: <span class="math display">\[
+  \left[ \begin{array}{c} \underline{x}_1^{\prime}  \\ \underline{x}_2^{\prime} \\ \underline{x}_3^{\prime} \end{array} \right]
+  = \left[ \begin{array}{cc} 120 &amp; 284 \\ 113 &amp; 282  \\ 128  &amp; 279  \end{array} \right]. 
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6M30sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVF5dzdDSUJEY1VsdFRFbzJKQnhQakw5ajRpRitnSDJBOGVjVVd0YkdDdGhnOSt1WHFRaUVxaHdtekE3T3p5MmExbmRNdEJZQVF3aGdSSVlWNHVaN09Gak9BRnNFcWdCWWsrbnpncXo0U0xYYU1CUUExdUNLZVh5MFlJWWFJZ2RjZ0V1ek1heVE5MDZRUnc5MWRXWm9jZUsyWUtxVHdqRWtsNzZrejZ4U2k0NXEwLzRTc1pMVkxjQ0xObVdMcHZrSS9WaS9QMHBZWG5ZZ21vbmVMUEhOUWVVTHZKdlFrK1RnNzNzUnBQSjNvQkhQZm9HUFA4SWVUSnBPOGJhL0k5b3E1T0JTQ3UrRkx0dU9sTGJxNHN0azR2VlNGY0Q5RVVhMVRKUlZ6NzJnbVM2ZVk1ZUQxQVlFcGtRdlVBUUFBIn0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["bwt"],"name":[1],"type":["int"],"align":["right"]},{"label":["gestation"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"120","2":"284","_rn_":"1"},{"1":"113","2":"282","_rn_":"2"},{"1":"128","2":"279","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Each <span style="color: blue;">row</span> is information for one baby; each <span style="color: red;">column</span> is all measurements (across babies) of either <strong>bwt</strong> or <strong>gestation</strong></p>
+</div>
+<div id="definition-of-matrix-and-vector" class="section level2">
+<h2>Definition of Matrix and Vector</h2>
+<p>A matrix is a two-dimensional array of numbers, symbols, or expressions, arranged in rows and columns.</p>
+<ul>
+<li><p>A vector is a matrix with either one row or one column.</p></li>
+<li><p>The dimension of a matrix is two numbers: number of <span style="color: blue;">rows</span> (units) and number of <span style="color: red;">columns</span> (units). Dimension of baby is 1236, 7 and dimension of submatrix <span class="math inline">\(x\)</span> is 3, 2.</p></li>
+<li><p>A square matrix is one for which the numbers of <span style="color: blue;">rows</span> and number of <span style="color: red;">columns</span> are equal, e.g.</p></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGltKHgpXG5cbmBgYCJ9 -->
+<pre class="r"><code>dim(x)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIgMlxuIn0= -->
+<pre><code>[1] 2 2</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="notations-of-matrix-and-vector" class="section level2">
+<h2>Notations of Matrix and Vector</h2>
+<ul>
+<li><p>Usually in this course we only consider matrices and vectors whose entries are real numbers.</p></li>
+<li><p>A real-valued <strong>matrix</strong> <span class="math inline">\({\bf M}\)</span> of dimension <span class="math inline">\(n \times m\)</span> is denoted <span class="math inline">\({\bf M} \in {\mathbb R}^{n \times m}\)</span>.</p></li>
+<li><p>A real <strong>vector</strong> <span class="math inline">\(\underline{v}\)</span> of length <span class="math inline">\(n\)</span> is denoted <span class="math inline">\(\underline{v} \in {\mathbb R}^n\)</span>.</p></li>
+<li><p>A <span style="color: blue;">row</span> vector can be written <span class="math inline">\(\underline{v} \in {\mathbb R}^{1 \times n}\)</span>, and a <span style="color: red;">column</span> vector can be written <span class="math inline">\(\underline{v} \in {\mathbb R}^{n \times 1}\)</span>.</p></li>
+<li><p>A <strong>scalar</strong> is a real number, or a vector of length <span class="math inline">\(1\)</span>, or a <span class="math inline">\(1 \times 1\)</span> dimensional matrix.</p></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxLDEsZHJvcD1GQUxTRV1cblxuYGBgIn0= -->
+<pre class="r"><code>x[1,1,drop=FALSE]
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICBid3RcbjEgMTIwXG4ifQ== -->
+<pre><code>  bwt
+1 120</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="transpose-of-a-matrix" class="section level2">
+<h2>Transpose of a Matrix</h2>
+<ul>
+<li><p>Definition: flip the rows and columns by interchanging row and column index. Denoted by <span class="math inline">\({\bf M}^{\prime}\)</span>.</p></li>
+<li><p>If <span class="math inline">\({\bf M}_{i,j}\)</span> is <span style="color: blue;">row</span> <span class="math inline">\(i\)</span>, <span style="color: red;">column</span> <span class="math inline">\(j\)</span> of matrix <span class="math inline">\({\bf M}\)</span>, then <span class="math inline">\({\bf M}^{\prime}_{i,j} = {\bf M}_{j,i}\)</span>, so that now <span class="math inline">\(i\)</span> is the <span style="color: red;">column</span> index, and <span class="math inline">\(j\)</span> is the <span style="color: blue;">row</span> index.</p></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudCh4KVxuXG5gYGAifQ== -->
+<pre class="r"><code>t(x)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgMSAgIDIgICAzXG5id3QgICAgICAgMTIwIDExMyAxMjhcbmdlc3RhdGlvbiAyODQgMjgyIDI3OVxuIn0= -->
+<pre><code>            1   2   3
+bwt       120 113 128
+gestation 284 282 279</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="symmetric-matrices" class="section level2">
+<h2>Symmetric Matrices</h2>
+<ul>
+<li><p>Definition: A square matrix <span class="math inline">\({\bf M}\)</span> is symmetric if <span class="math inline">\({\bf M}^{\prime} = {\bf M}\)</span>.</p></li>
+<li><p>Hence <span class="math inline">\({\bf M}_{i,j} = {\bf M}_{j,i}\)</span>.</p></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubVxuXG5gYGAifQ== -->
+<pre class="r"><code>m
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgIGJ3dCBnZXN0YXRpb25cbmJ3dCAgICAgICAgNDM1NTMgICAgMTAxNjU4XG5nZXN0YXRpb24gMTAxNjU4ICAgIDIzODAyMVxuIn0= -->
+<pre><code>             bwt gestation
+bwt        43553    101658
+gestation 101658    238021</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>Important examples of symmetric matrices in multivariate statistics include the variance-covariance matrix and the correlation matrix.</li>
+</ul>
+</div>
+<div id="linear-combination-of-two-matrices" class="section level2">
+<h2>Linear Combination of Two Matrices</h2>
+<ul>
+<li>Two matrices may be added if and only if they have the same dimensions. To add two matrices, add the corresponding elements.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCt5XG5cbmBgYCJ9 -->
+<pre class="r"><code>x+y
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICBid3QgZ2VzdGF0aW9uXG4xIDIyOCAgICAgICA1NjZcbjIgMjQ5ICAgICAgIDU2OFxuMyAyNjYgICAgICAgNTIzXG4ifQ== -->
+<pre><code>  bwt gestation
+1 228       566
+2 249       568
+3 266       523</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>If <span class="math inline">\({\bf A}\)</span> and <span class="math inline">\({\bf B}\)</span> are two <span class="math inline">\(n \times m\)</span> dimensional matrices, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are two scalars, then <span class="math inline">\({\bf C} = \alpha \, {\bf A} + \beta \, {\bf B} \in {\mathbb R}^{n \times m}\)</span>. A scalar multiples each entry of the matrix, i.e., <span class="math display">\[
+ {\bf C}_{i,j} = \alpha \, {\bf A}_{i,j} + \beta \, {\bf B}_{i,j}.
+\]</span></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMip4ICsgMyp5XG5gYGAifQ== -->
+<pre class="r"><code>2*x + 3*y</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="multiplication-of-two-matrices" class="section level2">
+<h2>Multiplication of Two Matrices</h2>
+<ul>
+<li>The <strong>dot product</strong> of two vectors <span class="math inline">\(\underline{x}\)</span> and <span class="math inline">\(\underline{y}\)</span> is the sum of the product of their entries: <span class="math inline">\(\underline{x} \cdot \underline{y} = \sum_{i=1}^n x_i \, y_i\)</span>.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudCh4WywxLGRyb3A9RkFMU0VdKSAlKiUgeFssMixkcm9wPUZBTFNFXVxuXG5gYGAifQ== -->
+<pre class="r"><code>t(x[,1,drop=FALSE]) %*% x[,2,drop=FALSE]
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIGdlc3RhdGlvblxuYnd0ICAgIDEwMTY1OFxuIn0= -->
+<pre><code>    gestation
+bwt    101658</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>We multiply matrices by taking dot products of row and column vectors: <span class="math inline">\({\bf C} = {\bf A} \, {\bf B}\)</span> is defined if number of columns in <span class="math inline">\({\bf A}\)</span> equals the number of rows in <span class="math inline">\({\bf B}\)</span>. Then <span class="math display">\[
+ {\bf C}_{i,j} = {\bf A}_{i, -} \cdot {\bf B}_{-,j} = \sum_{k=1}^p {\bf A}_{i,k} \, {\bf B}_{k,j}.
+\]</span> Here <span class="math inline">\({\bf A} \in {\mathbb R}^{n \times p}\)</span>, <span class="math inline">\({\bf B} \in {\mathbb R}^{p \times m}\)</span>, and <span class="math inline">\({\bf C} \in {\mathbb R}^{n \times m}\)</span>.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCAlKiUgdCh5KVxuXG5gYGAifQ== -->
+<pre class="r"><code>x %*% t(y)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgNSAgICAgNiAgICAgN1xuMSA5MzA0OCA5NzU0NCA4NTg1NlxuMiA5MTcyOCA5NjAyMCA4NDQwMlxuMyA5MjUwMiA5NzIwMiA4NTc0MFxuIn0= -->
+<pre><code>      5     6     7
+1 93048 97544 85856
+2 91728 96020 84402
+3 92502 97202 85740</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="identity-matrix" class="section level2">
+<h2>Identity Matrix</h2>
+<ul>
+<li>Definition: An identity matrix <span class="math inline">\({\bf I}\)</span> is a square matrix that has ones on its diagonal (from upper left to bottom right) and has zeros elsewhere.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXllXG5cbmBgYCJ9 -->
+<pre class="r"><code>eye
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl1cblsxLF0gICAgMSAgICAwXG5bMixdICAgIDAgICAgMVxuIn0= -->
+<pre><code>     [,1] [,2]
+[1,]    1    0
+[2,]    0    1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>When multiplying any square matrix, it leaves the matrix unchanged: <span class="math inline">\({\bf I} \, {\bf A} = {\bf A}\)</span>.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXllICUqJSB6XG5cbmBgYCJ9 -->
+<pre class="r"><code>eye %*% z
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBid3QgZ2VzdGF0aW9uXG5bMSxdIDEyMCAgICAgICAyODRcblsyLF0gMTEzICAgICAgIDI4MlxuIn0= -->
+<pre><code>     bwt gestation
+[1,] 120       284
+[2,] 113       282</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="matrix-inverse" class="section level2">
+<h2>Matrix Inverse</h2>
+<ul>
+<li>Definition: The inverse of a square matrix <span class="math inline">\({\bf A}\)</span>, if it exists (the inverse of zero does not exist!?), is denoted by <span class="math inline">\({\bf A}^{-1}\)</span>, and satisfies <span class="math display">\[
+ {\bf A}^{-1} \, {\bf A} = {\bf A} \, {\bf A}^{-1} = {\bf I}.
+\]</span></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYV9pbnYgJSolIGFcblxuYGBgIn0= -->
+<pre class="r"><code>a_inv %*% a
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICAgIGJ3dCAgICBnZXN0YXRpb25cbmJ3dCAgICAgICAxLjAwMDAwMGUrMDAgMS4xMzY4NjhlLTEzXG5nZXN0YXRpb24gMi44NDIxNzFlLTE0IDEuMDAwMDAwZSswMFxuIn0= -->
+<pre><code>                   bwt    gestation
+bwt       1.000000e+00 1.136868e-13
+gestation 2.842171e-14 1.000000e+00</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><em>What is a numerical zero in R?</em></p>
+<ul>
+<li>If the inverse exists, we say the matrix is <strong>invertible</strong>.</li>
+</ul>
+</div>
+<div id="matrix-trace" class="section level2">
+<h2>Matrix Trace</h2>
+<ul>
+<li>Definition: The trace of an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\({\bf A}\)</span> is the sum of its diagonal elements: <span class="math display">\[
+\mbox{tr} {\bf A} = \sum_{i=1}^n {\bf A}_{i,i}.
+\]</span></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGRpYWcoYSkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>sum(diag(a))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI4MTU3NFxuIn0= -->
+<pre><code>[1] 281574</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>For two matrices <span class="math inline">\({\bf A} \in {\mathbb R}^{n \times p}\)</span>, <span class="math inline">\({\bf B} \in {\mathbb R}^{p \times n}\)</span>, <span class="math display">\[
+ \mbox{tr} {\bf A} \, {\bf B} = \mbox{tr} {\bf B} \, {\bf A}.
+\]</span></li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGRpYWcoeiAlKiUgeCkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>sum(diag(z %*% x))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI3NDgwOFxuIn0= -->
+<pre><code>[1] 274808</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="eigenvalues-and-eigenvectors" class="section level2">
+<h2>Eigenvalues and Eigenvectors</h2>
+<ul>
+<li>Given a symmetric matrix <span class="math inline">\({\bf A}\)</span>, then any scalar <span class="math inline">\(\lambda\)</span> and vector <span class="math inline">\(\underline{v}\)</span> such that <span class="math display">\[
+ {\bf A} \, \underline{v} = \lambda \, \underline{v}
+\]</span> are an <strong>eigenvalue</strong> and <strong>eigenvector</strong> (together called an <strong>eigenpair</strong>).</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZWlnJHZhbHVlc1sxXSAqIGVpZyR2ZWN0b3JbLDFdXG5cbmBgYCJ9 -->
+<pre class="r"><code>eig$values[1] * eig$vector[,1]
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExMDU5NC44IDI1ODgyMS4xXG4ifQ== -->
+<pre><code>[1] 110594.8 258821.1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>. - A <span class="math inline">\(n \times n\)</span> symmetric matrix has <span class="math inline">\(n\)</span> real eigenvalues, denoted <span class="math inline">\(\lambda_1, \ldots, \lambda_n\)</span>.</p>
+<ul>
+<li>Fact: <span class="math inline">\(\mbox{tr} {\bf A} = \sum_{i=1}^n \lambda_i\)</span>.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGRpYWcoYSkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>sum(diag(a))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI4MTU3NFxuIn0= -->
+<pre><code>[1] 281574</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="positive-definite-matrix" class="section level2">
+<h2>Positive Definite Matrix</h2>
+<ul>
+<li>A symmetric <span class="math inline">\(n \times n\)</span> dimensional matrix <span class="math inline">\({\bf A}\)</span> is <strong>positive definite</strong> if <span class="math inline">\(\underline{v}^{\prime} {\bf A} \underline{v} &gt; 0\)</span> for all non-zero length <span class="math inline">\(n\)</span> vectors <span class="math inline">\(\underline{v}\)</span>. Compactly written <span class="math inline">\({\bf A} &gt; 0\)</span>.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudCh2KSAlKiUgYSAlKiUgdlxuXG5gYGAifQ== -->
+<pre class="r"><code>t(v) %*% a %*% v
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgWywxXVxuWzEsXSA2OTY0NzkuNlxuIn0= -->
+<pre><code>         [,1]
+[1,] 696479.6</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li><p>A symmetric <span class="math inline">\(n \times n\)</span> dimensional matrix <span class="math inline">\({\bf A}\)</span> is <strong>positive semi-definite</strong> if <span class="math inline">\(\underline{v}^{\prime} {\bf A} \underline{v} \geq 0\)</span> for alllength <span class="math inline">\(n\)</span> vectors <span class="math inline">\(\underline{v}\)</span>. Compactly written <span class="math inline">\({\bf A} \geq 0\)</span>.</p></li>
+<li><p>Fact: a symmetric <span class="math inline">\(n \times n\)</span> dimensional matrix is <strong>positive definite</strong> if and only if all of its eigenvalues are positive. (Remember, they must be real by symmetry!)</p></li>
+<li><p>Fact: a <strong>positive definite</strong> matrix is invertible.</p></li>
+</ul>
+<!-- rnb-text-end -->
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBNYXRyaXggQWxnZWJyYSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBNYXRyaXggQWxnZWJyYSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCiMgSS4gTXVsdGl2YXJpYXRlIERhdGENCg0KIyMgTWF0cml4IEZvcm11bGF0aW9uDQpJbiBtdWx0aXZhcmlhdGUgYW5hbHlzaXMsIHdlIGFyZSBpbnRlcmVzdGVkIGluIGpvaW50bHkgYW5hbHl6aW5nIG11bHRpcGxlIGRlcGVuZGVudCB2YXJpYWJsZXMuDQoNCi0gVGhlc2UgdmFyaWFibGVzIGNhbiBiZSByZXByZXNlbnRlZCB1c2luZyBtYXRyaWNlcyBhbmQgdmVjdG9ycy4NCg0KLSBUaGUgYmVuZWZpdHMgb2YgbWF0cml4IGZvcm06DQoNCjEuIFNpbXBsaWNpdHkgaW4gbm90YXRpb24NCjIuIEV4cHJlc3NpbmcgaW1wb3J0YW50IGZvcm11bGFzIGluIHJlYWRhYmxlIGZvcm1hdA0KDQojIyBFeGFtcGxlIDE6IE11bHRpdmFyaWF0ZSBEYXRhIG9mIEluZmFudCBEZWF0aA0KRGF0YSByZWNvcmRzIHNldmVyYWwgdmFyaWFibGVzIGZvciBhIGJhYnkgYXQgYmlydGg6DQoNCjwhLS0gYnd0CQlCYWJ54oCZcyB3ZWlnaHQgYXQgYmlydGgsIHRvIHRoZSBuZWFyZXN0IG91bmNlIC0tPg0KPCEtLSBnZXN0YXRpb24JCUR1cmF0aW9uIG9mIHRoZSBwcmVnbmFuY3kgaW4gZGF5cywgY2FsY3VsYXRlZCBmcm9tIHRoZSBmaXJzdCBkYXkgb2YgdGhlIGxhc3Qgbm9ybWFsIG1lbnN0cnVhbCBwZXJpb2QuIC0tPg0KPCEtLSBwYXJpdHkJCUluZGljYXRvciBmb3Igd2hldGhlciB0aGUgYmFieSBpcyB0aGUgZmlyc3QgYm9ybiAoMSkgb3Igbm90ICgwKS4gLS0+DQo8IS0tIGFnZQkJTW90aGVy4oCZcyBhZ2UgYXQgdGhlIHRpbWUgb2YgY29uY2VwdGlvbiwgaW4geWVhcnMgLS0+DQo8IS0tIGhlaWdodAkJSGVpZ2h0IG9mIHRoZSBtb3RoZXIsIGluIGluY2hlcyAtLT4NCjwhLS0gd2VpZ2h0CQlNb3RoZXLigJlzIHByZXByZWduYW5jeSB3ZWlnaHQsIGluIHBvdW5kcyAtLT4NCjwhLS0gc21va2luZwlJbmRpY2F0b3IgZm9yIHdoZXRoZXIgdGhlIG1vdGhlciBzbW9rZXMgKDEpIG9yIG5vdCAoMCkuIC0tPg0KDQoxLiBCYWJ5IFdlaWdodCAoKipid3QqKik6IGluIG91bmNlcw0KMi4gR2VzdGF0aW9uICgqKmdlc3RhdGlvbioqKTogaW4gZGF5cw0KDQpSb3dzIGFyZSBiYWJpZXMsIGNvbHVtbnMgYXJlIHZhcmlhYmxlcw0KDQpgYGB7cn0NCmJhYnkgPC0gcmVhZC50YWJsZSgiQzpcXFVzZXJzXFxuZWlkZVxcRG9jdW1lbnRzXFxHaXRIdWJcXG1hMTg5XFxEYXRhXFxiYWJpZXMuZGF0IixoZWFkZXI9VFJVRSkNCmhlYWQoYmFieVssYygxLDIpXSkNCmBgYA0KDQoqKk5vdGljZSBhbnl0aGluZyB3ZWlyZD8hKioNCg0KKlNvdXJjZSo6IFRoZSBDaGlsZCBIZWFsdGggYW5kIERldmVsb3BtZW50IFN0dWRpZXMgKENIRFMpIGRhdGEgYXJlIHByZXNlbnRlZCBpbiAqU3RhdCBMYWJzOiBNYXRoZW1hdGljYWwgU3RhdGlzdGljcyBUaHJvdWdoIEFwcGxpY2F0aW9ucyogYnkgRGVib3JhaCBOb2xhbiBhbmQgVGVycnkgU3BlZWQgKFNwcmluZ2VyKS4gIA0KDQojIyBNYXRoIE5vdGF0aW9uDQpMZXQgJFx1bmRlcmxpbmV7eH0gPSBbIHhfMSwgeF8yIF0nJCBkZW5vdGUgdGhlIDxzcGFuIHN0eWxlPSJjb2xvcjogcmVkOyI+Y29sdW1uPC9zcGFuPiB2ZWN0b3Igb2YgKipid3QqKiBhbmQgKipnZXN0YXRpb24qKi4NClxbDQogXHVuZGVybGluZXt4fSA9IFxsZWZ0WyBcYmVnaW57YXJyYXl9e2N9IHhfMSBcXCB4XzIgXGVuZHthcnJheX0gXHJpZ2h0XQ0KID0gXGxlZnRbIFxiZWdpbnthcnJheX17Y30gXG1ib3h7Ynd0fSBcXCBcbWJveHtnZXN0YXRpb259IFxlbmR7YXJyYXl9IFxyaWdodF0uIA0KXF0NCiBTbyAkXHVuZGVybGluZXt4fSBcaW4ge1xtYXRoYmIgUn1eMiQuDQogDQogVGhlcmUgYXJlICRuPTEyMzYkIGJhYmllcy4gTGV0ICRcdW5kZXJsaW5le3h9X2kkIGZvciAkMSBcbGVxIGkgXGxlcSAxMjM2JCBkZW5vdGUgYm90aCB2YXJpYWJsZXMgZm9yIGJhYnkgJGkkLCBpLmUuLA0KXFsNCiAgXHVuZGVybGluZXt4fV8xICA9IFxsZWZ0WyBcYmVnaW57YXJyYXl9e2N9IDEyMCAgXFwgMjg0IFxlbmR7YXJyYXl9IFxyaWdodF0sIFxxdWFkDQogIFx1bmRlcmxpbmV7eH1fMiAgPSBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSAxMTMgIFxcIDI4MiBcZW5ke2FycmF5fSBccmlnaHRdLCBccXVhZA0KICAgIFx1bmRlcmxpbmV7eH1fMyAgPSBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSAxMjggIFxcIDI3OSBcZW5ke2FycmF5fSBccmlnaHRdLFwsIFxjZG90cyANClxdDQogVGhpcyBpcyBjYWxsZWQgdGhlICoqcmVjb3JkKiogZm9yIHRoZSAkaSR0aCBiYWJ5IChvciB1bml0KS4gTGV0ICRpJCBpbmRleCBiYWJ5LCBhbmQgJGogPSAxLCAyJCBpbmRleCB2YXJpYWJsZS4gVGhlbiAkeF97aSxqfSQgaXMgKipid3QqKiAoJGo9MSQpIG9yICoqZ2VzdGF0aW9uKiogKCRqPTIkKSBmb3IgYmFieSAkaSQuIEdlc3RhdGlvbiBmb3IgdGhlIGZvdXJ0aCBiYWJ5IGlzICR4X3s0LDJ9ID0kIGByIGJhYnlbNCwyXWAuIA0KIA0KIEEgZGF0YSBtYXRyaXggY29uc2lzdHMgb2YgYWxsICoqcmVjb3JkcyoqIGFzIDxzcGFuIHN0eWxlPSJjb2xvcjogYmx1ZTsiPnJvdzwvc3Bhbj4gdmVjdG9yczoNClxbDQogIFxsZWZ0WyBcYmVnaW57YXJyYXl9e2N9IFx1bmRlcmxpbmV7eH1fMV57XHByaW1lfSAgXFwgXHVuZGVybGluZXt4fV8yXntccHJpbWV9IFxcIFx1bmRlcmxpbmV7eH1fM157XHByaW1lfSBcZW5ke2FycmF5fSBccmlnaHRdDQogID0gXGxlZnRbIFxiZWdpbnthcnJheX17Y2N9IDEyMCAmIDI4NCBcXCAxMTMgJiAyODIgIFxcIDEyOCAgJiAyNzkgIFxlbmR7YXJyYXl9IFxyaWdodF0uIA0KXF0NCg0KYGBge3J9DQp4IDwtIGJhYnlbMTozLDE6Ml0NCngNCmBgYA0KDQpFYWNoIDxzcGFuIHN0eWxlPSJjb2xvcjogYmx1ZTsiPnJvdzwvc3Bhbj4gaXMgaW5mb3JtYXRpb24gZm9yIG9uZSBiYWJ5OyBlYWNoIDxzcGFuIHN0eWxlPSJjb2xvcjogcmVkOyI+Y29sdW1uPC9zcGFuPiBpcyBhbGwgbWVhc3VyZW1lbnRzIChhY3Jvc3MgYmFiaWVzKSBvZiBlaXRoZXIgKipid3QqKiBvciAqKmdlc3RhdGlvbioqDQoNCiMjIERlZmluaXRpb24gb2YgTWF0cml4IGFuZCBWZWN0b3INCkEgbWF0cml4IGlzIGEgdHdvLWRpbWVuc2lvbmFsIGFycmF5IG9mIG51bWJlcnMsIHN5bWJvbHMsIG9yIGV4cHJlc3Npb25zLCBhcnJhbmdlZCBpbiByb3dzIGFuZCBjb2x1bW5zLg0KDQotIEEgdmVjdG9yIGlzIGEgbWF0cml4IHdpdGggZWl0aGVyIG9uZSByb3cgb3Igb25lIGNvbHVtbi4NCg0KLSBUaGUgZGltZW5zaW9uIG9mIGEgbWF0cml4IGlzIHR3byBudW1iZXJzOiBudW1iZXIgb2YgPHNwYW4gc3R5bGU9ImNvbG9yOiBibHVlOyI+cm93czwvc3Bhbj4gKHVuaXRzKSBhbmQgbnVtYmVyIG9mIDxzcGFuIHN0eWxlPSJjb2xvcjogcmVkOyI+Y29sdW1uczwvc3Bhbj4gKHVuaXRzKS4gRGltZW5zaW9uIG9mIGJhYnkgaXMgYHIgZGltKGJhYnkpYCBhbmQgZGltZW5zaW9uIG9mIHN1Ym1hdHJpeCAkeCQgaXMgYHIgZGltKHgpYC4NCg0KLSBBIHNxdWFyZSBtYXRyaXggaXMgb25lIGZvciB3aGljaCB0aGUgbnVtYmVycyBvZiA8c3BhbiBzdHlsZT0iY29sb3I6IGJsdWU7Ij5yb3dzPC9zcGFuPiBhbmQgbnVtYmVyIG9mIDxzcGFuIHN0eWxlPSJjb2xvcjogcmVkOyI+Y29sdW1uczwvc3Bhbj4gYXJlIGVxdWFsLCBlLmcuDQoNCmBgYHtyfQ0KeCA8LSBiYWJ5WzE6MiwxOjJdDQpkaW0oeCkNCmBgYA0KIA0KIyMgTm90YXRpb25zIG9mIE1hdHJpeCBhbmQgVmVjdG9yDQoNCi0gVXN1YWxseSBpbiB0aGlzIGNvdXJzZSB3ZSBvbmx5IGNvbnNpZGVyIG1hdHJpY2VzIGFuZCB2ZWN0b3JzIHdob3NlIGVudHJpZXMgYXJlIHJlYWwgbnVtYmVycy4NCg0KLSBBIHJlYWwtdmFsdWVkICoqbWF0cml4KiogJHtcYmYgTX0kIG9mIGRpbWVuc2lvbiAkbiBcdGltZXMgbSQgaXMgZGVub3RlZCAke1xiZiBNfSBcaW4ge1xtYXRoYmIgUn1ee24gXHRpbWVzIG19JC4NCg0KLSBBIHJlYWwgKip2ZWN0b3IqKiAkXHVuZGVybGluZXt2fSQgb2YgbGVuZ3RoICRuJCBpcyBkZW5vdGVkICRcdW5kZXJsaW5le3Z9IFxpbiB7XG1hdGhiYiBSfV5uJC4gDQoNCi0gQSA8c3BhbiBzdHlsZT0iY29sb3I6IGJsdWU7Ij5yb3c8L3NwYW4+IHZlY3RvciBjYW4gYmUgd3JpdHRlbiAkXHVuZGVybGluZXt2fSBcaW4ge1xtYXRoYmIgUn1eezEgXHRpbWVzIG59JCwgYW5kIGEgPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW48L3NwYW4+IHZlY3RvciBjYW4gYmUgd3JpdHRlbiAkXHVuZGVybGluZXt2fSBcaW4ge1xtYXRoYmIgUn1ee24gXHRpbWVzIDF9JC4NCg0KLSBBICoqc2NhbGFyKiogaXMgYSByZWFsIG51bWJlciwgb3IgYSB2ZWN0b3Igb2YgbGVuZ3RoICQxJCwgb3IgYSAkMSBcdGltZXMgMSQgZGltZW5zaW9uYWwgbWF0cml4Lg0KDQpgYGB7cn0NCnggPC0gYXMubWF0cml4KGJhYnlbMTozLDE6Ml0pDQp4DQp4WywxXQ0KeFssMSxkcm9wPUZBTFNFXQ0KeFsxLDFdDQp4WzEsMSxkcm9wPUZBTFNFXQ0KYGBgDQogDQojIyBUcmFuc3Bvc2Ugb2YgYSBNYXRyaXgNCg0KLSBEZWZpbml0aW9uOiBmbGlwIHRoZSByb3dzIGFuZCBjb2x1bW5zIGJ5IGludGVyY2hhbmdpbmcgcm93IGFuZCBjb2x1bW4gaW5kZXguIERlbm90ZWQgYnkgJHtcYmYgTX1ee1xwcmltZX0kLg0KDQotIElmICR7XGJmIE19X3tpLGp9JCBpcyA8c3BhbiBzdHlsZT0iY29sb3I6IGJsdWU7Ij5yb3c8L3NwYW4+ICRpJCwgPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW48L3NwYW4+ICRqJCBvZiBtYXRyaXggJHtcYmYgTX0kLCB0aGVuICR7XGJmIE19XntccHJpbWV9X3tpLGp9ID0ge1xiZiBNfV97aixpfSQsIHNvIHRoYXQgbm93ICRpJCBpcyB0aGUgPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW48L3NwYW4+IGluZGV4LCBhbmQgJGokIGlzIHRoZSA8c3BhbiBzdHlsZT0iY29sb3I6IGJsdWU7Ij5yb3c8L3NwYW4+IGluZGV4Lg0KIA0KYGBge3J9DQp4DQp0KHgpDQpgYGANCg0KIA0KIA0KIyMgU3ltbWV0cmljIE1hdHJpY2VzDQoNCi0gRGVmaW5pdGlvbjogQSBzcXVhcmUgbWF0cml4ICR7XGJmIE19JCBpcyBzeW1tZXRyaWMgaWYgJHtcYmYgTX1ee1xwcmltZX0gPSB7XGJmIE19JC4NCg0KLSBIZW5jZSAke1xiZiBNfV97aSxqfSA9IHtcYmYgTX1fe2osaX0kLg0KDQpgYGB7cn0NCm0gPC0gdCh4KSAlKiUgeA0KbQ0KYGBgDQoNCi0gSW1wb3J0YW50IGV4YW1wbGVzIG9mIHN5bW1ldHJpYyBtYXRyaWNlcyBpbiBtdWx0aXZhcmlhdGUgc3RhdGlzdGljcyBpbmNsdWRlIHRoZSB2YXJpYW5jZS1jb3ZhcmlhbmNlIG1hdHJpeCBhbmQgdGhlIGNvcnJlbGF0aW9uIG1hdHJpeC4NCg0KIyMgTGluZWFyIENvbWJpbmF0aW9uIG9mIFR3byBNYXRyaWNlcw0KDQotIFR3byBtYXRyaWNlcyBtYXkgYmUgYWRkZWQgaWYgYW5kIG9ubHkgaWYgdGhleSBoYXZlIHRoZSBzYW1lIGRpbWVuc2lvbnMuIFRvIGFkZCB0d28gbWF0cmljZXMsIGFkZCB0aGUgY29ycmVzcG9uZGluZyBlbGVtZW50cy4NCg0KYGBge3J9DQp5IDwtIGFzLm1hdHJpeChiYWJ5WzU6NywxOjJdKQ0KeQ0KeCt5DQpgYGANCiANCi0gSWYgJHtcYmYgQX0kIGFuZCAke1xiZiBCfSQgYXJlIHR3byAkbiBcdGltZXMgbSQgZGltZW5zaW9uYWwgbWF0cmljZXMsICRcYWxwaGEkIGFuZCAkXGJldGEkIGFyZSB0d28gc2NhbGFycywgdGhlbiAke1xiZiBDfSA9IFxhbHBoYSBcLCB7XGJmIEF9ICsgXGJldGEgXCwge1xiZiBCfSBcaW4ge1xtYXRoYmIgUn1ee24gXHRpbWVzIG19JC4gQSBzY2FsYXIgbXVsdGlwbGVzIGVhY2ggZW50cnkgb2YgdGhlIG1hdHJpeCwgaS5lLiwgDQpcWw0KIHtcYmYgQ31fe2ksan0gPSBcYWxwaGEgXCwge1xiZiBBfV97aSxqfSArIFxiZXRhIFwsIHtcYmYgQn1fe2ksan0uDQpcXQ0KIA0KYGBge3J9DQoyKnggKyAzKnkNCmBgYA0KDQojIyBNdWx0aXBsaWNhdGlvbiBvZiBUd28gTWF0cmljZXMNCg0KLSBUaGUgKipkb3QgcHJvZHVjdCoqIG9mIHR3byB2ZWN0b3JzICRcdW5kZXJsaW5le3h9JCBhbmQgJFx1bmRlcmxpbmV7eX0kIGlzIHRoZSBzdW0gb2YgdGhlIHByb2R1Y3Qgb2YgdGhlaXIgZW50cmllczogJFx1bmRlcmxpbmV7eH0gXGNkb3QgXHVuZGVybGluZXt5fSA9IFxzdW1fe2k9MX1ebiB4X2kgXCwgeV9pJC4NCg0KYGBge3J9DQpzdW0oeFssMV0qeFssMl0pDQp0KHhbLDEsZHJvcD1GQUxTRV0pICUqJSB4WywyLGRyb3A9RkFMU0VdDQpgYGANCg0KLSBXZSBtdWx0aXBseSBtYXRyaWNlcyBieSB0YWtpbmcgZG90IHByb2R1Y3RzIG9mIHJvdyBhbmQgY29sdW1uIHZlY3RvcnM6ICR7XGJmIEN9ID0ge1xiZiBBfSBcLCB7XGJmIEJ9JCBpcyBkZWZpbmVkIGlmIG51bWJlciBvZiBjb2x1bW5zIGluICR7XGJmIEF9JCBlcXVhbHMgdGhlIG51bWJlciBvZiByb3dzIGluICR7XGJmIEJ9JC4gVGhlbiANClxbDQoge1xiZiBDfV97aSxqfSA9IHtcYmYgQX1fe2ksIC19IFxjZG90IHtcYmYgQn1fey0san0gPSBcc3VtX3trPTF9XnAge1xiZiBBfV97aSxrfSBcLCB7XGJmIEJ9X3trLGp9Lg0KXF0NCkhlcmUgJHtcYmYgQX0gXGluIHtcbWF0aGJiIFJ9XntuIFx0aW1lcyBwfSQsICR7XGJmIEJ9IFxpbiB7XG1hdGhiYiBSfV57cCBcdGltZXMgbX0kLCBhbmQgJHtcYmYgQ30gXGluIHtcbWF0aGJiIFJ9XntuIFx0aW1lcyBtfSQuDQoNCmBgYHtyfQ0KeCAlKiUgdCh5KQ0Kc3VtKHhbMSxdKnQoeSlbLDNdKQ0KYGBgDQoNCiMjIElkZW50aXR5IE1hdHJpeA0KDQotIERlZmluaXRpb246IEFuIGlkZW50aXR5IG1hdHJpeCAke1xiZiBJfSQgaXMgYSBzcXVhcmUgbWF0cml4IHRoYXQgaGFzIG9uZXMgb24gaXRzIGRpYWdvbmFsIChmcm9tIHVwcGVyIGxlZnQgdG8gYm90dG9tIHJpZ2h0KSBhbmQgaGFzIHplcm9zIGVsc2V3aGVyZS4NCg0KYGBge3J9DQpleWUgPC0gZGlhZygyKQ0KZXllDQpgYGANCg0KLSBXaGVuIG11bHRpcGx5aW5nIGFueSBzcXVhcmUgbWF0cml4LCBpdCBsZWF2ZXMgdGhlIG1hdHJpeCB1bmNoYW5nZWQ6ICR7XGJmIEl9IFwsIHtcYmYgQX0gPSB7XGJmIEF9JC4NCg0KYGBge3J9DQp6IDwtIGFzLm1hdHJpeChiYWJ5WzE6MiwxOjJdKQ0Keg0KZXllICUqJSB6DQpgYGANCg0KIyMgTWF0cml4IEludmVyc2UgIA0KDQotIERlZmluaXRpb246IFRoZSBpbnZlcnNlIG9mIGEgc3F1YXJlIG1hdHJpeCAke1xiZiBBfSQsIGlmIGl0IGV4aXN0cyAodGhlIGludmVyc2Ugb2YgemVybyBkb2VzIG5vdCBleGlzdCE/KSwgaXMgZGVub3RlZCBieSAke1xiZiBBfV57LTF9JCwgYW5kIHNhdGlzZmllcw0KXFsNCiB7XGJmIEF9XnstMX0gXCwge1xiZiBBfSA9IHtcYmYgQX0gXCwge1xiZiBBfV57LTF9ID0ge1xiZiBJfS4NClxdDQoNCmBgYHtyfQ0KYSA8LSB0KHgpICUqJSB4DQphX2ludiA8LSBzb2x2ZShhKQ0KYV9pbnYNCmEgJSolIGFfaW52DQphX2ludiAlKiUgYQ0KYGBgDQoNCipXaGF0IGlzIGEgbnVtZXJpY2FsIHplcm8gaW4gUj8qDQoNCi0gSWYgdGhlIGludmVyc2UgZXhpc3RzLCB3ZSBzYXkgdGhlIG1hdHJpeCBpcyAqKmludmVydGlibGUqKi4NCg0KIyMgTWF0cml4IFRyYWNlDQoNCi0gRGVmaW5pdGlvbjogVGhlIHRyYWNlIG9mIGFuICRuIFx0aW1lcyBuJCBtYXRyaXggJHtcYmYgQX0kIGlzIHRoZSBzdW0gb2YgaXRzIGRpYWdvbmFsIGVsZW1lbnRzOiANClxbDQogIFxtYm94e3RyfSB7XGJmIEF9ID0gXHN1bV97aT0xfV5uIHtcYmYgQX1fe2ksaX0uDQpcXQ0KDQpgYGB7cn0NCnN1bShkaWFnKGEpKQ0KYGBgDQoNCi0gRm9yIHR3byBtYXRyaWNlcyAke1xiZiBBfSBcaW4ge1xtYXRoYmIgUn1ee24gXHRpbWVzIHB9JCwgJHtcYmYgQn0gXGluIHtcbWF0aGJiIFJ9XntwIFx0aW1lcyBufSQsIA0KXFsNCiBcbWJveHt0cn0ge1xiZiBBfSBcLCB7XGJmIEJ9ID0gXG1ib3h7dHJ9IHtcYmYgQn0gXCwge1xiZiBBfS4NClxdDQoNCmBgYHtyfQ0KeA0KeiA8LSB0KHkpDQp6DQpzdW0oZGlhZyh4ICUqJSB6KSkNCnN1bShkaWFnKHogJSolIHgpKQ0KYGBgDQoNCiMjIEVpZ2VudmFsdWVzIGFuZCBFaWdlbnZlY3RvcnMNCg0KLSBHaXZlbiBhIHN5bW1ldHJpYyBtYXRyaXggJHtcYmYgQX0kLCB0aGVuIGFueSBzY2FsYXIgJFxsYW1iZGEkIGFuZCB2ZWN0b3IgJFx1bmRlcmxpbmV7dn0kIHN1Y2ggdGhhdA0KXFsNCiB7XGJmIEF9IFwsIFx1bmRlcmxpbmV7dn0gPSBcbGFtYmRhIFwsIFx1bmRlcmxpbmV7dn0NClxdDQogYXJlIGFuICoqZWlnZW52YWx1ZSoqIGFuZCAqKmVpZ2VudmVjdG9yKiogKHRvZ2V0aGVyIGNhbGxlZCBhbiAqKmVpZ2VucGFpcioqKS4NCiANCmBgYHtyfQ0KZWlnIDwtIGVpZ2VuKGEpDQphICUqJSBlaWckdmVjdG9yWywxXQ0KZWlnJHZhbHVlc1sxXSAqIGVpZyR2ZWN0b3JbLDFdDQpgYGANCiAgLg0KLSBBICRuIFx0aW1lcyBuJCBzeW1tZXRyaWMgbWF0cml4IGhhcyAkbiQgcmVhbCBlaWdlbnZhbHVlcywgZGVub3RlZCAkXGxhbWJkYV8xLCBcbGRvdHMsIFxsYW1iZGFfbiQuDQoNCi0gRmFjdDogJFxtYm94e3RyfSB7XGJmIEF9ID0gXHN1bV97aT0xfV5uIFxsYW1iZGFfaSQuDQoNCmBgYHtyfQ0KZWlnJHZhbHVlcw0Kc3VtKGVpZyR2YWx1ZXMpDQpzdW0oZGlhZyhhKSkNCmBgYA0KDQojIyBQb3NpdGl2ZSBEZWZpbml0ZSBNYXRyaXgNCg0KLSBBIHN5bW1ldHJpYyAkbiBcdGltZXMgbiQgZGltZW5zaW9uYWwgbWF0cml4ICR7XGJmIEF9JCBpcyAqKnBvc2l0aXZlIGRlZmluaXRlKiogaWYgJFx1bmRlcmxpbmV7dn1ee1xwcmltZX0ge1xiZiBBfSBcdW5kZXJsaW5le3Z9ID4gMCQgZm9yIGFsbCBub24temVybyBsZW5ndGggJG4kIHZlY3RvcnMgJFx1bmRlcmxpbmV7dn0kLiAgQ29tcGFjdGx5IHdyaXR0ZW4gJHtcYmYgQX0gPiAwJC4NCg0KYGBge3J9DQp2IDwtIHJub3JtKDIpDQp0KHYpICUqJSBhICUqJSB2DQpgYGANCiANCi0gQSBzeW1tZXRyaWMgJG4gXHRpbWVzIG4kIGRpbWVuc2lvbmFsIG1hdHJpeCAke1xiZiBBfSQgaXMgKipwb3NpdGl2ZSBzZW1pLWRlZmluaXRlKiogaWYgJFx1bmRlcmxpbmV7dn1ee1xwcmltZX0ge1xiZiBBfSBcdW5kZXJsaW5le3Z9IFxnZXEgMCQgZm9yIGFsbGxlbmd0aCAkbiQgdmVjdG9ycyAkXHVuZGVybGluZXt2fSQuICBDb21wYWN0bHkgd3JpdHRlbiAke1xiZiBBfSBcZ2VxIDAkLg0KDQotIEZhY3Q6IGEgc3ltbWV0cmljICRuIFx0aW1lcyBuJCBkaW1lbnNpb25hbCBtYXRyaXggaXMgKipwb3NpdGl2ZSBkZWZpbml0ZSoqIGlmIGFuZCBvbmx5IGlmIGFsbCBvZiBpdHMgZWlnZW52YWx1ZXMgYXJlIHBvc2l0aXZlLiAoUmVtZW1iZXIsIHRoZXkgbXVzdCBiZSByZWFsIGJ5IHN5bW1ldHJ5ISkNCg0KLSBGYWN0OiBhICoqcG9zaXRpdmUgZGVmaW5pdGUqKiBtYXRyaXggaXMgaW52ZXJ0aWJsZS4NCg==</div>
 
 
 

@@ -1804,27 +1804,11 @@ summary {
 <p>Rows are babies, columns are variables</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFieSA8LSByZWFkLnRhYmxlKFwiQzpcXFxcVXNlcnNcXFxcbmVpZGVcXFxcRG9jdW1lbnRzXFxcXEdpdEh1YlxcXFxtYTE4OVxcXFxEYXRhXFxcXGJhYmllcy5kYXRcIixoZWFkZXI9VFJVRSlcbmRpbShiYWJ5KVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFieSA8LSByZWFkLnRhYmxlKFwiQzpcXFxcVXNlcnNcXFxcbmVpZGVcXFxcRG9jdW1lbnRzXFxcXEdpdEh1YlxcXFxtYTE4OVxcXFxEYXRhXFxcXGJhYmllcy5kYXRcIixoZWFkZXI9VFJVRSlcbmRpbShiYWJ5KVxuaGVhZChiYWJ5WyxjKDEsNyldKVxuYGBgIn0= -->
 <pre class="r"><code>baby &lt;- read.table(&quot;C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\babies.dat&quot;,header=TRUE)
-dim(baby)</code></pre>
+dim(baby)
+head(baby[,c(1,7)])</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEyMzYgICAgN1xuIn0= -->
-<pre><code>[1] 1236    7</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChiYWJ5WyxjKDEsNyldKVxuYGBgIn0= -->
-<pre class="r"><code>head(baby[,c(1,7)])</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVF5MjdDTUJCY095UVZsdnFRK2gxRUF0UXZhRCtnNm9tckNXNGJZV3hJaktqVUM4ZCtOZTA0OFVyRmxrYmVIZS9NN3ZydFpiVlVLMFZFQlJVVlVDS2s2dmwxdm5oYUVFMGtNa0VUbXNiN0MxV1BDQ0o1RzhzQWNIUUF6c0EzWUlHZmYrOTh4UFY5WlZ3NnZUTTlnb2ZCZkNTTDlTbndlNy96VzVPSnBwMC8xU3lNM2VSNXRLNXk5OGJxbnQyWlZCc2RkUDNlUVkvc2trbHUvRDYwM2tFazQ3NWxKaFpkUnR3ZlhaeGtNMnMrajI0N204Y0dhVmVScGhQcFB6aVdZMHY1bTZ6S1pGVVo5OUU2dzdOYnZUWTJKWGZZZUZpNDNuZXQ0ODlSWVBzNitLQzVUalhlTWpQc1JwYy80VWhnSytjQkFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["bwt"],"name":[1],"type":["int"],"align":["right"]},{"label":["smoke"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"120","2":"0","_rn_":"1"},{"1":"113","2":"0","_rn_":"2"},{"1":"128","2":"1","_rn_":"3"},{"1":"123","2":"0","_rn_":"4"},{"1":"108","2":"1","_rn_":"5"},{"1":"136","2":"0","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZ3JlZ2V4cHIoY2FsbHRleHQsIHNpbmdsZWxpbmUsIGZpeGVkID0gVFJVRSkgOiBcbiAgcmVndWxhciBleHByZXNzaW9uIGlzIGludmFsaWQgVVRGLThcbiJ9 -->
-<pre><code>Error in gregexpr(calltext, singleline, fixed = TRUE) : 
-  regular expression is invalid UTF-8</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>

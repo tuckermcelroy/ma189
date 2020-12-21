@@ -3,6 +3,267 @@ title: "Math 189: Matrix Algebra"
 output: html_notebook
 ---
 
+# I. Multivariate Data
 
+## Matrix Formulation
+In multivariate analysis, we are interested in jointly analyzing multiple dependent variables.
 
+- These variables can be represented using matrices and vectors.
 
+- The benefits of matrix form:
+
+1. Simplicity in notation
+2. Expressing important formulas in readable format
+
+## Example 1: Multivariate Data of Infant Death
+Data records several variables for a baby at birth:
+
+<!-- bwt		Baby’s weight at birth, to the nearest ounce -->
+<!-- gestation		Duration of the pregnancy in days, calculated from the first day of the last normal menstrual period. -->
+<!-- parity		Indicator for whether the baby is the first born (1) or not (0). -->
+<!-- age		Mother’s age at the time of conception, in years -->
+<!-- height		Height of the mother, in inches -->
+<!-- weight		Mother’s prepregnancy weight, in pounds -->
+<!-- smoking	Indicator for whether the mother smokes (1) or not (0). -->
+
+1. Baby Weight (**bwt**): in ounces
+2. Gestation (**gestation**): in days
+
+Rows are babies, columns are variables
+
+```{r}
+baby <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\babies.dat",header=TRUE)
+head(baby[,c(1,2)])
+```
+
+**Notice anything weird?!**
+
+*Source*: The Child Health and Development Studies (CHDS) data are presented in *Stat Labs: Mathematical Statistics Through Applications* by Deborah Nolan and Terry Speed (Springer).  
+
+## Math Notation
+Let $\underline{x} = [ x_1, x_2 ]'$ denote the <span style="color: red;">column</span> vector of **bwt** and **gestation**.
+\[
+ \underline{x} = \left[ \begin{array}{c} x_1 \\ x_2 \end{array} \right]
+ = \left[ \begin{array}{c} \mbox{bwt} \\ \mbox{gestation} \end{array} \right]. 
+\]
+ So $\underline{x} \in {\mathbb R}^2$.
+ 
+ There are $n=1236$ babies. Let $\underline{x}_i$ for $1 \leq i \leq 1236$ denote both variables for baby $i$, i.e.,
+\[
+  \underline{x}_1  = \left[ \begin{array}{c} 120  \\ 284 \end{array} \right], \quad
+  \underline{x}_2  = \left[ \begin{array}{c} 113  \\ 282 \end{array} \right], \quad
+    \underline{x}_3  = \left[ \begin{array}{c} 128  \\ 279 \end{array} \right],\, \cdots 
+\]
+ This is called the **record** for the $i$th baby (or unit). Let $i$ index baby, and $j = 1, 2$ index variable. Then $x_{i,j}$ is **bwt** ($j=1$) or **gestation** ($j=2$) for baby $i$. Gestation for the fourth baby is $x_{4,2} =$ `r baby[4,2]`. 
+ 
+ A data matrix consists of all **records** as <span style="color: blue;">row</span> vectors:
+\[
+  \left[ \begin{array}{c} \underline{x}_1^{\prime}  \\ \underline{x}_2^{\prime} \\ \underline{x}_3^{\prime} \end{array} \right]
+  = \left[ \begin{array}{cc} 120 & 284 \\ 113 & 282  \\ 128  & 279  \end{array} \right]. 
+\]
+
+```{r}
+x <- baby[1:3,1:2]
+x
+```
+
+Each <span style="color: blue;">row</span> is information for one baby; each <span style="color: red;">column</span> is all measurements (across babies) of either **bwt** or **gestation**
+
+## Definition of Matrix and Vector
+A matrix is a two-dimensional array of numbers, symbols, or expressions, arranged in rows and columns.
+
+- A vector is a matrix with either one row or one column.
+
+- The dimension of a matrix is two numbers: number of <span style="color: blue;">rows</span> (units) and number of <span style="color: red;">columns</span> (units). Dimension of baby is `r dim(baby)` and dimension of submatrix $x$ is `r dim(x)`.
+
+- A square matrix is one for which the numbers of <span style="color: blue;">rows</span> and number of <span style="color: red;">columns</span> are equal, e.g.
+
+```{r}
+x <- baby[1:2,1:2]
+dim(x)
+```
+ 
+## Notations of Matrix and Vector
+
+- Usually in this course we only consider matrices and vectors whose entries are real numbers.
+
+- A real-valued **matrix** ${\bf M}$ of dimension $n \times m$ is denoted ${\bf M} \in {\mathbb R}^{n \times m}$.
+
+- A real **vector** $\underline{v}$ of length $n$ is denoted $\underline{v} \in {\mathbb R}^n$. 
+
+- A <span style="color: blue;">row</span> vector can be written $\underline{v} \in {\mathbb R}^{1 \times n}$, and a <span style="color: red;">column</span> vector can be written $\underline{v} \in {\mathbb R}^{n \times 1}$.
+
+- A **scalar** is a real number, or a vector of length $1$, or a $1 \times 1$ dimensional matrix.
+
+```{r}
+x <- as.matrix(baby[1:3,1:2])
+x
+x[,1]
+x[,1,drop=FALSE]
+x[1,1]
+x[1,1,drop=FALSE]
+```
+ 
+## Transpose of a Matrix
+
+- Definition: flip the rows and columns by interchanging row and column index. Denoted by ${\bf M}^{\prime}$.
+
+- If ${\bf M}_{i,j}$ is <span style="color: blue;">row</span> $i$, <span style="color: red;">column</span> $j$ of matrix ${\bf M}$, then ${\bf M}^{\prime}_{i,j} = {\bf M}_{j,i}$, so that now $i$ is the <span style="color: red;">column</span> index, and $j$ is the <span style="color: blue;">row</span> index.
+ 
+```{r}
+x
+t(x)
+```
+
+ 
+ 
+## Symmetric Matrices
+
+- Definition: A square matrix ${\bf M}$ is symmetric if ${\bf M}^{\prime} = {\bf M}$.
+
+- Hence ${\bf M}_{i,j} = {\bf M}_{j,i}$.
+
+```{r}
+m <- t(x) %*% x
+m
+```
+
+- Important examples of symmetric matrices in multivariate statistics include the variance-covariance matrix and the correlation matrix.
+
+## Linear Combination of Two Matrices
+
+- Two matrices may be added if and only if they have the same dimensions. To add two matrices, add the corresponding elements.
+
+```{r}
+y <- as.matrix(baby[5:7,1:2])
+y
+x+y
+```
+ 
+- If ${\bf A}$ and ${\bf B}$ are two $n \times m$ dimensional matrices, $\alpha$ and $\beta$ are two scalars, then ${\bf C} = \alpha \, {\bf A} + \beta \, {\bf B} \in {\mathbb R}^{n \times m}$. A scalar multiples each entry of the matrix, i.e., 
+\[
+ {\bf C}_{i,j} = \alpha \, {\bf A}_{i,j} + \beta \, {\bf B}_{i,j}.
+\]
+ 
+```{r}
+2*x + 3*y
+```
+
+## Multiplication of Two Matrices
+
+- The **dot product** of two vectors $\underline{x}$ and $\underline{y}$ is the sum of the product of their entries: $\underline{x} \cdot \underline{y} = \sum_{i=1}^n x_i \, y_i$.
+
+```{r}
+sum(x[,1]*x[,2])
+t(x[,1,drop=FALSE]) %*% x[,2,drop=FALSE]
+```
+
+- We multiply matrices by taking dot products of row and column vectors: ${\bf C} = {\bf A} \, {\bf B}$ is defined if number of columns in ${\bf A}$ equals the number of rows in ${\bf B}$. Then 
+\[
+ {\bf C}_{i,j} = {\bf A}_{i, -} \cdot {\bf B}_{-,j} = \sum_{k=1}^p {\bf A}_{i,k} \, {\bf B}_{k,j}.
+\]
+Here ${\bf A} \in {\mathbb R}^{n \times p}$, ${\bf B} \in {\mathbb R}^{p \times m}$, and ${\bf C} \in {\mathbb R}^{n \times m}$.
+
+```{r}
+x %*% t(y)
+sum(x[1,]*t(y)[,3])
+```
+
+## Identity Matrix
+
+- Definition: An identity matrix ${\bf I}$ is a square matrix that has ones on its diagonal (from upper left to bottom right) and has zeros elsewhere.
+
+```{r}
+eye <- diag(2)
+eye
+```
+
+- When multiplying any square matrix, it leaves the matrix unchanged: ${\bf I} \, {\bf A} = {\bf A}$.
+
+```{r}
+z <- as.matrix(baby[1:2,1:2])
+z
+eye %*% z
+```
+
+## Matrix Inverse  
+
+- Definition: The inverse of a square matrix ${\bf A}$, if it exists (the inverse of zero does not exist!?), is denoted by ${\bf A}^{-1}$, and satisfies
+\[
+ {\bf A}^{-1} \, {\bf A} = {\bf A} \, {\bf A}^{-1} = {\bf I}.
+\]
+
+```{r}
+a <- t(x) %*% x
+a_inv <- solve(a)
+a_inv
+a %*% a_inv
+a_inv %*% a
+```
+
+*What is a numerical zero in R?*
+
+- If the inverse exists, we say the matrix is **invertible**.
+
+## Matrix Trace
+
+- Definition: The trace of an $n \times n$ matrix ${\bf A}$ is the sum of its diagonal elements: 
+\[
+  \mbox{tr} {\bf A} = \sum_{i=1}^n {\bf A}_{i,i}.
+\]
+
+```{r}
+sum(diag(a))
+```
+
+- For two matrices ${\bf A} \in {\mathbb R}^{n \times p}$, ${\bf B} \in {\mathbb R}^{p \times n}$, 
+\[
+ \mbox{tr} {\bf A} \, {\bf B} = \mbox{tr} {\bf B} \, {\bf A}.
+\]
+
+```{r}
+x
+z <- t(y)
+z
+sum(diag(x %*% z))
+sum(diag(z %*% x))
+```
+
+## Eigenvalues and Eigenvectors
+
+- Given a symmetric matrix ${\bf A}$, then any scalar $\lambda$ and vector $\underline{v}$ such that
+\[
+ {\bf A} \, \underline{v} = \lambda \, \underline{v}
+\]
+ are an **eigenvalue** and **eigenvector** (together called an **eigenpair**).
+ 
+```{r}
+eig <- eigen(a)
+a %*% eig$vector[,1]
+eig$values[1] * eig$vector[,1]
+```
+  .
+- A $n \times n$ symmetric matrix has $n$ real eigenvalues, denoted $\lambda_1, \ldots, \lambda_n$.
+
+- Fact: $\mbox{tr} {\bf A} = \sum_{i=1}^n \lambda_i$.
+
+```{r}
+eig$values
+sum(eig$values)
+sum(diag(a))
+```
+
+## Positive Definite Matrix
+
+- A symmetric $n \times n$ dimensional matrix ${\bf A}$ is **positive definite** if $\underline{v}^{\prime} {\bf A} \underline{v} > 0$ for all non-zero length $n$ vectors $\underline{v}$.  Compactly written ${\bf A} > 0$.
+
+```{r}
+v <- rnorm(2)
+t(v) %*% a %*% v
+```
+ 
+- A symmetric $n \times n$ dimensional matrix ${\bf A}$ is **positive semi-definite** if $\underline{v}^{\prime} {\bf A} \underline{v} \geq 0$ for alllength $n$ vectors $\underline{v}$.  Compactly written ${\bf A} \geq 0$.
+
+- Fact: a symmetric $n \times n$ dimensional matrix is **positive definite** if and only if all of its eigenvalues are positive. (Remember, they must be real by symmetry!)
+
+- Fact: a **positive definite** matrix is invertible.
