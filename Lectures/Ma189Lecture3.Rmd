@@ -247,7 +247,7 @@ A time plot (sometimes called a *time series graph*) displays values versus time
 
 ## Example 2: Stock Prices of High-tech Companies
 
-- We collect daily stock prices (closing price) of four leading high-tech companies between January 2018 and January 2019.
+- We collect daily stock prices (closing price) of four leading high-tech companies between January 2018 and January 2019; 250 trading days.
 
 - The following variables were included:
 
@@ -256,69 +256,269 @@ A time plot (sometimes called a *time series graph*) displays values versus time
 3. Daily stock price of IBM
 4. Daily stock price of Microsoft
 
+```{r}
+stock <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\Stock.csv", 
+                    sep = ",", header=TRUE)
+head(stock)
+```
+
+ 
+ 
+### Multivariate timeseries plot of stock prices.
+
+```{r}
+stock$index <- as.numeric(row.names(stock))
+stock <- stock[order(stock$index),]
+plot(x = seq(1,250), y = stock$Apple,
+     xlab = "Date", ylab = "Stock Price", ylim=c(80,240), xaxt='n',
+     main = "Daily Stock Prices in 2018",
+     col="red",  type="l", lwd=2)
+lines(x = seq(1,250), y = stock$FaceBook, col="blue",  lwd=2)
+lines(x = seq(1,250), y = stock$IBM, col="black",  lwd=2)
+lines(x = seq(1,250), y = stock$MicroSoft, col="purple",  lwd=2)
+axis(1, at = c( 50, 100, 150, 200 ), labels = c("3/27", "6/7", "8/17", "10/29"))
+legend("topleft",c("Apple", "FaceBook", "IBM", "MicroSoft"),
+       col=c("red", "blue", "black", "purple"), lty=c(1,1,1,1))
+```
+ 
+### Questions About this Plot
+
+- Can you observe any co-movement of these four stocks?
+- Any trends?
+- Which asset is most risky?
+
+### Pros and Cons of Price Data
+
+#### Pros
+- Straightforward
+- Easy to check trends and high/low prices
+
+#### Cons
+- Compare apple to pear
+- No relative gain/loss
+- Non-stationary data
+
+## Log-return of Financial Assets
+
+- In financial analysis, logarithm of returns is more popular than prices or raw returns.
+- For an asset (e.g. stock, bond, gold, bitcoin), **log return** at time $t$ is
+\[ 
+ r_t = \log (1 + R_t) = \log \left(1 + \frac{ P_t - P_{t-1}}{ P_{t-1}} \right)
+  = \log P_{t} - \log P_{t-1},
+\]
+where $P_t$ and $R_t$  are the price and simple return at time $t$.
+
+## Why Log-return ?
+
+Log-return is favored for multiple reasons:
+
+1. More normal-like distribution (recall log transformation)
+2. More stationary time series (zero mean and fixed variance)
+3. Log additivity
+\[
+  \sum_{t=1}^T r_t = \log P_T - \log P_0.
+\]
+  
+
+### Calculate Daily Log Return for Stock Data
+
+```{r}
+Apple_return=diff(log(stock$Apple), lag=1)
+FaceBook_return=diff(log(stock$FaceBook), lag=1)
+IBM_return=diff(log(stock$IBM), lag=1)
+MicroSoft_return=diff(log(stock$MicroSoft), lag=1)
+plot(x = seq(1,249), y = Apple_return,
+     xlab = "Date", ylab = "Stock Price",  ylim=c(-0.2, 0.1), xaxt='n',
+     main = "Daily Stock Returns in 2018",
+     col="red",  type="l", lwd=1)
+lines(x = seq(1,249), y = FaceBook_return, col="blue",  lwd=1)
+lines(x = seq(1,249), y = IBM_return, col="black",  lwd=1)
+lines(x = seq(1,249), y = MicroSoft_return, col="purple",  lwd=1)
+axis(1, at = c( 50, 100, 150, 200 ), labels = c("3/27", "6/7", "8/17", "10/29"))
+legend("bottomleft",c("Apple", "Facebook", "IBM", "Microsoft"),
+       col=c("red", "blue", "black", "purple"), lty=c(1,1,1,1))
+```
+
+### Questions About this Plot
+
+- Which asset is the most risky (largest "volatility")?
+- Can you observe any **black swan** event?  (Drop after warning that revenue growth is slowing)
+ 
+```{r}
+stock$Date[1+ which.min(FaceBook_return)]
+```
+
+# Radar Chart
+
+- *Radar chart* (also known as spider, web, polar, star chart) is agraphical method of comparing multivariate data in the form of a two-dimensional chart of three or more quantitative variables.
+- A radar chart is useful to:
+
+1. Find similar observations
+2. Find observation with high/low scores
+3. Find clusters of observations
+4. Find outliers
+
+## Example 3: High School Final Scores
+
+- We generate a toy dataset. The dataset contains the final scores of some students in a hypothetical high school.
+- Suppose the following 8 subjects are tested:
+
+1. Math, 
+2. English, 
+3. Biology, 
+4. Music,
+5. Physics, 
+6. Statistics
+
+- Each subject is scored from 1 to 10.
+
+### Simulate a Toy Example
+
+```{r}
+library(fmsb)
+data <- as.data.frame(matrix(sample(2:10, 24, replace=T), ncol=6))
+colnames(data) <- c("math", "english", "biology", "music", "physics", "statistics")
+head(data)
+```
+
+### Radar Chart for 1st Student
+
+- Each axis represents the score in a subject
+- Require standardized variables
+- The area covered can be considered as a score for overall performance
+
+```{r}
+data1 <- data[1,]
+# Add a row of 0 and a row of 10 to let the package know the range of data
+data1 <- rbind(rep(10,6), rep(0,6), data1)
+radarchart(data1, axistype=1, 
+     #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9), pfcol=rgb(0.2,0.5,0.5,0.5), plwd=4, 
+     #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,10,2.5), cglwd=0.8,
+     #custom labels
+    vlcex=0.8)
+```
 
 
-<!-- # SCRAP -->
+### Comparison on Parallel Charts
 
-<!-- ## Stock data -->
+Examine a radar chart for each of four students
 
-<!-- stock=read.table("https://www.math.ucsd.edu/~wez243/data/Stock.csv", sep = ",", header=TRUE) -->
-<!-- stock$index = as.numeric(row.names(stock)) -->
-<!-- stock=stock[order(stock$index),] -->
+```{r}
+data2 <- data[2,]
+data3 <- data[3,]
+data4 <- data[4,]
+data2 <- rbind(rep(10,6), rep(0,6), data2)
+data3 <- rbind(rep(10,6), rep(0,6), data3)
+data4 <- rbind(rep(10,6), rep(0,6), data4)
+radarchart(data1, axistype=1, 
+     #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9), pfcol=rgb(0.2,0.5,0.5,0.5), plwd=4, 
+     #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,10,2.5), cglwd=0.8,
+     #custom labels
+    vlcex=0.8)
+radarchart(data2, axistype=1, 
+     #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9), pfcol=rgb(0.2,0.5,0.5,0.5), plwd=4, 
+     #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,10,2.5), cglwd=0.8,
+     #custom labels
+    vlcex=0.8)
+radarchart(data3, axistype=1, 
+     #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9), pfcol=rgb(0.2,0.5,0.5,0.5), plwd=4, 
+     #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,10,2.5), cglwd=0.8,
+     #custom labels
+    vlcex=0.8)
+radarchart(data4, axistype=1, 
+     #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9), pfcol=rgb(0.2,0.5,0.5,0.5), plwd=4, 
+     #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,10,2.5), cglwd=0.8,
+     #custom labels
+    vlcex=0.8)
 
-<!-- png(file = "Stock_1.png", width=640, height=480) -->
+```
+ 
+### Comparison on One Chart
 
-<!-- # Multivariate timeseries plot of stock prices. -->
-<!-- plot(x = seq(1,250), y = stock$Apple, -->
-<!--      xlab = "Date", ylab = "Stock Price", ylim=c(80,240), xaxt='n',	  -->
-<!--      main = "Daily Stock Prices in 2018", -->
-<!--      col="red",  type="l", lwd=2) -->
+- Draw multiple observations on the same chart
+- Easy to compare areas, pros and cons
+- Not ideal given a large number of observations 
+ 
+```{r}
+data_all <- rbind(rep(10,6), rep(0,6), data)
+radarchart(data_all)
+```
 
-<!-- lines(x = seq(1,250), y = stock$Facebook, col="blue",  lwd=2) -->
+# Chernoff Face
 
-<!-- lines(x = seq(1,250), y = stock$IBM, col="black",  lwd=2) -->
+- *Chernoff faces*, invented by Herman Chernoff in 1973, display multivariate data in the shape of a human face.
+- The individual parts, such as eyes, ears, mouth and nose represent values of the variables by their shape, size, placement and orientation.
+- The idea behind using faces is that people easily recognize faces and notice small changes without difficulty. 
 
-<!-- lines(x = seq(1,250), y = stock$Microsoft, col="purple",  lwd=2) -->
+## Example 4: Crime Rates by State in 2008
 
-<!-- axis(1, at = c( 50, 100, 150, 200 ), labels = c("3/27", "6/7", "8/17", "10-29")) -->
+- The data contains the rates of various types of crimes in different states. The data source is Table 301 of the 2008 US Statistical Abstract.
+- Rates of the following crime types are recorded:
 
-<!-- legend("topleft",, c("Apple", "Facebook", "IBM", "Microsoft"),  -->
-<!--        col=c("red", "blue", "black", "purple"), lty=c(1,1,1,1)) -->
+1. Murder 
+2. Forcible rape
+3. Robbery 
+4. Aggravated assault
+5. Burglary 
+6. Larceny theft
+7. Motor vehicle theft
 
-<!-- # Save the file. -->
-<!-- dev.off() -->
+![](images/face_crime.png)
+
+### How to Make a Face?
+
+- Each type of crime corresponds to a character in face.
+- Shape of the character depends on the value of each variable
 
 
-<!-- # Calculate Daily log return -->
+```{r}
+library(aplpack)
+crime <- read.csv("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\crimeRatesByState-formatted.csv")
+head(crime)
+faces(crime[1:9,2:8], face.type = 0, labels=crime$state[1:9], cex=1.5)
+```
 
-<!-- Apple_return=diff(log(stock$Apple), lag=1) -->
-<!-- Facebook_return=diff(log(stock$Facebook), lag=1) -->
-<!-- IBM_return=diff(log(stock$IBM), lag=1) -->
-<!-- Microsoft_return=diff(log(stock$Microsoft), lag=1) -->
+### Pros and Cons
 
-<!-- # Multivariate timeseries plot of stock returns. -->
-<!-- png(file = "Stock_2.png", width=640, height=480) -->
+#### Pros
+- Easy to discern and remember the differences between states
 
-<!-- plot(x = seq(1,249), y = Apple_return, -->
-<!--      xlab = "Date", ylab = "Stock Price",  ylim=c(-0.2, 0.1), xaxt='n',	  -->
-<!--      main = "Daily Stock Returns in 2018", -->
-<!--      col="red",  type="l", lwd=1) -->
+###3 Cons
+- Hard to translate faces back to the value of variables
+ 
+ 
+```{r} 
+faces(crime[1:25,2:8], face.type = 0, labels=crime$state[1:25], cex=1.5)
+```
 
-<!-- lines(x = seq(1,249), y = Facebook_return, col="blue",  lwd=1) -->
+# Heat Map
 
-<!-- lines(x = seq(1,249), y = IBM_return, col="black",  lwd=1) -->
+- A *heat map* (or heatmap) is a visualization tool that represents values in a data matrix by colors in a 2D graph
+- Applications of heat map:
 
-<!-- lines(x = seq(1,249), y = Microsoft_return, col="purple",  lwd=1) -->
+1. Molecular biology
+2. Neural science
+3. Physics
+4. Density plot
 
-<!-- axis(1, at = c( 50, 100, 150, 200 ), labels = c("3/27", "6/7", "8/17", "10-29")) -->
 
-<!-- legend("bottomleft",, c("Apple", "Facebook", "IBM", "Microsoft"),  -->
-<!--        col=c("red", "blue", "black", "purple"), lty=c(1,1,1,1)) -->
+![Heat Map for Whole Brain Analysis](images/Whole-brain-analysis.png)
 
-<!-- # Save the file. -->
-<!-- dev.off() -->
+# Network Map
 
-<!-- png(file = "p5-2.png", width=640, height=480) -->
-<!-- pairs(nutrient_std, pch=20) -->
-<!-- dev.off() -->
+- A *network map* is a visualization tool used to study the physical connectivity of networks.
+- Each node in the map represents a variable (e.g. users, characters, features).
+- Two nodes are connected if there is an edge between them.
+- An example: Network map for marvel cinematic universe.
+https://graphics.straitstimes.com/STI/STIMEDIA/Interactives/2018/04/marvel-cinematic-universe-whos-who-interactive/index.html
 

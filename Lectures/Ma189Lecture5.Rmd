@@ -1,0 +1,6 @@
+---
+title: "Math 189: Exploratory Data Analysis III"
+output: html_notebook
+---
+
+ 

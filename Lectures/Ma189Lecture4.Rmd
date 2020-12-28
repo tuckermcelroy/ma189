@@ -1,0 +1,142 @@
+---
+title: "Math 189: Exploratory Data Analysis II"
+output: html_notebook
+---
+
+# Descriptive Statistics
+
+- *Descriptive statistics* is the term given to the analysis of data that helps describe, show or summarize data in a meaningful way.
+- Descriptive statistics are very important since raw data is hard to interpret, and visualization is not quantitively accurate.
+- Descriptive statistics do not, however, allow us to make conclusions beyond the data we have analyzed or reach conclusions regarding any hypotheses we might have made.
+- The goal of descriptive statistics is to obtain some partial descriptions of the joint distribution of the data.
+- Three aspects of the data are of importance:
+
+1. **Central Tendency**. What is a typical value for each variable?
+2. **Dispersion**. How far apart are the individual observations deviate from a central
+value for a given variable?
+3. **Association**. When more than one variable are studied together, how does each variable relate to the remaining variables? How are the variables simultaneously related to one another? Are they positively or negatively related?
+
+# Population
+
+- A *population* is the collection of all people, plants, animals, or objects of interest
+about which we wish to make statistical inferences (generalizations).
+- The population may also be viewed as the collection of all possible random draws from a stochastic model; for example, independent draws from a normal distribution with a given population mean and population variance.
+- A population parameter is a numerical characteristic of a population. 
+- In nearly all statistical problems we do not know the value of a parameter because we do not measure the entire population. We use sample data to make an inference about the value of a parameter.
+
+# Sample
+
+- A *sample* is the subset of the population that we actually measure or observe.
+- A sample statistic is a numerical characteristic of a sample. A sample statistic estimates the unknown value of a population parameter.
+- A sample statistic is sometimes referred to as a *descriptive statistic*.
+- *Statistics*, as a subject matter, is the science and art of using sample data to make generalizations about populations
+
+## Example 1: USDA Women’s Health Survey
+
+### Population
+
+- Intake of the 5 nutrients for all women aged between 25 and 50 in United States.
+
+### Sample
+
+- Intake of the 5 nutrients observed from 737 women aged between 25 and 50 in United States.
+
+### A Population Parameter
+
+- Average intake of Calcium
+
+### A Sample Statistic
+
+- Sample mean of Calcium intake
+
+# Notation
+
+- $p$ is number of variables, $n$ is number of observations.
+- $x_{ij}$ is $i$th observation of variable $j$
+- vector of observations for the $j$th variable is
+\[
+ \underline{x}_j = \left[ \begin{array}{c} x_{1j} \\ x_{2j} \\ \vdots \\ x_{nj} \end{array} \right] = { \left[ x_{1j}, x_{2j}, \ldots, x_{nj} \right] }^{\prime}.
+\]
+- The *data matrix* (sometimes called design, regressor, and model matrix) has $j$th column 
+given by $\underline{x}_j$:
+\[
+ {\bf X} = \left[ \underline{x}_1, \ldots, \underline{x}_p \right]
+  = \left[ \begin{array}{cc} x_{11} & \ldots & x_{1p} \\
+                              \vdots & \ddots & \vdots \\
+                              x_{n1} & \ldots & x_{np} \end{array} \right] \in 
+                              \mathbf{R}^{n \times p}.
+\]               
+ 
+- Each column of ${\bf X}$ contains the observations of one variable.
+- Each row of ${\bf X}$ contains all variables for one subject/unit.
+ 
+# Measures of Central Tendency
+
+- Throughout   we use $\mu_{j}$ to denote the population mean of the $j$th variable; $\overline{x}_j$ denotes  the sample mean based on the observed data for the $j$th variable.
+- The population mean/expectation is the measure of central tendency for the population. The population mean/expectation for the $j$th variable is
+\[
+ \mu_j = {\mathbf E} [ \underline{x}_j ].
+ \]
+- The population mean can be estimated by the sample mean
+\[
+ \overline{x}_j = \frac{1}{n} \sum_{i=1}^n x_{ij}.
+ \]
+ 
+## Population Mean Vector
+
+- A collection of population means of all variables forms the *population mean vector*:
+ or any $1 \leq i \leq n$
+\[
+ \underline{\mu} = \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right] = \left[ \begin{array}{c} \mathbf{E} [x_{i1} ] \\ \mathbf{E} [x_{i2} ] \\ \vdots
+ \\ \mathbf{E} [x_{ip} ] \end{array} \right] = \mathbf{E} [ \underline{x}_i ].
+\]
+ This also the mean of the $i$th row of ${\bf X}$.
+ 
+## Sample Mean Vector
+
+- We can estimate the *population mean vector* by the *sample mean vector*:
+\[
+ \overline{\underline{x}} =  \left[ \begin{array}{c} \overline{x}_1 \\ \overline{x}_2 \\ \vdots \\ \overline{x}_p \end{array} \right] = 
+ \left[ \begin{array}{c} n^{-1} \sum_{i=1}^n x_{i1} \\ n^{-1} \sum_{i=1}^n x_{i2} \\ \vdots
+ \\ n^{-1} \sum_{i=1}^n x_{ip} \end{array} \right] = n^{-1} \sum_{i=1}^n \underline{x}_{i}.
+\]
+
+## Sample Mean is Unbiased
+
+- The sample mean (vector) is an unbiased descriptive statistic of the population mean (vector):
+\[
+ \mathbf{E} [ \overline{x}_j] =  \mathbf{E} \left[ n^{-1} \sum_{i=1}^n x_{ij} \right]
+  =  n^{-1} \sum_{i=1}^n \mathbf{E } [ x_{ij} ] =  n^{-1} \sum_{i=1}^n \mu_j = \mu_j,
+  \]
+and hence  
+\[
+ \mathbf{E} [ \overline{\underline{x}} ] = 
+ \left[ \begin{array}{c} \mathbf{E} [ \overline{x}_1 ] \\ 
+ \mathbf{E} [ \overline{x}_2 ] \\ \vdots \\ \mathbf{E} [ \overline{x}_p ] \end{array} \right]
+ = \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right] = \underline{\mu}.
+\]
+
+## Why Do We Care About Bias?
+
+- Statistical bias is defined as the difference between population parameter and the expectation of the estimator.
+- For example
+\[
+  \mu_j - \mathbf{E} [ \overline{x}_j ].
+\]
+- The expectation of an estimator is a quantity (non-random) that your estimator should converge to when sample size is large enough. This is the "best” you can expect from your estimator.
+- If the bias is non-zero, there will be a non-vanishing estimation error even if you increase the sample size.
+
+## Example 1: USDA Women’s Health Survey
+
+Find sample mean for 5 variables
+
+```{r}
+nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient$V1=NULL
+colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
+colMeans(nutrient)
+# check
+n <- dim(nutrient)[1]
+p <- dim(nutrient)[2]
+sum(nutrient$Calcium)/n
+```
