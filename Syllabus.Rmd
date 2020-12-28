@@ -1,7 +1,7 @@
 ---
 # title: "Math 189 Syllabus"
 # author: "Tucker McElroy"
-# date: "12/7/2020"
+# date: "12/28/2020"
 output: 
   html_document:
     keep_md: true

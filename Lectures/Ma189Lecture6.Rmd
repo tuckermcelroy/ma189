@@ -1,0 +1,117 @@
+---
+title: "Math 189: Multivariate Mean I"
+output: html_notebook
+---
+
+#  Inference for Multivariate Mean
+
+- Statistical inference is the process of using sample data to analyze the properties of an underlying population probability distribution.
+- In this lecture we consider the properties of the sample mean vector.
+- We will also consider hypothesis testing problems on the population mean vector.
+
+# Linear Combinations of Random Variables
+
+- It is often of interest to investigate a linear combination of multiple random variables:
+\[
+ Y = c_1 X_1 + c_2 X_2 + \ldots + c_p X_p = \sum_{j=1}^p c_j X_j = \underline{c}^{\prime} \underline{X}.
+\]
+- Here  we have a set of coefficients $c_1$ through $c_p$ that are multiplied by corresponding variables $X_1$ through $X_p$, and summed.
+- The selection of the coefficients $c_1$ through $c_p$ depend on the application of interest, and the type of scientific questions we would like to address.
+ 
+## Example: USDA Women’s Health Survey Data
+
+- Suppose the variables in the dataset are $X_1 =$ Calcium (mg), $X_2 =$ Iron (mg), $X_3 =$ Protein (g), $X_4 =$ Vitamin A ($\mu$g), and $X_5 =$ Vitamin C (mg).
+- In addition to addressing questions about the individual nutritional component, we may wish to address questions about certain combinations of these components.
+- What is the total intake of vitamins A and C (in mg)? Note that Vitamin A is measured in micrograms ($\mu$g), while Vitamin C is measured in milligrams (mg). 
+- 1000 $\mu$g is 1 mg.
+- So the total intake of the two vitamins, $Y$ (in mg), can be expressed as
+\[
+ Y = .0001 X_4 + X_5.
+\]
+- In this case, $c_1 = c_2 = c_3 = 0$, $c_4 = .0001$, and $c_5 = 1$.
+
+## Example: Monthly Employment Data
+
+- Suppose a dataset contains the following 6 variables about monthly employment:
+
+1. $X_1$ is number of people laid off or fired
+2. $X_2$ is number of people resigned
+3. $X_3$ is number of people retired
+4. $X_4$ is number of jobs created
+5. $X_5$ is number of peoople hired
+6. $X_6$ is number of people entering the workforce
+
+- We want to calculate the following variables as linear combinations of the above variables:
+
+1. Net employment increase
+2. Net unemployment increase
+3. Unfilled jobs
+
+### Net employment increase
+\[
+ Y = X_5 - X_1 - X_2 - X_3.
+\]
+
+### Net unemployment increase
+\[
+ Y  = X_1 + X_2 + X_6 - X_5.
+\]
+
+### Unfilled jobs
+\[
+ Y = X_4 - X_5.
+\]
+
+## Descriptive Statistics of Linear Combination of Random Variables
+
+- Linear combinations are functions of random quantities, and hence have population means and variances. Moreover, if we are looking at several linear combinations, they will have covariances and correlations as well.
+- We are interested in knowing:
+
+1. What is the population mean of $Y$?
+2. What is the population variance of $Y$?
+3. What is the population covariance between two linear combinations $Y_1$ and $Y_2$?
+
+## Mean of $Y$
+
+- The population mean of a linear combination is equal to the same linear combination of the population means of the component variables. If $Y = \sum_{j=1}^p c_j X_j$, then $\mathbb{E} [Y] = \sum_{j=1}^p c_j \mu_j$.  Also
+\[
+  \mathbb{E} [Y] = \mathbb{E} \left[ \underline{c}^{\prime} \underline{X} \right]
+   = \underline{c}^{\prime} \mathbb{E} [ \underline{X} ]
+    = \underline{c}^{\prime} \underline{\mu}.
+\]
+- We can estimate the population mean by replacing the population means with the corresponding sample means:
+\[
+ \overline{Y} = \sum_{j=1}^p c_j \overline{X}_j =
+  \underline{c}^{\prime} \overline{\underline{X}}.
+\]
+
+## Variance of $Y$
+
+- The population variance of a linear combination is expressed as the following double sum over all pairs of variables:
+\[
+ \mbox{Var} [Y] = \sum_{j=1}^p \sum_{k=1}^p c_j c_k \sigma_{jk} = \underline{c}^{\prime} {\bf \Sigma} \underline{c}.
+\]
+- The population variance of $Y$ can be estimated by the sample variance of $Y$:
+\[
+ s^2_Y= \sum_{j=1}^p \sum_{k=1}^p c_j c_k s_{jk} = \underline{c}^{\prime} {\bf S} \underline{c}.
+\]
+ 
+
+## Covariance between $Y_1$ and $Y_2$
+
+- Consider a pair of linear combinations
+\begin{align*}
+ Y_1 & = \sum_{j=1}^p c_j X_j  = \underline{c}^{\prime} \underline{X} \\
+ Y_2 & = \sum_{j=1}^p d_j X_j = \underline{d}^{\prime} \underline{X}
+\end{align*}
+- The population covariance between $Y_1$ and $Y_2$ is obtained by summing over all pairs of variables: 
+\[
+ \sigma_{Y_1, Y_2} = \mbox{Cov} [ Y_1, Y_2] = \sum_{j=1}^p \sum_{k=1}^p c_j d_k \sigma_{jk} = 
+ \underline{c}^{\prime} {\bf \Sigma} \underline{d}.
+\]
+- The population covariance can be estimated by the sample covariance:
+\[
+ s_{Y_1, Y_2} = \sum_{j=1}^p \sum_{k=1}^p c_j d_k s_{jk} = 
+ \underline{c}^{\prime} {\bf S} \underline{d}.
+\]
+ 
