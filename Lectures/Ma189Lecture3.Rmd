@@ -1,0 +1,324 @@
+---
+title: "Math 189: Exploratory Data Analysis I"
+output: html_notebook
+---
+ 
+# Challenges in Multivariate Data Analysis
+
+## Objectives: 
+What is the scientific or social problem of interest? How can it be parsed as a multivariate analysis problem? 
+
+## Dataset: 
+Data is noisy (it has *randomness*). 
+
+- Measurement error.  (Human or machine.) 
+- Missing data. Corruption of data.
+- Normality versus extreme-value.
+- Homogeneity vs Heterogeneity.
+
+## Methodology:
+Which method should we use? What are the assumptions, and are they met? Are the method statistically accurate? Are they omputationally efficient?
+
+# Exploratory Data Analysis 
+
+An important step in data analysis is exploratory data analysis (EDA).
+
+EDA methods include loading, cleaning, and visualizing the data; descriptive statistics are used to provide quick summaries.
+
+## Benefits of EDA:
+
+1. Check the quality of data: has it been cleaned?  Are there missing data or outliers?
+2. Gain a first impression of data: data type, distribution, symmetry, etc.
+3. Illustrate analysis results: gain intuition, collaboration, general audience, etc.
+
+# Visualization of Multivariate Data
+
+Why do we look at graphical displays of the data? We need to condense the data (without losing important features) so that we can digest it.
+
+## Visualization may:
+
+1. suggest a plausible model for the data,
+2. assess validity of model assumptions,
+3. detect outliers or suggest a plausible normalizing transformation
+
+# Scatter Plot
+
+A scatter plot is a data visualization tool that uses dots to represent the values obtained for two different variables.
+
+## Plotted on Cartesian coordinates: 
+x-axis is the value of the first variable and y-axis is the value of the second variable.
+
+Used to check the relationship between two variables:
+
+1. Correlation
+2. Linear or nonlinear
+3. Joint normality
+4. Groups
+
+## Example 1:USDA Women's Health Survey
+
+- In 1985, the USDA commissioned a study of women’s nutrition. Nutrient intake was measured for a random sample of 737 women aged 25-50 years.
+- The following variables were measured:
+
+1. Calcium (mg)
+2. Iron (mg)
+3. Protein (g)
+4. Vitamin A (μg)
+5. Vitamin C (mg)
+
+```{r}
+nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient$V1=NULL
+colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
+dim(nutrient)
+head(nutrient)
+```
+
+### Scatter Plot of Calcium Versus Iron
+
+```{r}
+plot(x = nutrient$Calcium, y = nutrient$Iron,
+     xlab = "Calcium", ylab = "Iron",	 
+     main = "Calcium vs Iron")
+points(nutrient$Calcium[5],nutrient$Iron[5],col=2,pch=19)
+```
+
+Each circle is an observation; the fifth observation is in red.
+
+### Questions About this Plot
+
+- Is there a structure to this plot?
+- Are there outliers?
+- What model should we use to fit the data?
+- Can we model the data using the bivariate normal distribution?
+
+## Data Standardization
+
+- Rescale data from different sources and measures to a "standard" scale
+- Avoid comparing apples to oranges
+- A common standardization is called the *Z-score* scaling, which scales a random sample to have zero sample mean and unit sample variance.
+- For a random sample $x_1, \ldots, x_n$, the Z-score scaling transforms each observation by
+\[
+ z_i = \frac{x_i - \overline{x}}{s}
+\]
+where $\overline{x}$ is the **sample mean** and $s$ is **sample standard deviation**.
+
+```{r}
+x <- nutrient[,c(2,3)]
+z <- x
+for(i in 1:2)
+{
+  z[,i] <- (x[,i] - mean(x[,i]))/sd(x[,i])
+}
+plot(z[,1],z[,2],xlab=names(nutrient)[2],ylab=names(nutrient)[3],
+          main = "Calcium vs Iron (Standardized)")
+abline(h=3,col=4)
+abline(v=3,col=4)
+```
+
+We expect $99.7 \%$ of normal data to be within 3 standard deviations of the mean, or in lower left quadrant given by blue lines; here there are more than expected outliers.
+
+```{r}
+length(intersect(seq(1,dim(z)[1])[z[,1] < 3],seq(1,dim(z)[1])[z[2]< 3]))/dim(z)[1]
+```
+
+## Transformation Methods
+
+Sometimes data is "irregular”: non-normal, outliers, skewed, heavy-tailed, etc.
+
+- Data transformation techniques can be used to stabilize variance, so that data more resembles the normal distribution.
+
+- Power transformation:
+\[
+ y = x^{\alpha} \quad 0 < \alpha < 1
+\]
+
+- Log transformation:
+\[
+  y = \log(x), \; 0 < x
+\]
+ 
+### Scatter Plot after Log Transformation
+
+```{r}
+x <- log(nutrient[,c(2,3)])
+plot(x[,1],x[,2],xlab=names(nutrient)[2],ylab=names(nutrient)[3],
+          main = "Calcium vs Iron (Log Transformation)")
+```
+
+Less outliers, reduced variance, more normal.
+
+
+## Scatter Plot for Three Variables
+
+The scatter plot can be extended to visualize the relationship among three different variables, which is called 3d scatter plot.
+
+Plotted on Cartesian coordinates: 
+
+1. x-axis is the value of the first variable
+2. y-axis is the value of the second variable
+3. z-axis is the value of the third variable
+
+### Calcium, Iron and Protein
+
+- Each red dot represents an observation
+1. Calcium on x-axis
+2. Iron on y-axis
+3. Protein on z-axis
+
+```{r}
+library("scatterplot3d")
+scatterplot3d(x = nutrient$Calcium, y = nutrient$Iron, z=nutrient$Protein,
+              xlab = "Calcium", ylab = "Iron",	zlab="Protein", 
+              color="red", pch=20)
+```
+
+### 3D Scatter Plot After Log Transformation
+
+- Each blue represents an observation
+- More clustered in a “ball” or “ellipse”
+- Reduced variance
+- Less outliers
+
+
+```{r}
+scatterplot3d(x = log(nutrient$Calcium), y = log(nutrient$Iron), z=log(nutrient$Protein),
+              xlab = "Calcium", ylab = "Iron",	zlab="Protein", 
+              color="steelblue", pch=20)       
+```
+
+### Pros and Cons of 3D Scatter Plot
+
+#### Pros
+- Visualization for 3 variables (can be extended to 4)
+- Complex relationship rather than pair wise
+- Joint sample distribution
+
+#### Cons
+- Hard to see unless you rotate it (angle dependent)
+- Hard to interpret
+- Cannot visualize 5 or more variables
+
+## Pairwise Scatter Plot for More Variables
+- The pairwise scatter plot aims to visualize the relationship for each pair of variables in a multivariate dataset.
+- A **pairwise scatter plot** is an array of scatter plots, the $(i,j)$th plot in the array is the scatter plot between the $i$th and $j$th variables.
+
+
+```{r}
+pairs(nutrient, pch=20)
+```
+
+### Pros and Cons of Pairwise Scatter Plot
+
+#### Pros
+- Visualization for many variables simultaneously
+- Interpret pairwise relationships 
+
+#### Cons
+- No joint relationship for more than 2 variables
+- Huge array when the number of variables is large
+
+# Time Plot
+
+A time plot (sometimes called a *time series graph*) displays values versus time. It is similar to a scatter plot, but x-axis is chosen to be time.  
+
+- A time plot is useful to compare the "growth” of multiple variables with respect to time (or some other common index).
+
+- Application of time plot:
+
+1. Finance: compare multiple stock returns versus time
+2. Clinical: compare multiple patients versus survival time
+3. Biology: compare multiple genome sequences versus positions
+4. Physics: multiple measurements versus time
+5. Economoics: examine unemployment rate and economic indicators over time
+
+## Time Plot for Financial Time Series 
+
+*Time series* are one of the most common data types encountered in finance, economics, and weather forecasting
+
+- Visualization tool: time plot for multiple assets.
+
+- Things to check in a time plot:
+
+1. Co-movement of variables
+2. Trend (increasing or decreasing)
+3. Periodical patterns (daily, weekly, annual, etc.)
+4. **Black swan** event (huge gap, financial crisis, etc.)
+
+## Example 2: Stock Prices of High-tech Companies
+
+- We collect daily stock prices (closing price) of four leading high-tech companies between January 2018 and January 2019.
+
+- The following variables were included:
+
+1. Daily stock price of Apple
+2. Daily stock price of Facebook
+3. Daily stock price of IBM
+4. Daily stock price of Microsoft
+
+
+
+<!-- # SCRAP -->
+
+<!-- ## Stock data -->
+
+<!-- stock=read.table("https://www.math.ucsd.edu/~wez243/data/Stock.csv", sep = ",", header=TRUE) -->
+<!-- stock$index = as.numeric(row.names(stock)) -->
+<!-- stock=stock[order(stock$index),] -->
+
+<!-- png(file = "Stock_1.png", width=640, height=480) -->
+
+<!-- # Multivariate timeseries plot of stock prices. -->
+<!-- plot(x = seq(1,250), y = stock$Apple, -->
+<!--      xlab = "Date", ylab = "Stock Price", ylim=c(80,240), xaxt='n',	  -->
+<!--      main = "Daily Stock Prices in 2018", -->
+<!--      col="red",  type="l", lwd=2) -->
+
+<!-- lines(x = seq(1,250), y = stock$Facebook, col="blue",  lwd=2) -->
+
+<!-- lines(x = seq(1,250), y = stock$IBM, col="black",  lwd=2) -->
+
+<!-- lines(x = seq(1,250), y = stock$Microsoft, col="purple",  lwd=2) -->
+
+<!-- axis(1, at = c( 50, 100, 150, 200 ), labels = c("3/27", "6/7", "8/17", "10-29")) -->
+
+<!-- legend("topleft",, c("Apple", "Facebook", "IBM", "Microsoft"),  -->
+<!--        col=c("red", "blue", "black", "purple"), lty=c(1,1,1,1)) -->
+
+<!-- # Save the file. -->
+<!-- dev.off() -->
+
+
+<!-- # Calculate Daily log return -->
+
+<!-- Apple_return=diff(log(stock$Apple), lag=1) -->
+<!-- Facebook_return=diff(log(stock$Facebook), lag=1) -->
+<!-- IBM_return=diff(log(stock$IBM), lag=1) -->
+<!-- Microsoft_return=diff(log(stock$Microsoft), lag=1) -->
+
+<!-- # Multivariate timeseries plot of stock returns. -->
+<!-- png(file = "Stock_2.png", width=640, height=480) -->
+
+<!-- plot(x = seq(1,249), y = Apple_return, -->
+<!--      xlab = "Date", ylab = "Stock Price",  ylim=c(-0.2, 0.1), xaxt='n',	  -->
+<!--      main = "Daily Stock Returns in 2018", -->
+<!--      col="red",  type="l", lwd=1) -->
+
+<!-- lines(x = seq(1,249), y = Facebook_return, col="blue",  lwd=1) -->
+
+<!-- lines(x = seq(1,249), y = IBM_return, col="black",  lwd=1) -->
+
+<!-- lines(x = seq(1,249), y = Microsoft_return, col="purple",  lwd=1) -->
+
+<!-- axis(1, at = c( 50, 100, 150, 200 ), labels = c("3/27", "6/7", "8/17", "10-29")) -->
+
+<!-- legend("bottomleft",, c("Apple", "Facebook", "IBM", "Microsoft"),  -->
+<!--        col=c("red", "blue", "black", "purple"), lty=c(1,1,1,1)) -->
+
+<!-- # Save the file. -->
+<!-- dev.off() -->
+
+<!-- png(file = "p5-2.png", width=640, height=480) -->
+<!-- pairs(nutrient_std, pch=20) -->
+<!-- dev.off() -->
+

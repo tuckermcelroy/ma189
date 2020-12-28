@@ -15,11 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ### **Exploratory Data Analysis and Inference** 
 Lectures: MWF 4:00-4:50
 
-Zoom Meeting ID: 
-
-<!-- ### Course Catalog Description -->
-<!-- An introduction to various quantitative methods and statistical techniques for analyzing data—in particular big data. Quick review of probability continuing to topics of how to process, analyze, and visualize data using statistical language R. Further topics include basic inference, sampling, hypothesis testing, bootstrap methods, and regression and diagnostics. Offers conceptual explanation of techniques, along with opportunities to examine, implement, and practice them in real and simulated data. -->
-
 ### Overview
 The goal of the course is to both provide the theoretical foundation for common statistical methods and train undergraduate students in data analysis. The course material includes statistical inference, multivariate analysis, linear models, and time series. Class time will be divided between lectures presenting new methods and demonstrations of examples in R (https://www.r-project.org/).
 
@@ -40,7 +35,7 @@ At the completion of the course, students will acquire the following skills:
 ### Instructor
  Tucker S. McElroy
  
- Office Hours: Zoom session Mondays 1:00-3:00
+ Office Hours: Zoom session Mondays 12:00-3:00
  
  email:  tmcelroy@ucsd.edu
  
