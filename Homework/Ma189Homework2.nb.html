@@ -11,7 +11,7 @@
 
 
 
-<title>Math 189: Matrix Algebra</title>
+<title>Math 189: Homework 2</title>
 
 <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
@@ -1743,344 +1743,32 @@ summary {
 
 
 
-<h1 class="title toc-ignore">Math 189: Matrix Algebra</h1>
+<h1 class="title toc-ignore">Math 189: Homework 2</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<div id="i.-multivariate-data" class="section level1">
-<h1>I. Multivariate Data</h1>
-<div id="matrix-formulation" class="section level2">
-<h2>Matrix Formulation</h2>
-<p>In multivariate analysis, we are interested in jointly analyzing multiple dependent variables.</p>
-<ul>
-<li><p>These variables can be represented using matrices and vectors.</p></li>
-<li><p>The benefits of matrix form:</p></li>
-</ul>
+<div id="motor-trend-car-road-tests" class="section level1">
+<h1>Motor Trend Car Road Tests</h1>
+<p>In your homework groups, prepare a report in R Markdown Notebook based on examining the Motor Trend Car Road Tests dataset (available from GitHub). The file contains data extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models). The dataset contains 32 observations on 11 variables.</p>
+<div id="tasks" class="section level2">
+<h2>Tasks</h2>
+<p>Analyze the dataset according to the following steps:</p>
 <ol style="list-style-type: decimal">
-<li>Simplicity in notation</li>
-<li>Expressing important formulas in readable format</li>
+<li>Calculate sample mean and sample variance of each variable.</li>
+<li>Calculate the sample variance-covariance matrix and the sample correlation matrix. What can you say about the variance-covariance matrix and correlation matrix?</li>
+<li>Draw a scatter plot between wt (Weight) and mpg (Miles per gallon).</li>
+<li>Draw a scatter plot to show the relationship between wt (Weight), mpg (Miles per gallon) and cyl (Number of cylinders). Use a 3D scatter plot.</li>
+<li>Draw pairwise scatter plot for all variables.</li>
+<li>One engineer suggests that the relationship between wt and mpg is subject to the number of cylinders. According to the plot you draw in step 4, what is your opinion towards this suggestion?</li>
 </ol>
-</div>
-<div id="example-1-multivariate-data-of-infant-death" class="section level2">
-<h2>Example 1: Multivariate Data of Infant Death</h2>
-<p>Data records several variables for a baby at birth:</p>
-<ol style="list-style-type: decimal">
-<li>Baby Weight (<strong>bwt</strong>): in ounces</li>
-<li>Gestation (<strong>gestation</strong>): in days</li>
-</ol>
-<p>Rows are babies, columns are variables</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFieSA8LSByZWFkLnRhYmxlKFwiQzpcXFxcVXNlcnNcXFxcbmVpZGVcXFxcRG9jdW1lbnRzXFxcXEdpdEh1YlxcXFxtYTE4OVxcXFxEYXRhXFxcXGJhYmllcy5kYXRcIixoZWFkZXI9VFJVRSlcbmhlYWQoYmFieVssYygxLDIpXSlcbmBgYCJ9 -->
-<pre class="r"><code>baby &lt;- read.table(&quot;C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\babies.dat&quot;,header=TRUE)
-head(baby[,c(1,2)])</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFRVTdETUJEY09FMVFMQldRT0NBaHhBOGFxVVc4QUI2QU9QWHFwcVpFR0xza3JvckVoU00vNVJlRjJjUVc0TVBJczJQUHpxNGY3cGJYY2ltSktLZThCQXBRS20vdjU0dWJCZEZFb01wb1FoV2ZiM2gxQnNMaWxKOEIwT2dWK0FEZUFRTjgvdDVubDhBRmNBN3ZWK0JYU2VQQ3FoZmRnNXdPelVjeFgrMTlvTlZHOTE3NTF0bkVXSFZ1WDBjekp3b2VZMHorbjlBWTFjZUVLTXExOHFwKzdPQkhkVWdzUjI3TGlUQUozcmxJekZtWENDYzd5NU9zWjgzVHpqN1A1aHd3WEkrWWhyUDh3OFVZS2I1RHF5SzBLclhkdEZiSDJZMWFhUk9LWTJ3OExGeHZ1OWJHRDVKUSs5bzdyK0k3MlRnVGxXRTNPdndBdXpnOXErc0JBQUE9In0= -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["bwt"],"name":[1],"type":["int"],"align":["right"]},{"label":["gestation"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"120","2":"284","_rn_":"1"},{"1":"113","2":"282","_rn_":"2"},{"1":"128","2":"279","_rn_":"3"},{"1":"123","2":"999","_rn_":"4"},{"1":"108","2":"282","_rn_":"5"},{"1":"136","2":"286","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p><strong>Notice anything weird?!</strong></p>
-<p><em>Source</em>: The Child Health and Development Studies (CHDS) data are presented in <em>Stat Labs: Mathematical Statistics Through Applications</em> by Deborah Nolan and Terry Speed (Springer).</p>
-</div>
-<div id="math-notation" class="section level2">
-<h2>Math Notation</h2>
-<p>Let <span class="math inline">\(\underline{x} = [ x_1, x_2 ]&#39;\)</span> denote the <span style="color: red;">column</span> vector of <strong>bwt</strong> and <strong>gestation</strong>. <span class="math display">\[
- \underline{x} = \left[ \begin{array}{c} x_1 \\ x_2 \end{array} \right]
- = \left[ \begin{array}{c} \mbox{bwt} \\ \mbox{gestation} \end{array} \right]. 
-\]</span> So <span class="math inline">\(\underline{x} \in {\mathbb R}^2\)</span>.</p>
-<p>There are <span class="math inline">\(n=1236\)</span> babies. Let <span class="math inline">\(\underline{x}_i\)</span> for <span class="math inline">\(1 \leq i \leq 1236\)</span> denote both variables for baby <span class="math inline">\(i\)</span>, i.e., <span class="math display">\[
-  \underline{x}_1  = \left[ \begin{array}{c} 120  \\ 284 \end{array} \right], \quad
-  \underline{x}_2  = \left[ \begin{array}{c} 113  \\ 282 \end{array} \right], \quad
-    \underline{x}_3  = \left[ \begin{array}{c} 128  \\ 279 \end{array} \right],\, \cdots 
-\]</span> This is called the <strong>record</strong> for the <span class="math inline">\(i\)</span>th baby (or unit). Let <span class="math inline">\(i\)</span> index baby, and <span class="math inline">\(j = 1, 2\)</span> index variable. Then <span class="math inline">\(x_{i,j}\)</span> is <strong>bwt</strong> (<span class="math inline">\(j=1\)</span>) or <strong>gestation</strong> (<span class="math inline">\(j=2\)</span>) for baby <span class="math inline">\(i\)</span>. Gestation for the fourth baby is <span class="math inline">\(x_{4,2} =\)</span> 999.</p>
-<p>A data matrix consists of all <strong>records</strong> as <span style="color: blue;">row</span> vectors: <span class="math display">\[
-  \left[ \begin{array}{c} \underline{x}_1^{\prime}  \\ \underline{x}_2^{\prime} \\ \underline{x}_3^{\prime} \end{array} \right]
-  = \left[ \begin{array}{cc} 120 &amp; 284 \\ 113 &amp; 282  \\ 128  &amp; 279  \end{array} \right]. 
-\]</span></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBiYWJ5WzE6MywxOjJdXG54XG5gYGAifQ== -->
-<pre class="r"><code>x &lt;- baby[1:3,1:2]
-x</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Each <span style="color: blue;">row</span> is information for one baby; each <span style="color: red;">column</span> is all measurements (across babies) of either <strong>bwt</strong> or <strong>gestation</strong></p>
-</div>
-<div id="definition-of-matrix-and-vector" class="section level2">
-<h2>Definition of Matrix and Vector</h2>
-<p>A matrix is a two-dimensional array of numbers, symbols, or expressions, arranged in rows and columns.</p>
-<ul>
-<li><p>A vector is a matrix with either one row or one column.</p></li>
-<li><p>The dimension of a matrix is two numbers: number of <span style="color: blue;">rows</span> (units) and number of <span style="color: red;">columns</span> (units). Dimension of baby is 1236, 7 and dimension of submatrix <span class="math inline">\(x\)</span> is 5, 3.</p></li>
-<li><p>A square matrix is one for which the numbers of <span style="color: blue;">rows</span> and number of <span style="color: red;">columns</span> are equal, e.g.</p></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBiYWJ5WzE6MiwxOjJdXG5kaW0oeClcbmBgYCJ9 -->
-<pre class="r"><code>x &lt;- baby[1:2,1:2]
-dim(x)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="notations-of-matrix-and-vector" class="section level2">
-<h2>Notations of Matrix and Vector</h2>
-<ul>
-<li><p>Usually in this course we only consider matrices and vectors whose entries are real numbers.</p></li>
-<li><p>A real-valued <strong>matrix</strong> <span class="math inline">\({\bf M}\)</span> of dimension <span class="math inline">\(n \times m\)</span> is denoted <span class="math inline">\({\bf M} \in {\mathbb R}^{n \times m}\)</span>.</p></li>
-<li><p>A real <strong>vector</strong> <span class="math inline">\(\underline{v}\)</span> of length <span class="math inline">\(n\)</span> is denoted <span class="math inline">\(\underline{v} \in {\mathbb R}^n\)</span>.</p></li>
-<li><p>A <span style="color: blue;">row</span> vector can be written <span class="math inline">\(\underline{v} \in {\mathbb R}^{1 \times n}\)</span>, and a <span style="color: red;">column</span> vector can be written <span class="math inline">\(\underline{v} \in {\mathbb R}^{n \times 1}\)</span>.</p></li>
-<li><p>A <strong>scalar</strong> is a real number, or a vector of length <span class="math inline">\(1\)</span>, or a <span class="math inline">\(1 \times 1\)</span> dimensional matrix.</p></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBhcy5tYXRyaXgoYmFieVsxOjMsMToyXSlcbnhcbnhbLDFdXG54WywxLGRyb3A9RkFMU0VdXG54WzEsMV1cbnhbMSwxLGRyb3A9RkFMU0VdXG5gYGAifQ== -->
-<pre class="r"><code>x &lt;- as.matrix(baby[1:3,1:2])
-x
-x[,1]
-x[,1,drop=FALSE]
-x[1,1]
-x[1,1,drop=FALSE]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="transpose-of-a-matrix" class="section level2">
-<h2>Transpose of a Matrix</h2>
-<ul>
-<li><p>Definition: flip the rows and columns by interchanging row and column index. Denoted by <span class="math inline">\({\bf M}^{\prime}\)</span>.</p></li>
-<li><p>If <span class="math inline">\({\bf M}_{i,j}\)</span> is <span style="color: blue;">row</span> <span class="math inline">\(i\)</span>, <span style="color: red;">column</span> <span class="math inline">\(j\)</span> of matrix <span class="math inline">\({\bf M}\)</span>, then <span class="math inline">\({\bf M}^{\prime}_{i,j} = {\bf M}_{j,i}\)</span>, so that now <span class="math inline">\(i\)</span> is the <span style="color: red;">column</span> index, and <span class="math inline">\(j\)</span> is the <span style="color: blue;">row</span> index.</p></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFxudCh4KVxuYGBgIn0= -->
-<pre class="r"><code>x
-t(x)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="symmetric-matrices" class="section level2">
-<h2>Symmetric Matrices</h2>
-<ul>
-<li><p>Definition: A square matrix <span class="math inline">\({\bf M}\)</span> is symmetric if <span class="math inline">\({\bf M}^{\prime} = {\bf M}\)</span>.</p></li>
-<li><p>Hence <span class="math inline">\({\bf M}_{i,j} = {\bf M}_{j,i}\)</span>.</p></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubVxuXG5gYGAifQ== -->
-<pre class="r"><code>m
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgIGJ3dCBnZXN0YXRpb25cbmJ3dCAgICAgICAgNDM1NTMgICAgMTAxNjU4XG5nZXN0YXRpb24gMTAxNjU4ICAgIDIzODAyMVxuIn0= -->
-<pre><code>             bwt gestation
-bwt        43553    101658
-gestation 101658    238021</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li>Important examples of symmetric matrices in multivariate statistics include the variance-covariance matrix and the correlation matrix.</li>
-</ul>
-</div>
-<div id="linear-combination-of-two-matrices" class="section level2">
-<h2>Linear Combination of Two Matrices</h2>
-<ul>
-<li>Two matrices may be added if and only if they have the same dimensions. To add two matrices, add the corresponding elements.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueSA8LSBhcy5tYXRyaXgoYmFieVs1OjcsMToyXSlcbnlcbngreVxuYGBgIn0= -->
-<pre class="r"><code>y &lt;- as.matrix(baby[5:7,1:2])
-y
-x+y</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li>If <span class="math inline">\({\bf A}\)</span> and <span class="math inline">\({\bf B}\)</span> are two <span class="math inline">\(n \times m\)</span> dimensional matrices, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are two scalars, then <span class="math inline">\({\bf C} = \alpha \, {\bf A} + \beta \, {\bf B} \in {\mathbb R}^{n \times m}\)</span>. A scalar multiples each entry of the matrix, i.e., <span class="math display">\[
- {\bf C}_{i,j} = \alpha \, {\bf A}_{i,j} + \beta \, {\bf B}_{i,j}.
-\]</span></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMip4ICsgMyp5XG5gYGAifQ== -->
-<pre class="r"><code>2*x + 3*y</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="multiplication-of-two-matrices" class="section level2">
-<h2>Multiplication of Two Matrices</h2>
-<ul>
-<li>The <strong>dot product</strong> of two vectors <span class="math inline">\(\underline{x}\)</span> and <span class="math inline">\(\underline{y}\)</span> is the sum of the product of their entries: <span class="math inline">\(\underline{x} \cdot \underline{y} = \sum_{i=1}^n x_i \, y_i\)</span>.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKHhbLDFdKnhbLDJdKVxudCh4WywxLGRyb3A9RkFMU0VdKSAlKiUgeFssMixkcm9wPUZBTFNFXVxuYGBgIn0= -->
-<pre class="r"><code>sum(x[,1]*x[,2])
-t(x[,1,drop=FALSE]) %*% x[,2,drop=FALSE]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li>We multiply matrices by taking dot products of row and column vectors: <span class="math inline">\({\bf C} = {\bf A} \, {\bf B}\)</span> is defined if number of columns in <span class="math inline">\({\bf A}\)</span> equals the number of rows in <span class="math inline">\({\bf B}\)</span>. Then <span class="math display">\[
- {\bf C}_{i,j} = {\bf A}_{i, -} \cdot {\bf B}_{-,j} = \sum_{k=1}^p {\bf A}_{i,k} \, {\bf B}_{k,j}.
-\]</span> Here <span class="math inline">\({\bf A} \in {\mathbb R}^{n \times p}\)</span>, <span class="math inline">\({\bf B} \in {\mathbb R}^{p \times m}\)</span>, and <span class="math inline">\({\bf C} \in {\mathbb R}^{n \times m}\)</span>.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCAlKiUgdCh5KVxuc3VtKHhbMSxdKnQoeSlbLDNdKVxuYGBgIn0= -->
-<pre class="r"><code>x %*% t(y)
-sum(x[1,]*t(y)[,3])</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="identity-matrix" class="section level2">
-<h2>Identity Matrix</h2>
-<ul>
-<li>Definition: An identity matrix <span class="math inline">\({\bf I}\)</span> is a square matrix that has ones on its diagonal (from upper left to bottom right) and has zeros elsewhere.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXllIDwtIGRpYWcoMilcbmV5ZVxuYGBgIn0= -->
-<pre class="r"><code>eye &lt;- diag(2)
-eye</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li>When multiplying any square matrix, it leaves the matrix unchanged: <span class="math inline">\({\bf I} \, {\bf A} = {\bf A}\)</span>.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueiA8LSBhcy5tYXRyaXgoYmFieVsxOjIsMToyXSlcbnpcbmV5ZSAlKiUgelxuYGBgIn0= -->
-<pre class="r"><code>z &lt;- as.matrix(baby[1:2,1:2])
-z
-eye %*% z</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="matrix-inverse" class="section level2">
-<h2>Matrix Inverse</h2>
-<ul>
-<li>Definition: The inverse of a square matrix <span class="math inline">\({\bf A}\)</span>, if it exists (the inverse of zero does not exist!?), is denoted by <span class="math inline">\({\bf A}^{-1}\)</span>, and satisfies <span class="math display">\[
- {\bf A}^{-1} \, {\bf A} = {\bf A} \, {\bf A}^{-1} = {\bf I}.
-\]</span></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSB0KHgpICUqJSB4XG5hX2ludiA8LSBzb2x2ZShhKVxuYV9pbnZcbmEgJSolIGFfaW52XG5hX2ludiAlKiUgYVxuYGBgIn0= -->
-<pre class="r"><code>a &lt;- t(x) %*% x
-a_inv &lt;- solve(a)
-a_inv
-a %*% a_inv
-a_inv %*% a</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p><em>What is a numerical zero in R?</em></p>
-<ul>
-<li>If the inverse exists, we say the matrix is <strong>invertible</strong>.</li>
-</ul>
-</div>
-<div id="matrix-trace" class="section level2">
-<h2>Matrix Trace</h2>
-<ul>
-<li>Definition: The trace of an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\({\bf A}\)</span> is the sum of its diagonal elements: <span class="math display">\[
-\mbox{tr} {\bf A} = \sum_{i=1}^n {\bf A}_{i,i}.
-\]</span></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGRpYWcoYSkpXG5gYGAifQ== -->
-<pre class="r"><code>sum(diag(a))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li>For two matrices <span class="math inline">\({\bf A} \in {\mathbb R}^{n \times p}\)</span>, <span class="math inline">\({\bf B} \in {\mathbb R}^{p \times n}\)</span>, <span class="math display">\[
- \mbox{tr} {\bf A} \, {\bf B} = \mbox{tr} {\bf B} \, {\bf A}.
-\]</span></li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFxueiA8LSB0KHkpXG56XG5zdW0oZGlhZyh4ICUqJSB6KSlcbnN1bShkaWFnKHogJSolIHgpKVxuYGBgIn0= -->
-<pre class="r"><code>x
-z &lt;- t(y)
-z
-sum(diag(x %*% z))
-sum(diag(z %*% x))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="eigenvalues-and-eigenvectors" class="section level2">
-<h2>Eigenvalues and Eigenvectors</h2>
-<ul>
-<li>Given a symmetric matrix <span class="math inline">\({\bf A}\)</span>, then any scalar <span class="math inline">\(\lambda\)</span> and vector <span class="math inline">\(\underline{v}\)</span> such that <span class="math display">\[
- {\bf A} \, \underline{v} = \lambda \, \underline{v}
-\]</span> are an <strong>eigenvalue</strong> and <strong>eigenvector</strong> (together called an <strong>eigenpair</strong>).</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZWlnIDwtIGVpZ2VuKGEpXG5hICUqJSBlaWckdmVjdG9yWywxXVxuZWlnJHZhbHVlc1sxXSAqIGVpZyR2ZWN0b3JbLDFdXG5gYGAifQ== -->
-<pre class="r"><code>eig &lt;- eigen(a)
-a %*% eig$vector[,1]
-eig$values[1] * eig$vector[,1]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>. - A <span class="math inline">\(n \times n\)</span> symmetric matrix has <span class="math inline">\(n\)</span> real eigenvalues, denoted <span class="math inline">\(\lambda_1, \ldots, \lambda_n\)</span>.</p>
-<ul>
-<li>Fact: <span class="math inline">\(\mbox{tr} {\bf A} = \sum_{i=1}^n \lambda_i\)</span>.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZWlnJHZhbHVlc1xuc3VtKGVpZyR2YWx1ZXMpXG5zdW0oZGlhZyhhKSlcbmBgYCJ9 -->
-<pre class="r"><code>eig$values
-sum(eig$values)
-sum(diag(a))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li>Fact: the determinant is the product of the eigenvalues: <span class="math inline">\(\mbox{det} {\bf A} = \prod_{i=1}^n \lambda_i\)</span>.</li>
-</ul>
-</div>
-<div id="positive-definite-matrix" class="section level2">
-<h2>Positive Definite Matrix</h2>
-<ul>
-<li>A symmetric <span class="math inline">\(n \times n\)</span> dimensional matrix <span class="math inline">\({\bf A}\)</span> is <strong>positive definite</strong> if <span class="math inline">\(\underline{v}^{\prime} {\bf A} \underline{v} &gt; 0\)</span> for all non-zero length <span class="math inline">\(n\)</span> vectors <span class="math inline">\(\underline{v}\)</span>. Compactly written <span class="math inline">\({\bf A} &gt; 0\)</span>.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudiA8LSBybm9ybSgyKVxudCh2KSAlKiUgYSAlKiUgdlxuYGBgIn0= -->
-<pre class="r"><code>v &lt;- rnorm(2)
-t(v) %*% a %*% v</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ul>
-<li><p>A symmetric <span class="math inline">\(n \times n\)</span> dimensional matrix <span class="math inline">\({\bf A}\)</span> is <strong>positive semi-definite</strong> if <span class="math inline">\(\underline{v}^{\prime} {\bf A} \underline{v} \geq 0\)</span> for all length <span class="math inline">\(n\)</span> vectors <span class="math inline">\(\underline{v}\)</span>. Compactly written <span class="math inline">\({\bf A} \geq 0\)</span>.</p></li>
-<li><p>Fact: a symmetric <span class="math inline">\(n \times n\)</span> dimensional matrix is <strong>positive definite</strong> if and only if all of its eigenvalues are positive. (Remember, they must be real by symmetry!)</p></li>
-<li><p>Fact: a <strong>positive definite</strong> matrix is invertible.</p></li>
-</ul>
+<p>Your R Markdown Notebook report should have a introduction, body, conclusion (and optional appendix). Importantly, your code should run! (Note: the grader will check your <em>load</em> code by changing the path.)</p>
 <!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBNYXRyaXggQWxnZWJyYSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCiMgSS4gTXVsdGl2YXJpYXRlIERhdGENCg0KIyMgTWF0cml4IEZvcm11bGF0aW9uDQpJbiBtdWx0aXZhcmlhdGUgYW5hbHlzaXMsIHdlIGFyZSBpbnRlcmVzdGVkIGluIGpvaW50bHkgYW5hbHl6aW5nIG11bHRpcGxlIGRlcGVuZGVudCB2YXJpYWJsZXMuDQoNCi0gVGhlc2UgdmFyaWFibGVzIGNhbiBiZSByZXByZXNlbnRlZCB1c2luZyBtYXRyaWNlcyBhbmQgdmVjdG9ycy4NCg0KLSBUaGUgYmVuZWZpdHMgb2YgbWF0cml4IGZvcm06DQoNCjEuIFNpbXBsaWNpdHkgaW4gbm90YXRpb24NCjIuIEV4cHJlc3NpbmcgaW1wb3J0YW50IGZvcm11bGFzIGluIHJlYWRhYmxlIGZvcm1hdA0KDQojIyBFeGFtcGxlIDE6IE11bHRpdmFyaWF0ZSBEYXRhIG9mIEluZmFudCBEZWF0aA0KRGF0YSByZWNvcmRzIHNldmVyYWwgdmFyaWFibGVzIGZvciBhIGJhYnkgYXQgYmlydGg6DQoNCjEuIEJhYnkgV2VpZ2h0ICgqKmJ3dCoqKTogaW4gb3VuY2VzDQoyLiBHZXN0YXRpb24gKCoqZ2VzdGF0aW9uKiopOiBpbiBkYXlzDQoNClJvd3MgYXJlIGJhYmllcywgY29sdW1ucyBhcmUgdmFyaWFibGVzDQoNCmBgYHtyfQ0KYmFieSA8LSByZWFkLnRhYmxlKCJDOlxcVXNlcnNcXG5laWRlXFxEb2N1bWVudHNcXEdpdEh1YlxcbWExODlcXERhdGFcXGJhYmllcy5kYXQiLGhlYWRlcj1UUlVFKQ0KaGVhZChiYWJ5WyxjKDEsMildKQ0KYGBgDQoNCioqTm90aWNlIGFueXRoaW5nIHdlaXJkPyEqKg0KDQoqU291cmNlKjogVGhlIENoaWxkIEhlYWx0aCBhbmQgRGV2ZWxvcG1lbnQgU3R1ZGllcyAoQ0hEUykgZGF0YSBhcmUgcHJlc2VudGVkIGluICpTdGF0IExhYnM6IE1hdGhlbWF0aWNhbCBTdGF0aXN0aWNzIFRocm91Z2ggQXBwbGljYXRpb25zKiBieSBEZWJvcmFoIE5vbGFuIGFuZCBUZXJyeSBTcGVlZCAoU3ByaW5nZXIpLiAgDQoNCiMjIE1hdGggTm90YXRpb24NCkxldCAkXHVuZGVybGluZXt4fSA9IFsgeF8xLCB4XzIgXSckIGRlbm90ZSB0aGUgPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW48L3NwYW4+IHZlY3RvciBvZiAqKmJ3dCoqIGFuZCAqKmdlc3RhdGlvbioqLg0KXFsNCiBcdW5kZXJsaW5le3h9ID0gXGxlZnRbIFxiZWdpbnthcnJheX17Y30geF8xIFxcIHhfMiBcZW5ke2FycmF5fSBccmlnaHRdDQogPSBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSBcbWJveHtid3R9IFxcIFxtYm94e2dlc3RhdGlvbn0gXGVuZHthcnJheX0gXHJpZ2h0XS4gDQpcXQ0KIFNvICRcdW5kZXJsaW5le3h9IFxpbiB7XG1hdGhiYiBSfV4yJC4NCiANCiBUaGVyZSBhcmUgJG49MTIzNiQgYmFiaWVzLiBMZXQgJFx1bmRlcmxpbmV7eH1faSQgZm9yICQxIFxsZXEgaSBcbGVxIDEyMzYkIGRlbm90ZSBib3RoIHZhcmlhYmxlcyBmb3IgYmFieSAkaSQsIGkuZS4sDQpcWw0KICBcdW5kZXJsaW5le3h9XzEgID0gXGxlZnRbIFxiZWdpbnthcnJheX17Y30gMTIwICBcXCAyODQgXGVuZHthcnJheX0gXHJpZ2h0XSwgXHF1YWQNCiAgXHVuZGVybGluZXt4fV8yICA9IFxsZWZ0WyBcYmVnaW57YXJyYXl9e2N9IDExMyAgXFwgMjgyIFxlbmR7YXJyYXl9IFxyaWdodF0sIFxxdWFkDQogICAgXHVuZGVybGluZXt4fV8zICA9IFxsZWZ0WyBcYmVnaW57YXJyYXl9e2N9IDEyOCAgXFwgMjc5IFxlbmR7YXJyYXl9IFxyaWdodF0sXCwgXGNkb3RzIA0KXF0NCiBUaGlzIGlzIGNhbGxlZCB0aGUgKipyZWNvcmQqKiBmb3IgdGhlICRpJHRoIGJhYnkgKG9yIHVuaXQpLiBMZXQgJGkkIGluZGV4IGJhYnksIGFuZCAkaiA9IDEsIDIkIGluZGV4IHZhcmlhYmxlLiBUaGVuICR4X3tpLGp9JCBpcyAqKmJ3dCoqICgkaj0xJCkgb3IgKipnZXN0YXRpb24qKiAoJGo9MiQpIGZvciBiYWJ5ICRpJC4gR2VzdGF0aW9uIGZvciB0aGUgZm91cnRoIGJhYnkgaXMgJHhfezQsMn0gPSQgYHIgYmFieVs0LDJdYC4gDQogDQogQSBkYXRhIG1hdHJpeCBjb25zaXN0cyBvZiBhbGwgKipyZWNvcmRzKiogYXMgPHNwYW4gc3R5bGU9ImNvbG9yOiBibHVlOyI+cm93PC9zcGFuPiB2ZWN0b3JzOg0KXFsNCiAgXGxlZnRbIFxiZWdpbnthcnJheX17Y30gXHVuZGVybGluZXt4fV8xXntccHJpbWV9ICBcXCBcdW5kZXJsaW5le3h9XzJee1xwcmltZX0gXFwgXHVuZGVybGluZXt4fV8zXntccHJpbWV9IFxlbmR7YXJyYXl9IFxyaWdodF0NCiAgPSBcbGVmdFsgXGJlZ2lue2FycmF5fXtjY30gMTIwICYgMjg0IFxcIDExMyAmIDI4MiAgXFwgMTI4ICAmIDI3OSAgXGVuZHthcnJheX0gXHJpZ2h0XS4gDQpcXQ0KDQpgYGB7cn0NCnggPC0gYmFieVsxOjMsMToyXQ0KeA0KYGBgDQoNCkVhY2ggPHNwYW4gc3R5bGU9ImNvbG9yOiBibHVlOyI+cm93PC9zcGFuPiBpcyBpbmZvcm1hdGlvbiBmb3Igb25lIGJhYnk7IGVhY2ggPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW48L3NwYW4+IGlzIGFsbCBtZWFzdXJlbWVudHMgKGFjcm9zcyBiYWJpZXMpIG9mIGVpdGhlciAqKmJ3dCoqIG9yICoqZ2VzdGF0aW9uKioNCg0KIyMgRGVmaW5pdGlvbiBvZiBNYXRyaXggYW5kIFZlY3Rvcg0KQSBtYXRyaXggaXMgYSB0d28tZGltZW5zaW9uYWwgYXJyYXkgb2YgbnVtYmVycywgc3ltYm9scywgb3IgZXhwcmVzc2lvbnMsIGFycmFuZ2VkIGluIHJvd3MgYW5kIGNvbHVtbnMuDQoNCi0gQSB2ZWN0b3IgaXMgYSBtYXRyaXggd2l0aCBlaXRoZXIgb25lIHJvdyBvciBvbmUgY29sdW1uLg0KDQotIFRoZSBkaW1lbnNpb24gb2YgYSBtYXRyaXggaXMgdHdvIG51bWJlcnM6IG51bWJlciBvZiA8c3BhbiBzdHlsZT0iY29sb3I6IGJsdWU7Ij5yb3dzPC9zcGFuPiAodW5pdHMpIGFuZCBudW1iZXIgb2YgPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW5zPC9zcGFuPiAodW5pdHMpLiBEaW1lbnNpb24gb2YgYmFieSBpcyBgciBkaW0oYmFieSlgIGFuZCBkaW1lbnNpb24gb2Ygc3VibWF0cml4ICR4JCBpcyBgciBkaW0oeClgLg0KDQotIEEgc3F1YXJlIG1hdHJpeCBpcyBvbmUgZm9yIHdoaWNoIHRoZSBudW1iZXJzIG9mIDxzcGFuIHN0eWxlPSJjb2xvcjogYmx1ZTsiPnJvd3M8L3NwYW4+IGFuZCBudW1iZXIgb2YgPHNwYW4gc3R5bGU9ImNvbG9yOiByZWQ7Ij5jb2x1bW5zPC9zcGFuPiBhcmUgZXF1YWwsIGUuZy4NCg0KYGBge3J9DQp4IDwtIGJhYnlbMToyLDE6Ml0NCmRpbSh4KQ0KYGBgDQogDQojIyBOb3RhdGlvbnMgb2YgTWF0cml4IGFuZCBWZWN0b3INCg0KLSBVc3VhbGx5IGluIHRoaXMgY291cnNlIHdlIG9ubHkgY29uc2lkZXIgbWF0cmljZXMgYW5kIHZlY3RvcnMgd2hvc2UgZW50cmllcyBhcmUgcmVhbCBudW1iZXJzLg0KDQotIEEgcmVhbC12YWx1ZWQgKiptYXRyaXgqKiAke1xiZiBNfSQgb2YgZGltZW5zaW9uICRuIFx0aW1lcyBtJCBpcyBkZW5vdGVkICR7XGJmIE19IFxpbiB7XG1hdGhiYiBSfV57biBcdGltZXMgbX0kLg0KDQotIEEgcmVhbCAqKnZlY3RvcioqICRcdW5kZXJsaW5le3Z9JCBvZiBsZW5ndGggJG4kIGlzIGRlbm90ZWQgJFx1bmRlcmxpbmV7dn0gXGluIHtcbWF0aGJiIFJ9Xm4kLiANCg0KLSBBIDxzcGFuIHN0eWxlPSJjb2xvcjogYmx1ZTsiPnJvdzwvc3Bhbj4gdmVjdG9yIGNhbiBiZSB3cml0dGVuICRcdW5kZXJsaW5le3Z9IFxpbiB7XG1hdGhiYiBSfV57MSBcdGltZXMgbn0kLCBhbmQgYSA8c3BhbiBzdHlsZT0iY29sb3I6IHJlZDsiPmNvbHVtbjwvc3Bhbj4gdmVjdG9yIGNhbiBiZSB3cml0dGVuICRcdW5kZXJsaW5le3Z9IFxpbiB7XG1hdGhiYiBSfV57biBcdGltZXMgMX0kLg0KDQotIEEgKipzY2FsYXIqKiBpcyBhIHJlYWwgbnVtYmVyLCBvciBhIHZlY3RvciBvZiBsZW5ndGggJDEkLCBvciBhICQxIFx0aW1lcyAxJCBkaW1lbnNpb25hbCBtYXRyaXguDQoNCmBgYHtyfQ0KeCA8LSBhcy5tYXRyaXgoYmFieVsxOjMsMToyXSkNCngNCnhbLDFdDQp4WywxLGRyb3A9RkFMU0VdDQp4WzEsMV0NCnhbMSwxLGRyb3A9RkFMU0VdDQpgYGANCiANCiMjIFRyYW5zcG9zZSBvZiBhIE1hdHJpeA0KDQotIERlZmluaXRpb246IGZsaXAgdGhlIHJvd3MgYW5kIGNvbHVtbnMgYnkgaW50ZXJjaGFuZ2luZyByb3cgYW5kIGNvbHVtbiBpbmRleC4gRGVub3RlZCBieSAke1xiZiBNfV57XHByaW1lfSQuDQoNCi0gSWYgJHtcYmYgTX1fe2ksan0kIGlzIDxzcGFuIHN0eWxlPSJjb2xvcjogYmx1ZTsiPnJvdzwvc3Bhbj4gJGkkLCA8c3BhbiBzdHlsZT0iY29sb3I6IHJlZDsiPmNvbHVtbjwvc3Bhbj4gJGokIG9mIG1hdHJpeCAke1xiZiBNfSQsIHRoZW4gJHtcYmYgTX1ee1xwcmltZX1fe2ksan0gPSB7XGJmIE19X3tqLGl9JCwgc28gdGhhdCBub3cgJGkkIGlzIHRoZSA8c3BhbiBzdHlsZT0iY29sb3I6IHJlZDsiPmNvbHVtbjwvc3Bhbj4gaW5kZXgsIGFuZCAkaiQgaXMgdGhlIDxzcGFuIHN0eWxlPSJjb2xvcjogYmx1ZTsiPnJvdzwvc3Bhbj4gaW5kZXguDQogDQpgYGB7cn0NCngNCnQoeCkNCmBgYA0KDQogDQogDQojIyBTeW1tZXRyaWMgTWF0cmljZXMNCg0KLSBEZWZpbml0aW9uOiBBIHNxdWFyZSBtYXRyaXggJHtcYmYgTX0kIGlzIHN5bW1ldHJpYyBpZiAke1xiZiBNfV57XHByaW1lfSA9IHtcYmYgTX0kLg0KDQotIEhlbmNlICR7XGJmIE19X3tpLGp9ID0ge1xiZiBNfV97aixpfSQuDQoNCmBgYHtyfQ0KbSA8LSB0KHgpICUqJSB4DQptDQpgYGANCg0KLSBJbXBvcnRhbnQgZXhhbXBsZXMgb2Ygc3ltbWV0cmljIG1hdHJpY2VzIGluIG11bHRpdmFyaWF0ZSBzdGF0aXN0aWNzIGluY2x1ZGUgdGhlIHZhcmlhbmNlLWNvdmFyaWFuY2UgbWF0cml4IGFuZCB0aGUgY29ycmVsYXRpb24gbWF0cml4Lg0KDQojIyBMaW5lYXIgQ29tYmluYXRpb24gb2YgVHdvIE1hdHJpY2VzDQoNCi0gVHdvIG1hdHJpY2VzIG1heSBiZSBhZGRlZCBpZiBhbmQgb25seSBpZiB0aGV5IGhhdmUgdGhlIHNhbWUgZGltZW5zaW9ucy4gVG8gYWRkIHR3byBtYXRyaWNlcywgYWRkIHRoZSBjb3JyZXNwb25kaW5nIGVsZW1lbnRzLg0KDQpgYGB7cn0NCnkgPC0gYXMubWF0cml4KGJhYnlbNTo3LDE6Ml0pDQp5DQp4K3kNCmBgYA0KIA0KLSBJZiAke1xiZiBBfSQgYW5kICR7XGJmIEJ9JCBhcmUgdHdvICRuIFx0aW1lcyBtJCBkaW1lbnNpb25hbCBtYXRyaWNlcywgJFxhbHBoYSQgYW5kICRcYmV0YSQgYXJlIHR3byBzY2FsYXJzLCB0aGVuICR7XGJmIEN9ID0gXGFscGhhIFwsIHtcYmYgQX0gKyBcYmV0YSBcLCB7XGJmIEJ9IFxpbiB7XG1hdGhiYiBSfV57biBcdGltZXMgbX0kLiBBIHNjYWxhciBtdWx0aXBsZXMgZWFjaCBlbnRyeSBvZiB0aGUgbWF0cml4LCBpLmUuLCANClxbDQoge1xiZiBDfV97aSxqfSA9IFxhbHBoYSBcLCB7XGJmIEF9X3tpLGp9ICsgXGJldGEgXCwge1xiZiBCfV97aSxqfS4NClxdDQogDQpgYGB7cn0NCjIqeCArIDMqeQ0KYGBgDQoNCiMjIE11bHRpcGxpY2F0aW9uIG9mIFR3byBNYXRyaWNlcw0KDQotIFRoZSAqKmRvdCBwcm9kdWN0Kiogb2YgdHdvIHZlY3RvcnMgJFx1bmRlcmxpbmV7eH0kIGFuZCAkXHVuZGVybGluZXt5fSQgaXMgdGhlIHN1bSBvZiB0aGUgcHJvZHVjdCBvZiB0aGVpciBlbnRyaWVzOiAkXHVuZGVybGluZXt4fSBcY2RvdCBcdW5kZXJsaW5le3l9ID0gXHN1bV97aT0xfV5uIHhfaSBcLCB5X2kkLg0KDQpgYGB7cn0NCnN1bSh4WywxXSp4WywyXSkNCnQoeFssMSxkcm9wPUZBTFNFXSkgJSolIHhbLDIsZHJvcD1GQUxTRV0NCmBgYA0KDQotIFdlIG11bHRpcGx5IG1hdHJpY2VzIGJ5IHRha2luZyBkb3QgcHJvZHVjdHMgb2Ygcm93IGFuZCBjb2x1bW4gdmVjdG9yczogJHtcYmYgQ30gPSB7XGJmIEF9IFwsIHtcYmYgQn0kIGlzIGRlZmluZWQgaWYgbnVtYmVyIG9mIGNvbHVtbnMgaW4gJHtcYmYgQX0kIGVxdWFscyB0aGUgbnVtYmVyIG9mIHJvd3MgaW4gJHtcYmYgQn0kLiBUaGVuIA0KXFsNCiB7XGJmIEN9X3tpLGp9ID0ge1xiZiBBfV97aSwgLX0gXGNkb3Qge1xiZiBCfV97LSxqfSA9IFxzdW1fe2s9MX1ecCB7XGJmIEF9X3tpLGt9IFwsIHtcYmYgQn1fe2ssan0uDQpcXQ0KSGVyZSAke1xiZiBBfSBcaW4ge1xtYXRoYmIgUn1ee24gXHRpbWVzIHB9JCwgJHtcYmYgQn0gXGluIHtcbWF0aGJiIFJ9XntwIFx0aW1lcyBtfSQsIGFuZCAke1xiZiBDfSBcaW4ge1xtYXRoYmIgUn1ee24gXHRpbWVzIG19JC4NCg0KYGBge3J9DQp4ICUqJSB0KHkpDQpzdW0oeFsxLF0qdCh5KVssM10pDQpgYGANCg0KIyMgSWRlbnRpdHkgTWF0cml4DQoNCi0gRGVmaW5pdGlvbjogQW4gaWRlbnRpdHkgbWF0cml4ICR7XGJmIEl9JCBpcyBhIHNxdWFyZSBtYXRyaXggdGhhdCBoYXMgb25lcyBvbiBpdHMgZGlhZ29uYWwgKGZyb20gdXBwZXIgbGVmdCB0byBib3R0b20gcmlnaHQpIGFuZCBoYXMgemVyb3MgZWxzZXdoZXJlLg0KDQpgYGB7cn0NCmV5ZSA8LSBkaWFnKDIpDQpleWUNCmBgYA0KDQotIFdoZW4gbXVsdGlwbHlpbmcgYW55IHNxdWFyZSBtYXRyaXgsIGl0IGxlYXZlcyB0aGUgbWF0cml4IHVuY2hhbmdlZDogJHtcYmYgSX0gXCwge1xiZiBBfSA9IHtcYmYgQX0kLg0KDQpgYGB7cn0NCnogPC0gYXMubWF0cml4KGJhYnlbMToyLDE6Ml0pDQp6DQpleWUgJSolIHoNCmBgYA0KDQojIyBNYXRyaXggSW52ZXJzZSAgDQoNCi0gRGVmaW5pdGlvbjogVGhlIGludmVyc2Ugb2YgYSBzcXVhcmUgbWF0cml4ICR7XGJmIEF9JCwgaWYgaXQgZXhpc3RzICh0aGUgaW52ZXJzZSBvZiB6ZXJvIGRvZXMgbm90IGV4aXN0IT8pLCBpcyBkZW5vdGVkIGJ5ICR7XGJmIEF9XnstMX0kLCBhbmQgc2F0aXNmaWVzDQpcWw0KIHtcYmYgQX1eey0xfSBcLCB7XGJmIEF9ID0ge1xiZiBBfSBcLCB7XGJmIEF9XnstMX0gPSB7XGJmIEl9Lg0KXF0NCg0KYGBge3J9DQphIDwtIHQoeCkgJSolIHgNCmFfaW52IDwtIHNvbHZlKGEpDQphX2ludg0KYSAlKiUgYV9pbnYNCmFfaW52ICUqJSBhDQpgYGANCg0KKldoYXQgaXMgYSBudW1lcmljYWwgemVybyBpbiBSPyoNCg0KLSBJZiB0aGUgaW52ZXJzZSBleGlzdHMsIHdlIHNheSB0aGUgbWF0cml4IGlzICoqaW52ZXJ0aWJsZSoqLg0KDQojIyBNYXRyaXggVHJhY2UNCg0KLSBEZWZpbml0aW9uOiBUaGUgdHJhY2Ugb2YgYW4gJG4gXHRpbWVzIG4kIG1hdHJpeCAke1xiZiBBfSQgaXMgdGhlIHN1bSBvZiBpdHMgZGlhZ29uYWwgZWxlbWVudHM6IA0KXFsNCiAgXG1ib3h7dHJ9IHtcYmYgQX0gPSBcc3VtX3tpPTF9Xm4ge1xiZiBBfV97aSxpfS4NClxdDQoNCmBgYHtyfQ0Kc3VtKGRpYWcoYSkpDQpgYGANCg0KLSBGb3IgdHdvIG1hdHJpY2VzICR7XGJmIEF9IFxpbiB7XG1hdGhiYiBSfV57biBcdGltZXMgcH0kLCAke1xiZiBCfSBcaW4ge1xtYXRoYmIgUn1ee3AgXHRpbWVzIG59JCwgDQpcWw0KIFxtYm94e3RyfSB7XGJmIEF9IFwsIHtcYmYgQn0gPSBcbWJveHt0cn0ge1xiZiBCfSBcLCB7XGJmIEF9Lg0KXF0NCg0KYGBge3J9DQp4DQp6IDwtIHQoeSkNCnoNCnN1bShkaWFnKHggJSolIHopKQ0Kc3VtKGRpYWcoeiAlKiUgeCkpDQpgYGANCg0KIyMgRWlnZW52YWx1ZXMgYW5kIEVpZ2VudmVjdG9ycw0KDQotIEdpdmVuIGEgc3ltbWV0cmljIG1hdHJpeCAke1xiZiBBfSQsIHRoZW4gYW55IHNjYWxhciAkXGxhbWJkYSQgYW5kIHZlY3RvciAkXHVuZGVybGluZXt2fSQgc3VjaCB0aGF0DQpcWw0KIHtcYmYgQX0gXCwgXHVuZGVybGluZXt2fSA9IFxsYW1iZGEgXCwgXHVuZGVybGluZXt2fQ0KXF0NCiBhcmUgYW4gKiplaWdlbnZhbHVlKiogYW5kICoqZWlnZW52ZWN0b3IqKiAodG9nZXRoZXIgY2FsbGVkIGFuICoqZWlnZW5wYWlyKiopLg0KIA0KYGBge3J9DQplaWcgPC0gZWlnZW4oYSkNCmEgJSolIGVpZyR2ZWN0b3JbLDFdDQplaWckdmFsdWVzWzFdICogZWlnJHZlY3RvclssMV0NCmBgYA0KICAuDQotIEEgJG4gXHRpbWVzIG4kIHN5bW1ldHJpYyBtYXRyaXggaGFzICRuJCByZWFsIGVpZ2VudmFsdWVzLCBkZW5vdGVkICRcbGFtYmRhXzEsIFxsZG90cywgXGxhbWJkYV9uJC4NCg0KLSBGYWN0OiAkXG1ib3h7dHJ9IHtcYmYgQX0gPSBcc3VtX3tpPTF9Xm4gXGxhbWJkYV9pJC4NCg0KYGBge3J9DQplaWckdmFsdWVzDQpzdW0oZWlnJHZhbHVlcykNCnN1bShkaWFnKGEpKQ0KYGBgDQoNCi0gRmFjdDogdGhlIGRldGVybWluYW50IGlzIHRoZSBwcm9kdWN0IG9mIHRoZSBlaWdlbnZhbHVlczogJFxtYm94e2RldH0ge1xiZiBBfSA9IFxwcm9kX3tpPTF9Xm4gXGxhbWJkYV9pJC4NCg0KIyMgUG9zaXRpdmUgRGVmaW5pdGUgTWF0cml4DQoNCi0gQSBzeW1tZXRyaWMgJG4gXHRpbWVzIG4kIGRpbWVuc2lvbmFsIG1hdHJpeCAke1xiZiBBfSQgaXMgKipwb3NpdGl2ZSBkZWZpbml0ZSoqIGlmICRcdW5kZXJsaW5le3Z9XntccHJpbWV9IHtcYmYgQX0gXHVuZGVybGluZXt2fSA+IDAkIGZvciBhbGwgbm9uLXplcm8gbGVuZ3RoICRuJCB2ZWN0b3JzICRcdW5kZXJsaW5le3Z9JC4gIENvbXBhY3RseSB3cml0dGVuICR7XGJmIEF9ID4gMCQuDQoNCmBgYHtyfQ0KdiA8LSBybm9ybSgyKQ0KdCh2KSAlKiUgYSAlKiUgdg0KYGBgDQogDQotIEEgc3ltbWV0cmljICRuIFx0aW1lcyBuJCBkaW1lbnNpb25hbCBtYXRyaXggJHtcYmYgQX0kIGlzICoqcG9zaXRpdmUgc2VtaS1kZWZpbml0ZSoqIGlmICRcdW5kZXJsaW5le3Z9XntccHJpbWV9IHtcYmYgQX0gXHVuZGVybGluZXt2fSBcZ2VxIDAkIGZvciBhbGwgbGVuZ3RoICRuJCB2ZWN0b3JzICRcdW5kZXJsaW5le3Z9JC4gIENvbXBhY3RseSB3cml0dGVuICR7XGJmIEF9IFxnZXEgMCQuDQoNCi0gRmFjdDogYSBzeW1tZXRyaWMgJG4gXHRpbWVzIG4kIGRpbWVuc2lvbmFsIG1hdHJpeCBpcyAqKnBvc2l0aXZlIGRlZmluaXRlKiogaWYgYW5kIG9ubHkgaWYgYWxsIG9mIGl0cyBlaWdlbnZhbHVlcyBhcmUgcG9zaXRpdmUuIChSZW1lbWJlciwgdGhleSBtdXN0IGJlIHJlYWwgYnkgc3ltbWV0cnkhKQ0KDQotIEZhY3Q6IGEgKipwb3NpdGl2ZSBkZWZpbml0ZSoqIG1hdHJpeCBpcyBpbnZlcnRpYmxlLg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBIb21ld29yayAyIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyAgTW90b3IgVHJlbmQgQ2FyIFJvYWQgVGVzdHMgDQoNCkluIHlvdXIgaG9tZXdvcmsgZ3JvdXBzLCBwcmVwYXJlIGEgcmVwb3J0IGluIFIgTWFya2Rvd24gTm90ZWJvb2sgYmFzZWQgb24gZXhhbWluaW5nIHRoZSBNb3RvciBUcmVuZCBDYXIgUm9hZCBUZXN0cyBkYXRhc2V0IChhdmFpbGFibGUgZnJvbSBHaXRIdWIpLiBUaGUgZmlsZSBjb250YWlucyBkYXRhIGV4dHJhY3RlZCBmcm9tIHRoZSAxOTc0IE1vdG9yIFRyZW5kIFVTIG1hZ2F6aW5lLCBhbmQgY29tcHJpc2VzIGZ1ZWwgY29uc3VtcHRpb24gYW5kIDEwIGFzcGVjdHMgb2YgYXV0b21vYmlsZSBkZXNpZ24NCmFuZCBwZXJmb3JtYW5jZSBmb3IgMzIgYXV0b21vYmlsZXMgKDE5NzPigJM3NCBtb2RlbHMpLiBUaGUgZGF0YXNldCBjb250YWlucyAzMiBvYnNlcnZhdGlvbnMgb24gMTEgdmFyaWFibGVzLiANCg0KIyMgVGFza3MgDQoNCkFuYWx5emUgdGhlIGRhdGFzZXQgYWNjb3JkaW5nIHRvIHRoZSBmb2xsb3dpbmcgc3RlcHM6DQoNCjEuIENhbGN1bGF0ZSBzYW1wbGUgbWVhbiBhbmQgc2FtcGxlIHZhcmlhbmNlIG9mIGVhY2ggdmFyaWFibGUuDQoyLiBDYWxjdWxhdGUgdGhlIHNhbXBsZSB2YXJpYW5jZS1jb3ZhcmlhbmNlIG1hdHJpeCBhbmQgdGhlIHNhbXBsZSBjb3JyZWxhdGlvbiBtYXRyaXguIFdoYXQgY2FuIHlvdSBzYXkgYWJvdXQgdGhlIHZhcmlhbmNlLWNvdmFyaWFuY2UgbWF0cml4IGFuZCBjb3JyZWxhdGlvbiBtYXRyaXg/DQozLiBEcmF3IGEgc2NhdHRlciBwbG90IGJldHdlZW4gd3QgKFdlaWdodCkgYW5kIG1wZyAoTWlsZXMgcGVyIGdhbGxvbikuDQo0LiBEcmF3IGEgc2NhdHRlciBwbG90IHRvIHNob3cgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHd0IChXZWlnaHQpLCBtcGcgKE1pbGVzIHBlciBnYWxsb24pIGFuZCBjeWwgKE51bWJlciBvZiBjeWxpbmRlcnMpLiBVc2UgYSAzRCBzY2F0dGVyIHBsb3QuDQo1LiBEcmF3IHBhaXJ3aXNlIHNjYXR0ZXIgcGxvdCBmb3IgYWxsIHZhcmlhYmxlcy4NCjYuIE9uZSBlbmdpbmVlciBzdWdnZXN0cyB0aGF0IHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiB3dCBhbmQgbXBnIGlzIHN1YmplY3QgdG8gdGhlIG51bWJlciBvZiBjeWxpbmRlcnMuIEFjY29yZGluZyB0byB0aGUgcGxvdCB5b3UgZHJhdyBpbiBzdGVwIDQsIHdoYXQgaXMgeW91ciBvcGluaW9uIHRvd2FyZHMgdGhpcyBzdWdnZXN0aW9uPw0KDQpZb3VyIFIgTWFya2Rvd24gTm90ZWJvb2sgcmVwb3J0IHNob3VsZCBoYXZlIGEgaW50cm9kdWN0aW9uLCBib2R5LCBjb25jbHVzaW9uIChhbmQgb3B0aW9uYWwgYXBwZW5kaXgpLiBJbXBvcnRhbnRseSwgeW91ciBjb2RlIHNob3VsZCBydW4hIChOb3RlOiB0aGUgZ3JhZGVyIHdpbGwgY2hlY2sgeW91ciAqbG9hZCogY29kZSBieSBjaGFuZ2luZyB0aGUgcGF0aC4p</div>
 
 
 
@@ -2127,7 +1815,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Ma189Lecture2.Rmd");
+  window.initializeSourceEmbed("Ma189Homework2.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

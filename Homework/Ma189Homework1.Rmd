@@ -1,0 +1,32 @@
+---
+title: "Math 189: Homework 1"
+output: html_notebook
+---
+
+# A First Report 
+
+Form groups and generate an R Markdown Notebook for the assignment, which examines the baby data set from lecture.
+
+## Metadata for *babies.dat*
+
+- **bwt**:		Baby’s weight at birth, to the nearest ounce
+- **gestation**:	Duration of the pregnancy in days, calculated from the first day of the last normal menstrual period.
+- **parity**:		Indicator for whether the baby is the first born (1) or not (0).
+- **age**:		Mother’s age at the time of conception, in years
+- **height**:		Height of the mother, in inches
+- **weight**:		Mother’s prepregnancy weight, in pounds
+- **smoking	Indicator**: for whether the mother smokes (1) or not (0).
+
+
+## Tasks
+
+1. Download *babies.dat* from the course GitHub
+2. Load data and give proper data citation (see lecture notes)
+3. Use the *head* command to examine the first few rows of the variables **bwt**, **age**, and **weight**
+4. Define and dispay a submatrix ${\bf X}$ corresponding to the last 5 records (babies), for the variables **bwt**, **age**, and **weight**
+5. For the above ${\bf X}$, compute ${\bf A} = {\bf X}^{\prime} \, {\bf X}$ in the notebook.
+6. Compute and display ${\bf A}^{-1}$.
+7. Compute and display the trace of ${\bf A}$.
+8. Prove whether ${\bf A}$ is positive definite or not.
+
+Your R Markdown Notebook report should have a brief introduction, body, and discussion. Importantly, your code should run! (Note: the grader will check your *load* code by changing the path.)

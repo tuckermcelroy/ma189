@@ -3,4 +3,284 @@ title: "Math 189: Exploratory Data Analysis III"
 output: html_notebook
 ---
 
+# Measures of Dispersion
+
+- The *variance* of a random variable measures the degree of dispersion (spread) in a variable’s
+values.
+- The population variance of the $j$th variable is
+\[
+ \sigma^2_j = \mbox{Var} [ x_{ij}] = \mathbf{E} {\left( x_{ij} - \mu_j \right)}^2
+ = \mathbf{E} [ x_{ij}^2 ] - \mu_j^2
+\]
+for any $i$.
+- The population *standard deviation* of the $j$th variable is 
+\[
+ \sigma_j = \sqrt{ \mbox{Var} [ x_{ij} ]}.
+ \]
  
+# Sample Variance
+
+- The population variance $\sigma^2_j$ can be estimated by the *sample variance*
+\[
+  s^2_j = \frac{1}{n-1} \sum_{i=1}^n { \left( x_{ij} - \overline{x}_j \right) }^2.
+\]
+- The *sample standard deviation* for the $j$th variable is simply the square root of the sample variance, that is, $s_j$.
+
+## Question: why do we divide by $n-1$ instead of $n$?  
+ 
+- Because $\sum_{i=1}^n (x_ij - \overline{x}_j) = 0$  (why?), knowing any $n-1$ of the deviations $X_{ij} - \overline{x}_j$ means we can compute the $n$th deviation.
+- This means that there are only $n-1$ freely varying deviations, or $n-1$ *degrees of freedom*.
+- Dividing by $n-1$ makes the sample variance an unbiased descriptive statistic for population variance:
+\[
+ {\bf E} [ s^2_j ] = \sigma^2_j.
+\]
+
+## Pros and Cons of the Divisor
+
+(When $n$ is large $n \approx n-1$, and the difference is negligible.)
+
+### Dividing by $n$
+
+#### Pros
+From a purely descriptive viewpoint, to divide by $n$ in the definition of the sample variance makes more sense.
+
+#### Cons
+Biased variance estimator
+
+### Dividing $n-1$
+
+#### Pros
+Unbiased sample variance.
+
+#### Cons
+Not intuitive.
+
+## Relation Between Center and Dispersion
+
+- Measures of center and measures of dispersion are best thought of together, in the context of an error function.
+- The error function measures how well a single number $a$ represents the entire data set.
+- The values of $a$ (if they exist) that minimize the error functions are our measures of center.
+- The minimum value of the error function is the corresponding measure of spread.
+
+### Mean Squared Error Function
+
+- The mean squared error (MSE) function for the $j$th variable is defined by
+\[
+  \mbox{MSE} (a) = \frac{1}{n-1} \sum_{i=1}^n {(x_{ij} - a)}^2.
+\]
+- Minimizing MSE with respect to $a$ is equivalent to solving
+\[
+\frac{d}{da}  \mbox{MSE} (a) = - \frac{2}{n-1} \sum_{i=1}^n (x_{ij} - a) = 0,
+\]
+ which yields $a = \overline{x}_j$, the *sample mean*.
+- Plugging this minimizer back in yields
+\[
+ \mbox{MSE} ( \overline{x}_j) = s^2_j,
+\]
+  the *sample variance*.
+
+# Measures of Association: Covariance
+
+- The *population covariance* is a measure of the association between pairs of variables. The population covariance between variables $j$ and $k$ is
+\[
+ \sigma_{jk} = \mbox{Cov} [ x_{ij}, x_{ik}] = \mathbf{E} \left[ (x_{ij} - \mu_j) (x_{ik} - \mu_k) \right].
+\]
+- The product $(x_{ij} - \mu_j) (x_{ik} - \mu_k)$ is a function of random variables $x_{ij}$ and $x_{ik}$. Therefore, it is also a random variable and has a population mean, $\sigma_{jK}$.
+- Special case: $j=k$ means $\sigma_{jk} = \sigma_{jj}$, or $\sigma_j^2$ (the variance for the $j$th variable).
+- Positive population covariance means that the two variables are *positively associated*.
+- Negative population covariance means that the two variables are *negatively associated*.
+
+## Population Covariance Matrix
+
+- The population variances and covariances can be collected into the *population variance-covariance* matrix. This is also known by the name *population dispersion* matrix.
+\[
+ {\bf \Sigma} = \left[ \begin{array}{cccc} 
+ \sigma^2_1 & \sigma_{12} & \ldots & \sigma_{1p} \\
+ \sigma_{21} & \sigma_2^2 & \ldots & \sigma_{2p} \\
+ \vdots & \vdots & \ddots & \vdots \\
+ \sigma_{p1} & \sigma_{p2} & \ldots & \sigma_p^2 \end{array} \right] \in {\mathbf R}^{p \times p}
+\]
+- The population variance-covariance matrix is symmetric and positive semi-definite (PSD).
+
+## Sample Covariance
+
+- The population covariance between variables $j$ and $k$ can be estimated by the *sample covariance*
+\[
+  s_{jk} = \frac{1}{n-1} \sum_{i=1}^n ( x_{ij} - \overline{x}_j) )
+  ( x_{ik} - \overline{x}_k ).
+\]
+- $s_{jk} = 0$: suggests variables $j$ and $k$ are uncorrelated (not independent!)
+- $s_{jk} > 0$: suggests   variables $j$ and $k$ are positively correlated  
+- $s_{jk} < 0$: suggests   variables $j$ and $k$ are negatively correlated  
+- Unbiasedness:  $ \mathbb{E} [ s_{jk} ] = \sigma_{jk}$.
+ 
+## Sample Covariance Matrix
+
+- The population variance-covariance matrix can be estimated by the *sample variance-covariance* matrix
+\[
+ {\bf S} = \left[ \begin{array}{cccc} 
+ s^2_1 & s_{12} & \ldots & s_{1p} \\
+ s_{21} & s_2^2 & \ldots & s_{2p} \\
+ \vdots & \vdots & \ddots & \vdots \\
+ s_{p1} & s_{p2} & \ldots & s_p^2 \end{array} \right] \in {\mathbf R}^{p \times p}
+\]
+- The sample variance-covariance matrix is also a symmetric matrix, and PSD if $n > p$.
+- Unbiasedness: $ \mathbb{E} [  {\bf S} ] = {\bf \Sigma}$.
+ 
+# Measures of Association: Correlation
+
+- The sign of a covariance value is useful to suggest positive, negative, or zero correlations.
+- The magnitude of a covariance value is not particularly helpful, as it depends on the magnitudes (scales) of the two variables. It does notvtell us the strength of the associations.
+- To assess the strength of an association, we use correlation values. The *population correlation* between variables $j$ and $k$ is
+\[
+ \rho_{jk} = \frac{ \sigma_{jk} }{ \sigma_j \sigma_k}.
+\]
+
+## Correlation and Data Transformation
+
+- Correlation of raw data is equivalent to the covariance of Z-score standardized data.
+- After Z-score standardization, $\sigma_j = \sigma_k = 1$.
+- Correlation is a "standardized” version of covariance.
+- Correlation is "scale invariant,” as its value does not change if we apply an *affine* transformation (except multiply by 0) to the variable, i.e.,
+\[
+  \underline{x} \mapsto a \underline{x} + \underline{b}.
+\]
+
+```{r}
+nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient$V1=NULL
+colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
+cor(nutrient$Calcium,nutrient$Iron)
+affine_trans <- 3*nutrient + 50
+cor(affine_trans$Calcium,affine_trans$Iron)
+```
+
+## Population Correlation
+
+- The population correlation $\rho_{jk}$ has the same sign as $\sigma_{jk}$
+- The population correlation $\rho_{jk}$ lies between $-1$ and $1$:
+\[
+ - 1 \leq \rho_{jk} \leq 1.
+ \]
+- $\rho_{jk} = 0$:  suggests variables $j$ and $k$ are uncorrelated
+- $\rho_{jk}$ close to 1: strong positive dependence
+- $\rho_{jk}$ close to -1: strong negative dependence.
+- $\rho_{jj} = 1$: the association of variable $j$ with itself.
+ 
+
+## Sample Correlation
+
+- The population correlation can be estimated by substituting into the formula the sample covariances and sample standard deviations.
+- The sample correlation between variables $j$ and $k$ is
+\[
+ r_{jk} = \frac{ s_{jk}}{ s_j s_k}.
+\]
+- $r_{jk}$:  suggests  variables $j$ and $k$ are uncorrelated
+- $r_{jk}$ close to 1: suggests strong positive dependence
+- $r_{jk}$ close to -1: suggests strong negative dependence
+- Biased: $ \mathbb{E} [ r_{jk} ] \neq \rho_{jk}$
+- Asymptotic unbiasedness: $ \mathbb{E} [ r_{jk} ] \rightarrow \rho_{jk}$ as 
+$ n \rightarrow \infty$
+
+## Correlation Matrix
+
+- The *population correlation* matrix and *sample correlation* matrix are
+\[
+ {\bf P} = \left[ \begin{array}{cccc} 
+ 1 & \rho_{12} & \ldots & \rho_{1p} \\
+ \rho_{21} & 1 & \ldots & \rho_{2p} \\
+ \vdots & \vdots & \ddots & \vdots \\
+ \rho_{p1} & \rho_{p2} & \ldots & 1 \end{array} \right]  
+ \qquad 
+  {\bf R} = \left[ \begin{array}{cccc} 
+ 1 & r_{12} & \ldots & r_{1p} \\
+ r_{21} & 1 & \ldots & r_{2p} \\
+ \vdots & \vdots & \ddots & \vdots \\
+ r_{p1} & r_{p2} & \ldots & 1 \end{array} \right]  
+\]
+- These matrices are symmetric and PSD.
+
+### Illustration
+
+Is 
+\[
+ \left[ \begin{array}{ccc} 1 &  .8 & .9 \\  .8 & 1 & .4 \\ .9 & .4 & 1 \end{array} \right]
+\]
+ a correlation matrix?
+ 
+```{r}
+A <- rbind(c(1,.8,.9),rbind(c(.8,1,.4),c(.9,.4,1)))
+eigen(A)$values
+```
+
+## Example 1: USDA Women’s Health Survey
+
+Find sample standard deviation for 5 variables
+
+```{r}
+nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient$V1=NULL
+colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
+apply(nutrient,2,sd)
+```
+
+Examine sample means and sample standard deviations
+
+```{r}
+cbind(apply(nutrient,2,mean),apply(nutrient,2,sd))
+```
+
+- Sample mean estimates the central tendency (average amount of nutrient intake).
+- Sample SD estimates dispersion. 
+- Note that for Vitamin A and C, the SDs are large relative to their respective means.
+
+### Sample Covariance Matrix
+
+```{r}
+var(nutrient)
+```
+
+- Sample covariance estimates the association between variables.
+- All off-diagonal elements in this table are positive, which indicates positive association.
+- A woman with above-average Calcium intake may also have above-average intake of other nutrients.
+- A woman with below-average Iron intake may also have below-average intake of other nutrients.
+- The magnitude of the covariance value **can not** be directly interpreted as the strength of association, because it depends on the scales of variables.
+
+### Sample Correlation Matrix
+
+```{r}
+cor(nutrient)
+```
+
+- Sample correlation estimates the association between standardized variables.
+- All off-diagonal elements in this table are positive, which indicates positive association.
+- Magnitude indicates strength of dependency.
+- High correlation pairs: Calcium with Iron, Calcium with Protein, Iron with Protein
+- Why these three nutrients are highly correlated? This can be a good research problem!
+
+# Overall Measures of Dispersion
+
+- Sometimes it is also useful to have an overall measure of dispersion in the data. In this measure, it would be good to include all the variables simultaneously, rather than one at a time.
+- The following two quantities are used to measure the dispersion of all variables together:
+
+1. Total variance
+2. Generalized variance
+
+## Total Variance
+
+- *Population total variance* is defined as the trace of the population variance-covariance matrix:
+\[
+\mbox{tr} {\bf \Sigma} = \sum_{i=1}^p \sigma^2_i.
+\]
+- Total variance is the sum of variances for all variables in the dataset.
+- Population total variance can be estimated by the trace of the sample variance-covariance matrix:
+\[
+  \mbox{tr} {\bf S} = \sum_{i=1}^p s_i^2.
+\]
+ 
+## Generalized Variance
+
+- *Population generalized variance* is defined as the determinant of the
+population variance-covariance matrix $\mbox{det} [ {\bf \Sigma}]$, sometimes written $| {\bf \Sigma} |$.
+- Generalized variance also accounts for off-diagonal elements in ${\bf \Sigma}$ (covariance effects); strong correlations reduce the generalized variance. $ | {\bf \Sigma} | = 0 $ if and only if some variables are linearly dependent.
+- Population generalized variance can be estimated by the determinant of the sample variance-covariance matrix $\mbox{det} [{\bf S}]$.
