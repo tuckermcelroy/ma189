@@ -1,0 +1,191 @@
+---
+title: "Math 189: Multivariate Mean II"
+output: html_notebook
+---
+
+# Statistical Hypothesis
+
+- A *statistical hypothesis* is an assumption about a population parameter (e.g., the population mean $\mu$).
+- This assumption may or may not be true. *Hypothesis testing* refers to the formal procedures used by statisticians to accept or reject statistical hypotheses.
+- The best way to determine whether a statistical hypothesis is true would be to examine the entire population, which is impractical.
+- Instead, researchers typically examine a random sample from the population. If sample data are not consistent with the assumed statistical hypothesis, the hypothesis is rejected.
+- This is like "proof by contradiction".
+
+## Two Types of Hypotheses
+
+- The *null hypothesis*, denoted by $H_0$, is the statistical hypothesis that researchers try to disprove, reject or nullify.
+- The null hypothesis usually corresponds to the assumption that sample observations result purely from chance, or that a treatment has no effect, etc.
+- The *alternative hypothesis*, denoted by $H_1$ or $H_a$, is the statistical hypothesis that is contrary to the null hypothesis.
+- The alternative hypothesis usually corresponds to the assumption that sample observations are influenced by some non-random cause, or that a treatment does have an effect, etc.
+- The choice of null hypothesis and alternative hypothesis depends on the problem we want to test as well as our "common sense” of the problem.
+- In order to make a meaningful decision about a null hypothesis (accept or reject), the null and alternative hypotheses should be stated in such a way that they are mutually exclusive. That is, if one is true, the other must be false.
+- It is possible that a different researcher may test a problem with a different set of hypotheses. So it is important to clearly state your null and alternative hypotheses.
+
+### Example: Hypothesis on a Coin Flip
+
+- Suppose we want to determine whether a coin is fair and balanced.
+- A null hypothesis might be that the chance of heads $p$ equals the chance of tails $1-p$.
+- An alternative hypothesis might be that the chance of heads and tails are very different.
+- Symbolically, these hypotheses can be expressed as
+\[
+ H_0: p = .5 \qquad H_a: p \neq .5.
+\]
+
+## Hypothesis Testing
+
+- Hypothesis Testing is a formal process to determine whether to reject a null hypothesis, based on sample data.
+- Hypothesis Testing usually consists of the following 4 steps:
+
+1. State null and alternative hypotheses (mutually exclusive).
+2. Formulate an analysis plan. The plan describes how to use sample data to evaluate the null hypothesis. The evaluation often focuses around a single test statistic.
+3. Analyze sample data. Find the value of the test statistic.
+4. Interpret results. Apply the decision rule described in the analysis plan. If the value of the test statistic is unlikely, based on the null hypothesis, reject the null hypothesis. Otherwise we "fail to reject" (informally, "accept") the null hypothesis.
+
+### Example: Covid-19 Testing
+
+- Polymerase Chain Reaction (PCR) is a viral test based on saliva. 
+- Null hypothesis: subject does not have corona virus.
+- Alternative hypothesis: subject does have this virus.
+- "The test detects a part of the virus’s genetic material." A high content of material indicates the null hypothesis is rejected.
+- Are there multiple samples in this scenario?
+
+
+## Decision Errors
+
+- Two types of errors can result from a hypothesis test: Type I and Type II.
+- A Type I error occurs when the researcher rejects a null hypothesis when it is true. Called "false positive". The probability of committing a Type I error is called the *significance level*, or *alpha*, and is denoted by $\alpha$.
+- A Type II error occurs when the researcher fails to reject a null hypothesis when it is false.  Called a "false negative". The probability of committing a Type II error is called *beta*, and is denoted by $\beta$. 
+- Correct decisions: rejecting the null hypothesis when it is false, or accepting the null hypothesis when it is true. The probability of *not* committing a Type II error is called
+the *power* of the test, and equals $1 - \beta$.
+
+| Decision | Null is True  | Null is False |
+|---|---|---|---|---|
+| Accept Null  | Correct   | Type II Error   |  
+| Reject Null  | Type I Error   | Correct   |  
+
+\[
+ \alpha = {\mathbb P} [ \mbox{Type I Error} ]
+ \qquad \beta = {\mathbb P} [ \mbox{Type II Error} ].
+ \]
+ 
+### Example: Hypothesis on a Coin Flip
+
+- Suppose we want to determine whether a coin is fair and balanced.
+- Null and alternative hypotheses:
+\[
+ H_0: p = .5 \qquad H_a: p \neq .5.
+\]
+- Type I error: reject the null hypothesis when the coin is fair.
+- Type II error: fail to reject the null hypothesis when the coin is not  fair.
+
+# Decision Rules 
+
+## Critical Value Approach
+
+- In practice, there are two common approaches of making decision rules in hypothesis testing.
+- **Critical value** approach: check whether or not the observed test statistic is more extreme than what would be expected if the null hypothesis were true.
+- That is, it entails comparing the observed test statistic to some cutoff value, called the *critical value*.
+- If the test statistic is not as extreme as the critical value, then the null hypothesis is not rejected.
+- If the test statistic is more extreme than the critical value, then the null is rejected in favor of the alternative.
+- Specifically, the critical value approach can be summarized as follows:
+
+1. Specify the null and alternative hypotheses.
+2. Use the sample data, assuming the null hypothesis is true, to calculate the value of the test statistic.
+3. Determine the critical value by finding the value of the known distribution of the test statistic such that the significance level $\alpha$ is small (e.g., $\alpha = 5 \%$).
+4. Compare the test statistic to the critical value. If the test statistic is more extreme
+in the direction of the alternative than the critical value, reject the null hypothesis in favor of the alternative hypothesis. If the test statistic is less extreme than the critical value, do not reject the null hypothesis.
+
+## p-Value Approach
+
+- **p-value** approach: deciding "likely” or "unlikely” by determining the probability of observing a more extreme test statistic, assuming the null hypothesis is true.
+- Suppose the test statistic is $T$. The p-value is the probability of observing a test statistic value as extreme as $T$, assuming the null is true.
+- When the p-value is small, say $\leq \alpha$, then it is "unlikely” and we reject the null hypothesis.
+- When the p-value is large, say $\geq \alpha$, then it is "likely” and we do not reject the null hypothesis.
+- Specifically, the p-value approach can be summarized as follows:
+
+1. Specify the null and alternative hypotheses.
+2. Use the sample data, assuming the null hypothesis is true, to calculate the value of the test statistic.
+3. Use the distribution of the test statistic to calculate the p-value: "If the null
+hypothesis is true, what is the probability of observing a more extreme test statistic in the direction of the alternative hypothesis than what we’ve observed?”
+4. Set the significance level $\alpha$ to be small (e.g., $0.01$ or $0.05$). Compare the p-value to $\alpha$. If the p-value $\leq \alpha$, reject the null hypothesis. If the p-value $> \alpha$, do not reject the null hypothesis.
+
+# Hypothesis Testing for Population Mean
+
+- Suppose $x_1, x_2, \ldots, x_n$ are independently sampled from a normal distribution with unknown population mean $\mu$ and variance $\sigma^2$.
+- We would like to test whether or not the unknown population mean $\mu$ equals a specific value, say $\mu_0$.  E.g., $\mu_0 = 5$.
+- It is natural to consider the following null and alternative hypotheses:
+\[
+ H_0: \mu = \mu_0 \quad \mbox{versus} \quad H_a: \mu \neq \mu_0.
+\]
+ 
+## Student’s $t$-test
+
+- A test statistic named the $t$-statistic can be used to address this hypothesis testing problem when the population standard deviation is unknown.
+\[
+  T = \frac{ \overline{x} - \mu_0 }{ s/ \sqrt{n}} \sim \mathcal{t}_{n-1}.
+\]
+- The $t$-statistic measures the ratio between the deviation of sample mean $\overline{x}$ 
+from the hypothesized value $\mu_0$ and its standard error $s/\sqrt{n}$.
+- Under $H_0$, the $t$-statistic follows a $\mathcal{t}$ distribution with degrees of freedom
+$n-1$, denoted $\mathcal{t}_{n-1}$. 
+
+```{r}
+n <- 9
+mu <- 2
+sigma <- 3
+students <- NULL
+for(i in 1:1000) {
+x <- rnorm(n, mean = mu, sd = sigma)
+student <- (mean(x) - mu)/(sd(x)/sqrt(n))
+students <- c(students,student) }
+hist(students, freq=FALSE, ylim = c(0,.5))
+curve(dt(x, df = n-1), col = 2, lty = 2, lwd = 2, add = TRUE)
+```
+
+- We reject $H_0$ at level $\alpha$ if the absolute value of the test statistic $t$ is
+greater than the critical value from the $t$-table, evaluated at $\alpha/2$ as shown below:
+\[
+ |T| > \mathcal{t}_{n-1,\alpha/2}.
+\]
+
+```{r}
+n <- 9
+mu <- 2
+sigma <- 3
+students <- NULL
+x <- rnorm(n, mean = mu, sd = sigma)
+student <- (mean(x) - mu)/(sd(x)/sqrt(n))
+alpha <- .05
+c(abs(student),qt(1-alpha/2,df=n-1))
+```
+
+- Student’s $\mathcal{t}$ distribution was introduced in 1908 by a chemist working for the Guiness brewery in Dublin named William Sealy Gosset, who used a penname Student.
+
+![Student](images/william_Sealy_Gosset.jpg)
+
+
+## Example: Honolulu Heart Study
+
+- The systolic blood pressure, the first number in your blood pressure reading, measures the pressure in your blood vessels when your heart beats.
+- A recommended normal systolic blood pressure is $\mu_0 = 120 \mbox{mm Hg}$.
+- In the Honolulu Heart Study, a sample of $n = 100$ people had an average systolic blood pressure of $130.1 \mbox{mm Hg}$ with a standard deviation of $21.21 \mbox{mm Hg}$.
+- Is the group significantly different (with respect to systolic blood pressure) from the recommended normal value?
+
+```{r}
+mu <- 120
+n <- 100
+xbar <- 130.1
+sdev <- 21.21
+```
+
+1. Specify the null and alternative hypotheses
+\[
+ H_0 : \mu  = 120  \quad \mbox{versu} \quad H_a: \mu \neq 120.
+\] 
+2. Calculate the value of the test statistic:
+`r t <- (xbar - mu)/(sdev/sqrt(n)); t`
+3. Set significance level $\alpha = .05$. Calculate the critical value:
+`r alpha <- .05; crit <- qt(1-alpha/2,df=n-1); crit`
+4. Compare the test statistic and critical value:
+`r t` versus `r crit`.
+Conclusion: we reject the null hypothesis!

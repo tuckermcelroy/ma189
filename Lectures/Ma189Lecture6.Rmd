@@ -109,9 +109,203 @@ output: html_notebook
  \sigma_{Y_1, Y_2} = \mbox{Cov} [ Y_1, Y_2] = \sum_{j=1}^p \sum_{k=1}^p c_j d_k \sigma_{jk} = 
  \underline{c}^{\prime} {\bf \Sigma} \underline{d}.
 \]
-- The population covariance can be estimated by the sample covariance:
+- The *population covariance* can be estimated by the sample covariance:
 \[
  s_{Y_1, Y_2} = \sum_{j=1}^p \sum_{k=1}^p c_j d_k s_{jk} = 
  \underline{c}^{\prime} {\bf S} \underline{d}.
 \]
  
+## Correlation between $Y_1$ and $Y_2$
+
+- Consider the pair of linear combinations
+\begin{align*}
+ Y_1 & = \sum_{j=1}^p c_j X_j  = \underline{c}^{\prime} \underline{X} \\
+ Y_2 & = \sum_{j=1}^p d_j X_j = \underline{d}^{\prime} \underline{X}
+\end{align*}
+- The *population correlation* between $Y_1$ and $Y_2$ is defined as
+\[
+\rho_{Y_1, Y_2} = \frac{ \sigma_{Y_1, Y_2}}{ \sigma_{Y_1} \sigma_{Y_2}}.
+\]
+- The population correlation can be estimated by the sample correlation
+\[
+ r_{Y_1, Y_2} = \frac{ s_{Y_1, Y_2}}{ s_{Y_1} s_{Y_2}}.
+\]
+
+# Variance of Univariate Sample Mean
+
+- The sample mean $\overline{x}$ is also a random variable with a mean and a variance.
+- The mean of sample mean ${\mathbb E} [ \overline{x} ] $ equals the population mean $\mu$.
+- The variance of the sample mean, generated from independent samples of size $n$, is equal to the population variance $\sigma^2$ divided by $n$.
+\[
+ \mbox{Var} [ \overline{x} ] = \mbox{Var} \left[ n^{-1} \sum_{i=1}^n x_i \right]
+  = n^{-2} \sum_{i=1}^n \mbox{Var} [ x_i ] = \frac{ \sigma^2}{n}.
+\]
+- The population variance of the sample mean is a function of the unknown population parameter $\sigma$.
+- To estimate the population variance of the sample mean, we can replace the population parameter $\sigma$ with sample standard deviation $s$:
+\[
+\widehat{\mbox{Var}[ \overline{x} ]} = \frac{ s^2}{n}
+\]
+- The square root of this quantity is called the *standard error of the mean*:
+\[
+ \mbox{se} [ \overline{x} ] = \frac{s}{ \sqrt{n}}.
+\]
+
+## Standard Error of Sample Mean
+
+- The standard error of the sample mean is a measure of the uncertainty of our estimate of the population mean.
+- If the standard error is large, then we are less confident of our estimate of the mean.
+- If the standard error is small, then we are more confident of our estimate of the mean.
+- What is meant by large or small depends on the application at hand.
+- The standard error is a decreasing function of sample size: the larger our sample is, the more confident we can be of our estimate.
+
+## Variance of Sample Mean Vector
+
+- In the multivariate setting, the sample mean is a random vector $\overline{\underline{x}}$.
+- The mean of sample mean vector ${\mathbb E} [ \overline{\underline{x}}]$ equals the population mean vector $\mu$.  So it is unbiased.
+- The population variance-covariance matrix of the sample mean vector, generated from independent samples of size $n$, is
+\[
+ \mbox{Var} [ \overline{\underline{x}} ] = \frac{1}{n} {\mathbf \Sigma},
+ \]
+where ${\mathbf \Sigma}$ is the population variance-covariance matrix of $\underline{x}_i$.
+- The population variance-covariance matrix of sample mean vector is a function of ${\mathbf \Sigma}$.
+- To estimate the population variance-covariance matrix of the sample mean vector, we replace ${\mathbf \Sigma}$ with sample variance-covariance matrix ${\mathbf S}$:
+\[
+\widehat{\mbox{Var}[ \overline{\underline{x}} ]} = \frac{1}{n} {\mathbf S}.
+\]
+ 
+# Distribution of Univariate Sample Mean
+
+- Suppose $x_1, x_2, \ldots, x_n$ are independently sampled from a normal distribution with mean $\mu$ and variance $\sigma^2$.
+- Then the sample mean $\overline{x}$ is normally distributed as
+\[
+ \overline{x} \sim \mathcal{N} ( \mu, \sigma^2/n ).
+\]
+- This conclusion depends on the iid (independent and identically distributed) normal assumption.
+- Can you see its connection to the unbiasedness and variance of the sample mean?
+
+```{r}
+n <- 9
+mu <- 2
+sigma <- 3
+xbars <- NULL
+for(i in 1:1000) {
+x <- rnorm(n, mean = mu, sd = sigma)
+xbar <- mean(x) 
+xbars <- c(xbars,xbar) }
+mean(xbars)
+sd(xbars)
+hist(xbars)
+```
+
+## Distribution of Sample Mean Vector
+
+- Suppose $\underline{x}_1, \underline{x}_2, \ldots, \underline{x}_n$ are independently sampled from a multivariate normal distribution with mean vector $\underline{\mu}$ and   variance-covariance matrix ${\mathbf \Sigma}$.
+- Then the sample mean $\overline{\underline{x}}$ follows a multivariate normal distribution:
+\[
+ \overline{\underline{x}} \sim \mathcal{N} ( \underline{\mu}, n^{-1} {\mathbf \Sigma} ).
+\]
+- Again, the above argument depends on the iid normal assumption.
+- Can you see its connection to the unbiasedness and variance-covariance matrix of sample mean vector?
+
+```{r}
+library(MASS)
+n <- 9
+mu <- c(2,3)
+Sigma <- matrix(c(1,0.5,0.5,2),2,2)
+xbars <- NULL
+for(i in 1:1000) {
+X <- mvrnorm(n = n, mu, Sigma)
+xbar <- colMeans(X) 
+xbars <- rbind(xbars,xbar) }
+colMeans(xbars)
+var(xbars)
+hist(xbars[,1])
+hist(xbars[,2])
+```
+
+
+# What if the Population is Not Normal?
+
+- The previous results depend on the assumption that the observation is sampled from a normal distribution.
+- This can be an idealization from reality. The distribution of the population is usually unknown to us, and deviates away from normal.
+- What is the distribution of the sample mean or sample mean vector when the observations are **not** sampled from a normal distribution?
+
+## Central Limit Theorem (Univariate Case)
+
+- If the observations $x_1, x_2, \ldots, x_n$ are independently and identically
+sampled from a population with mean $\mu$ and variance $\sigma^2 < \infty$, then,
+the sample mean $\overline{x}$ is *approximately normally* distributed with mean $\mu$ and variance $\sigma^2/n$.
+- In other words, if the above conditions are satisfied, the following linear transformation of the sample mean converges to a normal distribution with mean zero and variance $1$:
+\[
+ \sqrt{n} \left( \overline{x} - \mu \right)  \Rightarrow \mathcal{N} (0,\sigma^2),
+\]
+ as $n \rightarrow \infty$.
+- The assumption that the population is normally distributed has been removed.
+- The sample mean is approximately normally distributed.
+- The convergence rate is $n^{-1/2}$. The error between $\overline{x}$ and $\mu$ is a
+random variable whose mean is of order $n^{-1/2}$.
+- The accuracy of normal approximation increases as the sample size $n$ increases. 
+ 
+```{r}
+# try different choices of n: 1, 9, 25, 100
+n <- 1
+lambda <- 2
+xbars <- NULL
+for(i in 1:1000) {
+x <- rexp(n, rate = lambda)
+xbar <- mean(x) 
+xbars <- c(xbars,xbar) }
+mean(xbars)
+sd(xbars)
+hist(xbars)
+``` 
+ 
+## Central Limit Theorem (Multivariate Case)
+
+- Suppose $p$-dimensional observations $\underline{x}_1, \underline{x}_2, \ldots, \underline{x}_n$ are independently sampled from apopulation with mean vector $\underline{\mu}$ and variance-covariance matrix ${\mathbf \Sigma}$.
+- Then the sample mean vector $\overline{\underline{x}}$ converges to a multivariate normal
+distribution with mean vector  $\underline{\mu}$ and variance-covariance matrix $n^{-1} {\mathbf \Sigma}$:
+\[
+ \sqrt{n} \left( \overline{\underline{x}} - \underline{\mu} \right)  \Rightarrow \mathcal{N}_p (0, {\mathbf \Sigma}),
+\]
+ as $n \rightarrow \infty$.
+ 
+```{r}
+runif_circle <- function(radius)
+{
+  bad <- TRUE
+  while(bad)
+  {
+    x <- runif(1,min=-radius,max=radius)
+    y <- runif(1,min=-radius,max=radius)
+    z <- sqrt(x^2 + y^2)
+    if(z <= radius) { bad <- FALSE }
+  }
+  return(c(x,y))
+}
+runifs_circle <- function(n,radius)
+{
+  z <- NULL
+  for(i in 1:n)
+  {
+    z <- rbind(z,runif_circle(radius))
+  }
+  return(z)
+}
+# try different choices of n: 1, 9, 25, 100
+n <- 1
+xbars <- NULL
+for(i in 1:1000) {
+X <- runifs_circle(n,1)   
+xbar <- colMeans(X) 
+xbars <- rbind(xbars,xbar) }
+colMeans(xbars)
+var(xbars)
+hist(xbars[,1])
+hist(xbars[,2])
+```
+
+### Bonus Round!
+
+- What is mean vector and covariance matrix for the bivariate distribution that is uniform on a circle?
+- Does the CLT apply?
