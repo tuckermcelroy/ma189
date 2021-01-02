@@ -11,7 +11,7 @@
 
 
 
-<title>Math 189: Multivariate Mean II</title>
+<title>Math 189: Multiple Testing I</title>
 
 <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
@@ -1743,247 +1743,534 @@ summary {
 
 
 
-<h1 class="title toc-ignore">Math 189: Multivariate Mean II</h1>
+<h1 class="title toc-ignore">Math 189: Multiple Testing I</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<div id="statistical-hypothesis" class="section level1">
-<h1>Statistical Hypothesis</h1>
+<div id="hypothesis-testing-for-multivariate-mean" class="section level1">
+<h1>Hypothesis Testing for Multivariate Mean</h1>
 <ul>
-<li>A <em>statistical hypothesis</em> is an assumption about a population parameter (e.g., the population mean <span class="math inline">\(\mu\)</span>).</li>
-<li>This assumption may or may not be true. <em>Hypothesis testing</em> refers to the formal procedures used by statisticians to accept or reject statistical hypotheses.</li>
-<li>The best way to determine whether a statistical hypothesis is true would be to examine the entire population, which is impractical.</li>
-<li>Instead, researchers typically examine a random sample from the population. If sample data are not consistent with the assumed statistical hypothesis, the hypothesis is rejected.</li>
-<li>This is like “proof by contradiction”.</li>
-</ul>
-<div id="two-types-of-hypotheses" class="section level2">
-<h2>Two Types of Hypotheses</h2>
-<ul>
-<li>The <em>null hypothesis</em>, denoted by <span class="math inline">\(H_0\)</span>, is the statistical hypothesis that researchers try to disprove, reject or nullify.</li>
-<li>The null hypothesis usually corresponds to the assumption that sample observations result purely from chance, or that a treatment has no effect, etc.</li>
-<li>The <em>alternative hypothesis</em>, denoted by <span class="math inline">\(H_1\)</span> or <span class="math inline">\(H_a\)</span>, is the statistical hypothesis that is contrary to the null hypothesis.</li>
-<li>The alternative hypothesis usually corresponds to the assumption that sample observations are influenced by some non-random cause, or that a treatment does have an effect, etc.</li>
-<li>The choice of null hypothesis and alternative hypothesis depends on the problem we want to test as well as our “common sense” of the problem.</li>
-<li>In order to make a meaningful decision about a null hypothesis (accept or reject), the null and alternative hypotheses should be stated in such a way that they are mutually exclusive. That is, if one is true, the other must be false.</li>
-<li>It is possible that a different researcher may test a problem with a different set of hypotheses. So it is important to clearly state your null and alternative hypotheses.</li>
-</ul>
-<div id="example-hypothesis-on-a-coin-flip" class="section level3">
-<h3>Example: Hypothesis on a Coin Flip</h3>
-<ul>
-<li>Suppose we want to determine whether a coin is fair and balanced.</li>
-<li>A null hypothesis might be that the chance of heads <span class="math inline">\(p\)</span> equals the chance of tails <span class="math inline">\(1-p\)</span>.</li>
-<li>An alternative hypothesis might be that the chance of heads and tails are very different.</li>
-<li>Symbolically, these hypotheses can be expressed as <span class="math display">\[
- H_0: p = .5 \qquad H_a: p \neq .5.
+<li>Suppose <span class="math inline">\(\underline{x}_1, \underline{x}_2, \ldots, \underline{x}_n\)</span> are independently sampled from a multivariate normal distribution with mean <span class="math inline">\(\underline{\mu}\)</span> and covariance matrix <span class="math inline">\({\mathbf \Sigma}\)</span>.</li>
+<li>We would like to test whether the unknown population mean vector <span class="math inline">\(\underline{\mu}\)</span> equals a specific vector, say <span class="math inline">\(\underline{\mu}_0\)</span>.</li>
+<li>It is natural to consider the following null and alternative hypotheses: <span class="math display">\[
+ H_0:   \underline{\mu} =  \underline{\mu}_0 \quad \mbox{versus} \quad
+ H_a:   \underline{\mu} \neq  \underline{\mu}_0.
 \]</span></li>
+<li>We can also express the null and alternative hypotheses as <span class="math display">\[
+ H_0:   \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right]
+= \left[ \begin{array}{c} \mu_1^0 \\ \mu_2^0 \\ \vdots \\ \mu_p^0 \end{array} \right]
+\quad \mbox{versus} \quad
+ H_a:  \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right]
+\neq \left[ \begin{array}{c} \mu_1^0 \\ \mu_2^0 \\ \vdots \\ \mu_p^0 \end{array} \right].
+\]</span> Equivalently, <span class="math display">\[
+ H_0 : \mu_1 = \mu_1^0, \ldots, \mu_p = \mu_p^0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_p \neq \mu_p^0.
+\]</span></li>
+<li>Testing a mean vector is equivalent to testing multiple means together!</li>
+<li>Note that the null says that all the means equal the null values, while the alternative says that at least one mean does not equal the null value.</li>
+</ul>
+<div id="a-naive-scheme-to-test-multivariate-mean" class="section level2">
+<h2>A Naive Scheme to Test Multivariate Mean</h2>
+<ul>
+<li>Following the univariate case, a naive scheme for testing a multivariate hypothesis is to compute the <span class="math inline">\(t\)</span>-statistic for each univariate mean.</li>
+<li>Define <span class="math inline">\(T_j\)</span>, the <span class="math inline">\(t\)</span>-statistic for the <span class="math inline">\(j\)</span>th variable, as <span class="math display">\[
+T_j = \frac{ \overline{x}_j - \mu_j^0 }{ s_j/ \sqrt{n}} \sim \mathcal{t}_{n-1}
+\]</span> for <span class="math inline">\(1 \leq j \leq p\)</span>.</li>
+<li>Given a significance level <span class="math inline">\(\alpha\)</span>, we reject <span class="math inline">\(H_0: \underline{\mu} = \underline{\mu}_0\)</span> if <span class="math inline">\(|T_j| &gt; \mathcal{t}_{n-1,\alpha/2}\)</span> for at least one <span class="math inline">\(j \in \{ 1, 2, \ldots, p \}\)</span>.</li>
 </ul>
 </div>
-</div>
-<div id="hypothesis-testing" class="section level2">
-<h2>Hypothesis Testing</h2>
+<div id="problem-with-the-naive-scheme" class="section level2">
+<h2>Problem with the Naive Scheme</h2>
 <ul>
-<li>Hypothesis Testing is a formal process to determine whether to reject a null hypothesis, based on sample data.</li>
-<li>Hypothesis Testing usually consists of the following 4 steps:</li>
+<li>The biggest issue with this naive scheme is that it does not control the <em>family-wise error rate</em>.</li>
+<li>The family-wise error rate is the probability of rejecting at least one of the null hypotheses <span class="math inline">\(H_0^{(j)}: \mu_j = \mu_j^0\)</span> when all nulls are true.</li>
+<li>If the <span class="math inline">\(p\)</span> test statistics are independent, rejecting each null hypothesis at significance level <span class="math inline">\(\alpha\)</span> will result in a family-wise error rate <span class="math display">\[
+\mbox{FWER} = 1 - {(1 - \alpha)}^p \geq \alpha
+\]</span></li>
+<li>The probability of falsely rejecting at least one null hypothesis is much higher than <span class="math inline">\(\alpha\)</span> if the number of variables <span class="math inline">\(p\)</span> is large.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxwaGEgPC0gLjA1XG4jIHRyeSBkaWZmZXJlbnQgdmFsdWVzIG9mIHA6IDEsIDMsIDEwLCAxMDBcbnAgPC0gMVxuZndlciA8LSAxIC0gKDEtYWxwaGEpXnBcbmZ3ZXJcbmBgYCJ9 -->
+<pre class="r"><code>alpha &lt;- .05
+# try different values of p: 1, 3, 10, 100
+p &lt;- 1
+fwer &lt;- 1 - (1-alpha)^p
+fwer</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxwaGEgPC0gLjA1XG5wIDwtIHNlcSgxLDEwMClcbmZ3ZXIgPC0gMSAtICgxLWFscGhhKV5wXG5wbG90LnRzKGZ3ZXIpXG5gYGAifQ== -->
+<pre class="r"><code>alpha &lt;- .05
+p &lt;- seq(1,100)
+fwer &lt;- 1 - (1-alpha)^p
+plot.ts(fwer)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="fwer-correction" class="section level1">
+<h1>FWER Correction</h1>
+<ul>
+<li>The naive scheme fails to control the family-wise error rate and hence yields a liberal test. That is, we tend to reject null hypotheses more often than we should.</li>
+<li>High family-wise error rate means we have a high chance to commit a Type I error: reject at least one null hypothesis when they are all true.</li>
+<li>To control the family-wise error rate, we need to correct the naive scheme. If we want to control the family-wise error rate at level <span class="math inline">\(\alpha\)</span>, we should set the significance level for each individual test smaller than <span class="math inline">\(\alpha\)</span>.</li>
+<li>Many procedures have been developed to control the familywise error rate.</li>
+<li>Two general types of FWER corrections:</li>
 </ul>
 <ol style="list-style-type: decimal">
-<li>State null and alternative hypotheses (mutually exclusive).</li>
-<li>Formulate an analysis plan. The plan describes how to use sample data to evaluate the null hypothesis. The evaluation often focuses around a single test statistic.</li>
-<li>Analyze sample data. Find the value of the test statistic.</li>
-<li>Interpret results. Apply the decision rule described in the analysis plan. If the value of the test statistic is unlikely, based on the null hypothesis, reject the null hypothesis. Otherwise we “fail to reject” (informally, “accept”) the null hypothesis.</li>
+<li>Single step: equivalent adjustment made to each p-value. <em>Bonferroni Correction</em></li>
+<li>Sequential: adaptive adjustment made to each p-value. <em>Holm’s Method</em></li>
 </ol>
-<div id="example-covid-19-testing" class="section level3">
-<h3>Example: Covid-19 Testing</h3>
+<div id="bonferroni-correction" class="section level2">
+<h2>Bonferroni Correction</h2>
 <ul>
-<li>Polymerase Chain Reaction (PCR) is a viral test based on saliva.</li>
-<li>Null hypothesis: subject does not have corona virus.</li>
-<li>Alternative hypothesis: subject does have this virus.</li>
-<li>“The test detects a part of the virus’s genetic material.” A high content of material indicates the null hypothesis is rejected.</li>
-<li>Are there multiple samples in this scenario?</li>
+<li>A simple yet popular FWER correction is the Bonferroni Correction, which is named after Italian mathematician Carlo Emilio Bonferroni for its use of Bonferroni inequalities.</li>
+<li>Suppose we have <span class="math inline">\(m\)</span> null hypotheses (e.g. a mean vector of <span class="math inline">\(m\)</span> variables). Denote <span class="math inline">\(p_1, \ldots, p_m\)</span> the corresponding p-values.</li>
+<li>To control the FWER at level <span class="math inline">\(\alpha\)</span>, the Bonferroni Correction sets the significance level for each individual test at <span class="math inline">\(\alpha/m\)</span> instead of <span class="math inline">\(\alpha\)</span>.</li>
+<li>The intuition of Bonferroni Correction is as follows: <span class="math display">\[
+ \mbox{FWER} = \mathbb{P} \left[ \cup_{i=1}^m \{ p_i \leq \alpha/m \} \right]
+\leq \sum_{i=1}^m \mathbb{P} \left[ p_i \leq \alpha/m \right]
+\leq m (\alpha/m) = \alpha.
+\]</span></li>
+<li>Derivation uses fact that a <span class="math inline">\(p\)</span>-value (when null is true) is uniformly distributed on <span class="math inline">\((0,1)\)</span>. (Why? Probability Integral Transform.) Does not assume independence of tests.</li>
+<li>For independent tests, the Bonferroni Correction yields a family-wise error rate of approximately <span class="math inline">\(\alpha\)</span>: <span class="math display">\[
+ \mbox{FWER} = \mathbb{P} \left[ \cup_{i=1}^m \{ p_i \leq \alpha/m \} \right]
+= 1 - \mathbb{P} \left[ \cap_{i=1}^m \{ p_i &gt; \alpha/m \} \right]
+= 1 - {(1 - \alpha/m)}^m \approx 1 - e^{-\alpha},
+\]</span> for <span class="math inline">\(\alpha\)</span> small.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxwaGEgPC0gLjA1XG5tIDwtIHNlcSgwLDEwMCw1KVxuZndlcl9uYWl2ZSA8LSAxIC0gKDEtYWxwaGEpXm1cbmZ3ZXJfYm9uIDwtIDEgLSAoMSAtIGFscGhhL20pXm1cbmNiaW5kKG0sY2JpbmQoZndlcl9uYWl2ZSxmd2VyX2JvbikpXG5wbG90LnRzKGZ3ZXJfbmFpdmUpXG5saW5lcyhmd2VyX2Jvbixjb2w9MilcbmBgYCJ9 -->
+<pre class="r"><code>alpha &lt;- .05
+m &lt;- seq(0,100,5)
+fwer_naive &lt;- 1 - (1-alpha)^m
+fwer_bon &lt;- 1 - (1 - alpha/m)^m
+cbind(m,cbind(fwer_naive,fwer_bon))
+plot.ts(fwer_naive)
+lines(fwer_bon,col=2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="pros-and-cons-of-bonferroni-correction" class="section level3">
+<h3>Pros and Cons of Bonferroni Correction</h3>
+<div id="pros" class="section level4">
+<h4>Pros</h4>
+<ul>
+<li>Control FWER at a given level <span class="math inline">\(\alpha\)</span></li>
+<li>Protects Type I errors</li>
+<li>Easy to implement</li>
+</ul>
+</div>
+<div id="cons" class="section level4">
+<h4>Cons</h4>
+<ul>
+<li>Need the assumption of independence to get FWER approximately <span class="math inline">\(\alpha\)</span></li>
+<li>Conservative when there is strong dependence among variables</li>
+<li>Vulnerable to Type II errors (failing to reject the null hypothesis when you should)</li>
 </ul>
 </div>
 </div>
-<div id="decision-errors" class="section level2">
-<h2>Decision Errors</h2>
+</div>
+<div id="holms-method" class="section level2">
+<h2>Holm’s Method</h2>
 <ul>
-<li>Two types of errors can result from a hypothesis test: Type I and Type II.</li>
-<li>A Type I error occurs when the researcher rejects a null hypothesis when it is true. Called “false positive”. The probability of committing a Type I error is called the <em>significance level</em>, or <em>alpha</em>, and is denoted by <span class="math inline">\(\alpha\)</span>.</li>
-<li>A Type II error occurs when the researcher fails to reject a null hypothesis when it is false. Called a “false negative”. The probability of committing a Type II error is called <em>beta</em>, and is denoted by <span class="math inline">\(\beta\)</span>.</li>
-<li>Correct decisions: rejecting the null hypothesis when it is false, or accepting the null hypothesis when it is true. The probability of <em>not</em> committing a Type II error is called the <em>power</em> of the test, and equals <span class="math inline">\(1 - \beta\)</span>.</li>
+<li>Holm’s Method is a simple sequential method to correct the FWER.</li>
+<li>Suppose we have <span class="math inline">\(m\)</span> null hypotheses (e.g. a mean vector of <span class="math inline">\(m\)</span> variables). Denote <span class="math inline">\(p_{(1)}, \ldots, p_{(m)}\)</span> the corresponding p-values in ascending order: <span class="math display">\[
+ p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(m)}.
+\]</span></li>
+<li>To control the FWER at level <span class="math inline">\(\alpha\)</span>, we adjust the significance level for the hypothesis testing with the <span class="math inline">\(j\)</span>th smallest p-value <span class="math inline">\(p_{(j)}\)</span> by <span class="math inline">\(\alpha^* = \alpha / (m - j +1)\)</span>.</li>
+<li>Proceed from <span class="math inline">\(j = 1, \ldots, m\)</span>, making comparisons, and <strong>exit</strong> as soon as there is a failure to reject.</li>
+<li>For example, when <span class="math inline">\(m = 100\)</span>, we find <span class="math inline">\(k\)</span> such that <span class="math display">\[
+ p_{(1) } \leq \alpha/100, p_{(2)} \leq \alpha/99, \ldots, p_{(k)} \leq \alpha/(101-k),
+ p_{(k+1)} &gt; \alpha/(100-k),
+\]</span> and conclude that the <span class="math inline">\(k\)</span> hypotheses corresponding to <span class="math inline">\(p_{(1)}, \ldots, p_{(k)}\)</span> are rejected.</li>
+<li>Holm’s Method downscales the significance level <span class="math inline">\(\alpha\)</span> (or upscales the p-value) by a factor depending on the order of the p-value.</li>
+<li>The Bonferroni correction rejects null hypotheses with p-value less than <span class="math inline">\(\alpha/m\)</span>, in order to control FWER at <span class="math inline">\(\alpha\)</span>. The cost of this protection against type I errors is an increased risk of accepting one or more false null hypotheses (i.e., of committing one or more type II errors).</li>
+<li>Holm’s method also controls the maximum family-wise error rate at <span class="math inline">\(\alpha\)</span>, but with a lower increase of type II error risk.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxwaGEgPC0gLjA1XG5tIDwtIDEwXG5wdmFscyA8LSBydW5pZihtKVxucHZhbHNfc29ydCA8LSBzb3J0KHB2YWxzKVxuaW5kZXggPC0gc2VxKDEsbSlcbmNyaXRzIDwtIGFscGhhLyhtIC0gaW5kZXggKzEpXG5udWxscyA8LSBOVUxMXG5qIDwtIDFcbndoaWxlKGogPD0gbSlcbntcbiAgaWYocHZhbHNfc29ydFtqXSA8PSBjcml0c1tqXSkgXG4gIHsgXG4gICAgbnVsbHMgPC0gYyhudWxscyxqKSBcbiAgfSBlbHNlIHsgaiA8LSBtKzEgfVxuICBqIDwtIGorMVxufVxubGVuZ3RoKG51bGxzKVxuYGBgIn0= -->
+<pre class="r"><code>alpha &lt;- .05
+m &lt;- 10
+pvals &lt;- runif(m)
+pvals_sort &lt;- sort(pvals)
+index &lt;- seq(1,m)
+crits &lt;- alpha/(m - index +1)
+nulls &lt;- NULL
+j &lt;- 1
+while(j &lt;= m)
+{
+  if(pvals_sort[j] &lt;= crits[j]) 
+  { 
+    nulls &lt;- c(nulls,j) 
+  } else { j &lt;- m+1 }
+  j &lt;- j+1
+}
+length(nulls)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDBcbiJ9 -->
+<pre><code>[1] 0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcHMgPC0gcHZhbHNfc29ydCA8PSBjcml0c1xuZGF0YS5mcmFtZShpbmRleCxwdmFsc19zb3J0LGNyaXRzLGNvbXBzKVxuYGBgIn0= -->
+<pre class="r"><code>comps &lt;- pvals_sort &lt;= crits
+data.frame(index,pvals_sort,crits,comps)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6MTB9LCJyZGYiOiJINHNJQUFBQUFBQUFCZ3R5aVREbWl1QmlZR0JnWm1CbUEySldJSk9CelRuQTBNalVpSUdCaFFuSVkyUmdZZUFFMFJWQVZjSkFCZ3NROHdJeEYxaVNnWUVKckIwaUR0TFBCc1RzUU13QnhKeFFkWHdnMm43ZlRidE5RSWI5b1l0ZE94cUE5TkdhdGhZUWZWTDh0ak5JL01wQi9RZ1EvYWpXUXhJay9vVHo3TzhEUVByRjBUMFdJUDVMSGY4VkNVRDYxZUhkK1F0QUxvV2FXMUwxMEgyZFNMVjkyY0Vjc1lNNTR2YVZNMEZnbG4ydDR4Vlp4eXR5OW8yQ1lHRGZBbFhYQ1pXZkNCV2ZDZVd2aE5CUU4zTXhFQTFRQW9vMUx6RTN0UmpJRUFBSENsUXdNeThsdFFMSzRTb29TOHdwamkvT0x5cUJTU2NYWlpZVXd6bjV1UVhGYUtaeUZ1V1g2OEZNQmdVL1V3UEViaTUwNjVOekVvdGgxc01FdVZJU1N4TDEwb3FBK29HOGYyaGEyUE1MU2pMejg0Q2FtSVNoa1lpc21iRUlUWUMvTkEva2toVGQ1SXpTdkd4ZFk2VEV3QUIxSFNOVURNWm1nVmpKOUI5cUZDdlVLTGJVdlBUTXZGU1kyM01TazFKem9CdytvSS9CSHRZcktNck1nNFVVRjFDMFdLOGt2eVFScG80ck9UOEhKZ0wyRzhNL0FObkpzR0xZQWdBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["index"],"name":[1],"type":["int"],"align":["right"]},{"label":["pvals_sort"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["crits"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["comps"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"1","2":"0.1205024","3":"0.005000000","4":"FALSE"},{"1":"2","2":"0.1470197","3":"0.005555556","4":"FALSE"},{"1":"3","2":"0.1678627","3":"0.006250000","4":"FALSE"},{"1":"4","2":"0.1960405","3":"0.007142857","4":"FALSE"},{"1":"5","2":"0.3242911","3":"0.008333333","4":"FALSE"},{"1":"6","2":"0.5777932","3":"0.010000000","4":"FALSE"},{"1":"7","2":"0.6261969","3":"0.012500000","4":"FALSE"},{"1":"8","2":"0.7741376","3":"0.016666667","4":"FALSE"},{"1":"9","2":"0.7866591","3":"0.025000000","4":"FALSE"},{"1":"10","2":"0.8363931","3":"0.050000000","4":"FALSE"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="pros-and-cons-of-holms-method" class="section level3">
+<h3>Pros and Cons of Holm’s Method</h3>
+<div id="pros-1" class="section level4">
+<h4>Pros</h4>
+<ul>
+<li>Sequential adjustment</li>
+<li>Adaptive significance level</li>
+<li>Uniformly higher power (less type II error)</li>
+</ul>
+</div>
+<div id="cons-1" class="section level4">
+<h4>Cons</h4>
+<ul>
+<li>Hard to define confidence interval</li>
+<li>No guarantee on type II error control (better than Bonferroni though)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="issues-about-controlling-fwer" class="section level2">
+<h2>Issues about Controlling FWER</h2>
+<ul>
+<li>FWER is appropriate when you want to guard against <em>any</em> type I error.</li>
+<li>When we control the FWER, the testing procedure needs “very strong evidence” to reject a null hypothesis. As a result, the testing procedure may fail to reject some hypothesis when the null hypothesis is false.</li>
+<li>We gain a strict control of type I error at a price of loose control of type II error.</li>
+<li>FWER control is important when the cost of type I error is much higher than type II error.</li>
+</ul>
+</div>
+<div id="example-fda-tests-on-drug-side-effects" class="section level2">
+<h2>Example: FDA Tests on Drug Side Effects</h2>
+<ul>
+<li>Before a new drug is proved by FDA, they need to test if the drug has severe side effects on patients. The test is based on the following null and alternative hypotheses: <span class="math display">\[\begin{align*}
+ &amp; H_0: \mbox{The drug has severe side effects}  \\
+ &amp; H_a: \mbox{The drug does not have severe side effects}.
+\end{align*}\]</span> In this case, the type I and type II errors stand for:</li>
+<li>Type I error: Claim that a drug does not have severe side effects when it really does.</li>
+<li>Type II error: Claim that a drug has severe side effects when it really does not.</li>
+<li>Note that we want control over Type I error (because this is more costly), so we set up null in this way.</li>
+</ul>
+<table>
+<colgroup>
+<col width="33%"></col>
+<col width="33%"></col>
+<col width="33%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Type I Error</th>
+<th>Type II Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decision</td>
+<td>Claim that a drug does not have severe side effects when it really does</td>
+<td>Claim that a drug has severe side effects when it really does not</td>
+</tr>
+<tr class="even">
+<td>Costs</td>
+<td>Drug is approved by FDA</td>
+<td>Drug is not approved by DFA</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Financial cost of lawsuits as patients suffer from side effects</td>
+<td>Financial cost to company of further research</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-genotype-and-disease" class="section level2">
+<h2>Example: Genotype and Disease</h2>
+<ul>
+<li>In genomic studies, it is often of interest to find the genotypes that have a significant association with a disease of interest.</li>
+<li>Usually, scientists collect a pool of millions of genotypes, and data analysts want to screen out irrelevant genotypes before conducting finer research.</li>
+<li>We need to carry out a large amount of testing problems.</li>
+<li>For each genotype, the null and alternative hypotheses are: <span class="math display">\[\begin{align*}
+&amp;  H_0: \mbox{the association is zero} \\
+&amp; H_a: \mbox{the association is non-zero}.
+\end{align*}\]</span></li>
+<li>Type II error is more important in this case.</li>
+</ul>
+<table>
+<colgroup>
+<col width="33%"></col>
+<col width="33%"></col>
+<col width="33%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Type I Error</th>
+<th>Type II Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decision</td>
+<td>Claim there’s an association when it does not exist</td>
+<td>Ignore an association when it does exist</td>
+</tr>
+<tr class="even">
+<td>Costs</td>
+<td>We include some non-significant genotypes, which may be filtered out in next</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>steps</td>
+<td>We missed a significant genotype that will be ignored in future studies</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="what-if-we-can-live-with-some-type-i-errors" class="section level2">
+<h2>What if We Can Live With Some Type I Errors?</h2>
+<ul>
+<li>However, in many cases, we could tolerate a certain amount (or percentage) of type I errors (e.g. the genotype example).</li>
+<li>Instead of FWER, a more relevant quantity we may want to control is the <em>false discovery rate</em> (FDR).</li>
+<li>FDR control will lead to procedures that are less conservative and more powerful than FWER control.</li>
+<li>FDR control is still a very active area in statistical research.</li>
+</ul>
+</div>
+</div>
+<div id="false-discovery-rate" class="section level1">
+<h1>False Discovery Rate</h1>
+<ul>
+<li>Suppose we have <span class="math inline">\(m\)</span> null hypotheses, among which <span class="math inline">\(m_0\)</span> are true (we do not know this in practice!)</li>
+<li>The test results can be summarized in the following table:</li>
 </ul>
 <table>
 <thead>
 <tr class="header">
 <th>Decision</th>
-<th>Null is True</th>
-<th>Null is False</th>
+<th><span class="math inline">\(H_0\)</span> is true</th>
+<th><span class="math inline">\(H_0\)</span> is false</th>
+<th>Total Number</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Accept Null</td>
-<td>Correct</td>
-<td>Type II Error</td>
+<td>Do not reject <span class="math inline">\(H_0\)</span></td>
+<td><span class="math inline">\(U\)</span></td>
+<td><span class="math inline">\(T\)</span> (Type II)</td>
+<td><span class="math inline">\(m-R\)</span></td>
 </tr>
 <tr class="even">
-<td>Reject Null</td>
-<td>Type I Error</td>
-<td>Correct</td>
+<td>Reject <span class="math inline">\(H_0\)</span></td>
+<td><span class="math inline">\(V\)</span> (Type I)</td>
+<td><span class="math inline">\(S\)</span></td>
+<td><span class="math inline">\(R\)</span></td>
+</tr>
+<tr class="odd">
+<td>Total Number</td>
+<td><span class="math inline">\(m_0\)</span></td>
+<td><span class="math inline">\(m - m_0\)</span></td>
+<td><span class="math inline">\(m\)</span></td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[
- \alpha = {\mathbb P} [ \mbox{Type I Error} ]
- \qquad \beta = {\mathbb P} [ \mbox{Type II Error} ].
- \]</span></p>
-<div id="example-hypothesis-on-a-coin-flip-1" class="section level3">
-<h3>Example: Hypothesis on a Coin Flip</h3>
 <ul>
-<li>Suppose we want to determine whether a coin is fair and balanced.</li>
-<li>Null and alternative hypotheses: <span class="math display">\[
- H_0: p = .5 \qquad H_a: p \neq .5.
+<li><em>False discovery propitiation</em> (FDP) is defined as the number of false rejections (<span class="math inline">\(V\)</span>) relative to the total rejections (<span class="math inline">\(R\)</span>): <span class="math display">\[
+ \mbox{FDP} = \frac{V}{R}
+\]</span> when <span class="math inline">\(R &gt; 0\)</span>.</li>
+<li>False discovery rate (FDR) is defined as the expected value of FDP: <span class="math display">\[
+\mbox{FDR} = {\mathbb E} [ \mbox{FDP} ] = {\mathbb E} [V/R].
 \]</span></li>
-<li>Type I error: reject the null hypothesis when the coin is fair.</li>
-<li>Type II error: fail to reject the null hypothesis when the coin is not fair.</li>
+<li>Family-wise error rate (FWER) can be expressed as <span class="math display">\[
+ \mbox{FWER} = {\mathbb P} [ V \geq 1].
+ \]</span></li>
+</ul>
+<div id="why-is-controlling-fdr-important" class="section level2">
+<h2>Why is Controlling FDR Important?</h2>
+<ul>
+<li>While the FWER control is appealing, the resulting thresholds often suffer from low power. In practice, this tends to wipe out evidence of the most interesting effects (true nulls can be buried by a large number of non-rejected false nulls).</li>
+<li>FDR control offers a way to increase power while maintaining some principle bound on type I error.</li>
+<li>It is based on the assessment of the chance you observe a type I error: <span class="math inline">\(4\)</span> false discoveries out of <span class="math inline">\(10\)</span> rejected null hypotheses is a more serious error than <span class="math inline">\(20\)</span> false discoveries out of <span class="math inline">\(100\)</span> rejected null hypotheses.</li>
 </ul>
 </div>
-</div>
-</div>
-<div id="decision-rules" class="section level1">
-<h1>Decision Rules</h1>
-<div id="critical-value-approach" class="section level2">
-<h2>Critical Value Approach</h2>
+<div id="the-benjamini-hochberg-procedure" class="section level2">
+<h2>The Benjamini-Hochberg Procedure</h2>
 <ul>
-<li>In practice, there are two common approaches of making decision rules in hypothesis testing.</li>
-<li><strong>Critical value</strong> approach: check whether or not the observed test statistic is more extreme than what would be expected if the null hypothesis were true.</li>
-<li>That is, it entails comparing the observed test statistic to some cutoff value, called the <em>critical value</em>.</li>
-<li>If the test statistic is not as extreme as the critical value, then the null hypothesis is not rejected.</li>
-<li>If the test statistic is more extreme than the critical value, then the null is rejected in favor of the alternative.</li>
-<li>Specifically, the critical value approach can be summarized as follows:</li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Specify the null and alternative hypotheses.</li>
-<li>Use the sample data, assuming the null hypothesis is true, to calculate the value of the test statistic.</li>
-<li>Determine the critical value by finding the value of the known distribution of the test statistic such that the significance level <span class="math inline">\(\alpha\)</span> is small (e.g., <span class="math inline">\(\alpha = 5 \%\)</span>).</li>
-<li>Compare the test statistic to the critical value. If the test statistic is more extreme in the direction of the alternative than the critical value, reject the null hypothesis in favor of the alternative hypothesis. If the test statistic is less extreme than the critical value, do not reject the null hypothesis.</li>
-</ol>
-</div>
-<div id="p-value-approach" class="section level2">
-<h2>p-Value Approach</h2>
-<ul>
-<li><strong>p-value</strong> approach: deciding “likely” or “unlikely” by determining the probability of observing a more extreme test statistic, assuming the null hypothesis is true.</li>
-<li>Suppose the test statistic is <span class="math inline">\(T\)</span>. The p-value is the probability of observing a test statistic value as extreme as <span class="math inline">\(T\)</span>, assuming the null is true.</li>
-<li>When the p-value is small, say <span class="math inline">\(\leq \alpha\)</span>, then it is “unlikely” and we reject the null hypothesis.</li>
-<li>When the p-value is large, say <span class="math inline">\(\geq \alpha\)</span>, then it is “likely” and we do not reject the null hypothesis.</li>
-<li>Specifically, the p-value approach can be summarized as follows:</li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Specify the null and alternative hypotheses.</li>
-<li>Use the sample data, assuming the null hypothesis is true, to calculate the value of the test statistic.</li>
-<li>Use the distribution of the test statistic to calculate the p-value: “If the null hypothesis is true, what is the probability of observing a more extreme test statistic in the direction of the alternative hypothesis than what we’ve observed?”</li>
-<li>Set the significance level <span class="math inline">\(\alpha\)</span> to be small (e.g., <span class="math inline">\(0.01\)</span> or <span class="math inline">\(0.05\)</span>). Compare the p-value to <span class="math inline">\(\alpha\)</span>. If the p-value <span class="math inline">\(\leq \alpha\)</span>, reject the null hypothesis. If the p-value <span class="math inline">\(&gt; \alpha\)</span>, do not reject the null hypothesis.</li>
-</ol>
-</div>
-</div>
-<div id="hypothesis-testing-for-population-mean" class="section level1">
-<h1>Hypothesis Testing for Population Mean</h1>
-<ul>
-<li>Suppose <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> are independently sampled from a normal distribution with unknown population mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</li>
-<li>We would like to test whether or not the unknown population mean <span class="math inline">\(\mu\)</span> equals a specific value, say <span class="math inline">\(\mu_0\)</span>. E.g., <span class="math inline">\(\mu_0 = 5\)</span>.</li>
-<li>It is natural to consider the following null and alternative hypotheses: <span class="math display">\[
- H_0: \mu = \mu_0 \quad \mbox{versus} \quad H_a: \mu \neq \mu_0.
+<li>Benjamini and Hochberg (1995) introduced the concept of FDR and proposed a simple procedure to control it. We will call it the BH procedure.</li>
+<li>Suppose we have <span class="math inline">\(m\)</span> null hypotheses: <span class="math inline">\(H_0^{(1)}, \ldots, H_0^{(m)}\)</span>. Denote <span class="math inline">\(p_{(1)}, \ldots, p_{(m)}\)</span> the corresponding p-values in ascending order: <span class="math display">\[
+ p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(m)}.
 \]</span></li>
-</ul>
-<div id="students-t-test" class="section level2">
-<h2>Student’s <span class="math inline">\(t\)</span>-test</h2>
-<ul>
-<li>A test statistic named the <span class="math inline">\(t\)</span>-statistic can be used to address this hypothesis testing problem when the population standard deviation is unknown. <span class="math display">\[
-T = \frac{ \overline{x} - \mu_0 }{ s/ \sqrt{n}} \sim \mathcal{t}_{n-1}.
+<li>For a given <span class="math inline">\(\alpha\)</span>, find the largest <span class="math inline">\(k\)</span> such that <span class="math display">\[
+p_{(k)} \leq \frac{k}{m} \alpha,
+\]</span> denoted by <span class="math inline">\(k^*\)</span>.</li>
+<li>Reject all the null hypotheses <span class="math inline">\(H_0^{(j)}\)</span> such that <span class="math inline">\(p_j \leq p_{(k^*)}\)</span>.</li>
+<li>In the BH (1995) paper, they proved (for independent tests) that the BH procedure controls the FDR at the given level <span class="math inline">\(\alpha\)</span> by showing <span class="math display">\[
+\mbox{FDR} = {\mathbb E} [ \mbox{FDP} ] = {\mathbb E} [V/R] \leq \frac{m_0}{m} \alpha \leq \alpha.
 \]</span></li>
-<li>The <span class="math inline">\(t\)</span>-statistic measures the ratio between the deviation of sample mean <span class="math inline">\(\overline{x}\)</span> from the hypothesized value <span class="math inline">\(\mu_0\)</span> and its standard error <span class="math inline">\(s/\sqrt{n}\)</span>.</li>
-<li>Under <span class="math inline">\(H_0\)</span>, the <span class="math inline">\(t\)</span>-statistic follows a <span class="math inline">\(\mathcal{t}\)</span> distribution with degrees of freedom <span class="math inline">\(n-1\)</span>, denoted <span class="math inline">\(\mathcal{t}_{n-1}\)</span>.</li>
+<li>When the tests are dependent, the BH procedure (under certain conditions) can control the FDR at level <span class="math inline">\(\alpha\)</span> up to a factor <span class="math inline">\(\ln (m)\)</span>: <span class="math display">\[
+ \mbox{FDR} \leq \ln (m) \, \alpha.
+ \]</span></li>
+<li>The BH procedure can be extended to dependent tests cases with some modifications.</li>
 </ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubiA8LSA5XG5tdSA8LSAyXG5zaWdtYSA8LSAzXG5zdHVkZW50cyA8LSBOVUxMXG5mb3IoaSBpbiAxOjEwMDApIHtcbnggPC0gcm5vcm0obiwgbWVhbiA9IG11LCBzZCA9IHNpZ21hKVxuc3R1ZGVudCA8LSAobWVhbih4KSAtIG11KS8oc2QoeCkvc3FydChuKSlcbnN0dWRlbnRzIDwtIGMoc3R1ZGVudHMsc3R1ZGVudCkgfVxuaGlzdChzdHVkZW50cywgZnJlcT1GQUxTRSwgeWxpbSA9IGMoMCwuNSkpXG5jdXJ2ZShkdCh4LCBkZiA9IG4tMSksIGNvbCA9IDIsIGx0eSA9IDIsIGx3ZCA9IDIsIGFkZCA9IFRSVUUpXG5gYGAifQ== -->
-<pre class="r"><code>n &lt;- 9
-mu &lt;- 2
-sigma &lt;- 3
-students &lt;- NULL
-for(i in 1:1000) {
-x &lt;- rnorm(n, mean = mu, sd = sigma)
-student &lt;- (mean(x) - mu)/(sd(x)/sqrt(n))
-students &lt;- c(students,student) }
-hist(students, freq=FALSE, ylim = c(0,.5))
-curve(dt(x, df = n-1), col = 2, lty = 2, lwd = 2, add = TRUE)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-plot-begin eyJjb25kaXRpb25zIjpbXSwiaGVpZ2h0Ijo0MzIuNjMyOSwic2l6ZV9iZWhhdmlvciI6MCwid2lkdGgiOjcwMH0= -->
-<p><img src="data:image/png;base64,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" /></p>
-<!-- rnb-plot-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
+</div>
+<div id="example-bh-procedure-on-a-simulated-example" class="section level2">
+<h2>Example: BH procedure on a Simulated Example</h2>
 <ul>
-<li>We reject <span class="math inline">\(H_0\)</span> at level <span class="math inline">\(\alpha\)</span> if the absolute value of the test statistic <span class="math inline">\(t\)</span> is greater than the critical value from the <span class="math inline">\(t\)</span>-table, evaluated at <span class="math inline">\(\alpha/2\)</span> as shown below: <span class="math display">\[
- |T| &gt; \mathcal{t}_{n-1,\alpha/2}.
+<li>To illustrate how the BH procedure works, we consider the following toy example.</li>
+<li>Suppose we have a dataset of <span class="math inline">\(10\)</span> variables. We want to test if the population mean vector <span class="math inline">\(\underline{\mu}\)</span> equals to a given vector <span class="math inline">\(\underline{\mu}^0\)</span>.</li>
+<li>Null and alternative hypothesis: <span class="math display">\[
+ H_0 : \mu_1 = \mu_1^0, \ldots, \mu_{10} = \mu_{10}^0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_{10} \neq \mu_{10}^0.
+\]</span></li>
+<li>For each component in the null hypothesis, we can calculate a <span class="math inline">\(t\)</span>-statistic, and hence a p-value.</li>
+<li>Denote the p-value in ascending order as <span class="math display">\[
+ p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(m)}.
 \]</span></li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubiA8LSA5XG5tdSA8LSAyXG5zaWdtYSA8LSAzXG5zdHVkZW50cyA8LSBOVUxMXG54IDwtIHJub3JtKG4sIG1lYW4gPSBtdSwgc2QgPSBzaWdtYSlcbnN0dWRlbnQgPC0gKG1lYW4oeCkgLSBtdSkvKHNkKHgpL3NxcnQobikpXG5hbHBoYSA8LSAuMDVcbmMoYWJzKHN0dWRlbnQpLHF0KDEtYWxwaGEvMixkZj1uLTEpKVxuYGBgIn0= -->
-<pre class="r"><code>n &lt;- 9
-mu &lt;- 2
-sigma &lt;- 3
-students &lt;- NULL
-x &lt;- rnorm(n, mean = mu, sd = sigma)
-student &lt;- (mean(x) - mu)/(sd(x)/sqrt(n))
-alpha &lt;- .05
-c(abs(student),qt(1-alpha/2,df=n-1))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxwaGEgPC0gLjA1XG5tIDwtIDEwXG5wdmFscyA8LSBydW5pZihtKVxucHZhbHNfc29ydCA8LSBzb3J0KHB2YWxzKVxuaW5kZXggPC0gc2VxKDEsbSlcbmNyaXRzIDwtIChpbmRleC9tKSphbHBoYVxubnVsbHMgPC0gTlVMTFxuaiA8LSAxXG53aGlsZShqIDw9IG0pXG57XG4gIGlmKHB2YWxzX3NvcnRbal0gPD0gY3JpdHNbal0pIFxuICB7IFxuICAgIG51bGxzIDwtIGMobnVsbHMsaikgXG4gIH0gXG4gIGogPC0gaisxXG59XG5iaCA8LSAwXG5pZihsZW5ndGgobnVsbHMpPjApIHsgYmggPC0gbWF4KG51bGxzKSB9XG5iaFxuYGBgIn0= -->
+<pre class="r"><code>alpha &lt;- .05
+m &lt;- 10
+pvals &lt;- runif(m)
+pvals_sort &lt;- sort(pvals)
+index &lt;- seq(1,m)
+crits &lt;- (index/m)*alpha
+nulls &lt;- NULL
+j &lt;- 1
+while(j &lt;= m)
+{
+  if(pvals_sort[j] &lt;= crits[j]) 
+  { 
+    nulls &lt;- c(nulls,j) 
+  } 
+  j &lt;- j+1
+}
+bh &lt;- 0
+if(length(nulls)&gt;0) { bh &lt;- max(nulls) }
+bh</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMTcxNzAzMyAyLjMwNjAwNDFcbiJ9 -->
-<pre><code>[1] 0.1717033 2.3060041</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDBcbiJ9 -->
+<pre><code>[1] 0</code></pre>
 <!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcHMgPC0gcHZhbHNfc29ydCA8PSBjcml0c1xuZGF0YS5mcmFtZShpbmRleCxwdmFsc19zb3J0LGNyaXRzLGNvbXBzKVxuYGBgIn0= -->
+<pre class="r"><code>comps &lt;- pvals_sort &lt;= crits
+data.frame(index,pvals_sort,crits,comps)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6MTB9LCJyZGYiOiJINHNJQUFBQUFBQUFCZ3R5aVREbWl1QmlZR0JnWm1CbUEySldJSk9CelRuQTBNalVpSUdCaFFuSVkyUmdZZUFFMFJWQVZjSkFCZ3NROHdJeEYxaVNnWUVKckIwaUR0TFBCc1RzUU13QnhKeFFkWHdnMm42cE9Oc09JTVArOEszbC9nMUErbnJPQnlVUWZjYzE4WVFEaVA3MVV3REVmeGpBekFXaUh6ZjAxeWdBNldjTDM1V0I1TjlIZFQwSDhkKzN2TEkvQUhJcDFOeVNxb2Z1NjBScTdGdWdkTitPd05ldGNqdnNwMEQ1TThGZ2x2MDhxUGhDRUJuNDJuNEpWSDQ1bDIzQjR1dmM5aXNoNnFCdTVtSWdHcUFFRkd0ZVltNXFNWkFoQUE0VXFHQm1Ya3BxQlpURFZWQ1dtRk1jWDV4ZlZBS1RUaTdLTENtR2MvSnpDNHJSVE9Vc3lpL1hnNWtNQ242bUJvamRYT2pXSitja0ZzT3Nod2x5cFNTV0pPcWxGUUgxQTNuLzBMU3c1eGVVWk9ibkFUVXhDVU1qRVZrell4R2FBSDlwSHNnbEtickpHYVY1MmJxbVNJbUJBZW82UnFnWWpNMENzWkxwUDlRb1ZxaFJiS2w1NlpsNXFUQzM1eVFtcGVaQU9YeEFINE05ckZkUWxKa0hDeWt1b0dpeFhrbCtTU0pNSFZkeWZnNU1CT3czaG44QTcvc2w2ZGdDQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["index"],"name":[1],"type":["int"],"align":["right"]},{"label":["pvals_sort"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["crits"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["comps"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"1","2":"0.0411913","3":"0.005","4":"FALSE"},{"1":"2","2":"0.1551103","3":"0.010","4":"FALSE"},{"1":"3","2":"0.3660240","3":"0.015","4":"FALSE"},{"1":"4","2":"0.4417347","3":"0.020","4":"FALSE"},{"1":"5","2":"0.4528182","3":"0.025","4":"FALSE"},{"1":"6","2":"0.5410171","3":"0.030","4":"FALSE"},{"1":"7","2":"0.6094434","3":"0.035","4":"FALSE"},{"1":"8","2":"0.7072670","3":"0.040","4":"FALSE"},{"1":"9","2":"0.9798026","3":"0.045","4":"FALSE"},{"1":"10","2":"0.9849750","3":"0.050","4":"FALSE"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<ul>
-<li>Student’s <span class="math inline">\(\mathcal{t}\)</span> distribution was introduced in 1908 by a chemist working for the Guiness brewery in Dublin named William Sealy Gosset, who used a penname Student.</li>
-</ul>
-<div class="figure">
-<img src="data:image/jpeg;base64,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" alt="Student" />
-<p class="caption">Student</p>
 </div>
-</div>
-<div id="example-honolulu-heart-study" class="section level2">
-<h2>Example: Honolulu Heart Study</h2>
+<div id="example-visualization-of-bh-procedure" class="section level2">
+<h2>Example: Visualization of BH Procedure</h2>
 <ul>
-<li>The systolic blood pressure, the first number in your blood pressure reading, measures the pressure in your blood vessels when your heart beats.</li>
-<li>A recommended normal systolic blood pressure is <span class="math inline">\(\mu_0 = 120 \mbox{mm Hg}\)</span>.</li>
-<li>In the Honolulu Heart Study, a sample of <span class="math inline">\(n = 100\)</span> people had an average systolic blood pressure of <span class="math inline">\(130.1 \mbox{mm Hg}\)</span> with a standard deviation of <span class="math inline">\(21.21 \mbox{mm Hg}\)</span>.</li>
-<li>Is the group significantly different (with respect to systolic blood pressure) from the recommended normal value?</li>
+<li>We can visualize the BH procedure as follows. First, we plot <span class="math inline">\(p_j\)</span> versus <span class="math inline">\(j\)</span> for <span class="math inline">\(1 \leq j \lew m\)</span>. Then we draw a line through the origin with slope <span class="math inline">\(\alpha/m\)</span>.</li>
+<li>To control the FDR at level <span class="math inline">\(\alpha\)</span>, the BH procedure will reject all the hypotheses with p-values below the line.</li>
+<li>We visualize the BH procedure with <span class="math inline">\(\alpha = .20\)</span>.</li>
+<li>We generate a simulated dataset of <span class="math inline">\(100\)</span> independent normal random variables each with variance <span class="math inline">\(1\)</span>. We set the mean of first <span class="math inline">\(80\)</span> random variables to be <span class="math inline">\(0\)</span> and the remaining <span class="math inline">\(20\)</span> to be <span class="math inline">\(3\)</span>.</li>
+<li>For each random variable, we sample <span class="math inline">\(100\)</span> observations.</li>
+<li>We test the following null and alternative hypothesis: <span class="math display">\[
+ H_0 : \mu_1 = \mu_1^0, \ldots, \mu_{100} = \mu_{100}^0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_{100} \neq \mu_{100}^0.
+\]</span></li>
+<li>In an oracle scenario, we should accept the first <span class="math inline">\(80\)</span> null hypotheses and reject the last <span class="math inline">\(20\)</span> null hypotheses.</li>
+<li>To control the FDR at level <span class="math inline">\(\alpha = .20\)</span>, we would observe on average, less than <span class="math inline">\(100 \alpha\)</span> type I errors.</li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXUgPC0gMTIwXG5uIDwtIDEwMFxueGJhciA8LSAxMzAuMVxuc2RldiA8LSAyMS4yMVxuYGBgIn0= -->
-<pre class="r"><code>mu &lt;- 120
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgZGVmaW5lIEJIIGZ1bmN0aW9uXG5iaF9yZWogPC0gZnVuY3Rpb24ocCxhbHBoYSkgXG4jIyBwOiB2ZWN0b3Igb2YgcC12YWx1ZXNcbiMjIGFscGhhOiBwcmVzcGVjaWZpZWQgRkRSIGxldmVsXG57XG4gIG0gPC0gbGVuZ3RoKHApXG4gIGwgPC0gYWxwaGEqYygxOm0pL21cbiAgc29ydF9wIDwtIHNvcnQocClcbiAgc2V0IDwtIHdoaWNoKGw+PXNvcnRfcClcbiAgXG4gIGlmKCBsZW5ndGgoc2V0KT09MCl7XG4gICAgcmVqIDwtIHNldFxuICAgIHB2YWx1ZSA8LSBzZXRcbiAgfSBlbHNle1xuICAgIGltYXggPC0gbWF4KHNldClcbiAgICB0aHJlc2hvbGQgPC0gc29ydF9wW2ltYXhdXG4gICAgcmVqIDwtIHdoaWNoKHAgPD0gdGhyZXNob2xkKVxuICAgIHB2YWx1ZSA8LSBwW3Jlal1cbiAgfVxuICBvdXRsaXN0PC1saXN0KHB2YWx1ZT1wdmFsdWUsIHJlaj1yZWopXG4gIHJldHVybihvdXRsaXN0KVxufVxuXG4jIyBHZW5lcmF0ZSBzeW50aGV0aWMgZGF0YSBzZXRzXG5uIDwtIDEwMFxubSA8LSAxMDBcbm0wIDwtIDIwXG5YMSA8LSBtYXRyaXgocm5vcm0obiptMCksbixtMClcblgyIDwtIG1hdHJpeChybm9ybShuKihtLW0wKSxtZWFuPTMsMSksbixtLW0wKVxuWCA8LSBjYmluZChYMSxYMilcblxuIyMgQ2FsY3VsYXRlIG1hcmdpbmFsIHAtdmFsdWVzXG4jIE1ldGhvZCAxOiB1c2UgZm9yIGxvb3BcbnAgPC0gbnVtZXJpYyhtKVxuZm9yKGogaW4gMTptKXtcbiAgdF90ZXN0IDwtIHQudGVzdChYWyxqXSlcbiAgcFtqXSA8LSB0X3Rlc3QkcC52YWx1ZVxufVxuXG4jIE1ldGhvZCAyOiB1c2UgZnVuY3Rpb24gXCJhcHBseVwiXG5wdl90IDwtIGZ1bmN0aW9uKHgpIFxueyByZXR1cm4odC50ZXN0KHgpJHAudmFsdWUpXG59XG5wdl9tdCA8LSBhcHBseShYLCAyLCBtYXRjaC5mdW4ocHZfdCkpXG5cblxuIyMgQXBwbHkgQkggbWV0aG9kXG5hbHBoYSA8LSAwLjJcbmJoX3Rlc3QgPC0gYmhfcmVqKHAsYWxwaGEpXG5cbmluZGV4IDwtIHNlcSgxLG0pXG5jcml0cyA8LSAoaW5kZXgvbSkqYWxwaGFcbmNvbXBzIDwtIHNvcnQocCkgPD0gY3JpdHNcbmRhdGEuZnJhbWUoaW5kZXgsc29ydChwKSxjcml0cyxjb21wcylcblxuIyMgRXhhbWluZSBjb25jbHVzaW9uc1xuUiA8LSBsZW5ndGgoYmhfdGVzdCRyZWopICAgIyB0b3RhbCBudW1iZXIgb2YgcmVqZWN0aW9uc1xuViA8LSBsZW5ndGgod2hpY2goYmhfdGVzdCRyZWo8PW0wKSkgIyBudW1iZXIgb2YgZmFsc2UgcmVqZWN0aW9uc1xuZmRwIDwtIFYvbWF4KDEsUilcblxuZmRwXG5gYGAifQ== -->
+<pre class="r"><code>## define BH function
+bh_rej &lt;- function(p,alpha) 
+## p: vector of p-values
+## alpha: prespecified FDR level
+{
+  m &lt;- length(p)
+  l &lt;- alpha*c(1:m)/m
+  sort_p &lt;- sort(p)
+  set &lt;- which(l&gt;=sort_p)
+  
+  if( length(set)==0){
+    rej &lt;- set
+    pvalue &lt;- set
+  } else{
+    imax &lt;- max(set)
+    threshold &lt;- sort_p[imax]
+    rej &lt;- which(p &lt;= threshold)
+    pvalue &lt;- p[rej]
+  }
+  outlist&lt;-list(pvalue=pvalue, rej=rej)
+  return(outlist)
+}
+
+## Generate synthetic data sets
 n &lt;- 100
-xbar &lt;- 130.1
-sdev &lt;- 21.21</code></pre>
+m &lt;- 100
+m0 &lt;- 20
+X1 &lt;- matrix(rnorm(n*m0),n,m0)
+X2 &lt;- matrix(rnorm(n*(m-m0),mean=3,1),n,m-m0)
+X &lt;- cbind(X1,X2)
+
+## Calculate marginal p-values
+# Method 1: use for loop
+p &lt;- numeric(m)
+for(j in 1:m){
+  t_test &lt;- t.test(X[,j])
+  p[j] &lt;- t_test$p.value
+}
+
+# Method 2: use function &quot;apply&quot;
+pv_t &lt;- function(x) 
+{ return(t.test(x)$p.value)
+}
+pv_mt &lt;- apply(X, 2, match.fun(pv_t))
+
+
+## Apply BH method
+alpha &lt;- 0.2
+bh_test &lt;- bh_rej(p,alpha)
+
+index &lt;- seq(1,m)
+crits &lt;- (index/m)*alpha
+comps &lt;- sort(p) &lt;= crits
+data.frame(index,sort(p),crits,comps)
+
+## Examine conclusions
+R &lt;- length(bh_test$rej)   # total number of rejections
+V &lt;- length(which(bh_test$rej&lt;=m0)) # number of false rejections
+fdp &lt;- V/max(1,R)
+
+fdp</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ol style="list-style-type: decimal">
-<li>Specify the null and alternative hypotheses <span class="math display">\[
- H_0 : \mu  = 120  \quad \mbox{versu} \quad H_a: \mu \neq 120.
-\]</span></li>
-<li>Calculate the value of the test statistic: 4.7619048</li>
-<li>Set significance level <span class="math inline">\(\alpha = .05\)</span>. Calculate the critical value: 1.984217</li>
-<li>Compare the test statistic and critical value: 4.7619048 versus 1.984217. Conclusion: we reject the null hypothesis!</li>
-</ol>
-<!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBNdWx0aXZhcmlhdGUgTWVhbiBJSSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCiMgU3RhdGlzdGljYWwgSHlwb3RoZXNpcw0KDQotIEEgKnN0YXRpc3RpY2FsIGh5cG90aGVzaXMqIGlzIGFuIGFzc3VtcHRpb24gYWJvdXQgYSBwb3B1bGF0aW9uIHBhcmFtZXRlciAoZS5nLiwgdGhlIHBvcHVsYXRpb24gbWVhbiAkXG11JCkuDQotIFRoaXMgYXNzdW1wdGlvbiBtYXkgb3IgbWF5IG5vdCBiZSB0cnVlLiAqSHlwb3RoZXNpcyB0ZXN0aW5nKiByZWZlcnMgdG8gdGhlIGZvcm1hbCBwcm9jZWR1cmVzIHVzZWQgYnkgc3RhdGlzdGljaWFucyB0byBhY2NlcHQgb3IgcmVqZWN0IHN0YXRpc3RpY2FsIGh5cG90aGVzZXMuDQotIFRoZSBiZXN0IHdheSB0byBkZXRlcm1pbmUgd2hldGhlciBhIHN0YXRpc3RpY2FsIGh5cG90aGVzaXMgaXMgdHJ1ZSB3b3VsZCBiZSB0byBleGFtaW5lIHRoZSBlbnRpcmUgcG9wdWxhdGlvbiwgd2hpY2ggaXMgaW1wcmFjdGljYWwuDQotIEluc3RlYWQsIHJlc2VhcmNoZXJzIHR5cGljYWxseSBleGFtaW5lIGEgcmFuZG9tIHNhbXBsZSBmcm9tIHRoZSBwb3B1bGF0aW9uLiBJZiBzYW1wbGUgZGF0YSBhcmUgbm90IGNvbnNpc3RlbnQgd2l0aCB0aGUgYXNzdW1lZCBzdGF0aXN0aWNhbCBoeXBvdGhlc2lzLCB0aGUgaHlwb3RoZXNpcyBpcyByZWplY3RlZC4NCi0gVGhpcyBpcyBsaWtlICJwcm9vZiBieSBjb250cmFkaWN0aW9uIi4NCg0KIyMgVHdvIFR5cGVzIG9mIEh5cG90aGVzZXMNCg0KLSBUaGUgKm51bGwgaHlwb3RoZXNpcyosIGRlbm90ZWQgYnkgJEhfMCQsIGlzIHRoZSBzdGF0aXN0aWNhbCBoeXBvdGhlc2lzIHRoYXQgcmVzZWFyY2hlcnMgdHJ5IHRvIGRpc3Byb3ZlLCByZWplY3Qgb3IgbnVsbGlmeS4NCi0gVGhlIG51bGwgaHlwb3RoZXNpcyB1c3VhbGx5IGNvcnJlc3BvbmRzIHRvIHRoZSBhc3N1bXB0aW9uIHRoYXQgc2FtcGxlIG9ic2VydmF0aW9ucyByZXN1bHQgcHVyZWx5IGZyb20gY2hhbmNlLCBvciB0aGF0IGEgdHJlYXRtZW50IGhhcyBubyBlZmZlY3QsIGV0Yy4NCi0gVGhlICphbHRlcm5hdGl2ZSBoeXBvdGhlc2lzKiwgZGVub3RlZCBieSAkSF8xJCBvciAkSF9hJCwgaXMgdGhlIHN0YXRpc3RpY2FsIGh5cG90aGVzaXMgdGhhdCBpcyBjb250cmFyeSB0byB0aGUgbnVsbCBoeXBvdGhlc2lzLg0KLSBUaGUgYWx0ZXJuYXRpdmUgaHlwb3RoZXNpcyB1c3VhbGx5IGNvcnJlc3BvbmRzIHRvIHRoZSBhc3N1bXB0aW9uIHRoYXQgc2FtcGxlIG9ic2VydmF0aW9ucyBhcmUgaW5mbHVlbmNlZCBieSBzb21lIG5vbi1yYW5kb20gY2F1c2UsIG9yIHRoYXQgYSB0cmVhdG1lbnQgZG9lcyBoYXZlIGFuIGVmZmVjdCwgZXRjLg0KLSBUaGUgY2hvaWNlIG9mIG51bGwgaHlwb3RoZXNpcyBhbmQgYWx0ZXJuYXRpdmUgaHlwb3RoZXNpcyBkZXBlbmRzIG9uIHRoZSBwcm9ibGVtIHdlIHdhbnQgdG8gdGVzdCBhcyB3ZWxsIGFzIG91ciAiY29tbW9uIHNlbnNl4oCdIG9mIHRoZSBwcm9ibGVtLg0KLSBJbiBvcmRlciB0byBtYWtlIGEgbWVhbmluZ2Z1bCBkZWNpc2lvbiBhYm91dCBhIG51bGwgaHlwb3RoZXNpcyAoYWNjZXB0IG9yIHJlamVjdCksIHRoZSBudWxsIGFuZCBhbHRlcm5hdGl2ZSBoeXBvdGhlc2VzIHNob3VsZCBiZSBzdGF0ZWQgaW4gc3VjaCBhIHdheSB0aGF0IHRoZXkgYXJlIG11dHVhbGx5IGV4Y2x1c2l2ZS4gVGhhdCBpcywgaWYgb25lIGlzIHRydWUsIHRoZSBvdGhlciBtdXN0IGJlIGZhbHNlLg0KLSBJdCBpcyBwb3NzaWJsZSB0aGF0IGEgZGlmZmVyZW50IHJlc2VhcmNoZXIgbWF5IHRlc3QgYSBwcm9ibGVtIHdpdGggYSBkaWZmZXJlbnQgc2V0IG9mIGh5cG90aGVzZXMuIFNvIGl0IGlzIGltcG9ydGFudCB0byBjbGVhcmx5IHN0YXRlIHlvdXIgbnVsbCBhbmQgYWx0ZXJuYXRpdmUgaHlwb3RoZXNlcy4NCg0KIyMjIEV4YW1wbGU6IEh5cG90aGVzaXMgb24gYSBDb2luIEZsaXANCg0KLSBTdXBwb3NlIHdlIHdhbnQgdG8gZGV0ZXJtaW5lIHdoZXRoZXIgYSBjb2luIGlzIGZhaXIgYW5kIGJhbGFuY2VkLg0KLSBBIG51bGwgaHlwb3RoZXNpcyBtaWdodCBiZSB0aGF0IHRoZSBjaGFuY2Ugb2YgaGVhZHMgJHAkIGVxdWFscyB0aGUgY2hhbmNlIG9mIHRhaWxzICQxLXAkLg0KLSBBbiBhbHRlcm5hdGl2ZSBoeXBvdGhlc2lzIG1pZ2h0IGJlIHRoYXQgdGhlIGNoYW5jZSBvZiBoZWFkcyBhbmQgdGFpbHMgYXJlIHZlcnkgZGlmZmVyZW50Lg0KLSBTeW1ib2xpY2FsbHksIHRoZXNlIGh5cG90aGVzZXMgY2FuIGJlIGV4cHJlc3NlZCBhcw0KXFsNCiBIXzA6IHAgPSAuNSBccXF1YWQgSF9hOiBwIFxuZXEgLjUuDQpcXQ0KDQojIyBIeXBvdGhlc2lzIFRlc3RpbmcNCg0KLSBIeXBvdGhlc2lzIFRlc3RpbmcgaXMgYSBmb3JtYWwgcHJvY2VzcyB0byBkZXRlcm1pbmUgd2hldGhlciB0byByZWplY3QgYSBudWxsIGh5cG90aGVzaXMsIGJhc2VkIG9uIHNhbXBsZSBkYXRhLg0KLSBIeXBvdGhlc2lzIFRlc3RpbmcgdXN1YWxseSBjb25zaXN0cyBvZiB0aGUgZm9sbG93aW5nIDQgc3RlcHM6DQoNCjEuIFN0YXRlIG51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzZXMgKG11dHVhbGx5IGV4Y2x1c2l2ZSkuDQoyLiBGb3JtdWxhdGUgYW4gYW5hbHlzaXMgcGxhbi4gVGhlIHBsYW4gZGVzY3JpYmVzIGhvdyB0byB1c2Ugc2FtcGxlIGRhdGEgdG8gZXZhbHVhdGUgdGhlIG51bGwgaHlwb3RoZXNpcy4gVGhlIGV2YWx1YXRpb24gb2Z0ZW4gZm9jdXNlcyBhcm91bmQgYSBzaW5nbGUgdGVzdCBzdGF0aXN0aWMuDQozLiBBbmFseXplIHNhbXBsZSBkYXRhLiBGaW5kIHRoZSB2YWx1ZSBvZiB0aGUgdGVzdCBzdGF0aXN0aWMuDQo0LiBJbnRlcnByZXQgcmVzdWx0cy4gQXBwbHkgdGhlIGRlY2lzaW9uIHJ1bGUgZGVzY3JpYmVkIGluIHRoZSBhbmFseXNpcyBwbGFuLiBJZiB0aGUgdmFsdWUgb2YgdGhlIHRlc3Qgc3RhdGlzdGljIGlzIHVubGlrZWx5LCBiYXNlZCBvbiB0aGUgbnVsbCBoeXBvdGhlc2lzLCByZWplY3QgdGhlIG51bGwgaHlwb3RoZXNpcy4gT3RoZXJ3aXNlIHdlICJmYWlsIHRvIHJlamVjdCIgKGluZm9ybWFsbHksICJhY2NlcHQiKSB0aGUgbnVsbCBoeXBvdGhlc2lzLg0KDQojIyMgRXhhbXBsZTogQ292aWQtMTkgVGVzdGluZw0KDQotIFBvbHltZXJhc2UgQ2hhaW4gUmVhY3Rpb24gKFBDUikgaXMgYSB2aXJhbCB0ZXN0IGJhc2VkIG9uIHNhbGl2YS4gDQotIE51bGwgaHlwb3RoZXNpczogc3ViamVjdCBkb2VzIG5vdCBoYXZlIGNvcm9uYSB2aXJ1cy4NCi0gQWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogc3ViamVjdCBkb2VzIGhhdmUgdGhpcyB2aXJ1cy4NCi0gIlRoZSB0ZXN0IGRldGVjdHMgYSBwYXJ0IG9mIHRoZSB2aXJ1c+KAmXMgZ2VuZXRpYyBtYXRlcmlhbC4iIEEgaGlnaCBjb250ZW50IG9mIG1hdGVyaWFsIGluZGljYXRlcyB0aGUgbnVsbCBoeXBvdGhlc2lzIGlzIHJlamVjdGVkLg0KLSBBcmUgdGhlcmUgbXVsdGlwbGUgc2FtcGxlcyBpbiB0aGlzIHNjZW5hcmlvPw0KDQoNCiMjIERlY2lzaW9uIEVycm9ycw0KDQotIFR3byB0eXBlcyBvZiBlcnJvcnMgY2FuIHJlc3VsdCBmcm9tIGEgaHlwb3RoZXNpcyB0ZXN0OiBUeXBlIEkgYW5kIFR5cGUgSUkuDQotIEEgVHlwZSBJIGVycm9yIG9jY3VycyB3aGVuIHRoZSByZXNlYXJjaGVyIHJlamVjdHMgYSBudWxsIGh5cG90aGVzaXMgd2hlbiBpdCBpcyB0cnVlLiBDYWxsZWQgImZhbHNlIHBvc2l0aXZlIi4gVGhlIHByb2JhYmlsaXR5IG9mIGNvbW1pdHRpbmcgYSBUeXBlIEkgZXJyb3IgaXMgY2FsbGVkIHRoZSAqc2lnbmlmaWNhbmNlIGxldmVsKiwgb3IgKmFscGhhKiwgYW5kIGlzIGRlbm90ZWQgYnkgJFxhbHBoYSQuDQotIEEgVHlwZSBJSSBlcnJvciBvY2N1cnMgd2hlbiB0aGUgcmVzZWFyY2hlciBmYWlscyB0byByZWplY3QgYSBudWxsIGh5cG90aGVzaXMgd2hlbiBpdCBpcyBmYWxzZS4gIENhbGxlZCBhICJmYWxzZSBuZWdhdGl2ZSIuIFRoZSBwcm9iYWJpbGl0eSBvZiBjb21taXR0aW5nIGEgVHlwZSBJSSBlcnJvciBpcyBjYWxsZWQgKmJldGEqLCBhbmQgaXMgZGVub3RlZCBieSAkXGJldGEkLiANCi0gQ29ycmVjdCBkZWNpc2lvbnM6IHJlamVjdGluZyB0aGUgbnVsbCBoeXBvdGhlc2lzIHdoZW4gaXQgaXMgZmFsc2UsIG9yIGFjY2VwdGluZyB0aGUgbnVsbCBoeXBvdGhlc2lzIHdoZW4gaXQgaXMgdHJ1ZS4gVGhlIHByb2JhYmlsaXR5IG9mICpub3QqIGNvbW1pdHRpbmcgYSBUeXBlIElJIGVycm9yIGlzIGNhbGxlZA0KdGhlICpwb3dlciogb2YgdGhlIHRlc3QsIGFuZCBlcXVhbHMgJDEgLSBcYmV0YSQuDQoNCnwgRGVjaXNpb24gfCBOdWxsIGlzIFRydWUgIHwgTnVsbCBpcyBGYWxzZSB8DQp8LS0tfC0tLXwtLS18IA0KfCBBY2NlcHQgTnVsbCAgfCBDb3JyZWN0ICAgfCBUeXBlIElJIEVycm9yICAgfCAgDQp8IFJlamVjdCBOdWxsICB8IFR5cGUgSSBFcnJvciAgIHwgQ29ycmVjdCAgIHwgIA0KDQpcWw0KIFxhbHBoYSA9IHtcbWF0aGJiIFB9IFsgXG1ib3h7VHlwZSBJIEVycm9yfSBdDQogXHFxdWFkIFxiZXRhID0ge1xtYXRoYmIgUH0gWyBcbWJveHtUeXBlIElJIEVycm9yfSBdLg0KIFxdDQogDQojIyMgRXhhbXBsZTogSHlwb3RoZXNpcyBvbiBhIENvaW4gRmxpcA0KDQotIFN1cHBvc2Ugd2Ugd2FudCB0byBkZXRlcm1pbmUgd2hldGhlciBhIGNvaW4gaXMgZmFpciBhbmQgYmFsYW5jZWQuDQotIE51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzZXM6DQpcWw0KIEhfMDogcCA9IC41IFxxcXVhZCBIX2E6IHAgXG5lcSAuNS4NClxdDQotIFR5cGUgSSBlcnJvcjogcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMgd2hlbiB0aGUgY29pbiBpcyBmYWlyLg0KLSBUeXBlIElJIGVycm9yOiBmYWlsIHRvIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzIHdoZW4gdGhlIGNvaW4gaXMgbm90ICBmYWlyLg0KDQojIERlY2lzaW9uIFJ1bGVzIA0KDQojIyBDcml0aWNhbCBWYWx1ZSBBcHByb2FjaA0KDQotIEluIHByYWN0aWNlLCB0aGVyZSBhcmUgdHdvIGNvbW1vbiBhcHByb2FjaGVzIG9mIG1ha2luZyBkZWNpc2lvbiBydWxlcyBpbiBoeXBvdGhlc2lzIHRlc3RpbmcuDQotICoqQ3JpdGljYWwgdmFsdWUqKiBhcHByb2FjaDogY2hlY2sgd2hldGhlciBvciBub3QgdGhlIG9ic2VydmVkIHRlc3Qgc3RhdGlzdGljIGlzIG1vcmUgZXh0cmVtZSB0aGFuIHdoYXQgd291bGQgYmUgZXhwZWN0ZWQgaWYgdGhlIG51bGwgaHlwb3RoZXNpcyB3ZXJlIHRydWUuDQotIFRoYXQgaXMsIGl0IGVudGFpbHMgY29tcGFyaW5nIHRoZSBvYnNlcnZlZCB0ZXN0IHN0YXRpc3RpYyB0byBzb21lIGN1dG9mZiB2YWx1ZSwgY2FsbGVkIHRoZSAqY3JpdGljYWwgdmFsdWUqLg0KLSBJZiB0aGUgdGVzdCBzdGF0aXN0aWMgaXMgbm90IGFzIGV4dHJlbWUgYXMgdGhlIGNyaXRpY2FsIHZhbHVlLCB0aGVuIHRoZSBudWxsIGh5cG90aGVzaXMgaXMgbm90IHJlamVjdGVkLg0KLSBJZiB0aGUgdGVzdCBzdGF0aXN0aWMgaXMgbW9yZSBleHRyZW1lIHRoYW4gdGhlIGNyaXRpY2FsIHZhbHVlLCB0aGVuIHRoZSBudWxsIGlzIHJlamVjdGVkIGluIGZhdm9yIG9mIHRoZSBhbHRlcm5hdGl2ZS4NCi0gU3BlY2lmaWNhbGx5LCB0aGUgY3JpdGljYWwgdmFsdWUgYXBwcm9hY2ggY2FuIGJlIHN1bW1hcml6ZWQgYXMgZm9sbG93czoNCg0KMS4gU3BlY2lmeSB0aGUgbnVsbCBhbmQgYWx0ZXJuYXRpdmUgaHlwb3RoZXNlcy4NCjIuIFVzZSB0aGUgc2FtcGxlIGRhdGEsIGFzc3VtaW5nIHRoZSBudWxsIGh5cG90aGVzaXMgaXMgdHJ1ZSwgdG8gY2FsY3VsYXRlIHRoZSB2YWx1ZSBvZiB0aGUgdGVzdCBzdGF0aXN0aWMuDQozLiBEZXRlcm1pbmUgdGhlIGNyaXRpY2FsIHZhbHVlIGJ5IGZpbmRpbmcgdGhlIHZhbHVlIG9mIHRoZSBrbm93biBkaXN0cmlidXRpb24gb2YgdGhlIHRlc3Qgc3RhdGlzdGljIHN1Y2ggdGhhdCB0aGUgc2lnbmlmaWNhbmNlIGxldmVsICRcYWxwaGEkIGlzIHNtYWxsIChlLmcuLCAkXGFscGhhID0gNSBcJSQpLg0KNC4gQ29tcGFyZSB0aGUgdGVzdCBzdGF0aXN0aWMgdG8gdGhlIGNyaXRpY2FsIHZhbHVlLiBJZiB0aGUgdGVzdCBzdGF0aXN0aWMgaXMgbW9yZSBleHRyZW1lDQppbiB0aGUgZGlyZWN0aW9uIG9mIHRoZSBhbHRlcm5hdGl2ZSB0aGFuIHRoZSBjcml0aWNhbCB2YWx1ZSwgcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMgaW4gZmF2b3Igb2YgdGhlIGFsdGVybmF0aXZlIGh5cG90aGVzaXMuIElmIHRoZSB0ZXN0IHN0YXRpc3RpYyBpcyBsZXNzIGV4dHJlbWUgdGhhbiB0aGUgY3JpdGljYWwgdmFsdWUsIGRvIG5vdCByZWplY3QgdGhlIG51bGwgaHlwb3RoZXNpcy4NCg0KIyMgcC1WYWx1ZSBBcHByb2FjaA0KDQotICoqcC12YWx1ZSoqIGFwcHJvYWNoOiBkZWNpZGluZyAibGlrZWx54oCdIG9yICJ1bmxpa2VseeKAnSBieSBkZXRlcm1pbmluZyB0aGUgcHJvYmFiaWxpdHkgb2Ygb2JzZXJ2aW5nIGEgbW9yZSBleHRyZW1lIHRlc3Qgc3RhdGlzdGljLCBhc3N1bWluZyB0aGUgbnVsbCBoeXBvdGhlc2lzIGlzIHRydWUuDQotIFN1cHBvc2UgdGhlIHRlc3Qgc3RhdGlzdGljIGlzICRUJC4gVGhlIHAtdmFsdWUgaXMgdGhlIHByb2JhYmlsaXR5IG9mIG9ic2VydmluZyBhIHRlc3Qgc3RhdGlzdGljIHZhbHVlIGFzIGV4dHJlbWUgYXMgJFQkLCBhc3N1bWluZyB0aGUgbnVsbCBpcyB0cnVlLg0KLSBXaGVuIHRoZSBwLXZhbHVlIGlzIHNtYWxsLCBzYXkgJFxsZXEgXGFscGhhJCwgdGhlbiBpdCBpcyAidW5saWtlbHnigJ0gYW5kIHdlIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzLg0KLSBXaGVuIHRoZSBwLXZhbHVlIGlzIGxhcmdlLCBzYXkgJFxnZXEgXGFscGhhJCwgdGhlbiBpdCBpcyAibGlrZWx54oCdIGFuZCB3ZSBkbyBub3QgcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMuDQotIFNwZWNpZmljYWxseSwgdGhlIHAtdmFsdWUgYXBwcm9hY2ggY2FuIGJlIHN1bW1hcml6ZWQgYXMgZm9sbG93czoNCg0KMS4gU3BlY2lmeSB0aGUgbnVsbCBhbmQgYWx0ZXJuYXRpdmUgaHlwb3RoZXNlcy4NCjIuIFVzZSB0aGUgc2FtcGxlIGRhdGEsIGFzc3VtaW5nIHRoZSBudWxsIGh5cG90aGVzaXMgaXMgdHJ1ZSwgdG8gY2FsY3VsYXRlIHRoZSB2YWx1ZSBvZiB0aGUgdGVzdCBzdGF0aXN0aWMuDQozLiBVc2UgdGhlIGRpc3RyaWJ1dGlvbiBvZiB0aGUgdGVzdCBzdGF0aXN0aWMgdG8gY2FsY3VsYXRlIHRoZSBwLXZhbHVlOiAiSWYgdGhlIG51bGwNCmh5cG90aGVzaXMgaXMgdHJ1ZSwgd2hhdCBpcyB0aGUgcHJvYmFiaWxpdHkgb2Ygb2JzZXJ2aW5nIGEgbW9yZSBleHRyZW1lIHRlc3Qgc3RhdGlzdGljIGluIHRoZSBkaXJlY3Rpb24gb2YgdGhlIGFsdGVybmF0aXZlIGh5cG90aGVzaXMgdGhhbiB3aGF0IHdl4oCZdmUgb2JzZXJ2ZWQ/4oCdDQo0LiBTZXQgdGhlIHNpZ25pZmljYW5jZSBsZXZlbCAkXGFscGhhJCB0byBiZSBzbWFsbCAoZS5nLiwgJDAuMDEkIG9yICQwLjA1JCkuIENvbXBhcmUgdGhlIHAtdmFsdWUgdG8gJFxhbHBoYSQuIElmIHRoZSBwLXZhbHVlICRcbGVxIFxhbHBoYSQsIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzLiBJZiB0aGUgcC12YWx1ZSAkPiBcYWxwaGEkLCBkbyBub3QgcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMuDQoNCiMgSHlwb3RoZXNpcyBUZXN0aW5nIGZvciBQb3B1bGF0aW9uIE1lYW4NCg0KLSBTdXBwb3NlICR4XzEsIHhfMiwgXGxkb3RzLCB4X24kIGFyZSBpbmRlcGVuZGVudGx5IHNhbXBsZWQgZnJvbSBhIG5vcm1hbCBkaXN0cmlidXRpb24gd2l0aCB1bmtub3duIHBvcHVsYXRpb24gbWVhbiAkXG11JCBhbmQgdmFyaWFuY2UgJFxzaWdtYV4yJC4NCi0gV2Ugd291bGQgbGlrZSB0byB0ZXN0IHdoZXRoZXIgb3Igbm90IHRoZSB1bmtub3duIHBvcHVsYXRpb24gbWVhbiAkXG11JCBlcXVhbHMgYSBzcGVjaWZpYyB2YWx1ZSwgc2F5ICRcbXVfMCQuICBFLmcuLCAkXG11XzAgPSA1JC4NCi0gSXQgaXMgbmF0dXJhbCB0byBjb25zaWRlciB0aGUgZm9sbG93aW5nIG51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzZXM6DQpcWw0KIEhfMDogXG11ID0gXG11XzAgXHF1YWQgXG1ib3h7dmVyc3VzfSBccXVhZCBIX2E6IFxtdSBcbmVxIFxtdV8wLg0KXF0NCiANCiMjIFN0dWRlbnTigJlzICR0JC10ZXN0DQoNCi0gQSB0ZXN0IHN0YXRpc3RpYyBuYW1lZCB0aGUgJHQkLXN0YXRpc3RpYyBjYW4gYmUgdXNlZCB0byBhZGRyZXNzIHRoaXMgaHlwb3RoZXNpcyB0ZXN0aW5nIHByb2JsZW0gd2hlbiB0aGUgcG9wdWxhdGlvbiBzdGFuZGFyZCBkZXZpYXRpb24gaXMgdW5rbm93bi4NClxbDQogIFQgPSBcZnJhY3sgXG92ZXJsaW5le3h9IC0gXG11XzAgfXsgcy8gXHNxcnR7bn19IFxzaW0gXG1hdGhjYWx7dH1fe24tMX0uDQpcXQ0KLSBUaGUgJHQkLXN0YXRpc3RpYyBtZWFzdXJlcyB0aGUgcmF0aW8gYmV0d2VlbiB0aGUgZGV2aWF0aW9uIG9mIHNhbXBsZSBtZWFuICRcb3ZlcmxpbmV7eH0kIA0KZnJvbSB0aGUgaHlwb3RoZXNpemVkIHZhbHVlICRcbXVfMCQgYW5kIGl0cyBzdGFuZGFyZCBlcnJvciAkcy9cc3FydHtufSQuDQotIFVuZGVyICRIXzAkLCB0aGUgJHQkLXN0YXRpc3RpYyBmb2xsb3dzIGEgJFxtYXRoY2Fse3R9JCBkaXN0cmlidXRpb24gd2l0aCBkZWdyZWVzIG9mIGZyZWVkb20NCiRuLTEkLCBkZW5vdGVkICRcbWF0aGNhbHt0fV97bi0xfSQuIA0KDQpgYGB7cn0NCm4gPC0gOQ0KbXUgPC0gMg0Kc2lnbWEgPC0gMw0Kc3R1ZGVudHMgPC0gTlVMTA0KZm9yKGkgaW4gMToxMDAwKSB7DQp4IDwtIHJub3JtKG4sIG1lYW4gPSBtdSwgc2QgPSBzaWdtYSkNCnN0dWRlbnQgPC0gKG1lYW4oeCkgLSBtdSkvKHNkKHgpL3NxcnQobikpDQpzdHVkZW50cyA8LSBjKHN0dWRlbnRzLHN0dWRlbnQpIH0NCmhpc3Qoc3R1ZGVudHMsIGZyZXE9RkFMU0UsIHlsaW0gPSBjKDAsLjUpKQ0KY3VydmUoZHQoeCwgZGYgPSBuLTEpLCBjb2wgPSAyLCBsdHkgPSAyLCBsd2QgPSAyLCBhZGQgPSBUUlVFKQ0KYGBgDQoNCi0gV2UgcmVqZWN0ICRIXzAkIGF0IGxldmVsICRcYWxwaGEkIGlmIHRoZSBhYnNvbHV0ZSB2YWx1ZSBvZiB0aGUgdGVzdCBzdGF0aXN0aWMgJHQkIGlzDQpncmVhdGVyIHRoYW4gdGhlIGNyaXRpY2FsIHZhbHVlIGZyb20gdGhlICR0JC10YWJsZSwgZXZhbHVhdGVkIGF0ICRcYWxwaGEvMiQgYXMgc2hvd24gYmVsb3c6DQpcWw0KIHxUfCA+IFxtYXRoY2Fse3R9X3tuLTEsXGFscGhhLzJ9Lg0KXF0NCg0KYGBge3J9DQpuIDwtIDkNCm11IDwtIDINCnNpZ21hIDwtIDMNCnN0dWRlbnRzIDwtIE5VTEwNCnggPC0gcm5vcm0obiwgbWVhbiA9IG11LCBzZCA9IHNpZ21hKQ0Kc3R1ZGVudCA8LSAobWVhbih4KSAtIG11KS8oc2QoeCkvc3FydChuKSkNCmFscGhhIDwtIC4wNQ0KYyhhYnMoc3R1ZGVudCkscXQoMS1hbHBoYS8yLGRmPW4tMSkpDQpgYGANCg0KLSBTdHVkZW504oCZcyAkXG1hdGhjYWx7dH0kIGRpc3RyaWJ1dGlvbiB3YXMgaW50cm9kdWNlZCBpbiAxOTA4IGJ5IGEgY2hlbWlzdCB3b3JraW5nIGZvciB0aGUgR3VpbmVzcyBicmV3ZXJ5IGluIER1YmxpbiBuYW1lZCBXaWxsaWFtIFNlYWx5IEdvc3NldCwgd2hvIHVzZWQgYSBwZW5uYW1lIFN0dWRlbnQuDQoNCiFbU3R1ZGVudF0oaW1hZ2VzL3dpbGxpYW1fU2VhbHlfR29zc2V0LmpwZykNCg0KDQojIyBFeGFtcGxlOiBIb25vbHVsdSBIZWFydCBTdHVkeQ0KDQotIFRoZSBzeXN0b2xpYyBibG9vZCBwcmVzc3VyZSwgdGhlIGZpcnN0IG51bWJlciBpbiB5b3VyIGJsb29kIHByZXNzdXJlIHJlYWRpbmcsIG1lYXN1cmVzIHRoZSBwcmVzc3VyZSBpbiB5b3VyIGJsb29kIHZlc3NlbHMgd2hlbiB5b3VyIGhlYXJ0IGJlYXRzLg0KLSBBIHJlY29tbWVuZGVkIG5vcm1hbCBzeXN0b2xpYyBibG9vZCBwcmVzc3VyZSBpcyAkXG11XzAgPSAxMjAgXG1ib3h7bW0gSGd9JC4NCi0gSW4gdGhlIEhvbm9sdWx1IEhlYXJ0IFN0dWR5LCBhIHNhbXBsZSBvZiAkbiA9IDEwMCQgcGVvcGxlIGhhZCBhbiBhdmVyYWdlIHN5c3RvbGljIGJsb29kIHByZXNzdXJlIG9mICQxMzAuMSBcbWJveHttbSBIZ30kIHdpdGggYSBzdGFuZGFyZCBkZXZpYXRpb24gb2YgJDIxLjIxIFxtYm94e21tIEhnfSQuDQotIElzIHRoZSBncm91cCBzaWduaWZpY2FudGx5IGRpZmZlcmVudCAod2l0aCByZXNwZWN0IHRvIHN5c3RvbGljIGJsb29kIHByZXNzdXJlKSBmcm9tIHRoZSByZWNvbW1lbmRlZCBub3JtYWwgdmFsdWU/DQoNCmBgYHtyfQ0KbXUgPC0gMTIwDQpuIDwtIDEwMA0KeGJhciA8LSAxMzAuMQ0Kc2RldiA8LSAyMS4yMQ0KYGBgDQoNCjEuIFNwZWNpZnkgdGhlIG51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzZXMNClxbDQogSF8wIDogXG11ICA9IDEyMCAgXHF1YWQgXG1ib3h7dmVyc3V9IFxxdWFkIEhfYTogXG11IFxuZXEgMTIwLg0KXF0gDQoyLiBDYWxjdWxhdGUgdGhlIHZhbHVlIG9mIHRoZSB0ZXN0IHN0YXRpc3RpYzoNCmByIHQgPC0gKHhiYXIgLSBtdSkvKHNkZXYvc3FydChuKSk7IHRgDQozLiBTZXQgc2lnbmlmaWNhbmNlIGxldmVsICRcYWxwaGEgPSAuMDUkLiBDYWxjdWxhdGUgdGhlIGNyaXRpY2FsIHZhbHVlOg0KYHIgYWxwaGEgPC0gLjA1OyBjcml0IDwtIHF0KDEtYWxwaGEvMixkZj1uLTEpOyBjcml0YA0KNC4gQ29tcGFyZSB0aGUgdGVzdCBzdGF0aXN0aWMgYW5kIGNyaXRpY2FsIHZhbHVlOg0KYHIgdGAgdmVyc3VzIGByIGNyaXRgLg0KQ29uY2x1c2lvbjogd2UgcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMhDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hdGggMTg5OiBNdWx0aXBsZSBUZXN0aW5nIEkiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIA0KIyBIeXBvdGhlc2lzIFRlc3RpbmcgZm9yIE11bHRpdmFyaWF0ZSBNZWFuDQoNCi0gU3VwcG9zZSAkXHVuZGVybGluZXt4fV8xLCBcdW5kZXJsaW5le3h9XzIsIFxsZG90cywgXHVuZGVybGluZXt4fV9uJCBhcmUgaW5kZXBlbmRlbnRseSBzYW1wbGVkIGZyb20gYSBtdWx0aXZhcmlhdGUgbm9ybWFsIGRpc3RyaWJ1dGlvbiB3aXRoIG1lYW4gJFx1bmRlcmxpbmV7XG11fSQgYW5kIGNvdmFyaWFuY2UgbWF0cml4ICR7XG1hdGhiZiBcU2lnbWF9JC4NCi0gV2Ugd291bGQgbGlrZSB0byB0ZXN0IHdoZXRoZXIgdGhlIHVua25vd24gcG9wdWxhdGlvbiBtZWFuIHZlY3RvciAgJFx1bmRlcmxpbmV7XG11fSQgZXF1YWxzIGEgc3BlY2lmaWMgdmVjdG9yLCBzYXkgICRcdW5kZXJsaW5le1xtdX1fMCQuDQotIEl0IGlzIG5hdHVyYWwgdG8gY29uc2lkZXIgdGhlIGZvbGxvd2luZyBudWxsIGFuZCBhbHRlcm5hdGl2ZSBoeXBvdGhlc2VzOg0KXFsNCiBIXzA6ICAgXHVuZGVybGluZXtcbXV9ID0gIFx1bmRlcmxpbmV7XG11fV8wIFxxdWFkIFxtYm94e3ZlcnN1c30gXHF1YWQNCiAgIEhfYTogICBcdW5kZXJsaW5le1xtdX0gXG5lcSAgXHVuZGVybGluZXtcbXV9XzAuDQogIFxdDQotIFdlIGNhbiBhbHNvIGV4cHJlc3MgdGhlIG51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzZXMgYXMNCiBcWw0KIEhfMDogICBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSBcbXVfMSBcXCBcbXVfMiBcXCBcdmRvdHMgXFwgXG11X3AgXGVuZHthcnJheX0gXHJpZ2h0XQ0KPSBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSBcbXVfMV4wIFxcIFxtdV8yXjAgXFwgXHZkb3RzIFxcIFxtdV9wXjAgXGVuZHthcnJheX0gXHJpZ2h0XQ0KICBccXVhZCBcbWJveHt2ZXJzdXN9IFxxdWFkDQogICBIX2E6ICBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSBcbXVfMSBcXCBcbXVfMiBcXCBcdmRvdHMgXFwgXG11X3AgXGVuZHthcnJheX0gXHJpZ2h0XQ0KXG5lcSBcbGVmdFsgXGJlZ2lue2FycmF5fXtjfSBcbXVfMV4wIFxcIFxtdV8yXjAgXFwgXHZkb3RzIFxcIFxtdV9wXjAgXGVuZHthcnJheX0gXHJpZ2h0XS4NCiAgXF0NCkVxdWl2YWxlbnRseSwNClxbDQogSF8wIDogXG11XzEgPSBcbXVfMV4wLCBcbGRvdHMsIFxtdV9wID0gXG11X3BeMA0KIFxxdWFkIFxtYm94e3ZlcnN1c30gXHF1YWQgIEhfYSA6IFxtdV8xIFxuZXEgXG11XzFeMCwgXCwgXG1ib3h7T1J9IFxsZG90cyBcbWJveHtPUn0sIFwsIFxtdV9wIFxuZXEgXG11X3BeMC4NClxdDQotIFRlc3RpbmcgYSBtZWFuIHZlY3RvciBpcyBlcXVpdmFsZW50IHRvIHRlc3RpbmcgbXVsdGlwbGUgbWVhbnMgdG9nZXRoZXIhDQotIE5vdGUgdGhhdCB0aGUgbnVsbCBzYXlzIHRoYXQgYWxsIHRoZSBtZWFucyBlcXVhbCB0aGUgbnVsbCB2YWx1ZXMsIHdoaWxlIHRoZSBhbHRlcm5hdGl2ZSBzYXlzIHRoYXQgYXQgbGVhc3Qgb25lIG1lYW4gZG9lcyBub3QgZXF1YWwgdGhlIG51bGwgdmFsdWUuDQoNCiMjIEEgTmFpdmUgU2NoZW1lIHRvIFRlc3QgTXVsdGl2YXJpYXRlIE1lYW4NCg0KLSBGb2xsb3dpbmcgdGhlIHVuaXZhcmlhdGUgY2FzZSwgYSBuYWl2ZSBzY2hlbWUgZm9yIHRlc3RpbmcgYSBtdWx0aXZhcmlhdGUgaHlwb3RoZXNpcyBpcyB0byBjb21wdXRlIHRoZSAkdCQtc3RhdGlzdGljIGZvciBlYWNoIHVuaXZhcmlhdGUgbWVhbi4NCi0gRGVmaW5lICRUX2okLCB0aGUgJHQkLXN0YXRpc3RpYyBmb3IgdGhlICRqJHRoIHZhcmlhYmxlLCBhcw0KXFsNCiAgVF9qID0gXGZyYWN7IFxvdmVybGluZXt4fV9qIC0gXG11X2peMCB9eyBzX2ovIFxzcXJ0e259fSBcc2ltIFxtYXRoY2Fse3R9X3tuLTF9DQpcXQ0KIGZvciAkMSBcbGVxIGogXGxlcSBwJC4NCi0gR2l2ZW4gYSBzaWduaWZpY2FuY2UgbGV2ZWwgJFxhbHBoYSQsIHdlIHJlamVjdCAkSF8wOiBcdW5kZXJsaW5le1xtdX0gPSBcdW5kZXJsaW5le1xtdX1fMCQgaWYgDQokfFRfanwgPiBcbWF0aGNhbHt0fV97bi0xLFxhbHBoYS8yfSQgZm9yIGF0IGxlYXN0IG9uZSAkaiBcaW4gXHsgMSwgMiwgXGxkb3RzLCBwIFx9JC4NCg0KIyMgUHJvYmxlbSB3aXRoIHRoZSBOYWl2ZSBTY2hlbWUNCg0KLSBUaGUgYmlnZ2VzdCBpc3N1ZSB3aXRoIHRoaXMgbmFpdmUgc2NoZW1lIGlzIHRoYXQgaXQgZG9lcyBub3QgY29udHJvbCB0aGUgKmZhbWlseS13aXNlIGVycm9yIHJhdGUqLg0KLSBUaGUgZmFtaWx5LXdpc2UgZXJyb3IgcmF0ZSBpcyB0aGUgcHJvYmFiaWxpdHkgb2YgcmVqZWN0aW5nIGF0IGxlYXN0IG9uZSBvZiB0aGUgbnVsbCBoeXBvdGhlc2VzICRIXzBeeyhqKX06IFxtdV9qID0gXG11X2peMCQgd2hlbiBhbGwgbnVsbHMgYXJlIHRydWUuDQotIElmIHRoZSAkcCQgdGVzdCBzdGF0aXN0aWNzIGFyZSBpbmRlcGVuZGVudCwgcmVqZWN0aW5nIGVhY2ggbnVsbCBoeXBvdGhlc2lzIGF0IHNpZ25pZmljYW5jZSBsZXZlbCAkXGFscGhhJCB3aWxsIHJlc3VsdCBpbiBhIGZhbWlseS13aXNlIGVycm9yIHJhdGUNClxbDQpcbWJveHtGV0VSfSA9IDEgLSB7KDEgLSBcYWxwaGEpfV5wIFxnZXEgXGFscGhhDQpcXQ0KLSBUaGUgcHJvYmFiaWxpdHkgb2YgZmFsc2VseSByZWplY3RpbmcgYXQgbGVhc3Qgb25lIG51bGwgaHlwb3RoZXNpcyBpcyBtdWNoIGhpZ2hlciB0aGFuICRcYWxwaGEkIGlmIHRoZSBudW1iZXIgb2YgdmFyaWFibGVzICRwJCBpcyBsYXJnZS4NCg0KYGBge3J9DQphbHBoYSA8LSAuMDUNCiMgdHJ5IGRpZmZlcmVudCB2YWx1ZXMgb2YgcDogMSwgMywgMTAsIDEwMA0KcCA8LSAxDQpmd2VyIDwtIDEgLSAoMS1hbHBoYSlecA0KZndlcg0KYGBgDQoNCmBgYHtyfQ0KYWxwaGEgPC0gLjA1DQpwIDwtIHNlcSgxLDEwMCkNCmZ3ZXIgPC0gMSAtICgxLWFscGhhKV5wDQpwbG90LnRzKGZ3ZXIpDQpgYGANCg0KIyBGV0VSIENvcnJlY3Rpb24NCg0KLSBUaGUgbmFpdmUgc2NoZW1lIGZhaWxzIHRvIGNvbnRyb2wgdGhlIGZhbWlseS13aXNlIGVycm9yIHJhdGUgYW5kIGhlbmNlIHlpZWxkcyBhIGxpYmVyYWwgdGVzdC4gVGhhdCBpcywgd2UgdGVuZCB0byByZWplY3QgbnVsbCBoeXBvdGhlc2VzIG1vcmUgb2Z0ZW4gdGhhbiB3ZSBzaG91bGQuDQotIEhpZ2ggZmFtaWx5LXdpc2UgZXJyb3IgcmF0ZSBtZWFucyB3ZSBoYXZlIGEgaGlnaCBjaGFuY2UgdG8gY29tbWl0IGEgVHlwZSBJIGVycm9yOiByZWplY3QgYXQgbGVhc3Qgb25lIG51bGwgaHlwb3RoZXNpcyB3aGVuIHRoZXkgYXJlIGFsbCB0cnVlLg0KLSBUbyBjb250cm9sIHRoZSBmYW1pbHktd2lzZSBlcnJvciByYXRlLCB3ZSBuZWVkIHRvIGNvcnJlY3QgdGhlIG5haXZlIHNjaGVtZS4gSWYgd2Ugd2FudCB0byBjb250cm9sIHRoZSBmYW1pbHktd2lzZSBlcnJvciByYXRlIGF0IGxldmVsICRcYWxwaGEkLCB3ZSBzaG91bGQgc2V0IHRoZSBzaWduaWZpY2FuY2UgbGV2ZWwgZm9yIGVhY2ggaW5kaXZpZHVhbCB0ZXN0IHNtYWxsZXIgdGhhbiAkXGFscGhhJC4NCi0gTWFueSBwcm9jZWR1cmVzIGhhdmUgYmVlbiBkZXZlbG9wZWQgdG8gY29udHJvbCB0aGUgZmFtaWx5d2lzZSBlcnJvciByYXRlLiANCi0gVHdvIGdlbmVyYWwgdHlwZXMgb2YgRldFUiBjb3JyZWN0aW9uczoNCg0KMS4gU2luZ2xlIHN0ZXA6IGVxdWl2YWxlbnQgYWRqdXN0bWVudCBtYWRlIHRvIGVhY2ggcC12YWx1ZS4gKkJvbmZlcnJvbmkgQ29ycmVjdGlvbioNCjIuIFNlcXVlbnRpYWw6IGFkYXB0aXZlIGFkanVzdG1lbnQgbWFkZSB0byBlYWNoIHAtdmFsdWUuICpIb2xt4oCZcyBNZXRob2QqDQoNCiMjIEJvbmZlcnJvbmkgQ29ycmVjdGlvbg0KDQotIEEgc2ltcGxlIHlldCBwb3B1bGFyIEZXRVIgY29ycmVjdGlvbiBpcyB0aGUgQm9uZmVycm9uaSBDb3JyZWN0aW9uLCB3aGljaCBpcyBuYW1lZCBhZnRlciBJdGFsaWFuIG1hdGhlbWF0aWNpYW4gQ2FybG8gRW1pbGlvIEJvbmZlcnJvbmkgZm9yIGl0cyB1c2Ugb2YgQm9uZmVycm9uaSBpbmVxdWFsaXRpZXMuDQotIFN1cHBvc2Ugd2UgaGF2ZSAkbSQgbnVsbCBoeXBvdGhlc2VzIChlLmcuIGEgbWVhbiB2ZWN0b3Igb2YgJG0kIHZhcmlhYmxlcykuIERlbm90ZSAkcF8xLCBcbGRvdHMsIHBfbSQgdGhlIGNvcnJlc3BvbmRpbmcgcC12YWx1ZXMuDQotIFRvIGNvbnRyb2wgdGhlIEZXRVIgYXQgbGV2ZWwgJFxhbHBoYSQsIHRoZSBCb25mZXJyb25pIENvcnJlY3Rpb24gc2V0cyB0aGUgc2lnbmlmaWNhbmNlIGxldmVsIGZvciBlYWNoIGluZGl2aWR1YWwgdGVzdCBhdCAkXGFscGhhL20kIGluc3RlYWQgb2YgJFxhbHBoYSQuDQotIFRoZSBpbnR1aXRpb24gb2YgQm9uZmVycm9uaSBDb3JyZWN0aW9uIGlzIGFzIGZvbGxvd3M6DQpcWw0KIFxtYm94e0ZXRVJ9ID0gXG1hdGhiYntQfSBcbGVmdFsgXGN1cF97aT0xfV5tIFx7IHBfaSBcbGVxIFxhbHBoYS9tIFx9IFxyaWdodF0NCiAgXGxlcSBcc3VtX3tpPTF9Xm0gXG1hdGhiYntQfSBcbGVmdFsgcF9pIFxsZXEgXGFscGhhL20gXHJpZ2h0XQ0KICBcbGVxIG0gKFxhbHBoYS9tKSA9IFxhbHBoYS4NClxdDQotIERlcml2YXRpb24gdXNlcyBmYWN0IHRoYXQgYSAkcCQtdmFsdWUgKHdoZW4gbnVsbCBpcyB0cnVlKSBpcyB1bmlmb3JtbHkgZGlzdHJpYnV0ZWQgb24gJCgwLDEpJC4gIChXaHk/ICBQcm9iYWJpbGl0eSBJbnRlZ3JhbCBUcmFuc2Zvcm0uKSAgRG9lcyBub3QgYXNzdW1lIGluZGVwZW5kZW5jZSBvZiB0ZXN0cy4NCi0gRm9yIGluZGVwZW5kZW50IHRlc3RzLCB0aGUgQm9uZmVycm9uaSBDb3JyZWN0aW9uIHlpZWxkcyBhIGZhbWlseS13aXNlIGVycm9yIHJhdGUgb2YgYXBwcm94aW1hdGVseSAkXGFscGhhJDoNClxbDQogXG1ib3h7RldFUn0gPSBcbWF0aGJie1B9IFxsZWZ0WyBcY3VwX3tpPTF9Xm0gXHsgcF9pIFxsZXEgXGFscGhhL20gXH0gXHJpZ2h0XQ0KICA9IDEgLSBcbWF0aGJie1B9IFxsZWZ0WyBcY2FwX3tpPTF9Xm0gXHsgcF9pID4gXGFscGhhL20gXH0gXHJpZ2h0XQ0KICA9IDEgLSB7KDEgLSBcYWxwaGEvbSl9Xm0gXGFwcHJveCAxIC0gZV57LVxhbHBoYX0sDQpcXQ0KIGZvciAkXGFscGhhJCBzbWFsbC4NCg0KYGBge3J9DQphbHBoYSA8LSAuMDUNCm0gPC0gc2VxKDAsMTAwLDUpDQpmd2VyX25haXZlIDwtIDEgLSAoMS1hbHBoYSlebQ0KZndlcl9ib24gPC0gMSAtICgxIC0gYWxwaGEvbSlebQ0KY2JpbmQobSxjYmluZChmd2VyX25haXZlLGZ3ZXJfYm9uKSkNCnBsb3QudHMoZndlcl9uYWl2ZSkNCmxpbmVzKGZ3ZXJfYm9uLGNvbD0yKQ0KYGBgDQogDQojIyMgUHJvcyBhbmQgQ29ucyBvZiBCb25mZXJyb25pIENvcnJlY3Rpb24NCg0KIyMjIyBQcm9zDQoNCi0gQ29udHJvbCBGV0VSIGF0IGEgZ2l2ZW4gbGV2ZWwgJFxhbHBoYSQNCi0gUHJvdGVjdHMgVHlwZSBJIGVycm9ycw0KLSBFYXN5IHRvIGltcGxlbWVudA0KDQojIyMjIENvbnMNCg0KLSBOZWVkIHRoZSBhc3N1bXB0aW9uIG9mIGluZGVwZW5kZW5jZSB0byBnZXQgRldFUiBhcHByb3hpbWF0ZWx5ICRcYWxwaGEkDQotIENvbnNlcnZhdGl2ZSB3aGVuIHRoZXJlIGlzIHN0cm9uZyBkZXBlbmRlbmNlIGFtb25nIHZhcmlhYmxlcw0KLSBWdWxuZXJhYmxlIHRvIFR5cGUgSUkgZXJyb3JzIChmYWlsaW5nIHRvIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzIHdoZW4geW91IHNob3VsZCkNCg0KIyMgSG9sbSdzIE1ldGhvZA0KDQotIEhvbG3igJlzIE1ldGhvZCBpcyBhIHNpbXBsZSBzZXF1ZW50aWFsIG1ldGhvZCB0byBjb3JyZWN0IHRoZSBGV0VSLg0KLSBTdXBwb3NlIHdlIGhhdmUgJG0kIG51bGwgaHlwb3RoZXNlcyAoZS5nLiBhIG1lYW4gdmVjdG9yIG9mICRtJCB2YXJpYWJsZXMpLiBEZW5vdGUgJHBfeygxKX0sIFxsZG90cywgcF97KG0pfSQgdGhlIGNvcnJlc3BvbmRpbmcgcC12YWx1ZXMgaW4gYXNjZW5kaW5nIG9yZGVyOg0KXFsNCiBwX3soMSl9IFxsZXEgcF97KDIpfSBcbGVxIFxsZG90cyBcbGVxIHBfeyhtKX0uDQpcXQ0KLSBUbyBjb250cm9sIHRoZSBGV0VSIGF0IGxldmVsICRcYWxwaGEkLCB3ZSBhZGp1c3QgdGhlIHNpZ25pZmljYW5jZSBsZXZlbCBmb3IgdGhlIGh5cG90aGVzaXMgdGVzdGluZyB3aXRoIHRoZSAkaiR0aCBzbWFsbGVzdCBwLXZhbHVlICAkcF97KGopfSQgYnkgDQogJFxhbHBoYV4qID0gXGFscGhhIC8gKG0gLSBqICsxKSQuDQotIFByb2NlZWQgZnJvbSAkaiA9IDEsIFxsZG90cywgbSQsIG1ha2luZyBjb21wYXJpc29ucywgYW5kICoqZXhpdCoqIGFzIHNvb24gYXMgdGhlcmUgaXMgYSBmYWlsdXJlIHRvIHJlamVjdC4gDQotIEZvciBleGFtcGxlLCB3aGVuICRtID0gMTAwJCwgd2UgZmluZCAkayQgc3VjaCB0aGF0IA0KXFsNCiBwX3soMSkgfSBcbGVxIFxhbHBoYS8xMDAsIHBfeygyKX0gXGxlcSBcYWxwaGEvOTksIFxsZG90cywgcF97KGspfSBcbGVxIFxhbHBoYS8oMTAxLWspLA0KICAgcF97KGsrMSl9ID4gXGFscGhhLygxMDAtayksDQpcXQ0KIGFuZCBjb25jbHVkZSB0aGF0IHRoZSAkayQgaHlwb3RoZXNlcyAgY29ycmVzcG9uZGluZyB0byAkcF97KDEpfSwgXGxkb3RzLCBwX3soayl9JCBhcmUgcmVqZWN0ZWQuDQotIEhvbG3igJlzIE1ldGhvZCBkb3duc2NhbGVzIHRoZSBzaWduaWZpY2FuY2UgbGV2ZWwgJFxhbHBoYSQgKG9yIHVwc2NhbGVzIHRoZSBwLXZhbHVlKSBieSBhIGZhY3RvciBkZXBlbmRpbmcgb24gdGhlIG9yZGVyIG9mIHRoZSBwLXZhbHVlLg0KLSBUaGUgQm9uZmVycm9uaSBjb3JyZWN0aW9uIHJlamVjdHMgbnVsbCBoeXBvdGhlc2VzIHdpdGggcC12YWx1ZSBsZXNzIHRoYW4gJFxhbHBoYS9tJCwgaW4gb3JkZXIgdG8gY29udHJvbCBGV0VSIGF0ICRcYWxwaGEkLiBUaGUgY29zdCBvZiB0aGlzIHByb3RlY3Rpb24gYWdhaW5zdCB0eXBlIEkgZXJyb3JzIGlzIGFuIGluY3JlYXNlZCByaXNrIG9mIGFjY2VwdGluZyBvbmUgb3IgbW9yZSBmYWxzZSBudWxsIGh5cG90aGVzZXMgKGkuZS4sIG9mIGNvbW1pdHRpbmcgb25lIG9yIG1vcmUgdHlwZSBJSSBlcnJvcnMpLg0KLSBIb2xt4oCZcyBtZXRob2QgYWxzbyBjb250cm9scyB0aGUgbWF4aW11bSBmYW1pbHktd2lzZSBlcnJvciByYXRlIGF0ICRcYWxwaGEkLCBidXQgd2l0aCBhIGxvd2VyIGluY3JlYXNlIG9mIHR5cGUgSUkgZXJyb3Igcmlzay4NCg0KYGBge3J9DQphbHBoYSA8LSAuMDUNCm0gPC0gMTANCnB2YWxzIDwtIHJ1bmlmKG0pDQpwdmFsc19zb3J0IDwtIHNvcnQocHZhbHMpDQppbmRleCA8LSBzZXEoMSxtKQ0KY3JpdHMgPC0gYWxwaGEvKG0gLSBpbmRleCArMSkNCm51bGxzIDwtIE5VTEwNCmogPC0gMQ0Kd2hpbGUoaiA8PSBtKQ0Kew0KICBpZihwdmFsc19zb3J0W2pdIDw9IGNyaXRzW2pdKSANCiAgeyANCiAgICBudWxscyA8LSBjKG51bGxzLGopIA0KICB9IGVsc2UgeyBqIDwtIG0rMSB9DQogIGogPC0gaisxDQp9DQpsZW5ndGgobnVsbHMpDQpjb21wcyA8LSBwdmFsc19zb3J0IDw9IGNyaXRzDQpkYXRhLmZyYW1lKGluZGV4LHB2YWxzX3NvcnQsY3JpdHMsY29tcHMpDQpgYGANCg0KIyMjIFByb3MgYW5kIENvbnMgb2YgSG9sbSdzIE1ldGhvZA0KDQojIyMjIFByb3MNCg0KLSBTZXF1ZW50aWFsIGFkanVzdG1lbnQNCi0gQWRhcHRpdmUgc2lnbmlmaWNhbmNlIGxldmVsDQotIFVuaWZvcm1seSBoaWdoZXIgcG93ZXIgKGxlc3MgdHlwZSBJSSBlcnJvcikNCg0KIyMjIyBDb25zDQoNCi0gSGFyZCB0byBkZWZpbmUgY29uZmlkZW5jZSBpbnRlcnZhbA0KLSBObyBndWFyYW50ZWUgb24gdHlwZSBJSSBlcnJvciBjb250cm9sIChiZXR0ZXIgdGhhbiBCb25mZXJyb25pIHRob3VnaCkNCg0KIyMgSXNzdWVzIGFib3V0IENvbnRyb2xsaW5nIEZXRVINCg0KLSBGV0VSIGlzIGFwcHJvcHJpYXRlIHdoZW4geW91IHdhbnQgdG8gZ3VhcmQgYWdhaW5zdCAqYW55KiB0eXBlIEkgZXJyb3IuDQotIFdoZW4gd2UgY29udHJvbCB0aGUgRldFUiwgdGhlIHRlc3RpbmcgcHJvY2VkdXJlIG5lZWRzICJ2ZXJ5IHN0cm9uZyBldmlkZW5jZeKAnSB0byByZWplY3QgYSBudWxsIGh5cG90aGVzaXMuIEFzIGEgcmVzdWx0LCB0aGUgdGVzdGluZyBwcm9jZWR1cmUgbWF5IGZhaWwgdG8gcmVqZWN0IHNvbWUgaHlwb3RoZXNpcyB3aGVuIHRoZSBudWxsIGh5cG90aGVzaXMgaXMgZmFsc2UuDQotIFdlIGdhaW4gYSBzdHJpY3QgY29udHJvbCBvZiB0eXBlIEkgZXJyb3IgYXQgYSBwcmljZSBvZiBsb29zZSBjb250cm9sIG9mIHR5cGUgSUkgZXJyb3IuDQotIEZXRVIgY29udHJvbCBpcyBpbXBvcnRhbnQgd2hlbiB0aGUgY29zdCBvZiB0eXBlIEkgZXJyb3IgaXMgbXVjaCBoaWdoZXIgdGhhbiB0eXBlIElJIGVycm9yLg0KDQojIyBFeGFtcGxlOiBGREEgVGVzdHMgb24gRHJ1ZyBTaWRlIEVmZmVjdHMNCg0KLSBCZWZvcmUgYSBuZXcgZHJ1ZyBpcyBwcm92ZWQgYnkgRkRBLCB0aGV5IG5lZWQgdG8gdGVzdCBpZiB0aGUgZHJ1ZyBoYXMgc2V2ZXJlIHNpZGUgZWZmZWN0cyBvbiBwYXRpZW50cy4gVGhlIHRlc3QgaXMgYmFzZWQgb24gdGhlIGZvbGxvd2luZyBudWxsIGFuZCBhbHRlcm5hdGl2ZSBoeXBvdGhlc2VzOg0KXGJlZ2lue2FsaWduKn0NCiAmIEhfMDogXG1ib3h7VGhlIGRydWcgaGFzIHNldmVyZSBzaWRlIGVmZmVjdHN9ICBcXA0KICYgSF9hOiBcbWJveHtUaGUgZHJ1ZyBkb2VzIG5vdCBoYXZlIHNldmVyZSBzaWRlIGVmZmVjdHN9Lg0KXGVuZHthbGlnbip9DQpJbiB0aGlzIGNhc2UsIHRoZSB0eXBlIEkgYW5kIHR5cGUgSUkgZXJyb3JzIHN0YW5kIGZvcjoNCi0gVHlwZSBJIGVycm9yOiBDbGFpbSB0aGF0IGEgZHJ1ZyBkb2VzIG5vdCBoYXZlIHNldmVyZSBzaWRlIGVmZmVjdHMgd2hlbiBpdCByZWFsbHkgZG9lcy4NCi0gVHlwZSBJSSBlcnJvcjogQ2xhaW0gdGhhdCBhIGRydWcgaGFzIHNldmVyZSBzaWRlIGVmZmVjdHMgd2hlbiBpdCByZWFsbHkgZG9lcyBub3QuDQotIE5vdGUgdGhhdCB3ZSB3YW50IGNvbnRyb2wgb3ZlciBUeXBlIEkgZXJyb3IgKGJlY2F1c2UgdGhpcyBpcyBtb3JlIGNvc3RseSksIHNvIHdlIHNldCB1cCBudWxsIGluIHRoaXMgd2F5Lg0KDQp8ICAgfCBUeXBlIEkgRXJyb3IgfCBUeXBlIElJIEVycm9yIHwNCnwtLS18LS0tfC0tLXwgDQp8IERlY2lzaW9uIHwgQ2xhaW0gdGhhdCBhIGRydWcgZG9lcyBub3QgaGF2ZSBzZXZlcmUgc2lkZSBlZmZlY3RzIHdoZW4gaXQgcmVhbGx5IGRvZXMgfCAgQ2xhaW0gdGhhdCBhIGRydWcgaGFzIHNldmVyZSAgc2lkZSBlZmZlY3RzIHdoZW4gaXQgcmVhbGx5IGRvZXMgbm90IHwNCnwgQ29zdHMgfCBEcnVnIGlzIGFwcHJvdmVkIGJ5IEZEQSB8IERydWcgaXMgbm90IGFwcHJvdmVkIGJ5IERGQSB8DQp8ICAgfCBGaW5hbmNpYWwgY29zdCBvZiBsYXdzdWl0cyBhcyAgcGF0aWVudHMgIHN1ZmZlciBmcm9tIHNpZGUgZWZmZWN0cyB8IEZpbmFuY2lhbCBjb3N0IHRvIGNvbXBhbnkgb2YgZnVydGhlciByZXNlYXJjaCB8DQogDQojIyBFeGFtcGxlOiBHZW5vdHlwZSBhbmQgRGlzZWFzZQ0KDQotIEluIGdlbm9taWMgc3R1ZGllcywgaXQgaXMgb2Z0ZW4gb2YgaW50ZXJlc3QgdG8gZmluZCB0aGUgZ2Vub3R5cGVzIHRoYXQgaGF2ZSBhIHNpZ25pZmljYW50IGFzc29jaWF0aW9uIHdpdGggYSBkaXNlYXNlIG9mIGludGVyZXN0Lg0KLSBVc3VhbGx5LCBzY2llbnRpc3RzIGNvbGxlY3QgYSBwb29sIG9mIG1pbGxpb25zIG9mIGdlbm90eXBlcywgYW5kIGRhdGEgYW5hbHlzdHMgd2FudCB0byBzY3JlZW4gb3V0IGlycmVsZXZhbnQgZ2Vub3R5cGVzIGJlZm9yZSBjb25kdWN0aW5nIGZpbmVyIHJlc2VhcmNoLg0KLSBXZSBuZWVkIHRvIGNhcnJ5IG91dCBhIGxhcmdlIGFtb3VudCBvZiB0ZXN0aW5nIHByb2JsZW1zLg0KLSBGb3IgZWFjaCBnZW5vdHlwZSwgdGhlIG51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzZXMgYXJlOg0KXGJlZ2lue2FsaWduKn0NCiYgIEhfMDogXG1ib3h7dGhlIGFzc29jaWF0aW9uIGlzIHplcm99IFxcDQomIEhfYTogXG1ib3h7dGhlIGFzc29jaWF0aW9uIGlzIG5vbi16ZXJvfS4NClxlbmR7YWxpZ24qfQ0KLSBUeXBlIElJIGVycm9yIGlzIG1vcmUgaW1wb3J0YW50IGluIHRoaXMgY2FzZS4NCg0KfCAgIHwgVHlwZSBJIEVycm9yIHwgVHlwZSBJSSBFcnJvciB8DQp8LS0tfC0tLXwtLS18IA0KfCBEZWNpc2lvbiB8IENsYWltIHRoZXJlJ3MgYW4gYXNzb2NpYXRpb24gd2hlbiBpdCBkb2VzIG5vdCBleGlzdCB8ICBJZ25vcmUgYW4gYXNzb2NpYXRpb24gd2hlbiBpdCBkb2VzIGV4aXN0IHwNCnwgQ29zdHMgfCBXZSBpbmNsdWRlIHNvbWUgbm9uLXNpZ25pZmljYW50IGdlbm90eXBlcywgd2hpY2ggbWF5IGJlIGZpbHRlcmVkIG91dCBpbiBuZXh0DQpzdGVwcyB8ICBXZSBtaXNzZWQgYSBzaWduaWZpY2FudCBnZW5vdHlwZSB0aGF0ICB3aWxsIGJlIGlnbm9yZWQgaW4gZnV0dXJlIHN0dWRpZXMgfA0KIA0KIyMgIFdoYXQgaWYgV2UgQ2FuIExpdmUgV2l0aCBTb21lIFR5cGUgSSBFcnJvcnM/DQoNCi0gSG93ZXZlciwgaW4gbWFueSBjYXNlcywgd2UgY291bGQgdG9sZXJhdGUgYSBjZXJ0YWluIGFtb3VudCAob3IgcGVyY2VudGFnZSkgb2YgdHlwZSBJIGVycm9ycyAoZS5nLiB0aGUgZ2Vub3R5cGUgZXhhbXBsZSkuDQotIEluc3RlYWQgb2YgRldFUiwgYSBtb3JlIHJlbGV2YW50IHF1YW50aXR5IHdlIG1heSB3YW50IHRvIGNvbnRyb2wgaXMgdGhlICpmYWxzZSBkaXNjb3ZlcnkgcmF0ZSogKEZEUikuDQotIEZEUiBjb250cm9sIHdpbGwgbGVhZCB0byBwcm9jZWR1cmVzIHRoYXQgYXJlIGxlc3MgY29uc2VydmF0aXZlIGFuZCBtb3JlIHBvd2VyZnVsIHRoYW4gRldFUiBjb250cm9sLg0KLSBGRFIgY29udHJvbCBpcyBzdGlsbCBhIHZlcnkgYWN0aXZlIGFyZWEgaW4gc3RhdGlzdGljYWwgcmVzZWFyY2guDQoNCiMgRmFsc2UgRGlzY292ZXJ5IFJhdGUNCg0KLSBTdXBwb3NlIHdlIGhhdmUgJG0kIG51bGwgaHlwb3RoZXNlcywgYW1vbmcgd2hpY2ggJG1fMCQgYXJlIHRydWUgKHdlIGRvIG5vdCBrbm93IHRoaXMgaW4gcHJhY3RpY2UhKQ0KLSBUaGUgdGVzdCByZXN1bHRzIGNhbiBiZSBzdW1tYXJpemVkIGluIHRoZSBmb2xsb3dpbmcgdGFibGU6DQoNCnwgRGVjaXNpb24gfCAkSF8wJCBpcyB0cnVlIHwgJEhfMCQgaXMgZmFsc2UgfCBUb3RhbCBOdW1iZXIgfA0KfC0tLXwtLS18LS0tfC0tLXwNCnwgRG8gbm90IHJlamVjdCAkSF8wJCB8ICRVJCB8ICRUJCAoVHlwZSBJSSkgfCAkbS1SJCB8DQp8IFJlamVjdCAkSF8wJCB8ICRWJCAoVHlwZSBJKSB8ICRTJCB8ICRSJCB8DQp8IFRvdGFsIE51bWJlciB8ICRtXzAkIHwgJG0gLSBtXzAkIHwgJG0kIHwNCiANCi0gKkZhbHNlIGRpc2NvdmVyeSBwcm9waXRpYXRpb24qIChGRFApIGlzIGRlZmluZWQgYXMgdGhlIG51bWJlciBvZiBmYWxzZSByZWplY3Rpb25zICgkViQpDQpyZWxhdGl2ZSB0byB0aGUgdG90YWwgcmVqZWN0aW9ucyAoJFIkKToNClxbDQogXG1ib3h7RkRQfSA9IFxmcmFje1Z9e1J9DQpcXQ0KIHdoZW4gJFIgPiAwJC4NCi0gRmFsc2UgZGlzY292ZXJ5IHJhdGUgKEZEUikgaXMgZGVmaW5lZCBhcyB0aGUgZXhwZWN0ZWQgdmFsdWUgb2YgRkRQOg0KXFsNClxtYm94e0ZEUn0gPSB7XG1hdGhiYiBFfSBbIFxtYm94e0ZEUH0gXSA9IHtcbWF0aGJiIEV9IFtWL1JdLg0KXF0NCi0gRmFtaWx5LXdpc2UgZXJyb3IgcmF0ZSAoRldFUikgY2FuIGJlIGV4cHJlc3NlZCBhcyANClxbDQogXG1ib3h7RldFUn0gPSB7XG1hdGhiYiBQfSBbIFYgXGdlcSAxXS4NCiBcXQ0KIA0KIyMgV2h5IGlzIENvbnRyb2xsaW5nIEZEUiAgSW1wb3J0YW50Pw0KDQotIFdoaWxlIHRoZSBGV0VSIGNvbnRyb2wgaXMgYXBwZWFsaW5nLCB0aGUgcmVzdWx0aW5nIHRocmVzaG9sZHMgb2Z0ZW4gc3VmZmVyIGZyb20gbG93IHBvd2VyLiBJbiBwcmFjdGljZSwgdGhpcyB0ZW5kcyB0byB3aXBlIG91dCBldmlkZW5jZSBvZiB0aGUgbW9zdCBpbnRlcmVzdGluZyBlZmZlY3RzICh0cnVlIG51bGxzIGNhbiBiZSBidXJpZWQgYnkgYSBsYXJnZSBudW1iZXIgb2Ygbm9uLXJlamVjdGVkIGZhbHNlIG51bGxzKS4NCi0gRkRSIGNvbnRyb2wgb2ZmZXJzIGEgd2F5IHRvIGluY3JlYXNlIHBvd2VyIHdoaWxlIG1haW50YWluaW5nIHNvbWUgcHJpbmNpcGxlIGJvdW5kIG9uIHR5cGUgSSBlcnJvci4NCi0gSXQgaXMgYmFzZWQgb24gdGhlIGFzc2Vzc21lbnQgb2YgdGhlIGNoYW5jZSB5b3Ugb2JzZXJ2ZSBhIHR5cGUgSSBlcnJvcjogJDQkIGZhbHNlIGRpc2NvdmVyaWVzIG91dCBvZiAkMTAkIHJlamVjdGVkIG51bGwgaHlwb3RoZXNlcyBpcyBhIG1vcmUgc2VyaW91cyBlcnJvciB0aGFuICQyMCQgZmFsc2UgZGlzY292ZXJpZXMgb3V0IG9mICQxMDAkIHJlamVjdGVkIG51bGwgaHlwb3RoZXNlcy4NCg0KIyMgVGhlIEJlbmphbWluaS1Ib2NoYmVyZyBQcm9jZWR1cmUNCg0KLSBCZW5qYW1pbmkgYW5kIEhvY2hiZXJnICgxOTk1KSBpbnRyb2R1Y2VkIHRoZSBjb25jZXB0IG9mIEZEUiBhbmQgcHJvcG9zZWQgYSBzaW1wbGUgcHJvY2VkdXJlIHRvIGNvbnRyb2wgaXQuIFdlIHdpbGwgY2FsbCBpdCB0aGUgQkggcHJvY2VkdXJlLg0KLSBTdXBwb3NlIHdlIGhhdmUgJG0kIG51bGwgaHlwb3RoZXNlczogJEhfMF57KDEpfSwgXGxkb3RzLCBIXzBeeyhtKX0kLiAgRGVub3RlICRwX3soMSl9LCBcbGRvdHMsIHBfeyhtKX0kIHRoZSBjb3JyZXNwb25kaW5nIHAtdmFsdWVzIGluIGFzY2VuZGluZyBvcmRlcjoNClxbDQogcF97KDEpfSBcbGVxIHBfeygyKX0gXGxlcSBcbGRvdHMgXGxlcSBwX3sobSl9Lg0KXF0NCi0gRm9yIGEgZ2l2ZW4gJFxhbHBoYSQsIGZpbmQgdGhlIGxhcmdlc3QgJGskICBzdWNoIHRoYXQNClxbDQogIHBfeyhrKX0gXGxlcSBcZnJhY3trfXttfSBcYWxwaGEsDQpcXQ0KIGRlbm90ZWQgYnkgJGteKiQuDQotIFJlamVjdCBhbGwgIHRoZSBudWxsIGh5cG90aGVzZXMgJEhfMF57KGopfSQgc3VjaCB0aGF0ICRwX2ogXGxlcSBwX3soa14qKX0kLg0KLSBJbiB0aGUgQkggKDE5OTUpIHBhcGVyLCB0aGV5IHByb3ZlZCAoZm9yIGluZGVwZW5kZW50IHRlc3RzKSB0aGF0IHRoZSBCSCBwcm9jZWR1cmUgY29udHJvbHMgdGhlIEZEUiBhdCB0aGUgZ2l2ZW4gbGV2ZWwgJFxhbHBoYSQgYnkgc2hvd2luZw0KXFsNClxtYm94e0ZEUn0gPSB7XG1hdGhiYiBFfSBbIFxtYm94e0ZEUH0gXSA9IHtcbWF0aGJiIEV9IFtWL1JdIFxsZXEgXGZyYWN7bV8wfXttfSBcYWxwaGEgXGxlcSBcYWxwaGEuDQpcXQ0KLSBXaGVuIHRoZSB0ZXN0cyBhcmUgZGVwZW5kZW50LCB0aGUgQkggcHJvY2VkdXJlICh1bmRlciBjZXJ0YWluIGNvbmRpdGlvbnMpIGNhbiBjb250cm9sIHRoZSBGRFIgYXQgbGV2ZWwgJFxhbHBoYSQgdXAgdG8gYSBmYWN0b3IgJFxsbiAobSkkOg0KXFsNCiBcbWJveHtGRFJ9IFxsZXEgXGxuIChtKSBcLCBcYWxwaGEuDQogXF0NCi0gVGhlIEJIIHByb2NlZHVyZSBjYW4gYmUgZXh0ZW5kZWQgdG8gZGVwZW5kZW50IHRlc3RzIGNhc2VzIHdpdGggc29tZSBtb2RpZmljYXRpb25zLg0KDQojIyBFeGFtcGxlOiBCSCBwcm9jZWR1cmUgb24gYSBTaW11bGF0ZWQgRXhhbXBsZQ0KDQotIFRvIGlsbHVzdHJhdGUgaG93IHRoZSBCSCBwcm9jZWR1cmUgd29ya3MsIHdlIGNvbnNpZGVyIHRoZSBmb2xsb3dpbmcgdG95IGV4YW1wbGUuDQotIFN1cHBvc2Ugd2UgaGF2ZSBhIGRhdGFzZXQgb2YgJDEwJCB2YXJpYWJsZXMuIFdlIHdhbnQgdG8gdGVzdCBpZiB0aGUgcG9wdWxhdGlvbiBtZWFuIHZlY3RvciAkXHVuZGVybGluZXtcbXV9JCBlcXVhbHMgdG8gYSBnaXZlbiB2ZWN0b3IgJFx1bmRlcmxpbmV7XG11fV4wJC4NCi0gTnVsbCBhbmQgYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczoNClxbDQogSF8wIDogXG11XzEgPSBcbXVfMV4wLCBcbGRvdHMsIFxtdV97MTB9ID0gXG11X3sxMH1eMA0KIFxxdWFkIFxtYm94e3ZlcnN1c30gXHF1YWQgIEhfYSA6IFxtdV8xIFxuZXEgXG11XzFeMCwgXCwgXG1ib3h7T1J9IFxsZG90cyBcbWJveHtPUn0sIFwsIFxtdV97MTB9IFxuZXEgXG11X3sxMH1eMC4NClxdDQotIEZvciBlYWNoIGNvbXBvbmVudCBpbiB0aGUgbnVsbCBoeXBvdGhlc2lzLCB3ZSBjYW4gY2FsY3VsYXRlIGEgJHQkLXN0YXRpc3RpYywgYW5kIGhlbmNlIGEgcC12YWx1ZS4NCi0gRGVub3RlIHRoZSBwLXZhbHVlIGluIGFzY2VuZGluZyBvcmRlciBhcw0KXFsNCiBwX3soMSl9IFxsZXEgcF97KDIpfSBcbGVxIFxsZG90cyBcbGVxIHBfeyhtKX0uDQpcXQ0KDQpgYGB7cn0NCmFscGhhIDwtIC4wNQ0KbSA8LSAxMA0KcHZhbHMgPC0gcnVuaWYobSkNCnB2YWxzX3NvcnQgPC0gc29ydChwdmFscykNCmluZGV4IDwtIHNlcSgxLG0pDQpjcml0cyA8LSAoaW5kZXgvbSkqYWxwaGENCm51bGxzIDwtIE5VTEwNCmogPC0gMQ0Kd2hpbGUoaiA8PSBtKQ0Kew0KICBpZihwdmFsc19zb3J0W2pdIDw9IGNyaXRzW2pdKSANCiAgeyANCiAgICBudWxscyA8LSBjKG51bGxzLGopIA0KICB9IA0KICBqIDwtIGorMQ0KfQ0KYmggPC0gMA0KaWYobGVuZ3RoKG51bGxzKT4wKSB7IGJoIDwtIG1heChudWxscykgfQ0KYmgNCmNvbXBzIDwtIHB2YWxzX3NvcnQgPD0gY3JpdHMNCmRhdGEuZnJhbWUoaW5kZXgscHZhbHNfc29ydCxjcml0cyxjb21wcykNCmBgYA0KDQojIyBFeGFtcGxlOiBWaXN1YWxpemF0aW9uIG9mIEJIIFByb2NlZHVyZQ0KDQotIFdlIGNhbiB2aXN1YWxpemUgdGhlIEJIIHByb2NlZHVyZSBhcyBmb2xsb3dzLiBGaXJzdCwgd2UgcGxvdCAkcF9qJCB2ZXJzdXMgJGokIGZvciAkMSBcbGVxIGogXGxldyBtJC4gVGhlbiB3ZSBkcmF3IGEgbGluZSB0aHJvdWdoIHRoZSBvcmlnaW4gd2l0aCBzbG9wZSAkXGFscGhhL20kLg0KLSBUbyBjb250cm9sIHRoZSBGRFIgYXQgbGV2ZWwgJFxhbHBoYSQsIHRoZSBCSCBwcm9jZWR1cmUgd2lsbCByZWplY3QgYWxsIHRoZSBoeXBvdGhlc2VzIHdpdGggcC12YWx1ZXMgYmVsb3cgdGhlIGxpbmUuDQotIFdlIHZpc3VhbGl6ZSB0aGUgQkggcHJvY2VkdXJlIHdpdGggJFxhbHBoYSA9IC4yMCQuDQotIFdlIGdlbmVyYXRlIGEgc2ltdWxhdGVkIGRhdGFzZXQgb2YgJDEwMCQgaW5kZXBlbmRlbnQgbm9ybWFsIHJhbmRvbSB2YXJpYWJsZXMgZWFjaCB3aXRoIHZhcmlhbmNlICQxJC4gV2Ugc2V0IHRoZSBtZWFuIG9mIGZpcnN0ICQ4MCQgcmFuZG9tIHZhcmlhYmxlcyB0byBiZSAkMCQgYW5kIHRoZSByZW1haW5pbmcgJDIwJCB0byBiZSAkMyQuDQotIEZvciBlYWNoIHJhbmRvbSB2YXJpYWJsZSwgd2Ugc2FtcGxlICQxMDAkIG9ic2VydmF0aW9ucy4NCi0gV2UgdGVzdCB0aGUgZm9sbG93aW5nIG51bGwgYW5kIGFsdGVybmF0aXZlIGh5cG90aGVzaXM6DQpcWw0KIEhfMCA6IFxtdV8xID0gXG11XzFeMCwgXGxkb3RzLCBcbXVfezEwMH0gPSBcbXVfezEwMH1eMA0KIFxxdWFkIFxtYm94e3ZlcnN1c30gXHF1YWQgIEhfYSA6IFxtdV8xIFxuZXEgXG11XzFeMCwgXCwgXG1ib3h7T1J9IFxsZG90cyBcbWJveHtPUn0sIFwsIFxtdV97MTAwfSBcbmVxIFxtdV97MTAwfV4wLg0KXF0gDQotIEluIGFuIG9yYWNsZSBzY2VuYXJpbywgd2Ugc2hvdWxkIGFjY2VwdCB0aGUgZmlyc3QgJDgwJCBudWxsIGh5cG90aGVzZXMgYW5kIHJlamVjdCB0aGUgbGFzdCAkMjAkIG51bGwgaHlwb3RoZXNlcy4NCi0gVG8gY29udHJvbCB0aGUgRkRSIGF0IGxldmVsICRcYWxwaGEgPSAuMjAkLCB3ZSB3b3VsZCBvYnNlcnZlIG9uIGF2ZXJhZ2UsIGxlc3MgdGhhbiAkMTAwIFxhbHBoYSQgdHlwZSBJIGVycm9ycy4gDQoNCmBgYHtyfQ0KIyMgZGVmaW5lIEJIIGZ1bmN0aW9uDQpiaF9yZWogPC0gZnVuY3Rpb24ocCxhbHBoYSkgDQojIyBwOiB2ZWN0b3Igb2YgcC12YWx1ZXMNCiMjIGFscGhhOiBwcmVzcGVjaWZpZWQgRkRSIGxldmVsDQp7DQogIG0gPC0gbGVuZ3RoKHApDQogIGwgPC0gYWxwaGEqYygxOm0pL20NCiAgc29ydF9wIDwtIHNvcnQocCkNCiAgc2V0IDwtIHdoaWNoKGw+PXNvcnRfcCkNCiAgDQogIGlmKCBsZW5ndGgoc2V0KT09MCl7DQogICAgcmVqIDwtIHNldA0KICAgIHB2YWx1ZSA8LSBzZXQNCiAgfSBlbHNlew0KICAgIGltYXggPC0gbWF4KHNldCkNCiAgICB0aHJlc2hvbGQgPC0gc29ydF9wW2ltYXhdDQogICAgcmVqIDwtIHdoaWNoKHAgPD0gdGhyZXNob2xkKQ0KICAgIHB2YWx1ZSA8LSBwW3Jlal0NCiAgfQ0KICBvdXRsaXN0PC1saXN0KHB2YWx1ZT1wdmFsdWUsIHJlaj1yZWopDQogIHJldHVybihvdXRsaXN0KQ0KfQ0KDQojIyBHZW5lcmF0ZSBzeW50aGV0aWMgZGF0YSBzZXRzDQpuIDwtIDEwMA0KbSA8LSAxMDANCm0wIDwtIDIwDQpYMSA8LSBtYXRyaXgocm5vcm0obiptMCksbixtMCkNClgyIDwtIG1hdHJpeChybm9ybShuKihtLW0wKSxtZWFuPTMsMSksbixtLW0wKQ0KWCA8LSBjYmluZChYMSxYMikNCg0KIyMgQ2FsY3VsYXRlIG1hcmdpbmFsIHAtdmFsdWVzDQojIE1ldGhvZCAxOiB1c2UgZm9yIGxvb3ANCnAgPC0gbnVtZXJpYyhtKQ0KZm9yKGogaW4gMTptKXsNCiAgdF90ZXN0IDwtIHQudGVzdChYWyxqXSkNCiAgcFtqXSA8LSB0X3Rlc3QkcC52YWx1ZQ0KfQ0KDQojIE1ldGhvZCAyOiB1c2UgZnVuY3Rpb24gImFwcGx5Ig0KcHZfdCA8LSBmdW5jdGlvbih4KSANCnsgcmV0dXJuKHQudGVzdCh4KSRwLnZhbHVlKQ0KfQ0KcHZfbXQgPC0gYXBwbHkoWCwgMiwgbWF0Y2guZnVuKHB2X3QpKQ0KDQoNCiMjIEFwcGx5IEJIIG1ldGhvZA0KYWxwaGEgPC0gMC4yDQpiaF90ZXN0IDwtIGJoX3JlaihwLGFscGhhKQ0KDQppbmRleCA8LSBzZXEoMSxtKQ0KY3JpdHMgPC0gKGluZGV4L20pKmFscGhhDQpjb21wcyA8LSBzb3J0KHApIDw9IGNyaXRzDQpkYXRhLmZyYW1lKGluZGV4LHNvcnQocCksY3JpdHMsY29tcHMpDQoNCiMjIEV4YW1pbmUgY29uY2x1c2lvbnMNClIgPC0gbGVuZ3RoKGJoX3Rlc3QkcmVqKSAgICMgdG90YWwgbnVtYmVyIG9mIHJlamVjdGlvbnMNClYgPC0gbGVuZ3RoKHdoaWNoKGJoX3Rlc3QkcmVqPD1tMCkpICMgbnVtYmVyIG9mIGZhbHNlIHJlamVjdGlvbnMNCmZkcCA8LSBWL21heCgxLFIpDQoNCmZkcA0KYGBgDQo=</div>
 
 
 
@@ -2030,7 +2317,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Ma189Lecture7.Rmd");
+  window.initializeSourceEmbed("Ma189Lecture8.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

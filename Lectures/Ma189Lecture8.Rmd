@@ -1,0 +1,398 @@
+---
+title: "Math 189: Multiple Testing I"
+output: html_notebook
+---
+ 
+# Hypothesis Testing for Multivariate Mean
+
+- Suppose $\underline{x}_1, \underline{x}_2, \ldots, \underline{x}_n$ are independently sampled from a multivariate normal distribution with mean $\underline{\mu}$ and covariance matrix ${\mathbf \Sigma}$.
+- We would like to test whether the unknown population mean vector  $\underline{\mu}$ equals a specific vector, say  $\underline{\mu}_0$.
+- It is natural to consider the following null and alternative hypotheses:
+\[
+ H_0:   \underline{\mu} =  \underline{\mu}_0 \quad \mbox{versus} \quad
+   H_a:   \underline{\mu} \neq  \underline{\mu}_0.
+  \]
+- We can also express the null and alternative hypotheses as
+ \[
+ H_0:   \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right]
+= \left[ \begin{array}{c} \mu_1^0 \\ \mu_2^0 \\ \vdots \\ \mu_p^0 \end{array} \right]
+  \quad \mbox{versus} \quad
+   H_a:  \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right]
+\neq \left[ \begin{array}{c} \mu_1^0 \\ \mu_2^0 \\ \vdots \\ \mu_p^0 \end{array} \right].
+  \]
+Equivalently,
+\[
+ H_0 : \mu_1 = \mu_1^0, \ldots, \mu_p = \mu_p^0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_p \neq \mu_p^0.
+\]
+- Testing a mean vector is equivalent to testing multiple means together!
+- Note that the null says that all the means equal the null values, while the alternative says that at least one mean does not equal the null value.
+
+## A Naive Scheme to Test Multivariate Mean
+
+- Following the univariate case, a naive scheme for testing a multivariate hypothesis is to compute the $t$-statistic for each univariate mean.
+- Define $T_j$, the $t$-statistic for the $j$th variable, as
+\[
+  T_j = \frac{ \overline{x}_j - \mu_j^0 }{ s_j/ \sqrt{n}} \sim \mathcal{t}_{n-1}
+\]
+ for $1 \leq j \leq p$.
+- Given a significance level $\alpha$, we reject $H_0: \underline{\mu} = \underline{\mu}_0$ if 
+$|T_j| > \mathcal{t}_{n-1,\alpha/2}$ for at least one $j \in \{ 1, 2, \ldots, p \}$.
+
+## Problem with the Naive Scheme
+
+- The biggest issue with this naive scheme is that it does not control the *family-wise error rate*.
+- The family-wise error rate is the probability of rejecting at least one of the null hypotheses $H_0^{(j)}: \mu_j = \mu_j^0$ when all nulls are true.
+- If the $p$ test statistics are independent, rejecting each null hypothesis at significance level $\alpha$ will result in a family-wise error rate
+\[
+\mbox{FWER} = 1 - {(1 - \alpha)}^p \geq \alpha
+\]
+- The probability of falsely rejecting at least one null hypothesis is much higher than $\alpha$ if the number of variables $p$ is large.
+
+```{r}
+alpha <- .05
+# try different values of p: 1, 3, 10, 100
+p <- 1
+fwer <- 1 - (1-alpha)^p
+fwer
+```
+
+```{r}
+alpha <- .05
+p <- seq(1,100)
+fwer <- 1 - (1-alpha)^p
+plot.ts(fwer)
+```
+
+# FWER Correction
+
+- The naive scheme fails to control the family-wise error rate and hence yields a liberal test. That is, we tend to reject null hypotheses more often than we should.
+- High family-wise error rate means we have a high chance to commit a Type I error: reject at least one null hypothesis when they are all true.
+- To control the family-wise error rate, we need to correct the naive scheme. If we want to control the family-wise error rate at level $\alpha$, we should set the significance level for each individual test smaller than $\alpha$.
+- Many procedures have been developed to control the familywise error rate. 
+- Two general types of FWER corrections:
+
+1. Single step: equivalent adjustment made to each p-value. *Bonferroni Correction*
+2. Sequential: adaptive adjustment made to each p-value. *Holm’s Method*
+
+## Bonferroni Correction
+
+- A simple yet popular FWER correction is the Bonferroni Correction, which is named after Italian mathematician Carlo Emilio Bonferroni for its use of Bonferroni inequalities.
+- Suppose we have $m$ null hypotheses (e.g. a mean vector of $m$ variables). Denote $p_1, \ldots, p_m$ the corresponding p-values.
+- To control the FWER at level $\alpha$, the Bonferroni Correction sets the significance level for each individual test at $\alpha/m$ instead of $\alpha$.
+- The intuition of Bonferroni Correction is as follows:
+\[
+ \mbox{FWER} = \mathbb{P} \left[ \cup_{i=1}^m \{ p_i \leq \alpha/m \} \right]
+  \leq \sum_{i=1}^m \mathbb{P} \left[ p_i \leq \alpha/m \right]
+  \leq m (\alpha/m) = \alpha.
+\]
+- Derivation uses fact that a $p$-value (when null is true) is uniformly distributed on $(0,1)$.  (Why?  Probability Integral Transform.)  Does not assume independence of tests.
+- For independent tests, the Bonferroni Correction yields a family-wise error rate of approximately $\alpha$:
+\[
+ \mbox{FWER} = \mathbb{P} \left[ \cup_{i=1}^m \{ p_i \leq \alpha/m \} \right]
+  = 1 - \mathbb{P} \left[ \cap_{i=1}^m \{ p_i > \alpha/m \} \right]
+  = 1 - {(1 - \alpha/m)}^m \approx 1 - e^{-\alpha},
+\]
+ for $\alpha$ small.
+
+```{r}
+alpha <- .05
+m <- seq(0,100,5)
+fwer_naive <- 1 - (1-alpha)^m
+fwer_bon <- 1 - (1 - alpha/m)^m
+cbind(m,cbind(fwer_naive,fwer_bon))
+plot.ts(fwer_naive)
+lines(fwer_bon,col=2)
+```
+ 
+### Pros and Cons of Bonferroni Correction
+
+#### Pros
+
+- Control FWER at a given level $\alpha$
+- Protects Type I errors
+- Easy to implement
+
+#### Cons
+
+- Need the assumption of independence to get FWER approximately $\alpha$
+- Conservative when there is strong dependence among variables
+- Vulnerable to Type II errors (failing to reject the null hypothesis when you should)
+
+## Holm's Method
+
+- Holm’s Method is a simple sequential method to correct the FWER.
+- Suppose we have $m$ null hypotheses (e.g. a mean vector of $m$ variables). Denote $p_{(1)}, \ldots, p_{(m)}$ the corresponding p-values in ascending order:
+\[
+ p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(m)}.
+\]
+- To control the FWER at level $\alpha$, we adjust the significance level for the hypothesis testing with the $j$th smallest p-value  $p_{(j)}$ by 
+ $\alpha^* = \alpha / (m - j +1)$.
+- Proceed from $j = 1, \ldots, m$, making comparisons, and **exit** as soon as there is a failure to reject. 
+- For example, when $m = 100$, we find $k$ such that 
+\[
+ p_{(1) } \leq \alpha/100, p_{(2)} \leq \alpha/99, \ldots, p_{(k)} \leq \alpha/(101-k),
+   p_{(k+1)} > \alpha/(100-k),
+\]
+ and conclude that the $k$ hypotheses  corresponding to $p_{(1)}, \ldots, p_{(k)}$ are rejected.
+- Holm’s Method downscales the significance level $\alpha$ (or upscales the p-value) by a factor depending on the order of the p-value.
+- The Bonferroni correction rejects null hypotheses with p-value less than $\alpha/m$, in order to control FWER at $\alpha$. The cost of this protection against type I errors is an increased risk of accepting one or more false null hypotheses (i.e., of committing one or more type II errors).
+- Holm’s method also controls the maximum family-wise error rate at $\alpha$, but with a lower increase of type II error risk.
+
+```{r}
+alpha <- .05
+m <- 10
+pvals <- runif(m)
+pvals_sort <- sort(pvals)
+index <- seq(1,m)
+crits <- alpha/(m - index +1)
+nulls <- NULL
+j <- 1
+while(j <= m)
+{
+  if(pvals_sort[j] <= crits[j]) 
+  { 
+    nulls <- c(nulls,j) 
+  } else { j <- m+1 }
+  j <- j+1
+}
+length(nulls)
+comps <- pvals_sort <= crits
+data.frame(index,pvals_sort,crits,comps)
+```
+
+### Pros and Cons of Holm's Method
+
+#### Pros
+
+- Sequential adjustment
+- Adaptive significance level
+- Uniformly higher power (less type II error)
+
+#### Cons
+
+- Hard to define confidence interval
+- No guarantee on type II error control (better than Bonferroni though)
+
+## Issues about Controlling FWER
+
+- FWER is appropriate when you want to guard against *any* type I error.
+- When we control the FWER, the testing procedure needs "very strong evidence” to reject a null hypothesis. As a result, the testing procedure may fail to reject some hypothesis when the null hypothesis is false.
+- We gain a strict control of type I error at a price of loose control of type II error.
+- FWER control is important when the cost of type I error is much higher than type II error.
+
+## Example: FDA Tests on Drug Side Effects
+
+- Before a new drug is proved by FDA, they need to test if the drug has severe side effects on patients. The test is based on the following null and alternative hypotheses:
+\begin{align*}
+ & H_0: \mbox{The drug has severe side effects}  \\
+ & H_a: \mbox{The drug does not have severe side effects}.
+\end{align*}
+In this case, the type I and type II errors stand for:
+- Type I error: Claim that a drug does not have severe side effects when it really does.
+- Type II error: Claim that a drug has severe side effects when it really does not.
+- Note that we want control over Type I error (because this is more costly), so we set up null in this way.
+
+|   | Type I Error | Type II Error |
+|---|---|---| 
+| Decision | Claim that a drug does not have severe side effects when it really does |  Claim that a drug has severe  side effects when it really does not |
+| Costs | Drug is approved by FDA | Drug is not approved by DFA |
+|   | Financial cost of lawsuits as  patients  suffer from side effects | Financial cost to company of further research |
+ 
+## Example: Genotype and Disease
+
+- In genomic studies, it is often of interest to find the genotypes that have a significant association with a disease of interest.
+- Usually, scientists collect a pool of millions of genotypes, and data analysts want to screen out irrelevant genotypes before conducting finer research.
+- We need to carry out a large amount of testing problems.
+- For each genotype, the null and alternative hypotheses are:
+\begin{align*}
+&  H_0: \mbox{the association is zero} \\
+& H_a: \mbox{the association is non-zero}.
+\end{align*}
+- Type II error is more important in this case.
+
+|   | Type I Error | Type II Error |
+|---|---|---| 
+| Decision | Claim there's an association when it does not exist |  Ignore an association when it does exist |
+| Costs | We include some non-significant genotypes, which may be filtered out in next
+steps |  We missed a significant genotype that  will be ignored in future studies |
+ 
+##  What if We Can Live With Some Type I Errors?
+
+- However, in many cases, we could tolerate a certain amount (or percentage) of type I errors (e.g. the genotype example).
+- Instead of FWER, a more relevant quantity we may want to control is the *false discovery rate* (FDR).
+- FDR control will lead to procedures that are less conservative and more powerful than FWER control.
+- FDR control is still a very active area in statistical research.
+
+# False Discovery Rate
+
+- Suppose we have $m$ null hypotheses, among which $m_0$ are true (we do not know this in practice!)
+- The test results can be summarized in the following table:
+
+| Decision | $H_0$ is true | $H_0$ is false | Total Number |
+|---|---|---|---|
+| Do not reject $H_0$ | $U$ | $T$ (Type II) | $m-R$ |
+| Reject $H_0$ | $V$ (Type I) | $S$ | $R$ |
+| Total Number | $m_0$ | $m - m_0$ | $m$ |
+ 
+- *False discovery propitiation* (FDP) is defined as the number of false rejections ($V$)
+relative to the total rejections ($R$):
+\[
+ \mbox{FDP} = \frac{V}{R}
+\]
+ when $R > 0$.
+- False discovery rate (FDR) is defined as the expected value of FDP:
+\[
+\mbox{FDR} = {\mathbb E} [ \mbox{FDP} ] = {\mathbb E} [V/R].
+\]
+- Family-wise error rate (FWER) can be expressed as 
+\[
+ \mbox{FWER} = {\mathbb P} [ V \geq 1].
+ \]
+ 
+## Why is Controlling FDR  Important?
+
+- While the FWER control is appealing, the resulting thresholds often suffer from low power. In practice, this tends to wipe out evidence of the most interesting effects (true nulls can be buried by a large number of non-rejected false nulls).
+- FDR control offers a way to increase power while maintaining some principle bound on type I error.
+- It is based on the assessment of the chance you observe a type I error: $4$ false discoveries out of $10$ rejected null hypotheses is a more serious error than $20$ false discoveries out of $100$ rejected null hypotheses.
+
+## The Benjamini-Hochberg Procedure
+
+- Benjamini and Hochberg (1995) introduced the concept of FDR and proposed a simple procedure to control it. We will call it the BH procedure.
+- Suppose we have $m$ null hypotheses: $H_0^{(1)}, \ldots, H_0^{(m)}$.  Denote $p_{(1)}, \ldots, p_{(m)}$ the corresponding p-values in ascending order:
+\[
+ p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(m)}.
+\]
+- For a given $\alpha$, find the largest $k$  such that
+\[
+  p_{(k)} \leq \frac{k}{m} \alpha,
+\]
+ denoted by $k^*$.
+- Reject all  the null hypotheses $H_0^{(j)}$ such that $p_j \leq p_{(k^*)}$.
+- In the BH (1995) paper, they proved (for independent tests) that the BH procedure controls the FDR at the given level $\alpha$ by showing
+\[
+\mbox{FDR} = {\mathbb E} [ \mbox{FDP} ] = {\mathbb E} [V/R] \leq \frac{m_0}{m} \alpha \leq \alpha.
+\]
+- When the tests are dependent, the BH procedure (under certain conditions) can control the FDR at level $\alpha$ up to a factor $\ln (m)$:
+\[
+ \mbox{FDR} \leq \ln (m) \, \alpha.
+ \]
+- The BH procedure can be extended to dependent tests cases with some modifications.
+
+## Example: BH procedure on a Simulated Example
+
+- To illustrate how the BH procedure works, we consider the following toy example.
+- Suppose we have a dataset of $10$ variables. We want to test if the population mean vector $\underline{\mu}$ equals to a given vector $\underline{\mu}^0$.
+- Null and alternative hypothesis:
+\[
+ H_0 : \mu_1 = \mu_1^0, \ldots, \mu_{10} = \mu_{10}^0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_{10} \neq \mu_{10}^0.
+\]
+- For each component in the null hypothesis, we can calculate a $t$-statistic, and hence a p-value.
+- Denote the p-value in ascending order as
+\[
+ p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(m)}.
+\]
+
+```{r}
+alpha <- .05
+m <- 10
+pvals <- runif(m)
+pvals_sort <- sort(pvals)
+index <- seq(1,m)
+crits <- (index/m)*alpha
+nulls <- NULL
+j <- 1
+while(j <= m)
+{
+  if(pvals_sort[j] <= crits[j]) 
+  { 
+    nulls <- c(nulls,j) 
+  } 
+  j <- j+1
+}
+bh <- 0
+if(length(nulls)>0) { bh <- max(nulls) }
+bh
+comps <- pvals_sort <= crits
+data.frame(index,pvals_sort,crits,comps)
+```
+
+## Example: Visualization of BH Procedure
+
+- We can visualize the BH procedure as follows. First, we plot $p_j$ versus $j$ for $1 \leq j \lew m$. Then we draw a line through the origin with slope $\alpha/m$.
+- To control the FDR at level $\alpha$, the BH procedure will reject all the hypotheses with p-values below the line.
+- We visualize the BH procedure with $\alpha = .20$.
+- We generate a simulated dataset of $100$ independent normal random variables each with variance $1$. We set the mean of first $80$ random variables to be $0$ and the remaining $20$ to be $3$.
+- For each random variable, we sample $100$ observations.
+- We test the following null and alternative hypothesis:
+\[
+ H_0 : \mu_1 = \mu_1^0, \ldots, \mu_{100} = \mu_{100}^0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_{100} \neq \mu_{100}^0.
+\] 
+- In an oracle scenario, we should accept the first $80$ null hypotheses and reject the last $20$ null hypotheses.
+- To control the FDR at level $\alpha = .20$, we would observe on average, less than $100 \alpha$ type I errors. 
+
+```{r}
+## define BH function
+bh_rej <- function(p,alpha) 
+## p: vector of p-values
+## alpha: prespecified FDR level
+{
+  m <- length(p)
+  l <- alpha*c(1:m)/m
+  sort_p <- sort(p)
+  set <- which(l>=sort_p)
+  
+  if( length(set)==0){
+    rej <- set
+    pvalue <- set
+  } else{
+    imax <- max(set)
+    threshold <- sort_p[imax]
+    rej <- which(p <= threshold)
+    pvalue <- p[rej]
+  }
+  outlist<-list(pvalue=pvalue, rej=rej)
+  return(outlist)
+}
+
+## Generate synthetic data sets
+n <- 100
+m <- 100
+m0 <- 20
+X1 <- matrix(rnorm(n*m0),n,m0)
+X2 <- matrix(rnorm(n*(m-m0),mean=3,1),n,m-m0)
+X <- cbind(X1,X2)
+
+## Calculate marginal p-values
+# Method 1: use for loop
+p <- numeric(m)
+for(j in 1:m){
+  t_test <- t.test(X[,j])
+  p[j] <- t_test$p.value
+}
+
+# Method 2: use function "apply"
+pv_t <- function(x) 
+{ return(t.test(x)$p.value)
+}
+pv_mt <- apply(X, 2, match.fun(pv_t))
+
+
+## Apply BH method
+alpha <- 0.2
+bh_test <- bh_rej(p,alpha)
+
+index <- seq(1,m)
+crits <- (index/m)*alpha
+comps <- sort(p) <= crits
+data.frame(index,sort(p),crits,comps)
+
+## Examine conclusions
+R <- length(bh_test$rej)   # total number of rejections
+V <- length(which(bh_test$rej<=m0)) # number of false rejections
+fdp <- V/max(1,R)
+
+fdp
+```

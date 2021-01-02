@@ -59,7 +59,7 @@ output: html_notebook
 the *power* of the test, and equals $1 - \beta$.
 
 | Decision | Null is True  | Null is False |
-|---|---|---|---|---|
+|---|---|---| 
 | Accept Null  | Correct   | Type II Error   |  
 | Reject Null  | Type I Error   | Correct   |  
 
