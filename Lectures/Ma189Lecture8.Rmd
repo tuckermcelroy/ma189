@@ -320,18 +320,18 @@ data.frame(index,pvals_sort,crits,comps)
 
 ## Example: Visualization of BH Procedure
 
-- We can visualize the BH procedure as follows. First, we plot $p_j$ versus $j$ for $1 \leq j \lew m$. Then we draw a line through the origin with slope $\alpha/m$.
+- We can visualize the BH procedure as follows. First, we plot $p_j$ versus $j$ for $1 \leq j \leq m$. Then we draw a line through the origin with slope $\alpha/m$.
 - To control the FDR at level $\alpha$, the BH procedure will reject all the hypotheses with p-values below the line.
 - We visualize the BH procedure with $\alpha = .20$.
 - We generate a simulated dataset of $100$ independent normal random variables each with variance $1$. We set the mean of first $80$ random variables to be $0$ and the remaining $20$ to be $3$.
-- For each random variable, we sample $100$ observations.
+- For each random variable, we sample $500$ observations.
 - We test the following null and alternative hypothesis:
 \[
- H_0 : \mu_1 = \mu_1^0, \ldots, \mu_{100} = \mu_{100}^0
- \quad \mbox{versus} \quad  H_a : \mu_1 \neq \mu_1^0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_{100} \neq \mu_{100}^0.
+ H_0 : \mu_1 = 0, \ldots, \mu_{100} = 0
+ \quad \mbox{versus} \quad  H_a : \mu_1 \neq 0, \, \mbox{OR} \ldots \mbox{OR}, \, \mu_{100} \neq 0.
 \] 
 - In an oracle scenario, we should accept the first $80$ null hypotheses and reject the last $20$ null hypotheses.
-- To control the FDR at level $\alpha = .20$, we would observe on average, less than $100 \alpha$ type I errors. 
+- To control the FDR at level $\alpha = .20$, we would observe on average less than $100 \alpha$ type I errors. 
 
 ```{r}
 ## define BH function
@@ -358,9 +358,9 @@ bh_rej <- function(p,alpha)
 }
 
 ## Generate synthetic data sets
-n <- 100
+n <- 500
 m <- 100
-m0 <- 20
+m0 <- 80
 X1 <- matrix(rnorm(n*m0),n,m0)
 X2 <- matrix(rnorm(n*(m-m0),mean=3,1),n,m-m0)
 X <- cbind(X1,X2)
@@ -392,7 +392,31 @@ data.frame(index,sort(p),crits,comps)
 ## Examine conclusions
 R <- length(bh_test$rej)   # total number of rejections
 V <- length(which(bh_test$rej<=m0)) # number of false rejections
+S <- length(which(bh_test$rej>m0)) # number of correct rejections
+U <- length(which(setdiff(seq(1,m),bh_test$rej)<=m0))  # number of correct non-rejections
+T <- length(which(setdiff(seq(1,m),bh_test$rej)>m0)) # number of false non-rejections
 fdp <- V/max(1,R)
-
 fdp
 ```
+
+- Note: we could repeat the experiment many times, and average FDP to get FDR.
+
+# FWER control vs FDR control
+
+## FWER
+
+- Most strict control of type I error
+- Conservative procedure
+- Inflated type II errors
+- Low power
+- Important for applications where no type I error is allowed (e.g., drug tests)
+
+## FDR
+
+- Tolerant for some type I error
+- Less conservative
+- Less type II errors
+- Higher power
+- Popular in applications where people can tolerate some type I errors (e.g., genomic studies)
+
+
