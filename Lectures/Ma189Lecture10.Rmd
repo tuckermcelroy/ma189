@@ -214,23 +214,4 @@ hot_test <- HotellingsT2(X1,X2)
 hot_test
 ```
 
-# Comparing More Than Two Populations
-
-- We have learned how to test if one population mean vector equals a specific vector
-\[
- H_0: \underline{\mu}^{(1)} = \underline{\mu}_0 \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}_0.
-\]
-- Also, we have learned how to test if two populations have equal mean vectors
-\[
- H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)}.
-\]
-- What if we want to test the equivalence of mean vectors among three or more populations?
-- Suppose $\underline{\mu}^{(1)}, \ldots, \underline{\mu}^{(g)}$  are mean vectors of $g$ populations. We are interested in testing
-\[
- H_0: \underline{\mu}^{(1)} = \ldots = \underline{\mu}^{(g)} 
- \quad H_a: \underline{\mu}^{(i)} \neq \underline{\mu}^{(j)} \; \mbox{for some} \, i \neq j.
-\]
-- The null hypothesis assumes all mean vectors to be the same. The null hypothesis is false
-(alternative is true) if any two mean vectors are different.
-
 

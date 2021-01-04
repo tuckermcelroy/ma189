@@ -1,0 +1,92 @@
+---
+title: "Math 189: Multivariate Analysis of Variance I"
+output: html_notebook
+---
+
+# Comparing More Than Two Populations
+
+- We have learned how to test if one population mean vector equals a specific vector
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}_0 \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}_0.
+\]
+- Also, we have learned how to test if two populations have equal mean vectors
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)}.
+\]
+- What if we want to test the equivalence of mean vectors among three or more populations?
+- Suppose $\underline{\mu}^{(1)}, \ldots, \underline{\mu}^{(g)}$  are mean vectors of $g$ populations. We are interested in testing
+\[
+ H_0: \underline{\mu}^{(1)} = \ldots = \underline{\mu}^{(g)} 
+ \quad H_a: \underline{\mu}^{(i)} \neq \underline{\mu}^{(j)} \; \mbox{for some} \, i \neq j.
+\]
+- The null hypothesis assumes all mean vectors to be the same. The null hypothesis is false
+(alternative is true) if any two mean vectors are different.
+
+## Example: Romano-British Pottery Data
+
+- Romano-British Pottery shards are collected from four sites in the British Isles:
+
+1. L: Llanedeyrn
+2. C: Caldicot
+3. I: Isle Thorns
+4. A: Ashley Rails
+
+![SwissFrance](images/pottery.jpg)
+
+- Each pottery sample was returned to the laboratory for a chemical test. In these tests the concentrations of five different chemicals were measured:
+
+1. Al: Aluminum
+2. Fe: Iron
+3. Mg: Magnesium
+4. Ca: Calcium
+5. Na: Sodium
+
+- Does the chemical content of the pottery depend on the site where the pottery was discovered?
+If yes, we can use the chemical content of a pottery sample of unknown origin to determine which site the sample came from.
+
+## A Peek at the Data
+
+Adopted from: Tubb, A., A. J. Parker, and G. Nickless. 1980. "The Analysis of Romano-British Pottery by Atomic Absorption Spectrophotometry". *Archaeometry* 22: 153-71.
+
+```{r}
+pottery <- read.csv("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\RBPottery.csv")
+colnames(pottery) <- c("No", "ID", "Kiln", "Al", "Fe", "Mg", "Ca", "Na", "K2O", "TiO2", "MnO", "BaO")
+pot_llan <- pottery[pottery$Kiln==2,]
+pot_cald <- pottery[pottery$Kiln==3,]
+pot_is <- pottery[pottery$Kiln==4,]
+pot_ar <- pottery[pottery$Kiln==5,]
+pottery[c(23,37,39,44),4:8]
+```
+
+Dataset contains $26$ ancient pottery shards found at four sites in British Isles. For each of $26$ samples of pottery, the percentages of oxides of five metals are measured.
+ 
+# Analysis of Variance (ANOVA)
+
+- ANalysis Of VAriance (ANOVA) is a set of statistical tools used to analyze the differences
+among population means given their samples. *ANOVA* is useful for comparing (testing) three or
+more group means for statistical significance.
+- ANOVA was developed by British statistician Ronald Fisher.
+- ANOVA is conceptually similar to multiple two-sample tests, but is more conservative (fewer
+type I errors). It is suited to a wide range of practical problems.
+
+
+![Fisher](images/FisherOld.jpg)
+
+## Univariate ANOVA
+
+- We begin with the univariate case. Suppose we have $g$ treatments (samples). For the $k$th treatment, we observe its effects on a group of patients of size $n_k$. The dataset
+can be summarized in the following table.
+
+
+1 2 ⋯ g
+1 &'' &(' ⋯ &)'
+2 &'( &(( ⋯ &)(
+⋮ ⋮ ⋮ ⋱ ⋮
+#$ &',- &(,. ⋯ &),/
+Treatments (samples)
+Observations
+Notations:
+• &$0 = 2-th observation in sample ".
+• #$ = number of observations in sample ".
+• 3 = #' + ⋯+ #) = total sample size.
+• ! = number of treatments/populations/samples

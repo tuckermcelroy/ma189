@@ -23,8 +23,7 @@ Each 50-minute lesson will cover theoretical material in an R Markdown Notebook 
 7. **MLK Holiday** (January 18, 2021)  No Class!
 8. **Multivariate Mean II** (January 20, 2021) Hypothesis Testing, Inference, Decision Rules.
 9. **Multiple Testing I** (January 22, 2021) Family-Wise Error Rate, False Discovery Rate.
- *Mid-Term 1 Due*
-10. **Multiple Testing II** (January 25, 2021) Two-sample Mean Testing, Paired Samples.
+10. **Multiple Testing II** (January 25, 2021) Two-sample Mean Testing, Paired Samples.  *Mid-Term 1 Due*
 11. **Multiple Testing III** (January 27, 2021) Unpaired Samples, Many Populations.
 12. **Multivariate Analysis of Variance I** (January 29, 2021)  ANOVA, Total Sums of Squares.
 13. **Multivariate Analysis of Variance II** (February 1, 2021) Wilks' Lambda, Pillai's Trace, Roy's Maximum Root.
