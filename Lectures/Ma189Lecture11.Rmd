@@ -76,17 +76,70 @@ type I errors). It is suited to a wide range of practical problems.
 
 - We begin with the univariate case. Suppose we have $g$ treatments (samples). For the $k$th treatment, we observe its effects on a group of patients of size $n_k$. The dataset
 can be summarized in the following table.
+\[
+ \left[ \begin{array}{ccccc}   & 1 & 2 & \ldots & g \\
+    1 & x_{11} & x_{12} & \ldots & x_{1g} \\
+    2 & x_{21} & x_{22} & \ldots & x_{2g} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    n_k & x_{n_1,1} & x_{n_2,1} & \ldots & x_{n_g, g} 
+\end{array}  \right]
+\]
 
 
-1 2 ⋯ g
-1 &'' &(' ⋯ &)'
-2 &'( &(( ⋯ &)(
-⋮ ⋮ ⋮ ⋱ ⋮
-#$ &',- &(,. ⋯ &),/
-Treatments (samples)
-Observations
-Notations:
-• &$0 = 2-th observation in sample ".
-• #$ = number of observations in sample ".
-• 3 = #' + ⋯+ #) = total sample size.
-• ! = number of treatments/populations/samples
+### Notation:
+
+- $x_{ik}$ is $i$th observation in $k$th sample
+- $n_k$ is number of observations in $k$th sample
+- $N = n_1 + \ldots + n_g$ is total sample size
+- $g$ is the  number of treatments/populations/samples
+
+### Assumptions for the ANOVA:
+
+1. The data from group $k$ has common mean $\mu_k$, i.e., ${\mathbb E} [ x_{ik} ] = \mu_k$.
+2. *Homoskedasticity*: the data from all groups have common variance $\sigma^2$.
+3. Independence: the observations are independently sampled.
+4. Normality: the data are normally distributed.
+
+The hypothesis of interest is that all of the means are equal. Mathematically this is formulated as:
+\[
+ H_0: \ {\mu}^{(1)} = \ldots = \ {\mu}^{(g)} 
+ \quad H_a: \ {\mu}^{(i)} \neq \ {\mu}^{(j)} \; \mbox{for some} \, i \neq j.
+\]
+- The alternative hypothesis indicates there exists at least one pair of different
+group population means.
+
+## Total Sum of Squares
+
+- Consider the following notation:
+\[
+ \overline{x}_k = \frac{1}{n_k} \sum_{i=1}^{n_k} x_{ik}, 
+\]
+ the sample mean of the $k$th sample.
+\[
+ \overline{x} = \frac{1}{N} \sum_{k=1}^g \sum_{i=1}^{n_k} x_{ik}, 
+\] 
+the grand mean (or, the overall sample mean).
+- The Analysis of Variance involves a partitioning of the total sum of squares, defined as:
+\[
+ \mbox{SS}_{total} = \sum_{k=1}^g \sum_{i=1}^{n_k} {( x_{ik} - \overline{x} )}^2.
+ \]
+- $\mbox{SS}_{total}$ is the sum of squared differences between each observation and the
+grand mean, which measures variation of the data around the grand mean.
+- When observations are far away from the grand mean, it tends to take a large value.
+- When observations are close to the grand mean, it tends to take a small value.
+
+## Partitioning Total Sum of Squares
+
+- An Analysis of Variance (ANOVA) is a partitioning of the total sum of squares.
+\begin{align}
+  \mbox{SS}_{total} & = \sum_{k=1}^g \sum_{i=1}^{n_k} {( x_{ik} - \overline{x} )}^2 \\
+& =  \sum_{k=1}^g \sum_{i=1}^{n_k} {[ ( x_{ik} - \overline{x}_k ) - (\overline{x}_k - \overline{x} ) ]}^2 \\
+ & = \sum_{k=1}^g \sum_{i=1}^{n_k} { ( x_{ik} - \overline{x}_k )}^2 +
+  n_k \sum_{k=1}^g  {  (\overline{x}_k - \overline{x} )  }^2.
+\end{align}
+- The first term is called the *error sum of squares* and measures the variation in the data
+about their group means. Denoted as $\mbox{SS}_{error}$.
+- The second term is called the *treatment sum of squares* and involves the differences
+between the group means and the Grand mean. Denoted as  $\mbox{SS}_{treat}$.
+
+Go up to slide 21
