@@ -1,6 +1,6 @@
 ---
 title: "Math 189: Homework 1"
-output: html_notebook
+output: pdf_document
 ---
 
 # A First Report 

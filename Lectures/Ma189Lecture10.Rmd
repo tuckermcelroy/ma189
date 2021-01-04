@@ -1,0 +1,236 @@
+---
+title: "Math 189: Multiple Testing III"
+output: html_notebook
+---
+ 
+# General Two-Sample Testing Problem
+
+- In general, observations from the two samples may not be one-to-one paired. We may even observe two samples with very different sizes.
+
+## Sample 1
+
+- $n_1$ observations
+- $m$ variables
+- $\underline{x}_1^{(1)}, \ldots, \underline{x}_{n_1}^{(1)}$.
+- Population parameters: $\underline{\mu}^{(1)}$, ${\mathbf \Sigma}^{(1)}$.
+- Sample statistics: $\overline{\underline{x}}^{(1)}$, ${\mathbf S}^{(1)}$.
+
+## Sample 2
+
+- $n_2$ observations
+- $m$ variables
+- $\underline{x}_1^{(2)}, \ldots, \underline{x}_{n_2}^{(2)}$.
+- Population parameters: $\underline{\mu}^{(2)}$, ${\mathbf \Sigma}^{(2)}$.
+- Sample statistics: $\overline{\underline{x}}^{(2)}$, ${\mathbf S}^{(2)}$.
+
+We are interested in testing the equivalence of the two population means:
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)},
+\]
+
+## Two-Sample Hotelling’s $T^2$
+
+- The two-sample Hotelling’s $T^2$  statistic is defined as
+\[
+ T^2 = {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}^{\prime}
+  \, { \left( n_1^{-1} {\mathbf S}^{(1)} + n_2^{-1} {\mathbf S}^{(2)} \right)}^{-1} \,
+  {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}.
+\]
+- This is a function of the difference between the sample means for the two populations.
+- Instead of being a function of a single covariance matrix, we can see that the two-sample
+test statistic is a function of ${\mathbf S}^{(1)}$,  ${\mathbf S}^{(2)}$, $n_1$, and $n_2$.
+- Denote
+\[
+  {\mathbf S}_T =  n_1^{-1} {\mathbf S}^{(1)} + n_2^{-1} {\mathbf S}^{(2)},
+\]
+whih i s a weighted-average of sample covariance matrices  ${\mathbf S}^{(1)}$ and
+${\mathbf S}^{(2)}$.
+
+## Two-Sample Hotelling’s $T^2$ (Large Sample)
+
+- When both $n_1$ and $n_2$ are large, we can ignore the effects of estimating the
+population covariance matrices by their sample estimators:
+\[
+ {\mathbf S}^{(1)} \approx {\mathbf \Sigma}^{(1)}, \quad
+  {\mathbf S}^{(2)} \approx {\mathbf \Sigma}^{(2)}.
+\]
+- Therefore the $T^2$ statistic is approximately chi-square distributed with $m$ degrees of
+freedom, under the null hypothesis.
+\[
+ T^2 \approx {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}^{\prime}
+  \, { \left( n_1^{-1} {\mathbf \Sigma}^{(1)} + 
+  n_2^{-1} {\mathbf \Sigma}^{(2)} \right)}^{-1} \,
+  {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}
+  \sim \chi^2_{m}.
+\]
+- At a given significance level $\alpha$, we reject the null hypothesis $H_0$ if
+\[
+ T^2 > \chi^2_{m,\alpha}.
+ \]
+ 
+## Two-Sample Hotelling’s $T^2$ (Small Sample)
+
+- When the sample sizes $n_1$ and $n_2$ are not large, we cannot ignore the effects of
+estimating the population covariance matrices by their sample counterparts.
+- Instead, we can calculate an $F$ transformation using the formula
+\[
+ F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -1)} \, T^2 \sim \mathcal{F}_{m,\nu},
+\]
+ where the degree of freedom $\nu$  is provided by the following complicated formula:
+\[
+ \frac{1}{\nu} = \sum_{k=1}^2 \frac{1}{n_k -1}
+ { \left( \frac{  {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}^{\prime} 
+ {\mathbf S}_T^{(1)}
+ \left( n_k^{-1} {\mathbf S}^{(k)} \right)  {\mathbf S}_T^{-1} {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}
+  }{ T^2 } \right) }^2.
+\]
+- At a given significance level $\alpha$, we reject the null hypothesis $H_0$ if
+\[
+F > \mathcal{F}_{m,\nu,\alpha}.
+\]
+
+## Two-Sample Hotelling’s $T^2$  (${\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}$)
+
+- The two-sample Hotelling’s $T^2$ statistic can be simplified if we know the two
+populations share the same variance-covariance matrix, i.e.
+\[
+{\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}.
+\]
+- When the sample sizes $n_1$ and $n_2$ are not large, the $F$-statistic will be
+\[
+ F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -1)} \, T^2 \sim \mathcal{F}_{m,n_1+n_2 - m-1}.
+\]
+In other words, the degrees of freedom $\nu$ equals $n_1+n_2 - m-1$ in this case. 
+- At a given significance level $\alpha$, we reject the null hypothesis $H_0$ if
+\[
+F > \mathcal{F}_{m,n_1+n_2 - m-1,\alpha}.
+\]
+
+## Example: Swiss Bank Notes
+
+- This is a dataset that contains six variables measured on 100 genuine and 100 counterfeit old Swiss 1000-franc bank notes.
+- Six variables are measured:
+
+1. Length of the note
+2. Width of the Left-Hand side of the note
+3. Width of the Right-Hand side of the note
+4. Width of the Bottom Margin
+5. Width of the Top Margin
+6. Diagonal Length of Printed Area
+
+![SwissFrance](images/swiss_franc.jpg)
+
+### Objective: 
+
+Determine if counterfeit notes can be distinguished from the genuine Swiss bank notes.
+
+One way to answer this question is to test if the genuine and counterfeit notes have different population means.
+- Denote the population mean vectors of genuine and counterfeit populations as $\underline{\mu}^{(1)}$ and $\underline{\mu}^{(2)}$ respectively. Denote by $\overline{\underline{x}}^{(1)}$ and $\overline{\underline{x}}^{(2)}$ the sample means, and
+${\mathbf S}^{(1)}$ and ${\mathbf S}^{(2)}$ the sample variance matrices.
+- We are interested in testing the equivalence of the two population means:
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)}.
+\]
+- To simplify our calculation, let us first assume the two populations share the
+same population variance-covariance matrices.  **This assumption could be wrong!**
+\[
+{\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}.
+\]
+
+### A Peek of the Dataset
+
+First, let us have a peak at the dataset. BN1 to BN100 are genuine banknotes and BN101 to BN200 are counterfeit banknotes. The data is from "Multivariate Statistics: A practical approach", by Bernhard Flury and Hans Riedwyl, Chapman and Hall, 1988.
+
+```{r}
+swiss <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\SBN.txt")
+swiss[1:5,]
+swiss[101:105,]
+```
+
+### Testing Procedure
+
+- We calculate the sample means of each variable from the genuine and counterfeit samples, respectively.  
+
+```{r}
+mu_mat <- cbind(colMeans(swiss[1:100,]),colMeans(swiss[101:200,]))
+colnames(mu_mat) <- c("Genuine Sample Mean","Counterfeit Sample Mean")
+mu_mat
+```
+
+- We calculate the sample variance covariance matrices from the genuine and counterfeit samples, respectively.
+
+```{r}
+var_genuine <- var(swiss[1:100,])
+var_counterfeit <- var(swiss[101:200,])
+var_genuine
+var_counterfeit
+```
+
+- Then we calculate
+\[
+  {\mathbf S}_T =  n_1^{-1} {\mathbf S}^{(1)} + n_2^{-1} {\mathbf S}^{(2)},
+\]
+
+```{r}
+n1 <- 100
+n2 <- 100
+var_weighted <- n1^{-1} * var_genuine + n2^{-1} * var_counterfeit
+round(var_weighted,digits=6)
+```
+
+- Get the $T^2$ and $F$ statistics:
+
+```{r}
+z <- swiss[1:100,] - swiss[101:200,]
+hotel <- t(colMeans(z)) %*% solve(var_weighted) %*% (colMeans(z))
+hotel
+m <- 6
+alpha <- .05
+f_stat <- (n1+n2-m-1)/(m*(n1+n2-2)) * hotel
+f_stat
+qf(1-alpha,df1=m,df2=n1+n2-m-1)
+```
+
+- Decision: reject $H_0$!  Conclusion: the counterfeit notes can be distinguished from the genuine notes on at least one of the measurements.
+
+### Getting Fancy with Packages
+
+```{r}
+library(Hotelling)
+library(ICSNP)
+X1 <- swiss[1:100,]
+X2 <- swiss[101:200,]
+colMeans(X1)
+colMeans(X2)
+S1 <- cov(X1)
+S2 <- cov(X2)
+
+# Package number one
+hot_test <- hotelling.test(X1,X2)
+hot_test
+
+# Package number two
+hot_test <- HotellingsT2(X1,X2)
+hot_test
+```
+
+# Comparing More Than Two Populations
+
+- We have learned how to test if one population mean vector equals a specific vector
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}_0 \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}_0.
+\]
+- Also, we have learned how to test if two populations have equal mean vectors
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)}.
+\]
+- What if we want to test the equivalence of mean vectors among three or more populations?
+- Suppose $\underline{\mu}^{(1)}, \ldots, \underline{\mu}^{(g)}$  are mean vectors of $g$ populations. We are interested in testing
+\[
+ H_0: \underline{\mu}^{(1)} = \ldots = \underline{\mu}^{(g)} 
+ \quad H_a: \underline{\mu}^{(i)} \neq \underline{\mu}^{(j)} \; \mbox{for some} \, i \neq j.
+\]
+- The null hypothesis assumes all mean vectors to be the same. The null hypothesis is false
+(alternative is true) if any two mean vectors are different.
+
+

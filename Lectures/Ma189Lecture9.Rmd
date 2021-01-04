@@ -1,0 +1,336 @@
+---
+title: "Math 189: Multiple Testing II"
+output: html_notebook
+---
+ 
+# Hypothesis Testing Problems on Population Mean Vectors
+
+- Thus far the mean vector testing schemes we have discussed are based on comparing each component of two vectors.
+- The problem of testing the equivalence of two vectors is decomposed into testing multiple univariate hypotheses.
+- This type of testing scheme is called *multiple testing*.
+- There are other ways to test the mean vector from one or multiple populations.
+
+# Hotelling's $T^2$
+
+## Hotelling’s $T^2$ (Univariate)
+
+- Consider the square of the $t$-statistic for testing a univariate mean:
+\[
+ T^2 = \frac{ {(\overline{x} - \mu_0)}^2 }{ s^2/n } = 
+ n (\overline{x} - \mu_0) s^{-1} (\overline{x}- \mu_0) \sim \mathcal{F}_{1,n-1}.
+\]
+- Squaring a $t$-distributed random variable with $n-1$ degrees of freedom gives rise to an $F$-distributed random variable with $1$ and $n-1$ degrees of freedom.
+- We reject $H_0$ at level $\alpha$ if $T^2$ exceeds the critical value from the $\mathcal{F}_{1,n-1}$ distribution, for  level $\alpha$:
+\[
+ T^2 > \mathcal{F}_{1,n-1,\alpha}.
+\]
+
+```{r}
+alpha <- .05
+x <- rnorm(10,mean=1)
+n <- length(x)
+t_stat <- (mean(x) - 0)/(sd(x)/n)
+t_stat^2
+qf(1-alpha,df1=1,df2=n-1)
+```
+
+## Hotelling’s $T^2$ (Multivariate)
+
+- Motivated by the univariate case, we define the Hotelling’s $T^2$ statistic for testing
+a dimension $m$ mean vector 
+\[
+  T^2 = n {( \overline{\underline{x}} - \underline{\mu}_0)}^{\prime} {\mathbf S}^{-1}
+  {( \overline{\underline{x}} - \underline{\mu}_0)}.
+\]
+- The difference between the sample mean and ${\mu}_0$ is replaced with the
+difference between the sample mean vector and the hypothesized $\underline{\mu}_0$.
+- The inverse of the sample variance is replaced by the inverse of the
+sample covariance matrix  ${\mathbf S}$.
+
+## Distribution of Hotelling’s $T^2$  (Large Sample)
+
+- When sample size $n$ is large, we can ignore the estimation error of the variance-covariance matrix.
+- If we replace the sample covariance matrix  ${\mathbf S}$. by the population covariance matrix ${\mathbf \Sigma}$, then $T^2$ is chi-square distributed with $m$ degrees of freedom.
+\[
+    n {( \overline{\underline{x}} - \underline{\mu}_0)}^{\prime} {\mathbf \Sigma}^{-1}
+  {( \overline{\underline{x}} - \underline{\mu}_0)}  \sim \chi^2_{m}.
+\]
+- Therefore, when the sample size $n$ is large, $T^2$ is approximately chi-square distributed with $m$ degrees of freedom.
+
+## Distribution of Hotelling’s $T^2$  (Small Sample)
+
+- For small samples, the chi-square approximation for $T^2$  does not take into account the estimation error of estimating  ${\mathbf \Sigma}$ with  ${\mathbf S}$.
+- Better results can be obtained from the following transformation of the Hotelling’s $T^2$ statistic:
+\[
+  F = \frac{n-m}{m (n-1)} T^2 \sim \mathcal{F}_{m,n-m}.
+\]
+- Under $H_0$, $F$ follows a $F$-distribution with $m$ and $n-m$ degrees of freedom.
+- We reject the null hypothesis at level $\alpha$ if
+\[
+ F > \mathcal{F}_{m,n-m,\alpha}.
+ \]
+
+```{r}
+alpha <- .05
+x1 <- rnorm(10,mean=1)
+x2 <- rnorm(10,mean=0)
+x <- cbind(x1,x2)
+n <- dim(x)[1]
+m <- dim(x)[2]
+f_stat <- (n-m)/(m*(n-1)) * t(colMeans(x)) %*% solve(var(x)) %*% colMeans(x)
+f_stat
+qf(1-alpha,df1=m,df2=n-m)
+```
+
+## Example: USDA Women’s Health Survey Data
+
+- The recommended intake and sample mean are given below:
+
+```{r}
+nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient$V1=NULL
+colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
+null_mu <- c(1000,15,60,800,75)
+mu_mat <- cbind(null_mu,colMeans(nutrient))
+colnames(mu_mat) <- c("Recommended Intake","Sample Mean")
+mu_mat
+```
+
+- At a significance level $\alpha = .01$, test the following null and alternative hypotheses
+using Hotelling’s $T^2$:
+\[
+ H_0: \underline{\mu} = \underline{\mu}_0 \quad H_a: \underline{\mu} \neq \underline{\mu}_0.
+\]
+- Calculate sample covariance matrix ${\mathbf S}$:
+
+```{r}
+var(nutrient)
+```
+
+- The Hotelling’s $T^2$ can be calculated as 
+
+```{r}
+n <- dim(nutrient)[1]
+hotel <- n*t(colMeans(nutrient)-null_mu) %*% 
+  solve(var(nutrient)) %*% (colMeans(nutrient)-null_mu)
+hotel
+```
+
+- The $F$-statistic can be calculated as 
+
+```{r}
+m <- 5
+alpha <- .01
+f_stat <- (n-m)/(m*(n-1)) * hotel
+f_stat
+qf(1-alpha,df1=m,df2=n-m)
+```
+
+- Conclusion: We reject the null, because the $F$-statistic exceeds the critical value.
+
+
+# Compare Two Population Means
+
+- Thus far, we have focused on testing if a population mean vector equals a specific vector:
+\[
+ H_0: \underline{\mu} = \underline{\mu}_0 \quad H_a: \underline{\mu} \neq \underline{\mu}_0.
+\]
+- In some applications, we want to test the equivalence of two (unknown) population means, i.e.,
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)},
+\]
+where $\underline{\mu}^{(1)}$ and $\underline{\mu}^{(2)}$ are the mean vectors of two populations.
+- This is a *two-sample testing* problem.
+
+# Two-Sample Mean Testing Problems
+
+- There are many applications, for example:
+
+1. Test if there is a significant difference before and after a treatment.
+2. Compare the reading ability of the students in two middle schools.
+3. Check if a policy has a positive impact on reducing unemployment rate.
+4. Can we classify two cities into the same class according to their weather conditions?
+5. Which mobile phone company has better quality control? Samsung or Apple?
+
+-  There are several aspects we need to consider before applying the test:
+
+1. The data may either be paired or unpaired.
+2. The sample sizes can be the same or different.
+3. The covariance matrices of two populations can be equal or unequal (we often do not
+know this in practice).
+
+# Paired Samples
+
+- *Paired samples* are samples where natural or matched couplings occur. This generates a dataset in which each data point in one sample is uniquely paired to a data point in the second sample.
+- The two samples are one-to-one paired.
+
+## Sample 1
+
+- $n$ observations
+- $m$ variables
+- $\underline{x}_1^{(1)}, \ldots, \underline{x}_n^{(1)}$.
+- Population parameters: $\underline{\mu}^{(1)}$, ${\mathbf \Sigma}^{(1)}$.
+- Sample statistics: $\overline{\underline{x}}^{(1)}$, ${\mathbf S}^{(1)}$.
+
+## Sample 2
+
+- $n$ observations
+- $m$ variables
+- $\underline{x}_1^{(2)}, \ldots, \underline{x}_n^{(2)}$.
+- Population parameters: $\underline{\mu}^{(2)}$, ${\mathbf \Sigma}^{(2)}$.
+- Sample statistics: $\overline{\underline{x}}^{(2)}$, ${\mathbf S}^{(2)}$.
+ 
+## Illustrations of Paired Samples:
+
+1. Pre-test/post-test samples in which a factor is measured before and after an intervention.
+2. Cross-over trials in which individuals are randomized to two treatments and then the same individuals are crossed-over to the alternative treatment.
+3. Matched samples, in which individuals are matched on personal characteristics such as age and sex.
+4. Duplicate measurements on the same biological samples.
+5. Any circumstance in which each data point in one sample is uniquely matched to a data point in the second sample.  
+
+## Example: Spouse Data
+
+- A sample of 30 husband-wife pairs are asked to respond to each of the following questions:
+
+1. What is the level of passionate love you feel for your partner?
+2. What is the level of passionate love your partner feels for you?
+3. What is the level of companionate love you feel for your partner?
+4. What is the level of companionate love your partner feels for you?
+
+- Responses were recorded on the five-point scale: 1 None at all, 2. Very little, 3. Some, 4. A great deal, 5. Tremendous amount
+
+### Population/Sample 1: Husbands
+
+- 30 observations
+- 4 variables (responses to 4 questions)
+- $\underline{x}^{(1)}_{i} = {[ x_{i1}^{(1)},  x_{i2}^{(1)},  x_{i3}^{(1)},  x_{i4}^{(1)} ]}^{\prime}$
+- Population parameters: $\underline{\mu}^{(1)}$, ${\mathbf \Sigma}^{(1)}$.
+- Sample statistics: $\overline{\underline{x}}^{(1)}$, ${\mathbf S}^{(1)}$.
+
+### Population/Sample 2: Wives
+
+- 30 observations
+- 4 variables (responses to 4 questions)
+- $\underline{x}^{(2)}_{i} = {[ x_{i1}^{(2)},  x_{i2}^{(2)},  x_{i3}^{(2)},  x_{i4}^{(2)} ]}^{\prime}$
+- Population parameters: $\underline{\mu}^{(2)}$, ${\mathbf \Sigma}^{(2)}$.
+- Sample statistics: $\overline{\underline{x}}^{(2)}$, ${\mathbf S}^{(2)}$.
+
+### Questions of Interest
+
+- Do the husbands respond to the questions in the same way as their wives?
+- Do the husbands and wives accurately perceive the responses of their spouses?
+
+### Question 1: Do the husbands respond to the questions in the same way as their wives?
+
+- This is equivalent to asking whether the population mean vector of the husbands equals the population mean vector of the wives.
+\[
+  \mbox{Yes}: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad \mbox{No}: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)},
+\]
+To answer this question, we are interested in testing the following null
+and alternative hypotheses:
+\[
+ H_0: \underline{\mu}^{(1)} = \underline{\mu}^{(2)} \quad H_a: \underline{\mu}^{(1)} \neq \underline{\mu}^{(2)},
+\]
+
+## Testing on Paired Samples
+
+- We can re-write the null and alternative hypotheses as
+\[
+ H_0: \underline{\mu}^{(1)} - \underline{\mu}^{(2)} = \underline{0} \quad H_a: \underline{\mu}^{(1)} - \underline{\mu}^{(2)} \neq \underline{0}.
+\]
+Here $\underline{0}$ is the zero vector.
+- This motivates us to consider a pair-wise difference of the two samples.
+- Denote by $\underline{y}_i$ the (vector) difference in responses for the $i$th pair ($i$th husband and $i$th wife):
+\[
+ \underline{y}_i = \underline{x}^{(1)} - \underline{x}^{(2)}.
+\]
+- The population mean vector of $\underline{y}_i$ is
+\[
+ \underline{\mu}_y = \underline{\mu}^{(1)} - \underline{\mu}^{(2)}.
+\]
+- So we transform the two-sample testing problem to a one-sample problem:
+\[
+ H_0: \underline{\mu}_y = \underline{0} \quad H_a: \underline{\mu}_y \neq \underline{0}.
+\]
+
+## Paired Hotelling’s $T^2$:
+
+- Because $\underline{y}_i = \underline{x}^{(1)} - \underline{x}^{(2)}$ can be considered a new sample, we can calculate its sample mean vector and sample covariance matrix as
+\[
+ \overline{\underline{y}} = \frac{1}{n} \sum_{i=1}^n \underline{y}_i \qquad
+  {\mathbf S}_y = \frac{1}{n-1} \sum_{i=1}^n {(\underline{y}_i - \overline{\underline{y}} )}
+   {(\underline{y}_i - \overline{\underline{y}} )}^{\prime}.
+\]
+- The paired Hotelling's $T^2$ test statistic is given by
+\[
+  T^2 = n \overline{\underline{y}}^{\prime} \, {\mathbf S}_y^{-1} \, \overline{\underline{y}}.
+\]
+- Then, we can define the $F$-statistic as
+\[
+  F = \frac{n-m}{m (n-1) } T^2 \sim \mathcal{F}_{m,n-m}.
+\]
+At a given significance level $\alpha$, we reject the null hypothesis $H_0$ if
+\[
+ F > \mathcal{F}_{m,n-m,\alpha}.
+\]
+
+### Question 1: Do the husbands respond to the questions in the same way as their wives?
+
+```{r}
+spouse <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\spouse.txt")
+n <- dim(spouse)[1]
+spouse_diff <- spouse[,1:4] - spouse[,5:8]
+colMeans(spouse_diff)
+hotel <- n*t(colMeans(spouse_diff)) %*% 
+  solve(var(spouse_diff)) %*% (colMeans(spouse_diff))
+hotel
+m <- 4
+alpha <- .05
+f_stat <- (n-m)/(m*(n-1)) * hotel
+f_stat
+qf(1-alpha,df1=m,df2=n-m)
+```
+
+### Question 2: Do the husbands and wives accurately perceive the responses of their spouses?
+
+- To understand this question, let us return to the four questions asked of each husband-wife pair. The questions were:
+
+1. What is the level of passionate love you feel for your partner?
+2. What is the level of passionate love your partner feels for you?
+3. What is the level of companionate love you feel for your partner?
+4. What is the level of companionate love your partner feels for you?
+
+- A sub-question of question 2 is, does the wife accurately perceive the amount of passionate love her husband feels towards her?
+- This is equivalent to asking, does the husband's answer to question 1 match the wife's answer to question 2?
+- Mathematically, we formulate the question into the following null and alternative
+hypotheses
+\[
+ H_0: \mu^{(1)}_1 - \mu^{(2)}_2 = 0 \quad H_a: \mu^{(1)}_1 - \mu^{(2)}_2 \neq 0.
+\]
+- To address question 2 we need to define four new variables as follows:
+
+1. $z_{i,1} = x^{(1)}_{i,1} - x^{(2)}_{i,2}$ (husbands’ response to question 1 minus wives’ response to question 2).
+2. $z_{i,2} = x^{(1)}_{i,2} - x^{(2)}_{i,1}$ (husbands’ response to question 2 minus wives’ response to question 1).
+3. $z_{i,3} = x^{(1)}_{i,3} - x^{(2)}_{i,4}$ (husbands’ response to question 3 minus wives’ response to question 4).
+4. $z_{i,4} = x^{(1)}_{i,4} - x^{(2)}_{i,3}$ (husbands’ response to question 4 minus wives’ response to question 3).
+- Then, we transform the question 2 to the following mean testing problem:
+\[
+ H_0: \underline{\mu}_z = \underline{0} \quad H_a: \underline{\mu}_z \neq \underline{0}.
+\]
+- Use the paired Hotelling’s $T^2$ test.
+
+```{r}
+z <- data.frame(spouse[,1]-spouse[,6],spouse[,2]-spouse[,5],
+                spouse[,3]-spouse[,8],spouse[,4]-spouse[,7])
+colMeans(z)
+hotel <- n*t(colMeans(z)) %*% solve(var(z)) %*% (colMeans(z))
+hotel
+m <- 4
+alpha <- .05
+f_stat <- (n-m)/(m*(n-1)) * hotel
+f_stat
+qf(1-alpha,df1=m,df2=n-m)
+```
+
+- Fail to reject! Conclusion: There is no clear evidence, according to the observed sample, to reject the hypothesis that husbands and wives accurately perceive the responses of their spouses.
+
