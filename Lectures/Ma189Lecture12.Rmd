@@ -4,3 +4,274 @@ output: html_notebook
 ---
 
 # Multivariate ANOVA 
+
+- Suppose we measure $m$ variables over $g$ populations. For the $k$th population, we observe a sample of size $n_k$.
+- The dataset can be summarized in this table. Superscript denotes the population, whereas row and column index refer to record and variable respectively:
+
+\[
+ \left[ \begin{array}{ccccc}   & 1 & 2 & \ldots & g \\
+    1 & x_{11}^{(1)}, \ldots, x_{1m}^{(1)} & x_{11}^{(2)}, \ldots, x_{1m}^{(2)}  &
+      \ldots & x_{11}^{(g)}, \ldots, x_{1m}^{(g)} \\
+    2 & x_{21}^{(1)}, \ldots, x_{2m}^{(1)} & x_{21}^{(2)}, \ldots, x_{2m}^{(2)} & 
+    \ldots & x_{21}^{(g)}, \ldots, x_{2m}^{(g)}  \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    n_k & x_{n_1,1}^{(1)}, \ldots, x_{n_1,m}^{(1)} & x_{n_1,1}^{(2)}, \ldots, x_{n_1,m}^{(2)} &
+    \ldots & x_{n_1,1}^{(g)}, \ldots, x_{n_1,m}^{(g)} 
+\end{array}  \right]
+\]
+
+### Notation:
+
+- $x_{ij}^{(k)}$ is $i$th observation of the $j$th variable in the $k$th population
+- $n_k$ is number of observations in $k$th population
+- $N = n_1 + \ldots + n_g$ is total sample size
+- $g$ is the  number of treatments/populations/samples
+
+## MANOVA
+
+- The assumptions here are essentially the same as the univariate ANOVA, except we have $m$ variables.
+1. The data from group $k$ has common mean vector $\underline{\mu}^{(k)}$, i.e., 
+\[
+  {\mathbb E} [ x_{ij}^{(k)} ] = \underline{\mu}_j^{(k)}.
+\]
+ (The $m$ components of the vector correspond to the $m$ variables.)
+2. Homoskedasticity: The data from all groups have common covariance matrix ${\mathbf \Sigma}$, i.e.,
+\[
+  {\mathbf \Sigma} = \mbox{Cov} [ \underline{x}_i^{(k)}, \underline{x}_i^{(k)}]
+\]
+ for any record $i$, and the matrix does not depend on $k$ (the group index).
+3. Independence: The observations are independently sampled.
+4. Normality: The data are multivariate normally distributed.
+
+
+- We are interested in testing the null hypothesis that all group mean vectors are equal:
+\[
+ H_0:  \underline{\mu}^{(1)} = \underline{\mu}^{(2)} = \ldots = \underline{\mu}^{(g)}
+ \quad \mbox{versus} \quad H_a: \mu_j^{(k)} \neq \mu_{j}^{(h)} 
+\]
+ for some variable $j$, and for some groups $k$ and $h$.
+- This says that the null hypothesis is false if at least one pair of treatments is different on
+at least one variable.
+
+## Total Sum of Squares and Cross Products
+
+- Consider the following notation:
+\[
+  \overline{\underline{x}}^{(k)} = \frac{1}{n_k} \sum_{i=1}^{n_k}  \underline{x}_{i}^{(k)},
+\]
+ which is the sample mean vector of $k$th sample (so it gives sample means for all the variables, for the $k$th sample).
+\[
+ \overline{\underline{x}} = \frac{1}{N} \sum_{k=1}^g  \sum_{i=1}^{n_k}  \underline{x}_{i}^{(k)},
+\]
+ which is the Grand mean vector (overall sample mean).
+- The multivariate analog is the Total Sum of Squares and is a cross products matrix of size $m \times m$:
+\[
+  {\mathbf T} = \sum_{k=1}^g \sum_{i=1}^{n_k} { \left( \underline{x}_i^{(k)} - \overline{\underline{x}}  \right) } '
+  { \left( \underline{x}_i^{(k)} - \overline{\underline{x}}  \right) }^{\prime} 
+\]
+- The diagonal entries of ${\mathbf T}$ are the total sum of squares of each variable.
+- The off-diagonal entries of  ${\mathbf T}$  measure the dependence of two variables across all observations.
+
+## Partitioning Total Sum of Squares ${\mathbf T}$
+
+- We may partition the total sum of squares and cross products as follows:
+\begin{align*}
+  {\mathbf T} & = \sum_{k=1}^g \sum_{i=1}^{n_k} { \left( \underline{x}_i^{(k)} -  \overline{\underline{x}}  \right) } 
+  { \left( \underline{x}_i^{(k)} - \overline{\underline{x}}  \right) }^{\prime}  \\
+& = \sum_{k=1}^g \sum_{i=1}^{n_k} { \left\{ \left( \underline{x}_i^{(k)} - 
+\overline{\underline{x}}^{(k)} \right) + \left( \overline{\underline{x}}^{(k)} -
+  \overline{\underline{x}} \right) \right\} } 
+{ \left\{ \left( \underline{x}_i^{(k)} - 
+\overline{\underline{x}}^{(k)} \right) + \left( \overline{\underline{x}}^{(k)} -
+  \overline{\underline{x}} \right) \right\} }^{\prime}   \\
+ & = \sum_{k=1}^g \sum_{i=1}^{n_k} {   \left( \underline{x}_i^{(k)} - 
+\overline{\underline{x}}^{(k)} \right)   } 
+{  \left( \underline{x}_i^{(k)} - \overline{\underline{x}}^{(k)} \right)  }^{\prime}  +
+    \sum_{k=1}^g  n_k {   \left( \overline{\underline{x}}^{(k)} -
+  \overline{\underline{x}} \right)  } 
+{  \left( \overline{\underline{x}}^{(k)} -
+  \overline{\underline{x}} \right)  }^{\prime}.
+\end{align*}
+- Call the first term ${\mathbf E}$, the Error Sum of Squares and Cross Products.
+- Call the second term ${\mathbf H}$, the Hypothesis Sum of Squares and Cross Products.
+- We tend to reject the null hypothesis
+\[
+ H_0:  \underline{\mu}^{(1)} = \underline{\mu}^{(2)} = \ldots = \underline{\mu}^{(g)}
+\]
+if the Hypothesis Sum of Squares and Cross Products matrix ${\mathbf H}$ is "large" relative to the Error Sum of Squares and Cross Products matrix ${\mathbf E}$.
+- What do we mean by "large" when comparing two matrices?
+
+## Wilks’s Lambda (Ratio of Determinants)
+
+- The first test statistic for Multivariate ANOVA is named *Wilks’s Lambda*, which is named after American statistician Samuel S. Wilks:
+\[
+ \Lambda = \frac{ \det {\mathbf E} }{ \det {\mathbf T}} = 
+ \frac{ \det {\mathbf E} }{ \det \left( {\mathbf E}  + {\mathbf H} \right) }.
+\]
+- Here ${\mathbf E}$ is the Error Sum of Squares and Cross Products, ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products, and ${\mathbf T}$ is the Total Sum of Squares and Cross Products.
+Also $\det$ denotes the determinant of a matrix.
+- The Wilks’s Lambda statistic follows a Lambda distribution. In general, we will reject the null hypothesis if Wilks’s lambda is small (close to zero).
+
+## Pillai’s Trace (Trace of Ratio)
+
+- The second test statistic for Multivariate ANOVA is named *Pillai’s Trace*:
+\[
+  V = \mbox{tr} \left[ {\mathbf H} { \left( {\mathbf H} + {\mathbf E} \right) }^{-1}  \right],
+\]
+where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products. Also $\mbox{tr}$ denotes the trace of a matrix.
+- If ${\mathbf H}$ is large relative to ${\mathbf E}$ then Pillai’s Trace will take a large value. Thus, we reject the null hypothesis if this test statistic is large.
+- Pillai’s Trace can be transformed to an $F$-statistic up to a scaling factor depending on the data:
+\[
+   F = \frac{ s_1 V }{ s_2 - V},
+\]
+ for some data-dependent parameters $s_1$ and $s_2$.
+ 
+## Hotelling-Lawley Trace (Trace of Ratio)
+
+- The third test statistic for Multivariate ANOVA is named the *Hotelling-Lawley Trace*, which is defined as
+\[
+ U = \mbox{tr} \left[ {\mathbf H} {  {\mathbf E}   }^{-1}  \right],
+\]
+where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products.  
+- If ${\mathbf H}$ is large relative to ${\mathbf E}$ then the Hotelling-Lawley Trace will take a large value. Thus, we reject the null hypothesis if this test statistic is large.
+- Hotelling-Lawley Trace can be transformed to an $F$-statistic up to a scaling factor, depending on the data:
+\[
+ F = s \, U,
+\]
+ for some data-dependent parameter $s$. It is slightly simpler than Pillai’s Trace.
+ 
+## Roy’s Maximum Root (Largest Eigenvalue of Ratio)
+
+- The fourth test statistic for Multivariate ANOVA is named *Roy’s Maximum Root*, which is defined as
+\[
+ R = \lambda_m  \left[ {\mathbf H} {  {\mathbf E}   }^{-1}  \right],
+\]
+where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products.  Also $\lambda_m$ denotes the largest  eigenvalue of a $m \times m$-dimensional matrix.
+- If ${\mathbf H}$ is large relative to ${\mathbf E}$, then the Roy’s Maximum Root will take a large value. Thus, we reject the null hypothesis if this test statistic is large.
+- Roy’s Maximum Root can also be transformed to an $F$-statistic up to a scaling factor depending on the data.
+\[
+  F = t \, R,
+\]
+ for some data-dependent parameter $t$.
+ 
+## Example: Romano-British Pottery data
+
+- Recall the null and alternative hypothesis
+\[
+ H_0:  \underline{\mu}^{(1)} = \underline{\mu}^{(2)} = \ldots = \underline{\mu}^{(g)}
+ \quad \mbox{versus} \quad H_a: \mu_j^{(k)} \neq \mu_{j}^{(h)} 
+\]
+ for some variable $j$, and for some groups $k$ and $h$.
+- Associated Question: Is there at least one chemical that varies significantly over at least one pair of sites?
+- What is the difference compared with univariate ANOVA?
+1. The alternative hypothesis is different. (Answering different questions!)
+2. The correlation among variables is ignored in univariate case.
+3. Interpretation will be different. 
+- Let’s compare the MANOVA test results for the four test statistics
+1. Wilks’ Lambda: $\Lambda = \det  {\mathbf E} / \det {\mathbf T}$.
+2. Pillai’s Trace:  $V = \mbox{tr} [ {\mathbf H} { ( {\mathbf H} + {\mathbf E} ) }^{-1} ]$
+3. Hotelling-Lawley Trace:  $U = \mbox{tr} [ {\mathbf H} { {\mathbf E}  }^{-1} ]$
+4. Roy’s Maximum Root: $R = \lambda_m [ {\mathbf H} { {\mathbf E}  }^{-1} ]$
+- A common procedure can be summarized as follows:
+1. Calculate ${\mathbf E}$ and ${\mathbf H}$.
+2. Calculate test statistic.
+3. Transform the test statistic to an $F$-statistic.
+4. Calculate critical value or p-value, and make conclusion.
+
+```{r}
+pottery <- read.csv("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\RBPottery.csv")
+colnames(pottery) <- c("No", "ID", "Kiln", "Al", "Fe", "Mg", "Ca", "Na", "K2O", "TiO2", "MnO", "BaO")
+pot_llan <- pottery[pottery$Kiln==2,]
+pot_cald <- pottery[pottery$Kiln==3,]
+pot_is <- pottery[pottery$Kiln==4,]
+pot_ar <- pottery[pottery$Kiln==5,]
+pot <- NULL
+pot <- rbind(pot,pot_llan)
+pot <- rbind(pot,pot_cald)
+pot <- rbind(pot,pot_is)
+pot <- rbind(pot,pot_ar)
+
+# Group: kiln 2
+x2 <- pot[pot$Kiln==2,4:8]
+m2 <- colMeans(x2)
+n2 <- dim(x2)[1]
+# Group: kiln 3
+x3 <- pot[pot$Kiln==3,4:8]
+m3 <- colMeans(x3)
+n3 <- dim(x3)[1]
+# Group: kiln 4
+x4 <- pot[pot$Kiln==4,4:8]
+m4 <- colMeans(x4)
+n4 <- dim(x4)[1]
+# Group: kiln 5
+x5 <- pot[pot$Kiln==5,4:8]
+m5 <- colMeans(x5)
+n5 <- dim(x5)[1]
+# Grand Mean
+mg <- (m2*n2 + m3*n3 + m4*n4 + m5*n5)/(n2+n3+n4+n5)
+```
+ 
+### Error Sum of Squares and Cross Products Matrix 
+
+- Can be calculated as follows:
+\[
+ {\mathbf E} = \sum_{k=1}^g \sum_{i=1}^{n_k} {   \left( \underline{x}_i^{(k)} - 
+\overline{\underline{x}}^{(k)} \right)   } 
+{  \left( \underline{x}_i^{(k)} - \overline{\underline{x}}^{(k)} \right)  }^{\prime}.
+\]
+- Code: group data into a data matrix that is $n_k \times m$ for each population $k$.
+- The results are below:
+```{r}
+ESS <- cov(x2)*(n2-1) + cov(x3)*(n3-1) + cov(x4)*(n4-1) + cov(x5)*(n5-1)
+ESS
+```
+
+### Hypothesis Sum of Squares and Cross Products Matrix 
+
+- Can be calculated as follows:
+\[
+ {\mathbf H} = 
+ \sum_{k=1}^g  n_k {   \left( \overline{\underline{x}}^{(k)} -
+  \overline{\underline{x}} \right)  } 
+{  \left( \overline{\underline{x}}^{(k)} -
+  \overline{\underline{x}} \right)  }^{\prime}.
+\]
+- Code: group data into a data matrix that is $n_k \times m$ for each population $k$.
+- The results are below:
+```{r}
+HSS <- n2*(m2 - mg) %*% t(m2 - mg) + n3*(m3 - mg) %*% t(m3 - mg) +
+  n4*(m4 - mg) %*% t(m4 - mg) + n5*(m5 - mg) %*% t(m5 - mg)
+HSS
+```
+
+### Four Test Statistics
+
+- After calculating ${\mathbf E}$ and ${\mathbf H}$, we can calculate the four test statistics.
+- In the table below, we list the calculated test statistics, associated $F$-statistics, and their
+p-values.
+
+```{r}
+wilks <- det(ESS)/det(ESS + HSS)
+pillai <- sum(diag(HSS %*% solve(ESS + HSS)))
+hotel <- sum(diag(HSS %*% solve(ESS)))
+roy <- max(eigen(HSS %*% solve(ESS))$values)
+#manova.pot <- summary(manova(cbind(pot$Al,pot$Fe,pot$Mg,pot$Ca,pot$Na) ~ pot$Kiln))
+```
+
+
+#  ANOVA versus MANOVA
+
+## Univariate Analysis of Variance
+
+- Compare univariate means among multiple populations
+- Decompose total sum of errors into two errors
+- $F$-statistic is defined as the ratio of two errors (up to some factor)
+- Can be applied in multiple testing way for multivariate data
+
+## Multivariate Analysis of Variance
+
+- Compare mean vectors among multiple populations
+- Decompose total sum of errors matrix into two error matrices
+- Four statistics are defined on the function of the "ratio" between two error matrices
+
+

@@ -323,9 +323,6 @@ For an $\alpha = 0.05$ level test, we reject the $j$th null hypothesis $H_0^{(j)
 \]
  which equals `r qf(.99,df=3,df2=22)`.
 
-- The testing results are listed below. As all $F$ statistics exceed the critical value 4.82, we
-reject all the null hypotheses.
-
 ```{r}
 pot <- NULL
 pot <- rbind(pot,pot_llan)
@@ -333,23 +330,90 @@ pot <- rbind(pot,pot_cald)
 pot <- rbind(pot,pot_is)
 pot <- rbind(pot,pot_ar)
 
-n2 <- length(pot[pot$Kiln == 2,])
-n3 <- length(pot[pot$Kiln == 3,])
-n4 <- length(pot[pot$Kiln == 4,])
-n5 <- length(pot[pot$Kiln == 5,])
-nv <- c(n2,n3,n4,n5)
+x <- pot$Al
+n2 <- length(x[pot$Kiln == 2])
+n3 <- length(x[pot$Kiln == 3])
+n4 <- length(x[pot$Kiln == 4])
+n5 <- length(x[pot$Kiln == 5])
+N <- n2+n3+n4+n5
+m2 <- mean(x[pot$Kiln == 2])
+m3 <- mean(x[pot$Kiln == 3])
+m4 <- mean(x[pot$Kiln == 4])
+m5 <- mean(x[pot$Kiln == 5])
+mg <- mean(x)
+ESS1 <- sum((x[pot$Kiln == 2] - m2)^2) + sum((x[pot$Kiln == 3] - m3)^2) + 
+  sum((x[pot$Kiln == 4] - m4)^2) + sum((x[pot$Kiln == 5] - m5)^2)
+TSS1 <- n2*(m2-mg)^2 + n3*(m3-mg)^2 + n4*(m4-mg)^2 + n5*(m5-mg)^2  
+F1 <- TSS1/ESS1 * (N-4)/(4-1)
 
-  
+x <- pot$Fe
+n2 <- length(x[pot$Kiln == 2])
+n3 <- length(x[pot$Kiln == 3])
+n4 <- length(x[pot$Kiln == 4])
+n5 <- length(x[pot$Kiln == 5])
+N <- n2+n3+n4+n5
+m2 <- mean(x[pot$Kiln == 2])
+m3 <- mean(x[pot$Kiln == 3])
+m4 <- mean(x[pot$Kiln == 4])
+m5 <- mean(x[pot$Kiln == 5])
+mg <- mean(x)
+ESS2 <- sum((x[pot$Kiln == 2] - m2)^2) + sum((x[pot$Kiln == 3] - m3)^2) + 
+  sum((x[pot$Kiln == 4] - m4)^2) + sum((x[pot$Kiln == 5] - m5)^2)
+TSS2 <- n2*(m2-mg)^2 + n3*(m3-mg)^2 + n4*(m4-mg)^2 + n5*(m5-mg)^2  
+F2 <- TSS2/ESS2 * (N-4)/(4-1)
 
-ESS1 <- sum(center_x1^2)
-TSS1 <- nv%*%(colMeans(x1)-mean(x1))^2
-ESS2 <- sum(center_x2^2)
-TSS2 <- nv%*%(colMeans(x2)-mean(x2))^2
+x <- pot$Mg
+n2 <- length(x[pot$Kiln == 2])
+n3 <- length(x[pot$Kiln == 3])
+n4 <- length(x[pot$Kiln == 4])
+n5 <- length(x[pot$Kiln == 5])
+N <- n2+n3+n4+n5
+m2 <- mean(x[pot$Kiln == 2])
+m3 <- mean(x[pot$Kiln == 3])
+m4 <- mean(x[pot$Kiln == 4])
+m5 <- mean(x[pot$Kiln == 5])
+mg <- mean(x)
+ESS3 <- sum((x[pot$Kiln == 2] - m2)^2) + sum((x[pot$Kiln == 3] - m3)^2) + 
+  sum((x[pot$Kiln == 4] - m4)^2) + sum((x[pot$Kiln == 5] - m5)^2)
+TSS3 <- n2*(m2-mg)^2 + n3*(m3-mg)^2 + n4*(m4-mg)^2 + n5*(m5-mg)^2  
+F3 <- TSS3/ESS3 * (N-4)/(4-1)
 
+x <- pot$Ca
+n2 <- length(x[pot$Kiln == 2])
+n3 <- length(x[pot$Kiln == 3])
+n4 <- length(x[pot$Kiln == 4])
+n5 <- length(x[pot$Kiln == 5])
+N <- n2+n3+n4+n5
+m2 <- mean(x[pot$Kiln == 2])
+m3 <- mean(x[pot$Kiln == 3])
+m4 <- mean(x[pot$Kiln == 4])
+m5 <- mean(x[pot$Kiln == 5])
+mg <- mean(x)
+ESS4 <- sum((x[pot$Kiln == 2] - m2)^2) + sum((x[pot$Kiln == 3] - m3)^2) + 
+  sum((x[pot$Kiln == 4] - m4)^2) + sum((x[pot$Kiln == 5] - m5)^2)
+TSS4 <- n2*(m2-mg)^2 + n3*(m3-mg)^2 + n4*(m4-mg)^2 + n5*(m5-mg)^2  
+F4 <- TSS4/ESS4 * (N-4)/(4-1)
 
+x <- pot$Na
+n2 <- length(x[pot$Kiln == 2])
+n3 <- length(x[pot$Kiln == 3])
+n4 <- length(x[pot$Kiln == 4])
+n5 <- length(x[pot$Kiln == 5])
+N <- n2+n3+n4+n5
+m2 <- mean(x[pot$Kiln == 2])
+m3 <- mean(x[pot$Kiln == 3])
+m4 <- mean(x[pot$Kiln == 4])
+m5 <- mean(x[pot$Kiln == 5])
+mg <- mean(x)
+ESS5 <- sum((x[pot$Kiln == 2] - m2)^2) + sum((x[pot$Kiln == 3] - m3)^2) + 
+  sum((x[pot$Kiln == 4] - m4)^2) + sum((x[pot$Kiln == 5] - m5)^2)
+TSS5 <- n2*(m2-mg)^2 + n3*(m3-mg)^2 + n4*(m4-mg)^2 + n5*(m5-mg)^2  
+F5 <- TSS5/ESS5 * (N-4)/(4-1)
 ```
 
 
-Conclusion: All chemical elements differ significantly among the sites. Each element is significantly different between at least one pair of sites.
+- The testing results are listed below. As all $F$ statistics `r c(F1,F2,F3,F4,F5)` exceed the critical value `r qf(.99,df=3,df2=22)`, we reject all the null hypotheses. 
+
+**Conclusion**: All chemical elements differ significantly among the sites. Each element is significantly different between at least one pair of sites.
 
  

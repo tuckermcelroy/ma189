@@ -1,0 +1,91 @@
+---
+title: "Math 189: Classification via Discriminant Analysis I"
+output: html_notebook
+---
+
+# Classification
+
+So far we have examined how to compare the means of more than two samples:
+- Multiple-sample testing
+- Analysis of variance (ANOVA)
+- Multivariate analysis of variance (MANOVA)
+
+Next we study **classification**, with a particular focus on the *linear discriminant analysis* method. Some topics:
+1. The classification problems
+2. Bayes’ rule in classification
+3. Linear discriminant analysis
+
+# Qualitative variables
+
+- Qualitative, or categorical, variables are very common in many datasets. They naturally reflect the discrete (or unordered) properties of observations.  
+- When a qualitative variable contains only two outcomes, it is also called a *binary variable*.
+
+Examples of unordered variables:
+- Gender, blood type, smoking history, eye color of patients.
+- The political party that a voter might vote for.
+- Four nucleobases (A,G,T,C) of a DNA double helix.
+- Nationalities of students in a department.
+- Authenticity of a bank note (recall the swiss banknotes dataset).
+- Location of pottery shards (recall the pottery dataset).
+
+# Classification
+
+- The process to predict a qualitative variable is called *classification*. Or we can say that
+we classify that observation into a class/group/category. The statistical tools to classify the observations are called *classifiers*.
+
+Examples:
+- A patient arrives at the emergency room with a set of symptoms that could possibly be
+attributed to one of the three medical conditions. Which one of the three does this patient
+have?
+- An online banking service must be able to determine whether or not a transaction being
+processed on the site is fraudulent, on the basis of the user’s IP address, transaction history, etc.
+- On the basis of DNA sequence data for a number of patients with and without a given
+disease, a biologist would like to determine which DNA mutations are dependent (disease-causing) and which are not.
+
+
+## Classification versus Regression
+
+Classification problems are different, but connected to regression problems!
+
+### Classification
+
+- Predict qualitative variables
+- Rarely interested in population parameters
+- With or without a response variable
+- Many methods first predict the probability of each category. In this sense, they behave like regression methods
+
+### Regression
+
+- Predict quantitative variables
+- Inference on population parameters
+- Require a response variable to formulate the problem
+- Response variable can be qualitative (e.g., logistic regression)
+
+## Two Types of Classification
+
+- In general, there are two types of classification problems: *supervised* and *un-supervised*, depending on whether we know (or partially know) the true values of the qualitative variables in the data.
+
+### Supervised Classification
+
+- We observed a sample in which we know the true class labels. We usually call this sample a *training set*.
+- The true labels in the training set can "supervise" us to train a classifier.
+- When we observe a sample without labelling, we can classify them using the classifier learned from the training set.
+
+### Un-supervised Classification
+
+- Sometimes we observe a sample without knowing the true class labels.  Maybe there are no true class labels at all. There are also cases in which we do not even know how many groups/categories the variables belong to.
+- We design a cost function based on the our objective. We classify the observations in order to minimize the cost function.
+- Often, this is more challenging than supervised classification.
+
+![Fisher](images/FisherYoung.jpg)
+
+## Linear Discriminant Analysis
+
+- *Linear discriminant analysis* (LDA) is a statistical tool with an objective to solve a classification problem when the groups are known as a priori.
+- LDA was developed (again!) by British statistician Ronald Fisher. Therefore, sometimes LDA is also called *Fisher’s Linear discriminant analysis*.
+- LDA is different from ANOVA, as it is used to predict the group membership of an observation.
+- LDA and ANOVA are closely related!
+
+
+up to slide 21
+ 

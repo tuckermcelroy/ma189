@@ -5,18 +5,15 @@ output: pdf_document
 
 #  Motor Trend Car Road Tests 
 
-In your homework groups, prepare a report in R Markdown Notebook based on examining the Motor Trend Car Road Tests dataset (available from GitHub). The file contains data extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design
-and performance for 32 automobiles (1973–74 models). The dataset contains 32 observations on 11 variables. 
+In your homework groups, prepare a report in R Markdown Notebook based on examining the Motor Trend Car Road Tests dataset (available from GitHub). The file contains data extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models). The dataset contains 32 observations on 11 variables. 
 
 ## Tasks 
 
 Analyze the dataset according to the following steps:
 
-1. Calculate sample mean and sample variance of each variable.
-2. Calculate the sample variance-covariance matrix and the sample correlation matrix. What can you say about the variance-covariance matrix and correlation matrix?
-3. Draw a scatter plot between wt (Weight) and mpg (Miles per gallon).
-4. Draw a scatter plot to show the relationship between wt (Weight), mpg (Miles per gallon) and cyl (Number of cylinders). Use a 3D scatter plot.
-5. Draw pairwise scatter plot for all variables.
-6. One engineer suggests that the relationship between wt and mpg is subject to the number of cylinders. According to the plot you draw in step 4, what is your opinion towards this suggestion?
+1. Draw a scatter plot between wt (Weight) and mpg (Miles per gallon).
+2. Draw a scatter plot to show the relationship between wt (Weight), mpg (Miles per gallon) and cyl (Number of cylinders). Use a 3D scatter plot.
+3. Draw pairwise scatter plot for all variables.
+4. One engineer suggests that the relationship between wt and mpg is subject to the number of cylinders. According to the plot you draw in step 2, what is your opinion towards this suggestion?
 
-Your R Markdown Notebook report should have a introduction, body, conclusion (and optional appendix). Importantly, your code should run! (Note: the grader will check your *load* code by changing the path.)
+Your R Markdown Notebook report should have a introduction, body, conclusion (and optional appendix). Importantly, your code should run!  
