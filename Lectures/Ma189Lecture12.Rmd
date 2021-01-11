@@ -1,0 +1,6 @@
+---
+title: "Math 189: Multivariate Analysis of Variance II"
+output: html_notebook
+---
+
+# Multivariate ANOVA 

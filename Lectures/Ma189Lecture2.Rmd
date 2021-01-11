@@ -233,6 +233,9 @@ sum(diag(z %*% x))
 eig <- eigen(a)
 a %*% eig$vector[,1]
 eig$values[1] * eig$vector[,1]
+
+a %*% eig$vector[,2]
+eig$values[2] * eig$vector[,2] 
 ```
   .
 - A $n \times n$ symmetric matrix has $n$ real eigenvalues, denoted $\lambda_1, \ldots, \lambda_n$.

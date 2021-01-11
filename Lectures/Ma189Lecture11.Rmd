@@ -135,11 +135,221 @@ grand mean, which measures variation of the data around the grand mean.
   \mbox{SS}_{total} & = \sum_{k=1}^g \sum_{i=1}^{n_k} {( x_{ik} - \overline{x} )}^2 \\
 & =  \sum_{k=1}^g \sum_{i=1}^{n_k} {[ ( x_{ik} - \overline{x}_k ) - (\overline{x}_k - \overline{x} ) ]}^2 \\
  & = \sum_{k=1}^g \sum_{i=1}^{n_k} { ( x_{ik} - \overline{x}_k )}^2 +
-  n_k \sum_{k=1}^g  {  (\overline{x}_k - \overline{x} )  }^2.
+   \sum_{k=1}^g n_k {  (\overline{x}_k - \overline{x} )  }^2.
 \end{align}
 - The first term is called the *error sum of squares* and measures the variation in the data
 about their group means. Denoted as $\mbox{SS}_{error}$.
 - The second term is called the *treatment sum of squares* and involves the differences
 between the group means and the Grand mean. Denoted as  $\mbox{SS}_{treat}$.
+- Error sum of squares ($\mbox{SS}_{error}$) measures the within-group variability.
+- Treatment sum of squares ($\mbox{SS}_{treat}$) measures the between-group variability.
 
-Go up to slide 21
+### Intuitions
+
+- When the null hypothesis is true, i.e.
+\[
+ H_0: \ {\mu}^{(1)} = \ldots = \ {\mu}^{(g)} 
+ \quad H_a: \ {\mu}^{(i)} \neq \ {\mu}^{(j)} \; \mbox{for some} \, i \neq j,
+\]
+we would expect the between-group variability to be small and within-group variability to be large.
+- On the other hand, when the null hypothesis is false, we would expect the between-group variability to be large and within-group variability to be small.
+
+## A Simulated Example
+
+- We simulate two datasets, each contains two samples (to compare).
+- Here we draw the histogram for each dataset.
+- Can you tell if the population means of the two samples are equal or not?
+
+```{r}
+# Generate simulations
+n <- 500
+x1 <- cbind(matrix(rnorm(n*1,-0.5,2),n,1),
+            matrix(rnorm(n*1,0.5,2),n,1))
+x2 <- cbind(matrix(rnorm(n*1,-2,1),n,1),
+            matrix(rnorm(n*1,2,1),n,1))
+
+# Data visualization via histograms
+hist(rbind(x1[,1],x1[,2]), breaks=20, xlim=c(-5,5),ylim=c(0,0.5),freq = F,
+     main="Histogram of Sample 1", xlab="", col=rgb(1,0,0,0.5))
+hist(rbind(x2[,1],x2[,2]), breaks=20, xlim=c(-5,5),ylim=c(0,0.5),freq = F,
+     main="Histogram of Sample 2", xlab="", col=rgb(1,0,0,0.5))
+```
+
+### True Data Generating Process
+
+```{r}
+nv <- c(n,n)
+center_x1 <- x1 - matrix(colMeans(x1), nr=dim(x1)[1], nc=dim(x1)[2], byrow=TRUE)
+center_x2 <- x2 - matrix(colMeans(x2), nr=dim(x2)[1], nc=dim(x2)[2], byrow=TRUE)
+ESS1 <- sum(center_x1^2)
+TSS1 <- nv%*%(colMeans(x1)-mean(x1))^2
+ESS2 <- sum(center_x2^2)
+TSS2 <- nv%*%(colMeans(x2)-mean(x2))^2
+```
+
+- Dataset 1:
+1. Sample 1 is generated from $\mathcal{N} (−0.5, 2^2)$. The sample size is $500$.
+2. Sample 2 is generated from $\mathcal{N} (0.5, 2^2)$. The sample size is $500$.
+3. $\mbox{SS}_{error}$ `r ESS1` Large within-group variability.
+4. $\mbox{SS}_{treat}$ `r TSS1`  Small between-group variability.
+
+- Dataset 2:
+1. Sample 1 is generated from $\mathcal{N}(−2, 1^2)$. The sample size is $500$.
+2. Sample 2 is generated from $\mathcal{N}(2, 1^2)$. The sample size is $500$.
+3. $\mbox{SS}_{error}$  `r ESS2` Small within-group variability.
+4. $\mbox{SS}_{treat}$  `r TSS2` Large between-group variability.
+
+Both datasets have un-equal population means. Why is this easier to discern in the second dataset?
+
+### Distinguish with Colors
+
+Now we use red and blue to discriminate the two samples:
+- The red dashed line denotes the true population mean of each sample.
+- Error sum of squares ($\mbox{SS}_{error}$) measures within-group variability.
+- Treatment sum of squares ($\mbox{SS}_{treat}$) measures between-group variability.
+
+
+```{r}
+# Data visualization via histograms
+hist(x1[,1], breaks=20, xlim=c(-5,5),ylim=c(0,0.5),freq = F,
+     main="Histogram of Sample 1", xlab="", col=rgb(1,0,0,0.5))
+hist(x1[,2], breaks=20, col=rgb(0,0,1,0.5),freq = F, add=T )
+abline(v = -0.5, col="red", lwd=2, lty=2)
+abline(v = 0.5, col="red", lwd=2, lty=2)
+
+hist(x2[,1], breaks=20, xlim=c(-5,5),ylim=c(0,0.5),freq = F,
+     main="Histogram of Sample 2", xlab="", col=rgb(1,0,0,0.5))
+hist(x2[,2], breaks=20, col=rgb(0,0,1,0.5),freq = F, add=T)
+abline(v = -1, col="red", lwd=2, lty=2)
+abline(v = 1, col="red", lwd=2, lty=2)
+```
+
+## Design of Test Statistic
+ 
+- Motivated by this toy example, we should reject the null hypothesis when the Treatment Sum of
+Squares ($\mbox{SS}_{treat}$) is large. Given the same level of total sum of squares, a large $\mbox{SS}_{treat}$ will result $\mbox{SS}_{error}$.
+- We want to find a test statistic which is proportional to $\mbox{SS}_{treat}$ and inversely proportional to $\mbox{SS}_{error}$.
+- A naive approach is to use the ratio
+\[
+  \mbox{SS}_{treat} / \mbox{SS}_{error}.
+\]
+
+### Calculation for Simulated Datasets:
+
+- Dataset 1: $\mbox{SS}_{treat} / \mbox{SS}_{error}$ `r TSS1/ESS1`
+- Dataset 2: $\mbox{SS}_{treat} / \mbox{SS}_{error}$ `r TSS2/ESS2`
+
+#### Some problems:
+
+1. Both ratios are very small! This can make the test insensitive!
+2. $\mbox{SS}_{error}$ is sensitive to the size of each sample $n_i$, while $\mbox{SS}_{treat}$ is less sensitive to $n_i$. Therefore, this ratio will be sensitive to the sample sizes $n_i$, which is not ideal.
+
+#### Solution:
+
+1. We rescale the sum of squares by dividing their degrees of freedom.
+2. Change from ratio between sum of squares to the ratio between mean of squares.
+
+## Degrees of Freedom (DOF)
+
+- We check the degrees of freedom of these sum of squares
+- Error sum of squares
+\[
+ \mbox{SS}_{error} = \sum_{k=1}^g \sum_{i=1}^{n_k} { ( x_{ik} - \overline{x}_k )}^2 \sim \chi^2_{N-g}.
+\]
+- Treatment sum of squares
+\[
+ \mbox{SS}_{treat} =  \sum_{k=1}^g n_k {  (\overline{x}_k - \overline{x} )  }^2 \sim \chi^2_{g-1}.
+\]
+- Total sum of squares
+\[
+ \mbox{SS}_{total}  = \sum_{k=1}^g \sum_{i=1}^{n_k} {( x_{ik} - \overline{x} )}^2  \sim \chi^2_{N-1}.
+\]
+- Therefore, the three degrees of freedom satisfy
+\[
+ \mbox{DF}_{total} = \mbox{DF}_{treat} + \mbox{DF}_{error}.
+\]
+ 
+## An F-Statistic as the Ratio of Means of Squares
+
+- Error mean of squares
+\[
+ \mbox{MS}_{error} = \frac{1}{N-g} \mbox{SS}_{error} =
+ \frac{1}{N-g} \sum_{k=1}^g \sum_{i=1}^{n_k} { ( x_{ik} - \overline{x}_k )}^2.
+\]
+- Treatment mean of squares
+ \[
+ \mbox{MS}_{treat}  = \frac{1}{g-1} \mbox{SS}_{treat} = 
+ \frac{1}{g-1} \sum_{k=1}^g n_k {  (\overline{x}_k - \overline{x} )  }^2.
+\]
+- Then we can define an $F$-statistic as the ratio between $\mbox{MS}_{treat}$ and $\mbox{MS}_{error}$:
+\[
+ F = \frac{ \mbox{MS}_{treat} }{ \mbox{MS}_{error} } \sim \mathcal{F}_{g-1,N-g}.
+\]
+- At significance level $\alpha$ we reject the null hypothesis  $H_0$ if
+\[
+  F > \mathcal{F}_{g-1,N-g,\alpha}.
+\]
+
+## Example: Romano-British Pottery Data
+
+Question: Which chemical element varies significantly across sites?
+- As a naive approach to assess the significance of individual variables (chemical elements), we consider the following univariate multisample testing:  
+\[
+  H_0^{(j)}:  \mu_{1j} = \mu_{2j} = \ldots = \mu_{gj}
+\]
+ for variables $1 \leq j \leq m$.
+ 
+- For the $j$th chemical, we apply a univariate ANOVA and calculate an $F$-statistic $F^{(j)}$,
+for   $1 \leq j \leq m$.
+- For a significance level $\alpha$, we reject the null hypothesis $H_0^{(j)}$ if
+\[
+  F^{(j)} > \mathcal{F}_{g-1,N-g,\alpha}.
+\]
+
+- Sounds like a good plan?  What about FWER? 
+- To control the type I errors among multiple testing, we can utilize Bonferroni correction.
+- To control the FWER at level $\alpha$, we adjust the significance level for each individual
+test to $\alpha/m$ instead of $\alpha$.
+- At a significance level $\alpha$, we reject the null hypothesis $H_0^{(j)}$ if
+\[
+  F^{(j)} > \mathcal{F}_{g-1,N-g,\alpha/m}.
+\]
+
+- Other type I error control methods can also be applied depending on your goals. 
+- The Pottery data contains $m=5$ variables, $g=4$ groups, and a total number of $N=26$ observations.
+For an $\alpha = 0.05$ level test, we reject the $j$th null hypothesis $H_0^{(j)}$ if
+\[
+ F^{(j)} > \mathcal{F}_{3,22,.01},  
+\]
+ which equals `r qf(.99,df=3,df2=22)`.
+
+- The testing results are listed below. As all $F$ statistics exceed the critical value 4.82, we
+reject all the null hypotheses.
+
+```{r}
+pot <- NULL
+pot <- rbind(pot,pot_llan)
+pot <- rbind(pot,pot_cald)
+pot <- rbind(pot,pot_is)
+pot <- rbind(pot,pot_ar)
+
+n2 <- length(pot[pot$Kiln == 2,])
+n3 <- length(pot[pot$Kiln == 3,])
+n4 <- length(pot[pot$Kiln == 4,])
+n5 <- length(pot[pot$Kiln == 5,])
+nv <- c(n2,n3,n4,n5)
+
+  
+
+ESS1 <- sum(center_x1^2)
+TSS1 <- nv%*%(colMeans(x1)-mean(x1))^2
+ESS2 <- sum(center_x2^2)
+TSS2 <- nv%*%(colMeans(x2)-mean(x2))^2
+
+
+```
+
+
+Conclusion: All chemical elements differ significantly among the sites. Each element is significantly different between at least one pair of sites.
+
+ 

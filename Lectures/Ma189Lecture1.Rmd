@@ -41,7 +41,6 @@ period <- 365.25/7
 claims <- ts(claims, start = c(1967,1), frequency = period)
 plot(claims)
 plot(log(claims))
-
 ```
  
 
