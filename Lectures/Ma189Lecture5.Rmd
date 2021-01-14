@@ -3,6 +3,10 @@ title: "Math 189: Exploratory Data Analysis III"
 output: html_notebook
 ---
 
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
 # Measures of Dispersion
 
 - The *variance* of a random variable measures the degree of dispersion (spread) in a variable’s
@@ -28,7 +32,7 @@ for any $i$.
 
 ## Question: why do we divide by $n-1$ instead of $n$?  
  
-- Because $\sum_{i=1}^n (x_ij - \overline{x}_j) = 0$  (why?), knowing any $n-1$ of the deviations $X_{ij} - \overline{x}_j$ means we can compute the $n$th deviation.
+- Because $\sum_{i=1}^n (x_{ij} - \overline{x}_j) = 0$  (why?), knowing any $n-1$ of the deviations $x_{ij} - \overline{x}_j$ means we can compute the $n$th deviation.
 - This means that there are only $n-1$ freely varying deviations, or $n-1$ *degrees of freedom*.
 - Dividing by $n-1$ makes the sample variance an unbiased descriptive statistic for population variance:
 \[
@@ -106,13 +110,13 @@ Not intuitive.
 
 - The population covariance between variables $j$ and $k$ can be estimated by the *sample covariance*
 \[
-  s_{jk} = \frac{1}{n-1} \sum_{i=1}^n ( x_{ij} - \overline{x}_j) )
+  s_{jk} = \frac{1}{n-1} \sum_{i=1}^n ( x_{ij} - \overline{x}_j) 
   ( x_{ik} - \overline{x}_k ).
 \]
 - $s_{jk} = 0$: suggests variables $j$ and $k$ are uncorrelated (not independent!)
 - $s_{jk} > 0$: suggests   variables $j$ and $k$ are positively correlated  
 - $s_{jk} < 0$: suggests   variables $j$ and $k$ are negatively correlated  
-- Unbiasedness:  $ \mathbb{E} [ s_{jk} ] = \sigma_{jk}$.
+- Unbiasedness:  $\mathbb{E} [ s_{jk} ] = \sigma_{jk}$.
  
 ## Sample Covariance Matrix
 
@@ -125,7 +129,7 @@ Not intuitive.
  s_{p1} & s_{p2} & \ldots & s_p^2 \end{array} \right] \in {\mathbf R}^{p \times p}
 \]
 - The sample variance-covariance matrix is also a symmetric matrix, and PSD if $n > p$.
-- Unbiasedness: $ \mathbb{E} [  {\bf S} ] = {\bf \Sigma}$.
+- Unbiasedness: $\mathbb{E} [  {\bf S} ] = {\bf \Sigma}$.
  
 # Measures of Association: Correlation
 
@@ -147,7 +151,7 @@ Not intuitive.
 \]
 
 ```{r}
-nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient <- read.table("nutrient.txt")
 nutrient$V1=NULL
 colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
 cor(nutrient$Calcium,nutrient$Iron)
@@ -158,10 +162,10 @@ cor(affine_trans$Calcium,affine_trans$Iron)
 ## Population Correlation
 
 - The population correlation $\rho_{jk}$ has the same sign as $\sigma_{jk}$
-- The population correlation $\rho_{jk}$ lies between $-1$ and $1$:
+- The population correlation $\rho_{jk}$ lies between $-1$ and $1$, i.e.,
 \[
- - 1 \leq \rho_{jk} \leq 1.
- \]
+ -1 \leq \rho_{jk} \leq 1.
+\]
 - $\rho_{jk} = 0$:  suggests variables $j$ and $k$ are uncorrelated
 - $\rho_{jk}$ close to 1: strong positive dependence
 - $\rho_{jk}$ close to -1: strong negative dependence.
@@ -178,9 +182,9 @@ cor(affine_trans$Calcium,affine_trans$Iron)
 - $r_{jk}$:  suggests  variables $j$ and $k$ are uncorrelated
 - $r_{jk}$ close to 1: suggests strong positive dependence
 - $r_{jk}$ close to -1: suggests strong negative dependence
-- Biased: $ \mathbb{E} [ r_{jk} ] \neq \rho_{jk}$
-- Asymptotic unbiasedness: $ \mathbb{E} [ r_{jk} ] \rightarrow \rho_{jk}$ as 
-$ n \rightarrow \infty$
+- Biased: $\mathbb{E} [ r_{jk} ] \neq \rho_{jk}$
+- Asymptotic unbiasedness: $\mathbb{E} [ r_{jk} ] \rightarrow \rho_{jk}$ as 
+$n \rightarrow \infty$
 
 ## Correlation Matrix
 
@@ -218,9 +222,6 @@ eigen(A)$values
 Find sample standard deviation for 5 variables
 
 ```{r}
-nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
-nutrient$V1=NULL
-colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
 apply(nutrient,2,sd)
 ```
 
@@ -281,6 +282,6 @@ cor(nutrient)
 ## Generalized Variance
 
 - *Population generalized variance* is defined as the determinant of the
-population variance-covariance matrix $\mbox{det} [ {\bf \Sigma}]$, sometimes written $| {\bf \Sigma} |$.
-- Generalized variance also accounts for off-diagonal elements in ${\bf \Sigma}$ (covariance effects); strong correlations reduce the generalized variance. $ | {\bf \Sigma} | = 0 $ if and only if some variables are linearly dependent.
-- Population generalized variance can be estimated by the determinant of the sample variance-covariance matrix $\mbox{det} [{\bf S}]$.
+population variance-covariance matrix $\det {\bf \Sigma}]$, sometimes written $|{\bf \Sigma} |$.
+- Generalized variance also accounts for off-diagonal elements in ${\bf \Sigma}$ (covariance effects); strong correlations reduce the generalized variance. $| {\bf \Sigma} | = 0$ if and only if some variables are linearly dependent.
+- Population generalized variance can be estimated by the determinant of the sample variance-covariance matrix $\det [{\bf S}]$.

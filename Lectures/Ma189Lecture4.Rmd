@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Exploratory Data Analysis II"
-output: html_notebook
+title: 'Math 189: Exploratory Data Analysis II'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
 
 # Descriptive Statistics
 
@@ -75,7 +81,7 @@ given by $\underline{x}_j$:
 - Throughout   we use $\mu_{j}$ to denote the population mean of the $j$th variable; $\overline{x}_j$ denotes  the sample mean based on the observed data for the $j$th variable.
 - The population mean/expectation is the measure of central tendency for the population. The population mean/expectation for the $j$th variable is
 \[
- \mu_j = {\mathbf E} [ \underline{x}_j ].
+ \mu_j = {\mathbf E} [ {x}_{ij} ].
  \]
 - The population mean can be estimated by the sample mean
 \[
@@ -88,7 +94,7 @@ given by $\underline{x}_j$:
  or any $1 \leq i \leq n$
 \[
  \underline{\mu} = \left[ \begin{array}{c} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{array} \right] = \left[ \begin{array}{c} \mathbf{E} [x_{i1} ] \\ \mathbf{E} [x_{i2} ] \\ \vdots
- \\ \mathbf{E} [x_{ip} ] \end{array} \right] = \mathbf{E} [ \underline{x}_i ].
+ \\ \mathbf{E} [x_{ip} ] \end{array} \right].
 \]
  This also the mean of the $i$th row of ${\bf X}$.
  
@@ -98,7 +104,7 @@ given by $\underline{x}_j$:
 \[
  \overline{\underline{x}} =  \left[ \begin{array}{c} \overline{x}_1 \\ \overline{x}_2 \\ \vdots \\ \overline{x}_p \end{array} \right] = 
  \left[ \begin{array}{c} n^{-1} \sum_{i=1}^n x_{i1} \\ n^{-1} \sum_{i=1}^n x_{i2} \\ \vdots
- \\ n^{-1} \sum_{i=1}^n x_{ip} \end{array} \right] = n^{-1} \sum_{i=1}^n \underline{x}_{i}.
+ \\ n^{-1} \sum_{i=1}^n x_{ip} \end{array} \right].
 \]
 
 ## Sample Mean is Unbiased
@@ -121,7 +127,7 @@ and hence
 - Statistical bias is defined as the difference between population parameter and the expectation of the estimator.
 - For example
 \[
-  \mu_j - \mathbf{E} [ \overline{x}_j ].
+  \mathbf{E} [ \overline{x}_j ] - \mu_j.
 \]
 - The expectation of an estimator is a quantity (non-random) that your estimator should converge to when sample size is large enough. This is the "best” you can expect from your estimator.
 - If the bias is non-zero, there will be a non-vanishing estimation error even if you increase the sample size.
@@ -131,7 +137,7 @@ and hence
 Find sample mean for 5 variables
 
 ```{r}
-nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient <- read.table("nutrient.txt")
 nutrient$V1=NULL
 colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
 colMeans(nutrient)
@@ -140,3 +146,5 @@ n <- dim(nutrient)[1]
 p <- dim(nutrient)[2]
 sum(nutrient$Calcium)/n
 ```
+ 
+

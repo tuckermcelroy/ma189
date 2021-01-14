@@ -3,6 +3,10 @@ title: "Math 189: Exploratory Data Analysis I"
 output: html_notebook
 ---
  
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
 # Challenges in Multivariate Data Analysis
 
 ## Objectives: 
@@ -67,7 +71,7 @@ Used to check the relationship between two variables:
 5. Vitamin C (mg)
 
 ```{r}
-nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient <- read.table("nutrient.txt")
 nutrient$V1=NULL
 colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
 dim(nutrient)
@@ -110,7 +114,7 @@ for(i in 1:2)
 {
   z[,i] <- (x[,i] - mean(x[,i]))/sd(x[,i])
 }
-plot(z[,1],z[,2],xlab=names(nutrient)[2],ylab=names(nutrient)[3],
+plot(z[,1],z[,2],xlab=names(nutrient)[1],ylab=names(nutrient)[2],
           main = "Calcium vs Iron (Standardized)")
 abline(h=3,col=4)
 abline(v=3,col=4)
@@ -119,7 +123,7 @@ abline(v=3,col=4)
 We expect $99.7 \%$ of normal data to be within 3 standard deviations of the mean, or in lower left quadrant given by blue lines; here there are more than expected outliers.
 
 ```{r}
-length(intersect(seq(1,dim(z)[1])[z[,1] < 3],seq(1,dim(z)[1])[z[2]< 3]))/dim(z)[1]
+length(intersect(seq(1,dim(z)[1])[z[,1] < 3],seq(1,dim(z)[1])[z[,2]< 3]))/dim(z)[1]
 ```
 
 ## Transformation Methods
@@ -142,7 +146,7 @@ Sometimes data is "irregular”: non-normal, outliers, skewed, heavy-tailed, etc
 
 ```{r}
 x <- log(nutrient[,c(2,3)])
-plot(x[,1],x[,2],xlab=names(nutrient)[2],ylab=names(nutrient)[3],
+plot(x[,1],x[,2],xlab=names(nutrient)[1],ylab=names(nutrient)[2],
           main = "Calcium vs Iron (Log Transformation)")
 ```
 
@@ -257,8 +261,7 @@ A time plot (sometimes called a *time series graph*) displays values versus time
 4. Daily stock price of Microsoft
 
 ```{r}
-stock <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\Stock.csv", 
-                    sep = ",", header=TRUE)
+stock <- read.table("Stock.csv",sep = ",", header=TRUE)
 head(stock)
 ```
 
@@ -483,7 +486,7 @@ radarchart(data_all)
 
 ```{r}
 library(aplpack)
-crime <- read.csv("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\crimeRatesByState-formatted.csv")
+crime <- read.csv("crimeRatesByState-formatted.csv")
 head(crime)
 faces(crime[1:9,2:8], face.type = 0, labels=crime$state[1:9], cex=1.5)
 ```
@@ -493,7 +496,7 @@ faces(crime[1:9,2:8], face.type = 0, labels=crime$state[1:9], cex=1.5)
 #### Pros
 - Easy to discern and remember the differences between states
 
-###3 Cons
+#### Cons
 - Hard to translate faces back to the value of variables
  
  

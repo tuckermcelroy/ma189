@@ -3,6 +3,10 @@ title: "Math 189: Matrix Algebra"
 output: html_notebook
 ---
 
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
 # I. Multivariate Data
 
 ## Matrix Formulation
@@ -24,7 +28,7 @@ Data records several variables for a baby at birth:
 Rows are babies, columns are variables
 
 ```{r}
-baby <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\babies.dat",header=TRUE)
+baby <- read.table("babies.dat",header=TRUE)
 head(baby[,c(1,2)])
 ```
 

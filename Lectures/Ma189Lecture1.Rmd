@@ -3,6 +3,10 @@ title: "Math 189: Introduction"
 output: html_notebook
 ---
 
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
 # I. Overview
 
 ## Syllabus
@@ -36,7 +40,7 @@ https://math189.edublogs.org/files/2018/01/Statistics-and-Data-Science-1vh53fi-1
 ## Unemployment Claims Surge due to Covid-19 
 
 ```{r}
-claims <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\InitialClaims.dat")
+claims <- read.table("InitialClaims.dat")
 period <- 365.25/7
 claims <- ts(claims, start = c(1967,1), frequency = period)
 plot(claims)
