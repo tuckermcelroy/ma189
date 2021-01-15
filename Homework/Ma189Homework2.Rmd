@@ -1,6 +1,6 @@
 ---
 title: "Math 189: Homework 2"
-output: pdf_document
+output: html_document
 ---
 
 #  Motor Trend Car Road Tests 
