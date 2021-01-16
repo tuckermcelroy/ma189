@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Multiple Testing II"
-output: html_notebook
+title: 'Math 189: Multiple Testing II'
+output:
+  html_document:
+    df_print: paged
 ---
+ 
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
  
 # Hypothesis Testing Problems on Population Mean Vectors
 
@@ -87,7 +93,7 @@ qf(1-alpha,df1=m,df2=n-m)
 - The recommended intake and sample mean are given below:
 
 ```{r}
-nutrient <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\nutrient.txt")
+nutrient <- read.table("nutrient.txt")
 nutrient$V1=NULL
 colnames(nutrient)=c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
 null_mu <- c(1000,15,60,800,75)
@@ -277,7 +283,7 @@ At a given significance level $\alpha$, we reject the null hypothesis $H_0$ if
 ### Question 1: Do the husbands respond to the questions in the same way as their wives?
 
 ```{r}
-spouse <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\spouse.txt")
+spouse <- read.table("spouse.txt")
 n <- dim(spouse)[1]
 spouse_diff <- spouse[,1:4] - spouse[,5:8]
 colMeans(spouse_diff)

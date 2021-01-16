@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Multivariate Mean II"
-output: html_notebook
+title: 'Math 189: Multivariate Mean II'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
 
 # Statistical Hypothesis
 

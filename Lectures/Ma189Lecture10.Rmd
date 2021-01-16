@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Multiple Testing III"
-output: html_notebook
+title: 'Math 189: Multiple Testing III'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
  
 # General Two-Sample Testing Problem
 
@@ -142,7 +148,7 @@ same population variance-covariance matrices.  **This assumption could be wrong!
 First, let us have a peak at the dataset. BN1 to BN100 are genuine banknotes and BN101 to BN200 are counterfeit banknotes. The data is from "Multivariate Statistics: A practical approach", by Bernhard Flury and Hans Riedwyl, Chapman and Hall, 1988.
 
 ```{r}
-swiss <- read.table("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\SBN.txt")
+swiss <- read.table("SBN.txt")
 swiss[1:5,]
 swiss[101:105,]
 ```

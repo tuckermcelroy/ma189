@@ -1,6 +1,8 @@
 ---
-title: "Math 189: Exploratory Data Analysis III"
-output: html_notebook
+title: 'Math 189: Exploratory Data Analysis III'
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r, setup, include=FALSE}

@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Multivariate Mean I"
-output: html_notebook
+title: 'Math 189: Multivariate Mean I'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
 
 #  Inference for Multivariate Mean
 
@@ -26,9 +32,9 @@ output: html_notebook
 - 1000 $\mu$g is 1 mg.
 - So the total intake of the two vitamins, $Y$ (in mg), can be expressed as
 \[
- Y = .0001 X_4 + X_5.
+ Y = .001 X_4 + X_5.
 \]
-- In this case, $c_1 = c_2 = c_3 = 0$, $c_4 = .0001$, and $c_5 = 1$.
+- In this case, $c_1 = c_2 = c_3 = 0$, $c_4 = .001$, and $c_5 = 1$.
 
 ## Example: Monthly Employment Data
 
@@ -134,7 +140,7 @@ output: html_notebook
 # Variance of Univariate Sample Mean
 
 - The sample mean $\overline{x}$ is also a random variable with a mean and a variance.
-- The mean of sample mean ${\mathbb E} [ \overline{x} ] $ equals the population mean $\mu$.
+- The mean of sample mean ${\mathbb E} [ \overline{x} ]$ equals the population mean $\mu$.
 - The variance of the sample mean, generated from independent samples of size $n$, is equal to the population variance $\sigma^2$ divided by $n$.
 \[
  \mbox{Var} [ \overline{x} ] = \mbox{Var} \left[ n^{-1} \sum_{i=1}^n x_i \right]

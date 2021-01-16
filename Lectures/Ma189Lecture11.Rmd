@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Multivariate Analysis of Variance I"
-output: html_notebook
+title: 'Math 189: Multivariate Analysis of Variance I'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
 
 # Comparing More Than Two Populations
 
@@ -49,7 +55,7 @@ If yes, we can use the chemical content of a pottery sample of unknown origin to
 Adopted from: Tubb, A., A. J. Parker, and G. Nickless. 1980. "The Analysis of Romano-British Pottery by Atomic Absorption Spectrophotometry". *Archaeometry* 22: 153-71.
 
 ```{r}
-pottery <- read.csv("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\RBPottery.csv")
+pottery <- read.csv("RBPottery.csv")
 colnames(pottery) <- c("No", "ID", "Kiln", "Al", "Fe", "Mg", "Ca", "Na", "K2O", "TiO2", "MnO", "BaO")
 pot_llan <- pottery[pottery$Kiln==2,]
 pot_cald <- pottery[pottery$Kiln==3,]
