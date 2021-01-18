@@ -1,16 +1,32 @@
 ---
-title: "Math 189: Midterm 1"
+title: "Math 189: Midterm Project 1"
 output: pdf_document
 ---
 
 #  Motor Trend Car Road Tests 
 
-In your homework groups, prepare a report in R Markdown Notebook based on examining the Motor Trend Car Road Tests dataset (available from GitHub). The file contains data extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models). The dataset contains 32 observations on 11 variables. 
+Working alone, prepare a R Markdown Notebook report based on examining the Motor Trend Car Road Tests dataset (available from GitHub). The file contains data extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models). The dataset contains 32 observations on 11 variables. 
 
-## Tasks 
+## Analysis
 
-Analyze the dataset according to the following steps:
+What is the relationship between weight (wt) and miles per gallon (mpg)? Does this relationship depend on the number of cylinders (cyl)?
 
-1. Calculate sample mean and sample variance of each variable.
-2. Calculate the sample variance-covariance matrix and the sample correlation matrix. What can you say about the variance-covariance matrix and correlation matrix?
+## Components to Your Report
+
+This is your report, but consider including the following:
+
+1. Introduction, Body, and conclusion.
+2. Data citation.
+3. Any relevant tools learned in lectures 1 through 6. Don't you want to use sample mean, sample variance, and sample correlation?
+4. Justify your analysis. Are your estimators unbiased? Explain it to an engineer.
+
+## Ethics
+
+*Work alone!!!*
+
+## Submission
+
+Write an rmd file, render to pdf and submit the pdf.
+
+
 
