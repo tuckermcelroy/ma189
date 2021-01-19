@@ -1,13 +1,18 @@
 ---
-title: "Math 189: Multivariate Analysis of Variance II"
-output: html_notebook
+title: 'Math 189: Multivariate Analysis of Variance II'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
 
 # Multivariate ANOVA 
 
 - Suppose we measure $m$ variables over $g$ populations. For the $k$th population, we observe a sample of size $n_k$.
 - The dataset can be summarized in this table. Superscript denotes the population, whereas row and column index refer to record and variable respectively:
-
 \[
  \left[ \begin{array}{ccccc}   & 1 & 2 & \ldots & g \\
     1 & x_{11}^{(1)}, \ldots, x_{1m}^{(1)} & x_{11}^{(2)}, \ldots, x_{1m}^{(2)}  &
@@ -50,8 +55,7 @@ output: html_notebook
  \quad \mbox{versus} \quad H_a: \mu_j^{(k)} \neq \mu_{j}^{(h)} 
 \]
  for some variable $j$, and for some groups $k$ and $h$.
-- This says that the null hypothesis is false if at least one pair of treatments is different on
-at least one variable.
+- This says that the null hypothesis is false if at least one pair of treatments is different on at least one variable.
 
 ## Total Sum of Squares and Cross Products
 
@@ -111,6 +115,16 @@ if the Hypothesis Sum of Squares and Cross Products matrix ${\mathbf H}$ is "lar
 - Here ${\mathbf E}$ is the Error Sum of Squares and Cross Products, ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products, and ${\mathbf T}$ is the Total Sum of Squares and Cross Products.
 Also $\det$ denotes the determinant of a matrix.
 - The Wilks’s Lambda statistic follows a Lambda distribution. In general, we will reject the null hypothesis if Wilks’s lambda is small (close to zero).
+- The Wilks's Lambda distribution depends on $p$ (the number of variables), and degrees of freedom $N-g$ and $g-1$. If $N-g$ is large, we have the approximation
+\begin{align*}
+ \xi & = \begin{cases}  \sqrt{ \frac{ p^2 {(g-1)}^2 - 4}{ p^2 + {(g-1)}^2 - 5}} \; \mbox{if} \;   p^2 + {(g-1)}^2 - 5  > 0 \\
+  1 \qquad \mbox{else}  \end{cases} \\
+  \omega & = \frac{ p (g-1) -2}{2} \\
+  d_1 & = p (g-1) \\
+ d_2 & = \left( (N-g) - (p - g + 2)/2 \right) \xi - \omega \\
+ \frac{d_2 \, (1 - \Lambda^{1/\xi})}{ d_1 \, \Lambda^{1/\xi}} & \sim
+ \mathcal{F}_{d_1,d_2}
+\end{align*}
 
 ## Pillai’s Trace (Trace of Ratio)
 
@@ -121,11 +135,15 @@ Also $\det$ denotes the determinant of a matrix.
 where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products. Also $\mbox{tr}$ denotes the trace of a matrix.
 - If ${\mathbf H}$ is large relative to ${\mathbf E}$ then Pillai’s Trace will take a large value. Thus, we reject the null hypothesis if this test statistic is large.
 - Pillai’s Trace can be transformed to an $F$-statistic up to a scaling factor depending on the data:
-\[
-   F = \frac{ s_1 V }{ s_2 - V},
-\]
- for some data-dependent parameters $s_1$ and $s_2$.
- 
+\begin{align*}
+  s &  = \min \{ p, g-1 \} \\
+  m &  = ( | p - g + 1| - 1)/2 \\
+  r & = (N-g -p -1)/2 \\
+  d_1 & = 2 r + s + 1\\
+  d_2 & = 2 m + s + 1 \\
+  \frac{ d_1 V }{ d_2 ( s- V)} & \sim \mathcal{F}_{s d_1, s d_2 }
+\end{align*}
+
 ## Hotelling-Lawley Trace (Trace of Ratio)
 
 - The third test statistic for Multivariate ANOVA is named the *Hotelling-Lawley Trace*, which is defined as
@@ -135,10 +153,14 @@ where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf
 where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf H}$ is the Hypothesis Sum of Squares and Cross Products.  
 - If ${\mathbf H}$ is large relative to ${\mathbf E}$ then the Hotelling-Lawley Trace will take a large value. Thus, we reject the null hypothesis if this test statistic is large.
 - Hotelling-Lawley Trace can be transformed to an $F$-statistic up to a scaling factor, depending on the data:
-\[
- F = s \, U,
-\]
- for some data-dependent parameter $s$. It is slightly simpler than Pillai’s Trace.
+\begin{align*}
+ b & = \frac{(N-p-2)(N-g-1)}{(N-g-p-3)(N-g-p)} \\
+ d_1 & = p (g-1) \\
+ d_2 & = 4 + \frac{d_1 +2}{b-1} \\
+ c & = \frac{ d_1 (d_2-2)}{ d_2 (N-g-p-1)} \\
+  U/c & \sim \mathcal{F}_{d_1,d_2}
+\end{align*}
+ It is slightly simpler than Pillai’s Trace.
  
 ## Roy’s Maximum Root (Largest Eigenvalue of Ratio)
 
@@ -153,6 +175,11 @@ where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf
   F = t \, R,
 \]
  for some data-dependent parameter $t$.
+- There is an R package to numerically compute the distribution of 
+\[
+  \frac{R}{1+R}.
+\]
+ 
  
 ## Example: Romano-British Pottery data
 
@@ -179,7 +206,7 @@ where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf
 4. Calculate critical value or p-value, and make conclusion.
 
 ```{r}
-pottery <- read.csv("C:\\Users\\neide\\Documents\\GitHub\\ma189\\Data\\RBPottery.csv")
+pottery <- read.csv("RBPottery.csv")
 colnames(pottery) <- c("No", "ID", "Kiln", "Al", "Fe", "Mg", "Ca", "Na", "K2O", "TiO2", "MnO", "BaO")
 pot_llan <- pottery[pottery$Kiln==2,]
 pot_cald <- pottery[pottery$Kiln==3,]
@@ -251,13 +278,58 @@ HSS
 p-values.
 
 ```{r}
-wilks <- det(ESS)/det(ESS + HSS)
-pillai <- sum(diag(HSS %*% solve(ESS + HSS)))
-hotel <- sum(diag(HSS %*% solve(ESS)))
-roy <- max(eigen(HSS %*% solve(ESS))$values)
-#manova.pot <- summary(manova(cbind(pot$Al,pot$Fe,pot$Mg,pot$Ca,pot$Na) ~ pot$Kiln))
-```
+library(rootWishart)
+N <- n2+n3+n4+n5
+g <- 4
+p <- 5
+output <- NULL
 
+# Wilks Lambda
+wilks <- det(ESS)/det(ESS + HSS)
+wilk_f <- ((N - g) - (p - g + 2)/2)
+wilk_xi <- 1
+if((p^2 + (g-1)^2 - 5) > 0) 
+{
+  wilk_xi <- sqrt((p^2*(g-1)^2 - 4)/(p^2 + (g-1)^2 - 5))
+}
+wilk_omega <- (p*(g-1)-2 )/2
+wilks_stat <- (wilk_f*wilk_xi - wilk_omega)*
+  (1 - wilks^(1/wilk_xi))/(p*(g-1)*wilks^(1/wilk_xi))
+output <- rbind(output,c(wilks,wilks_stat,
+  1 - pf(wilks_stat,df1 = p*(g-1), df2 = (wilk_f*wilk_xi - wilk_omega))))
+
+# Pillai's Trace
+pillai <- sum(diag(HSS %*% solve(ESS + HSS)))
+pillai_s <- min(p,g-1)
+pillai_m <- (abs(p-g+1)-1)/2
+pillai_r <- (N-g-p-1)/2
+pillai_stat <- (2*pillai_r + pillai_s + 1)*pillai/
+  ((2*pillai_m + pillai_s + 1)*(pillai_s - pillai))
+output <- rbind(output,c(pillai,pillai_stat,
+  1 - pf(pillai_stat,df1 = pillai_s*(2*pillai_m + pillai_s + 1),
+       df2 = pillai_s*(2*pillai_r + pillai_s + 1))))
+
+# Hotelling-Lawley
+hotel <- sum(diag(HSS %*% solve(ESS)))
+hotel_b <- (N-p-2)*(N-g-1)/((N-g-p-3)*(N-g-p))
+hotel_df1 <- p*(g-1)
+hotel_df2 <- 4 + (hotel_df1 + 2)/(hotel_b - 1)
+hotel_c <- hotel_df1*(hotel_df2 - 2)/(hotel_df2*(N-g-p-1))
+hotel_stat <- hotel/hotel_c
+output <- rbind(output,c(hotel,hotel_stat,
+  1 - pf(hotel_stat,df1 = hotel_df1,df2 = hotel_df2)))
+
+# Roy
+roy <- max(eigen(HSS %*% solve(ESS))$values)
+roy_stat <- roy/(1+roy)
+output <- rbind(output,c(roy,roy_stat,
+  1 - doubleWishart(roy_stat,p=p,m=N-g,n=g-1)))
+
+colnames(output) <- c("Statistic","Test Statistic","P-value")
+rownames(output) <- c("Wilks","Pillai","Hotelling-Lawley","Roy")
+output
+```
+ 
 
 #  ANOVA versus MANOVA
 
