@@ -1,7 +1,13 @@
 ---
-title: "Math 189: Classification via Discriminant Analysis I"
-output: html_notebook
+title: 'Math 189: Classification via Discriminant Analysis I'
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
 
 # Classification
 
@@ -116,8 +122,10 @@ Based on the combination of these four features, can we develop a classifier for
 - For each flower, the label of species is given and four features are measured.
 
 ```{r}
-library(datasets)
-data(iris)
+#library(datasets)
+#data(iris)
+iris <- read.csv("iris.csv")
+iris$X <- NULL
 iris.setosa <- iris[iris$Species == "setosa",]
 iris.versi <- iris[iris$Species == "versicolor",]
 iris.virgi <- iris[iris$Species == "virginica",]
@@ -227,9 +235,73 @@ f( \underline{X} = \underline{x} \vert Y = k) =
 Both $\underline{\mu}^{(k)}$ and ${\mathbf \Sigma}$ are unknown parameters to us. We estimate them using the training data.
 - Population means $\underline{\mu}^{(k)}$ are estimated by the sample means $\overline{\underline{x}}^{(k)}$ of the $k$th group. 
 - Population covariance matrix ${\mathbf \Sigma}$ is estimated by the pooled sample covariance matrix
-
+\[
+  {\mathbf S} = \frac{ \sum_{k=1}^g (n_k -1) {\mathbf S}_k }{ \sum_{k=1}^g (n_k -1)}
+  =  \frac{1}{N-g} \sum_{k=1}^g \sum_{i=1}^{n_k} {   \left( \underline{x}_i^{(k)} - 
+\overline{\underline{x}}^{(k)} \right)   } 
+{  \left( \underline{x}_i^{(k)} - \overline{\underline{x}}^{(k)} \right)  }^{\prime},
+\]
+ where ${\mathbf S}_k$ is the sample covariance matrix of group $k$ based on the training data.
   
+### Calculate the Discriminant Function
 
+- The discriminant function $d_k (\underline{x}) =  \log (  p_k \, f( \underline{X} = \underline{x} \vert Y = k) )$ can be calculated as
+\begin{align*}
+ d_k (\underline{x}) & =  \log (f( \underline{X} = \underline{x} \vert Y = k) ) + \log p_k \\
+  & = - \log \left( {(2 \pi)}^{m/2} \det {\mathbf \Sigma}^{1/2} \right) 
+  - \frac{1}{2}  {( \underline{x} - \underline{\mu}^{(k)})}^{\prime} \,
+   {\mathbf \Sigma}^{-1} {( \underline{x} - \underline{\mu}^{(k)})}  + \log p_k \\
+    & = - \log \left( {(2 \pi)}^{m/2} \det {\mathbf \Sigma}^{1/2} \right) 
+  - \frac{1}{2}   { \underline{x}  }^{\prime} \,
+   {\mathbf \Sigma}^{-1} { \underline{x}  } 
+  - \frac{1}{2}  {  \underline{\mu}^{(k)}}^{\prime} \,
+   {\mathbf \Sigma}^{-1} { \underline{\mu}^{(k)} } 
+   +   {  \underline{\mu}^{(k)} }^{\prime} \,
+   {\mathbf \Sigma}^{-1} { \underline{x}  }  + \log p_k
+\end{align*}
 
-up through slide 20
+- With some calculations, we decompose $d_k (\underline{x})$ into 5 terms. The first two terms do not dependent on the group membership $k$. Therefore, we can ignore them without changing the ranking of $d_k (\underline{x})$.  
+  
+## Linear Discriminant Function
+
+- Motivated by the previous decomposition, we define a simplified discriminant function:
+\[
+  d_k^L (\underline{x}) = 
+  - \frac{1}{2}  {  \underline{\mu}^{(k)}}^{\prime} \,
+   {\mathbf \Sigma}^{-1} { \underline{\mu}^{(k)} } 
+   +   {  \underline{\mu}^{(k)} }^{\prime} \,
+   {\mathbf \Sigma}^{-1} { \underline{x}  }  + \log p_k
+\]
+
+- We call  $d_k^L (\underline{x})$ the *linear discriminant function*, as it is a linear function of $\underline{x}$.
+\begin{align*}
+  d_k^L (\underline{x}) & = \alpha_k + \underline{\beta}_k^{\prime} \underline{x} \\
+   \alpha_k & =  - \frac{1}{2}  {  \underline{\mu}^{(k)}}^{\prime} \,
+   {\mathbf \Sigma}^{-1} { \underline{\mu}^{(k)} } + \log p_k \\
+   \underline{\beta}_k & =    {\mathbf \Sigma}^{-1} \,  {  \underline{\mu}^{(k)} }^{\prime}.
+\end{align*}
+- Classifying $\underline{x}$ into the group with highest linear discriminant function is equivalent to classifying $\underline{x}$ into the group with the highest posterior probability.
+
+### Estimate Linear Discriminant Function
+
+- Given a training dataset, we can estimate the linear discriminant function by:
+\[
+  \widehat{d}_k^L (\underline{x}) = 
+  - \frac{1}{2}  {  \overline{\underline{x}}^{(k)}}^{\prime} \,
+   {\mathbf S}^{-1} { \overline{\underline{x}}^{(k)} } 
+   +   {  \overline{\underline{x}}^{(k)} }^{\prime} \,
+   {\mathbf S}^{-1} { \underline{x}  }  + \log p_k
+\]
+where  $\overline{\underline{x}}^{(k)}$ is the sample mean of group $k$, and ${\mathbf S}$ is the pooled sample covariance matrix.
+- This is a function of the sample mean vectors, the pooled covariance matrix, and
+prior probabilities for $g$ different populations.
+- The estimated linear discriminant function can also be written as a linear form:
+\begin{align*}
+  \widehat{d}_k^L (\underline{x}) & = \widehat{\alpha}_k + \widehat{\underline{\beta}}_k^{\prime} \underline{x} \\
+   \widehat{\alpha}_k & =  - \frac{1}{2}  {  \overline{\underline{x}}^{(k)}}^{\prime} \,
+   {\mathbf S}^{-1} { \overline{\underline{x}}^{(k)} } + \log p_k \\
+   \widehat{\underline{\beta}}_k & =    {\mathbf S}^{-1} \, 
+   {  \overline{\underline{x}}^{(k)} }^{\prime}.
+\end{align*}
+   
  
