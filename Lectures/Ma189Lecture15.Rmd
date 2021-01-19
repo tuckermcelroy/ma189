@@ -1,0 +1,163 @@
+---
+title: 'Math 189: Logistic Regression I'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Classification on Synthetic Data
+
+- We are interested in predicting whether an individual will default on his/her credit card payment, on the basis of annual income and monthly credit card balance.
+- We study the "Default" data set from the package *ISLR*. It contains 10,000 individuals with 4 variables: default (Yes or No), student (Yes or No), balance, and income.
+- Visualization: a scatter plot of monthly credit card balance versus annual income, with red marking individuals who defaulted on their credit card payments, and green corresponding to those who did not default.  
+ 
+
+```{r}
+library(ISLR)
+data(Default)
+Default_good <- Default[Default$default == "No",]
+Default_bad <- Default[Default$default == "Yes",]
+plot(x = Default_good$balance, y = Default_good$income,col=3,
+     xlab = "Balance",ylab = "Income")
+points(x = Default_bad$balance, y = Default_bad$income,col=2)
+```
+
+- Also some boxplots of balance and income as a function of default status.
+
+```{r}
+boxplot(balance ~ default, data=Default, col=c(3,2))
+boxplot(income ~ default, data=Default, col=c(3,2))
+```
+
+## Goal:
+
+- We wish to build a model to predict "default" $Y$ for any given value of balance $X_1$ and income $X_2$.
+- Logistic Regression: the response "default" falls into one of two categories, Yes or No. 
+- Logistic regression models the probability that $Y$ belongs to a particular category.
+- Perhaps we want to know the probability of default given a balance value.
+\[
+ {\mathbb P} \left[ \mbox{default} = \mbox{Yes} \vert \mbox{balance} \right]
+\]
+Call this $p(\mbox{balance})$. 
+- Maybe a credit card company deems the risk of default to be high whenever  $p(\mbox{balance}) > 1/2$. They could use a lower threshold if they want to control more risk.
+ 
+## The Logistic Model
+
+- Let Yes be $1$ and No be $0$.
+- Consider the conditional probability
+\[
+ p(x) = {\mathbb P} [ Y = 1 \vert X = x ]
+\]
+- We want to model $p(x)$ using a function that gives outputs between $0$ and $1$ for all values of $x$. Many functions meet this criterion.
+- In logistic regression, we use the *logistic function*.
+\[
+ p(x) = \frac{ \exp \{ \beta_0 + \beta_1 x \} }{ 1 +  \exp \{ \beta_0 + \beta_1 x \} }
+\]
+- To fit this model, we use a method called *maximum likelihood estimation*.
+- Note that
+\[
+ \frac{p(x)}{1 - p(x)} = \exp \{ \beta_0 + \beta_1 x \}
+\]
+ The left-hand side is called the *odds*. 
+- Values of the odds close to 0 indicate very low probabilities of default.
+- Values of the odds close to $\infty$ indicate very high probabilities of default.
+  
+### Example
+
+- On average, 1 in 5 people with an odds of $1/4$ will default, since $p(x) = 0.2$ implies an odds of 1/4. 
+- Likewise, on average 9 out of every 10 people with an odds of 9 will default. Because: odds of $9$ implies $p(x) = .9$.
+- Odds are traditionally used instead of probabilities in horseracing, since they relate more naturally to the correct betting strategy.
+
+## Estimating the Regression Coefficients
+
+- Intuition: We seek estimates for $\beta_0$ and $\beta_1$ such that the predicted probability $\widehat{p}(x)$ of default for each individual corresponds as closely as possible to the individual’s observed default status.
+- Suppose we have data ${( y_i, x_i)}_{i=1}^n$. 
+- Likelihood function: by model assumption, ${\mathbf P} [ y_i=1 \vert x_i] = p(x_i)$ and
+${\mathbf P} [ y_i=0 \vert x_i] = 1-p(x_i)$. So the conditional "density function” of $y_i$  given $x_i$ can be written compactly as
+\[
+  { p(x_i)}^{y_i} { ( 1 - p(x_i))}^{1 - y_i}
+\]
+- The joint conditional density of $y_1, \ldots, y_n$ given $x_1, \ldots, x_n$ is
+\[
+  L_n (\beta_0, \beta_1) = \prod_{i=1}^n { p(x_i)}^{y_i} { ( 1 - p(x_i))}^{1 - y_i}
+\]
+- This is a function of $\beta_0$ and $\beta_1$, because our model assumption is that
+\[
+ p(x_i) = \frac{ \exp \{ \beta_0 + \beta_1 x_i \} }{ 1 +  \exp \{ \beta_0 + \beta_1 x_i \} }
+\]
+- The estimates $\widehat{\beta}_0$ and $\widehat{\beta}_1$ are chosen to maximize this likelihood function.
+- How to maximize? Calculus, or nonlinear optimization. Use the computer!
+- The logistic regression model can be fitted using a statistical software package, such as *glm* in R.
+
+
+### Results on Default Data
+
+The following table shows the coefficient estimates and related information that result from fitting a logistic regression model on the Default data in order to predict the probability of default, using balance.
+
+```{r}
+y <- as.numeric(Default$default=="Yes")
+## Use the credit card balance to predict default probability
+balance.fit <- glm(y~balance, data=Default,family=binomial)
+summary(balance.fit)
+```
+
+- The glm() function fits generalized linear models, a class of models that includes logistic regression. When use it this way, we must pass in the argument *family=binomial* in order to tell R to run a logistic regression rather than some other type of generalized linear model.
+- The $Z$-statistic here plays the same role as the $t$-statistic. For example, the $Z$-statistic associated with $\beta_1$ is $\widehat{\beta}_1/\mbox{se}(\widehat{\beta}_1)$. Large (absolute) values of the $Z$-statistic indicate evidence against the null hypothesis $H_0: \beta_1 = 0$.
+- The null hypothesis $H_0: \beta_1 = 0$ implies that
+\[
+ p(X) = {\mathbf P} [ Y = 1 \vert X = x] = 
+ \frac{ \exp \{ \beta_0   \} }{ 1 +  \exp \{ \beta_0   \} }
+\]
+In other words, the probability of default does not depend on balance under the null hypothesis. Since the $Z$-value associated with balance is tiny, we can reject $H_0$. We conclude that there is indeed an association between balance and the probability of default.
+
+# Making Predictions
+
+- Once the coefficients have been estimated, it is a simple matter to compute the probability of default for any given credit card balance.
+
+```{r}
+pred_balance <- function(obs_balance){
+  x <- c(1,obs_balance)
+  pred <- as.numeric(as.numeric(x %*% balance.fit$coefficients))
+  pred <- 1/(1+exp(-pred))
+  return(pred)
+}
+```
+
+- Using the coefficient estimates, we predict that the default probability for an individual with a balance of 1000 dollars is
+\[
+ \widehat{p} (1000) = \frac{ \exp \{ \widehat{\beta}_0 + \widehat{\beta}_1 (1000) \} }{ 1 +  \exp \{ \widehat{\beta}_0 + \widehat{\beta}_1 (1000) \} },
+\]
+ which is `r pred_balance(1000)`.
+- The predicted probability of default for an individual with a balance of 2000 dollars is much higher: `r pred_balance(2000)`.
+- Alternatively, one may predict the probability of default from student status. To see this, create a dummy variable that takes on a value of 1 for students and 0 for non-students.
+
+```{r}
+stu <- as.numeric(Default$student=="Yes")
+student.fit <- glm(y~stu,data=Default,family=binomial)
+summary(student.fit)
+```
+
+- The coefficient for the dummy variable is positive, and the associated $Z$-value is statistically significant. This indicates that students tend to have higher default probabilities than non-students.
+
+```{r}
+pred_student <- function(obs_student){
+  x <- c(1,obs_student)
+  pred <- as.numeric(as.numeric(x %*% student.fit$coefficients))
+  pred <- 1/(1+exp(-pred))
+  return(pred)
+}
+```
+
+- Then we can predict the risk of default 
+\begin{align*}
+ & \widehat{\mathbb P} [ \mbox{default} = \mbox{Yes} \vert \mbox{Student} = \mbox{Yes} ]
+  = \frac{ \exp \{ \widehat{\beta}_0 + \widehat{\beta}_1 (1) \} }{ 1 +  \exp \{ \widehat{\beta}_0 + \widehat{\beta}_1 (1) \} }
+  & \widehat{\mathbb P} [ \mbox{default} = \mbox{Yes} \vert \mbox{Student} = \mbox{No} ]
+  = \frac{ \exp \{ \widehat{\beta}_0 + \widehat{\beta}_1 (0) \} }{ 1 +  \exp \{ \widehat{\beta}_0 + \widehat{\beta}_1 (0) \} }
+\end{align*}
+for students `r pred_student(1)` and non-students `r pred_student(0)`.
+
+ 
+

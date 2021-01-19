@@ -1,0 +1,49 @@
+---
+title: 'Math 189: Logistic Regression II'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Multiple Logistic Regression
+
+- Goal: predict a binary response using multiple predictors.
+- We generalize the previous model as follows:
+\[
+ \log \left( \frac{ p( \underline{X})}{ 1- p (\underline{X})} \right)
+ = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p
+\]
+where is $\underline{X}$ is a $p$-vector of covariates.
+- Equivalently,
+\[
+ p( \underline{X}) = \frac{ \exp \{  \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p \} }{
+  1 + \exp \{  \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p \} }
+\]
+- Let $\underline{\beta} = {[ \beta_1, \ldots, \beta_p ]}^{\prime}$ be the vector of regression coefficients; $\beta_0$ is referred to as the intercept.
+
+## Logistic Function
+
+- Set the logistic function to be
+\[
+ \phi (t) = \frac{1}{1 + e^{-t}}
+\]
+- Then the logistic regression model for ${(Y,\underline{X})}$ is
+\[
+ p( \underline{x}) = {\mathbb P} [ Y = 1 \vert \underline{X} = \underline{x} ] 
+  \phi ( \beta_0 + \underline{x}^{\prime} \underline{\beta})
+\]
+- On the other hand
+\[
+ {\mathbb P} [ Y = 0 \vert \underline{X} = \underline{x} ] 
+  1 - \phi ( \beta_0 + \underline{x}^{\prime} \underline{\beta})
+\]
+ 
+```{r}
+x <- seq(-10,10,.1)
+y <- (1+exp(-x))^{-1}
+plot(ts(y),xlab="x",ylab="")
+```
+
+
