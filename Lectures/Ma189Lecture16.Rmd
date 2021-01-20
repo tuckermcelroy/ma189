@@ -46,4 +46,98 @@ y <- (1+exp(-x))^{-1}
 plot(ts(y),xlab="x",ylab="")
 ```
 
+## Likelihood Function
 
+- To compute the likelihood function, assume that $(Y_1, \underline{X}_1),\ldots,(Y_n,\underline{X}_n)$ are i.i.d. 
+- The conditional density of $Y_i$ given $\underline{X}_i$ is
+\[
+  { \left( \phi ( \beta_0 + \underline{X}_i^{\prime} \underline{\beta} ) \right)}^{Y_i}
+  \,  { \left( 1 - \phi ( \beta_0 + \underline{X}_i^{\prime} 
+  \underline{\beta} ) \right)}^{1 - Y_i}
+\]
+Hence, the joint density of $Y_1, \ldots, Y_n$ given $\underline{X}_1, \ldots,\underline{X}_n$ is
+\[
+ L_n (\beta_0, \underline{\beta} ) = \prod_{i=1}^n  { \left( \phi ( \beta_0 + \underline{X}_i^{\prime} \underline{\beta} ) \right)}^{Y_i}
+  \,  { \left( 1 - \phi ( \beta_0 + \underline{X}_i^{\prime} 
+  \underline{\beta} ) \right)}^{1 - Y_i}
+\]
+This $L_n: {\mathbb R}^{p+1} \rightarrow [0,\infty)$ is called the *likelihood function*.
+
+## Maximum Likelihood Estimator
+
+- The *maximum likelihood estimator*  $(\widehat{\beta}_0, \widehat{\underline{\beta}})$
+is defined as the maximizer of the likelihood function:
+\[
+(\widehat{\beta}_0, \widehat{\underline{\beta}}) = \arg \max 
+L_n (\beta_0, \underline{\beta} ) 
+\]
+- In both theory and practice, it is easier to work with the logarithm of the likelihood function.
+\[
+ \mathcal{L}_n (\beta_0, \underline{\beta} ) = \log L_n (\beta_0, \underline{\beta} )
+ =   \sum_{i=1}^n \left\{ Y_i \, \log \left( \phi ( \beta_0 + \underline{X}_i^{\prime} \underline{\beta} ) \right) +  (1 - Y_i) \log \left( 1 - \phi ( \beta_0 + \underline{X}_i^{\prime}   \underline{\beta} ) \right) \right\}
+\]
+ 
+### Example: Default Data
+
+- Consider Default data. Let $X_1$ be balance, $X_2$ be income, $X_3 \in \{ 0, 1 \}$ is student status. 
+ 
+```{r}
+library(ISLR)
+data(Default)
+y <- as.numeric(Default$default=="Yes")
+stu <- as.numeric(Default$student=="Yes")
+income <- 0.001*Default$income
+balance <- Default$balance
+all.fit <- glm(y~stu+balance+income,data=Default,family=binomial)
+summary(all.fit)
+```
+
+- We can make predictions by plugging in the coefficient estimates:
+\[
+ \widehat{p}( \underline{x})  =
+  \phi ( \widehat{\beta}_0 + \underline{x}^{\prime} \widehat{\underline{\beta}})
+\]
+
+```{r}
+pred_all <- function(obs){
+  x <- c(1,obs)
+  pred <- as.numeric(as.numeric(x %*% all.fit$coefficients))
+  pred <- 1/(1+exp(-pred))
+  return(pred)
+}
+```
+
+- A student with a credit card balance of 1500 dollars and an income of 40,000 has an estimated probability of default of `r pred_all(c(1,1500,40))`.  The same balances for a non-student yield a default risk of `r pred_all(c(0,1500,40))`.
+- The two-class logistic regression models have multiple-class extensions (*multiple-class logistic regression*), but in practice they tend not to be used all that often. The software for it is available in R.
+- We can generate additional plots: probability of default as a function of Balance, for student (orange) and non-student (blue) groups. Horizontal line is the straight proportion of defaults for student and non-students, ignoring Balance.
+
+```{r}
+fitted.prob <- as.numeric(all.fit$fitted.values)
+prob.stu <- fitted.prob[stu==1]
+balance.stu <- balance[stu==1]
+M1 <- matrix(c(prob.stu,balance.stu), ncol = 2)
+M1 <- M1[order(M1[,1], decreasing = FALSE),]
+
+plot(M1[,2], M1[,1],type='l',lwd=2,col="orange",
+     xlab="Credit Card Balance",ylab="Default Rate")
+
+prob.nonstu <- fitted.prob[stu==0]
+balance.nonstu <- balance[stu==0]
+M2 <- matrix(c(prob.nonstu,balance.nonstu), ncol = 2)
+M2 <- M2[order(M2[,1], decreasing = FALSE),]
+
+lines(M2[,2],M2[,1],lwd=2,col="slateblue1")
+
+stu.rate <- sum(stu[y==1])/sum(stu)
+nonstu.rate <- sum((1-stu)[y==1])/sum(1-stu)
+
+abline(h=stu.rate,lwd=2,lty=2,col="orange")
+abline(h=nonstu.rate,lwd=2,lty=2,col="slateblue1")
+```
+
+- We can examine boxplots for Balance as a function of Student status. 
+
+```{r}
+boxplot(balance~Default$student,xlab="Student Status", 
+        ylab="Credit Card Balance",col=c("slateblue1","orange"))
+```
