@@ -1,0 +1,104 @@
+---
+title: 'Math 189: Support Vector Machine I'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Discrimination
+
+- We have already examined Fisher’s Linear Discriminant Analysis (LDA) and logistic regression method for classification.
+- Now we study *support vector machine* for classification:
+
+1. Separating hyperplane
+2. Maximal margin classifier
+3. Support vector classifier
+
+# Support Vector Machine
+
+- Support vector machine (SVM) is a classification method developed in the computer science community in 1990s, and has grown in popularity since then.
+- Support vector machines have been shown to perform well in a variety of settings, and are
+often considered one of the best "out of the box” classifiers.
+- Support vector machines are intended for the binary classification setting in which there
+are two classes. There are extensions of SVM to the case of more than two classes. SVM can also be extended to regression tasks.
+- SVM is a generalization of a simple and intuitive classifier, called the *maximal margin
+classifier*.
+
+# Hyperplane
+
+- In a $p$-dimensional space, a hyperplane is a flat affine subspace of dimension $p-1$. The
+word affine indicates that the subspace needs not pass through the origin.
+- For instance, in two dimensions, a hyperplane is a straight line. In three dimensions, a
+hyperplane is a plane.
+- The mathematical definition of a hyperplane is quite simple. A hyperplane in $p$-dimensional space is
+\[
+ \{ \underline{X} \in {\mathbb R}^p :    \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p = 0 \}
+\]
+- For a $p$-vector $\underlie{X}$, we say $\underline{X}$ lies on the hyperplane if $\underline{X}$ satisfies the above equation.
+- A $p-1$-dimensional hyperplane cuts a $p$-dimensional space into two "sides”.
+- For a $p$-vector $\underline{X}$ that does not lie on the hyperplane, it either lies on the positive side or the negative side of the hyperplane.  
+- The positive side:
+\[
+ \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p > 0
+\]
+- The negative side:
+\[
+ \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p < 0
+\]
+- For a given point $\underline{X}$, one can easily determine on which side of thehyperplane it lies by calculating the sign of $\beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p$.
+
+## Example: Hyperplane in ${\mathbb R}^2$
+
+- Here we draw a hyperplane
+\[
+  1 + 2 X_1 + 3 X_2 = 0
+\]
+in ${\mathbb R}^2$, displayed using a black solid line.
+- The blue region is the set of points for which
+\[
+  1 + 2 X_1 + 3 X_2 > 0
+\]
+- The purple region is the set of points for which
+\[
+  1 + 2 X_1 + 3 X_2 < 0
+\]
+- For a given point $\underline{X} = {[ X_1, X_2 ]}^{\prime}$, we can
+decide its region by calculating the sign of
+\[
+  1 + 2 X_1 + 3 X_2 
+\]
+
+```{r}
+x1 <- seq(-1.5,1.5,.1)
+x2 <- seq(-1.5,1.5,.1)
+y <- -(1/3) + (-2/3)*x1 
+plot(x1,y,type="l",xlim=c(-1.5,1.5),ylim=c(-1.5,1.5),lwd=3)
+for(i in 1:length(x1))
+{
+  for(j in 1:length(x2))
+  {
+    if(1+2*x1[i]+3*x2[j] < 0) { points(x1[i],x2[j],col=6,pch=16)}
+    if(1+2*x1[i]+3*x2[j] > 0) { points(x1[i],x2[j],col=4,pch=16)}
+  }
+}
+```
+
+## Classification Using a Hyperplane
+
+- Suppose that we have a $n \times p$ data matrix ${\mathbf X}$ that consists of $n$ training
+observations in $p$-dimensional space,
+\[
+ \left[ \begin{array}{c} x_{11} \\ x_{12} \\ \vdots \\ x_{1p} \end{array} \right], \;
+ \left[ \begin{array}{c} x_{21} \\ x_{22} \\ \vdots \\ x_{2p} \end{array} \right], \ldots
+ \left[ \begin{array}{c} x_{n1} \\ x_{n2} \\ \vdots \\ x_{np} \end{array} \right].
+\]
+and assume these observations fall into two classes, i.e., 
+$y_1, y_2, \ldots, y_n \in \{ -1, 1 \}$.
+- The property of hyperplane that divides the space motivates us to consider if it is possible to construct a hyperplane that separates the training observations perfectly according to their class labels.
+
+
+
+Go up through slide 23
+ 

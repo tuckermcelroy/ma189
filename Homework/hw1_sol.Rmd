@@ -1,0 +1,88 @@
+---
+title: "hw1_sol"
+author: "TA"
+date: "1/9/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+## Q.1,2,3
+
+*Source*: The Child Health and Development Studies (CHDS) data are presented in *Stat Labs: Mathematical Statistics Through Applications* by Deborah Nolan and Terry Speed (Springer). 
+
+
+
+```{r}
+baby <- read.table("babies.dat",header=TRUE)
+
+head(baby[c(1,4,6)])
+
+```
+## The dataset consists of 1236 records over 7 variables.
+
+## Q.4 Submatrix  
+
+
+```{r }
+
+X<- as.matrix(tail(baby[,c(1,4,6)], n = 5))
+
+X
+
+```
+
+## Q.5
+
+```{r}
+
+A<- t(X)%*%X
+
+A
+```
+
+
+## Q.6 
+```{r}
+
+det (A)
+
+inv_A<- solve(A)
+
+inv_A
+```
+## The Determinant of A is not zero, hence the inverse exists.
+
+
+
+## Q.7 
+
+```{r}
+
+sum(diag(A))
+
+```
+## The trace of the matrix is positive which means the sum of it's eigenvalues is also positive as trace(A) = sum of it's eigenvalues.
+
+## Q.8 
+One way to check if a matrix is positive definite:
+A matrix is positive definite if it is symmetric and all it's eigenvalues are positive 
+
+```{r}
+
+all(t(A) == A)
+
+eig <- eigen(A)
+
+eig_values <- eig$values
+
+eig_values
+
+
+```
+
+We can see that the matrix is symmetric and all it's eigenvalues are positive. Therefor it is a positive definite matrix.

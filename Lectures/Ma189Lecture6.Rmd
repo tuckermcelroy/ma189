@@ -254,7 +254,7 @@ random variable whose mean is of order $n^{-1/2}$.
  
 ```{r}
 # try different choices of n: 1, 9, 25, 100
-n <- 1
+n <- 9
 lambda <- 2
 xbars <- NULL
 for(i in 1:1000) {
@@ -299,7 +299,7 @@ runifs_circle <- function(n,radius)
   return(z)
 }
 # try different choices of n: 1, 9, 25, 100
-n <- 1
+n <- 25
 xbars <- NULL
 for(i in 1:1000) {
 X <- runifs_circle(n,1)   

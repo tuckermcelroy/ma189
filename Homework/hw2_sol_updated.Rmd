@@ -1,0 +1,66 @@
+---
+title: "hw2_sol"
+author: "TA"
+date: "1/9/2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+## Q.1
+
+Source: The file contains data extracted from the 1974 Motor Trend
+US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32
+automobiles (1973–74 models). The dataset contains 32 observations on 11 variables.
+
+```{r}
+mtcars <- read.table("mtcars.csv",sep = ",", header=TRUE)
+
+head(mtcars)
+# colMeans(mtcars[,2:11])
+
+
+# apply(mtcars[,2:11], 2, var)
+
+typeof(mtcars)
+
+plot(x = mtcars$wt, y = mtcars$mpg,
+     xlab = "Weight", ylab = "Miles Per Gallon",	 
+     main = "Weight vs. miles per gallon")
+```
+## The scatter plot shows a decreasing linear relationship between mpg and weight which can be investigated further if the relationship is statistically significant.
+
+## Q. 2
+```{r}
+
+library("scatterplot3d")
+scatterplot3d(x = mtcars$wt, y = mtcars$mpg, z=mtcars$cyl,
+              xlab = "Weight", ylab = "Miles Per Gallon",	zlab="Cylinders", 
+              color="red", pch=20)
+```
+### One of the drawback of 3d scatter-plot is that the interpretation of relationships between the variables can be difficult to observe. An alternative can be to plot a 2d catter plot b/w mpg and weight and colorcode the points according to cylinder variable.
+
+
+## Q. 3
+
+```{r}
+
+pairs(mtcars[,2:11], pch=20)
+
+```
+## Q.4
+
+If we look at the 2d scatter plot, and color code the points accoring to the number of cylinders, we can see that the points cluster into 3 groups according to the number of cylinders. Therefore, the engineer's suggestions reasonable.
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point(aes(color = factor(cyl)))
+```
+
+
+
