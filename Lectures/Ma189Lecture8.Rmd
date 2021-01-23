@@ -222,8 +222,7 @@ In this case, the type I and type II errors stand for:
 |   | Type I Error | Type II Error |
 |---|---|---| 
 | Decision | Claim there's an association when it does not exist |  Ignore an association when it does exist |
-| Costs | We include some non-significant genotypes, which may be filtered out in next
-steps |  We missed a significant genotype that  will be ignored in future studies |
+| Costs | We include some non-significant genotypes, which may be filtered out in next steps |  We missed a significant genotype that  will be ignored in future studies |
  
 ##  What if We Can Live With Some Type I Errors?
 
