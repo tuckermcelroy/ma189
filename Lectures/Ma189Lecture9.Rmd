@@ -248,7 +248,7 @@ Here $\underline{0}$ is the zero vector.
 - This motivates us to consider a pair-wise difference of the two samples.
 - Denote by $\underline{y}_i$ the (vector) difference in responses for the $i$th pair ($i$th husband and $i$th wife):
 \[
- \underline{y}_i = \underline{x}^{(1)} - \underline{x}^{(2)}.
+ \underline{y}_i = \underline{x}^{(1)}_i - \underline{x}^{(2)}_i.
 \]
 - The population mean vector of $\underline{y}_i$ is
 \[

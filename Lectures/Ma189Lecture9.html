@@ -1665,7 +1665,7 @@ x &lt;- rnorm(10,mean=1)
 n &lt;- length(x)
 t_stat &lt;- (mean(x) - 0)/(sd(x)/n)
 t_stat^2</code></pre>
-<pre><code>## [1] 256.1706</code></pre>
+<pre><code>## [1] 136.5691</code></pre>
 <pre class="r"><code>qf(1-alpha,df1=1,df2=n-1)</code></pre>
 <pre><code>## [1] 5.117355</code></pre>
 </div>
@@ -1712,7 +1712,7 @@ m &lt;- dim(x)[2]
 f_stat &lt;- (n-m)/(m*(n-1)) * t(colMeans(x)) %*% solve(var(x)) %*% colMeans(x)
 f_stat</code></pre>
 <pre><code>##          [,1]
-## [1,] 1.639321</code></pre>
+## [1,] 2.236868</code></pre>
 <pre class="r"><code>qf(1-alpha,df1=m,df2=n-m)</code></pre>
 <pre><code>## [1] 4.45897</code></pre>
 </div>
@@ -1901,7 +1901,7 @@ f_stat</code></pre>
 \]</span> Here <span class="math inline">\(\underline{0}\)</span> is the zero vector.</li>
 <li>This motivates us to consider a pair-wise difference of the two samples.</li>
 <li>Denote by <span class="math inline">\(\underline{y}_i\)</span> the (vector) difference in responses for the <span class="math inline">\(i\)</span>th pair (<span class="math inline">\(i\)</span>th husband and <span class="math inline">\(i\)</span>th wife): <span class="math display">\[
- \underline{y}_i = \underline{x}^{(1)} - \underline{x}^{(2)}.
+ \underline{y}_i = \underline{x}^{(1)}_i - \underline{x}^{(2)}_i.
 \]</span></li>
 <li>The population mean vector of <span class="math inline">\(\underline{y}_i\)</span> is <span class="math display">\[
  \underline{\mu}_y = \underline{\mu}^{(1)} - \underline{\mu}^{(2)}.
