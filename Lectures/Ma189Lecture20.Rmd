@@ -7,8 +7,246 @@ output: html_document
 knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 ```
 
-## How to Find Principle Components?
+## How to Find Principal Components?
 
-- The principle directions can be found by computing the eigenvalues and eigenvectors of the covariance matrix ${\mathbf \Sigma}$.
+- The principal directions can be found by computing the eigenvalues and eigenvectors of the covariance matrix ${\mathbf \Sigma}$.
 - Let $\lambda_1, \ldots, \lambda_p$ denote the eigenvalues of ${\mathbf \Sigma}$ in descending order, i.e.
+\[
+ \lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_p.
+\]
+- Let $\underline{e}_1, \ldots, \underline{e}_p$ be the corresponding eigenvectors (with unit length):
+\[
+ {\mathbf \Sigma} \, \underline{e}_j = \lambda_j \, \underline{e}_j
+\]
+for $j = 1, \ldots, p$. 
+- In fact, the $j$th eigenvector will serve as the $j$th principal direction!
+
+1. $\underline{e}_j^{\prime} \underline{e}_j = 1$ and $\underline{e}_j^{\prime} \underline{e}_k = 0$ for $k \neq j$, due to orthogonality of eigenvectors (if eigenvalues are distinct).
+2. Because
+\[
+ \mbox{Var} [ y_j] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_j
+  = \lambda_j \underline{e}_j^{\prime} \underline{e}_j = \lambda_j,
+\]
+  we see that $\mbox{Var} [ y_1] \geq  \mbox{Var} [ y_2] \geq 
+  \ldots \geq  \mbox{Var} [ y_1]$.
+3. Also for $j \neq k$
+\[
+ \mbox{Cov} [ y_j, y_k] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_k
+  = \lambda_k \underline{e}_j^{\prime} \underline{e}_k = 0
+\]
+ so the new variables $y_1, \ldots, y_p$ are uncorrelated.
+ 
+## Spectral Decomposition Theorem
+
+- The covariance matrix is symmetric and positive semi-definite. It admits a spectral decomposition:
+\[
+ {\mathbf \Sigma} = \sum_{j=1}^p \lambda_j \underline{e}_j \underline{e}_j^{\prime}.
+\]
+- The spectral decomposition states that the linear space spanned by the $p$ features can
+be fully explained by the $p$ orthogonal directions (the principal vectors).
+- This decomposition suggests that we can approximate ${\mathbf \Sigma}$ by its first $k$ eigenvectors:
+\[
+ {\mathbf \Sigma} \approx \sum_{j=1}^k \lambda_j \underline{e}_j \underline{e}_j^{\prime},
+\]
+for some $k < p$.
+- This approximation is useful when $\lambda_{k+1}, \ldots, \lambda_p$ are small. In other words,
+\[
+ {\mathbf \Sigma} - \sum_{j=1}^k \lambda_j \underline{e}_j \underline{e}_j^{\prime}= 
+ \sum_{j=k+1}^p \lambda_j \underline{e}_j \underline{e}_j^{\prime}
+\]
+ is negligible. 
+ 
+## Uniqueness of the Principal Components
+
+- Each principal component loading vector is unique, up to a sign flip. This means that two different software packages will yield the same principal component loading vectors up to signs.
+- The signs may differ because each principal component loading vector specifies a direction in ${\mathbf R}^p$: flipping the sign does not affect the amount of variability contained in each PC.
+
+## How Much Information Do We Lose?
+
+- The total variation of $\underline{X}$ is the trace of its covariance matrix ${\mathbf \Sigma}$. This is also the sum of all the eigenvalues:
+\[
+ \mbox{tr} {\bf \Sigma} = \sum_{j=1}^p \lambda_j.
+\]
+- The proportion of variation explained by the $j$th principal component is
+\[
+  \frac{ \lambda_j}{ \sum_{k=1}^p \lambda_k}
+\]
+- The proportion of variation explained by the first $j$ principal components is
+\[
+  \frac{ \sum_{k=1}^j \lambda_k}{ \sum_{k=1}^p \lambda_k}.
+\]
+- Naturally, if the proportion of variation explained by the first $k$ principal components is large, then not much information is lost by considering only the first $k$ principal components.
+
+## Choose the Number of Principal Components
+
+- To reduce the dimensionality, we only retain the first $k$ principal components.
+- Here we need to balance two conflicting purposes:
+
+1. To obtain the simplest possible interpretation, we want $k$ to be as small as possible. If we can explain most of the variation by just looking at the first few principal components, then it would give us a simpler description of the data.
+2. To reduce loss of information, we want the proportion of variation explained by the first $k$ principal components to be large (ideally close to 1):
+\[
+  \frac{ \sum_{k=1}^j \lambda_k}{ \sum_{k=1}^p \lambda_k} \approx 1
+\]
+ 
+## Estimate Principal Components From a Sample
+
+- Suppose we observe a sample $\underline{x}_1, \ldots, \underline{x}_n$ of $p$ features.
+- The principle components can be estimated via the following steps:
+
+1. Standardize each variable to have mean 0 and standard deviation 1.
+2. Calculate the sample covariance matrix
+\[
+  {\mathbf S} = \frac{1}{n-1} \sum_{i=1}^n ( \underline{x}_i - \overline{\underline{x}})
+   {( \underline{x}_i - \overline{\underline{x}})}^{\prime}.
+  \]
+3. Calculate eigenvalues and eigenvectors of ${\mathbf S}$. Let $\hat{\lambda}_1, \ldots, \hat{\lambda}_p$ denote the eigenvalues of ${\mathbf S}$ in descending order, and let $\hat{\underline{e}}_1, \ldots, \hat{\underline{e}}_p$ be the corresponding eigenvectors.
+4. The estimated principal components are
+\[
+  \hat{y}_{i1} = \hat{\underline{e}}_1 \underline{x}_i,
+  \ldots,  \hat{y}_{ip} = \hat{\underline{e}}_p \underline{x}_i.
+\]
+
+## Example: Violent Crime Rates by US State
+
+- This dataset contains records of arrests per 100,000 residents for assault, murder, and rape in each of the 50 US states in 1973. The dataset also includes the percent of the population living in urban areas.
+- The dataset contains 50 observations of the following four variables:
+
+1. Murder: number of murder arrests per 100,000 residents.
+2. Assault: number of assault arrests per 100,000 residents.
+3. Rape: number of rape arrests per 100,000 residents.
+4. UrbanPop: percentage of urban population.
+
+### A Peek at the Dataset
+
+- First let’s take a quick look at the dataset along with some descriptive statistics.
+
+```{r}
+data(USArrests)
+head(USArrests)
+```
+
+```{r}
+states <- row.names(USArrests)
+out1 <- rbind(apply(USArrests, 2, mean),apply(USArrests, 2, var))
+rownames(out1) <- c("Sample Mean","Sample Variance")
+out1
+```
+
+### Principle Component Analysis Results
+
+- We first standardize each variable to have mean 0 and standard deviation 1. Then we apply PCA to the standardized data.
+- All four eigenvalues and their corresponding eigenvectors are listed below.
+- We also report the proportion of total variance explained by each PC and the cumulative proportion explained.
+
+```{r}
+pca_result <- eigen(cor(USArrests))
+pca_var <- pca_result$values
+pve <- pca_var/sum(pca_var)
+out2 <- cbind(pca_var,pve,cumsum(pve))
+colnames(out2) <- c("Eigenvalue","Proportion","Cumulative")
+rownames(out2) <- c("PC1","PC2","PC3","PC4")
+out2
+```
+
+- Fancy with a package:
+
+```{r}
+#"scale=True" means the data are standardized first
+pca_result <- prcomp(USArrests, scale = TRUE)
+pca_var <- pca_result$sdev^2
+pve <- pca_var/sum(pca_var)
+out2 <- cbind(pca_var,pve,cumsum(pve))
+colnames(out2) <- c("Eigenvalue","Proportion","Cumulative")
+rownames(out2) <- c("PC1","PC2","PC3","PC4")
+out2
+```
+
+### Scree Plot and Cumulative Proportion Plot
+
+- We draw the so-called scree plot to visualize the proportion of total variance explained by each PC. Also, we can visualize the cumulative proportion explained by first $k$ PCs.
+
+```{r}
+#Scree plot
+plot(pve, xlab=" Principal Component ", 
+  ylab=" Proportion of Variance Explained ", 
+  ylim=c(0,1), xaxt="n" ,type='b', col="red", 
+  cex=2,pch=20, cex.lab=1.5)
+axis(1, at=c(1,2,3,4),labels=c(1,2,3,4))
+
+#Cumulative proportion plot
+plot(cumsum(pve), xlab=" Principal Component ", 
+  ylab ="Cumulative Proportion of Variance Explained ", 
+  ylim=c(0,1) , xaxt="n", type='b', col="blue", 
+  cex=2, pch=20, cex.lab=1.5)
+axis(1, at=c(1,2,3,4),labels=c(1,2,3,4))
+```
+
+### Visualize the Dataset by First Two PCs
+
+- As a dimension reduction tool, PCA allows us to visualize multivariate data through a lower dimensional projection.
+- Here, we plot the data projected onto the first two PCs.
+
+```{r}
+library(ggfortify)
+plot_0 <- autoplot(pca_result, data = USArrests, colour = 'black')
+plot_0 + theme_grey(base_size = 22)
+plot_1 <- autoplot(pca_result, data = USArrests, color = 'steelblue', 
+                label=TRUE, shape=FALSE, size=2)
+plot_1 + theme_grey(base_size = 15)
+```
+
+
+### Compare with Pairwise Scatterplot
+
+- Pairwise scatterplot consists of $p(p-1)/2$ independent scatterplots.
+- Pairwise scatterplot views only marginal dependence rather than joint effect.
+ 
+```{r}  
+pairs(USArrests, pch=20)
+```
+
+### Interpret Principal Components
+
+- The eigenvectors are used as the estimated principal component loading vectors.
+- These loading vectors show coefficients of each principal component as a linear combination of variables.
+- The calculated principal component coefficients are listed as follows.
+
+```{r}
+t(pca_result$rotation)
+```
+
+- The first loading vector places approximately equal weight on Assault, Murder, and Rape, with much less weight on UrbanPop. Hence this component roughly corresponds to a measure of overall rates of serious crimes.
+- The second loading vector places most of its weight on UrbanPop and much less weight on the other three features. Hence, this component roughly corresponds to the level of urbanization of the state.
+- The crime-related variables (Murder, Assault, and Rape) are located close to each other,
+and that the UrbanPop variable is far from the other three. This indicates their
+correlations.
+
+### Without Scaling
+
+- How do results change if we don't scale the variables first?
+
+```{r}
+pca_result <- eigen(cov(USArrests))
+pca_var <- pca_result$values
+pve <- pca_var/sum(pca_var)
+out2 <- cbind(pca_var,pve,cumsum(pve))
+colnames(out2) <- c("Eigenvalue","Proportion","Cumulative")
+rownames(out2) <- c("PC1","PC2","PC3","PC4")
+out2
+```
+
+- The first principal component now explains most of the variability.
+
+```{r}
+out3 <- t(pca_result$vector)
+colnames(out3) <- c("Murder","Assault","UrbanPop","Rape")
+rownames(out3) <- c("PC1","PC2","PC3","PC4")
+out3
+```
+
+- The first principal component vector highly weights Assault, since this variable has the
+highest variance.
+- The second principal component loading vector places almost all of its weight on UrpanPop. - - So we see that scaling does indeed have a substantial effect on the results.
+
+
 

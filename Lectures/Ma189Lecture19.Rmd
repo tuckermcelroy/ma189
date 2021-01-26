@@ -58,7 +58,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 - We have three variables, but really (at most) two dimensions in the data because total = verbal + math, meaning that the third variable is completely determined by the first two.
 - The reason for saying "at most” two dimensions is that if there is a strong correlation between verbal and math, one dimension might just be enough to describe the data.
 
-## Principle Component Analysis
+## Principal Component Analysis
 
 - Principal components analysis (PCA) is a widely-used approach for extracting a small set of features from a large set of variables, meanwhile retaining most of the information.
 - Principal component analysis is a mathematical procedure that transforms many possibly correlated variables into a smaller number of uncorrelated variables called *principal components*.
@@ -91,7 +91,7 @@ with population covariance matrix $\mbox{Cov} [ \underline{x}] = {\mathbf \Sigma
 \[
  \mbox{Cov}[ y_j, y_k] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_k.
 \]
-- Principle component analysis aims to find the linear combination $y_j$ such that $\mbox{Var} [ y_j]$ is maximized.
+- Principal component analysis aims to find the linear combination $y_j$ such that $\mbox{Var} [ y_j]$ is maximized.
 
 ## Scaling the Variables
 
@@ -102,7 +102,7 @@ this variable when we look for the direction that maximizes the variance.
 - Because it is undesirable for the principal components obtained to depend on an arbitrary
 choice of scaling, we typically scale each variable to have mean zero and standard deviation one before we perform PCA.
 
-## First Principle Component
+## First Principal Component
 
 - The first principal component is the linear combination of variables that has the largest variance (among all linear combinations). It accounts for as much variation in the data as possible.
 - Specifically we define coefficients
@@ -118,14 +118,14 @@ subject to (as a direction vector)
   \underline{e}_1^{\prime} \underline{e}_1 =1.
 \]
 
-## Second Principle Component
+## Second Principal Component
 
 - The second principal component is the linear combination of variables that accounts for as much of the remaining variation as possible, and is uncorrelated with the first component.
 - Select
 \[
   \underline{e}_2 = {[ e_{21}, e_{22}, \ldots, e_{2p}]}^{\prime}
 \]
-for the second principle component that maximizes
+for the second principal component that maximizes
 \[
  \mbox{Var}[ y_2] = \underline{e}_2^{\prime} {\mathbf \Sigma} \underline{e}_2
 \]
@@ -138,13 +138,13 @@ and the additional constraint that these two components are uncorrelated:
  \mbox{Cov}[ y_1, y_2] = \underline{e}_1^{\prime} {\mathbf \Sigma} \underline{e}_2 = 0.
 \]
 
-## $j$th Principle Component
+## $j$th Principal Component
 
 - For $j \geq 2$, select
 \[
   \underline{e}_j = {[ e_{j1}, e_{j2}, \ldots, e_{jp}]}^{\prime}
 \]
-for the $j$th principle component that maximizes
+for the $j$th principal component that maximizes
 \[
  \mbox{Var}[ y_j] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_j
 \]
@@ -160,14 +160,14 @@ and that this new component is uncorrelated with all the previous ones:
    \mbox{Cov}[ y_{j-1}, y_j] & = \underline{e}_{j-1}^{\prime} {\mathbf \Sigma} \underline{e}_j = 0.
   \end{align*}
 
-## Interpretation of Principle Components
+## Interpretation of Principal Components
 
 - The first principal component loading vector has a geometric interpretation: it is the line in ${\mathbf R}^p$ that is closest to the $n$ observations under the average squared Euclidean distance.
 - We seek a single direction along which the univariate projections are as close as possible to all the data points, and therefore provides a good summary of the data.
 - Consider this plot below. The blue dot is the sample mean. The green solid line is the first principal component. The dashed lines indicate the distance between each observation and the first principal component loading vector.
 
 
-![The first principle component of a two-dimensional dataset](images/one_pc.png)
+![The first principal component of a two-dimensional dataset](images/one_pc.png)
 
 
 - The first two principal components span the plane that is closest to the $n$ observations
