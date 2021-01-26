@@ -1,0 +1,234 @@
+---
+title: 'Math 189: Factor Analysis I'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Outline
+
+- In the previous lecture we discussed a dimension reduction method named *principal component analysis*.
+- Now we discuss a closely related method, named *factor analysis*.
+ 
+## Factor Analysis
+
+- Factor Analysis is a method for modeling observed variables, and their covariance structure, in terms of a smaller number of underlying unobservable (latent) **factors**.
+- Factor analysis is a very flexible dimension reduction method. It is similar to PCA, but more elaborate. In some sense, factor analysis can be considered as an "inversion” of PCA.
+- In both PCA and factor analysis, the dimension of the data is reduced.
+- In factor analysis, we model the observed variables as linear functions of the **factors**.
+- In PCA, we create new variables that are linear combinations of the observed variables.
+
+## Why Do We Need Factor Analysis?
+
+- Factor analysis is a widely used tool in many scientific areas, like psychology, economics, finance, social science, etc.
+- In these areas, it is often impossible to measure directly the concepts of primary interest.
+- Instead, researchers are forced to examine the concepts indirectly by collecting information on variables that can be measured or observed.
+- The unobservable concept of primary interest is then treated as *latent common factors* of these observable indicators.
+
+## Example: General Intelligence
+
+- English Psychologist Charles Spearman developed a single factor model in his study of
+general intelligence in 1904. This is arguably the first introduction of factor model.
+- Spearman collected a sample of children's examination grades in three subjects: Classics,
+French, and English. He suggested that all three exam grades are influenced by the general
+intelligence plus some random errors.
+- Specifically, his model is
+\begin{align*}
+ \mbox{Classics} & = \alpha \, \mbox{Int} + e_1 \\
+ \mbox{French} & = \beta \, \mbox{Int} + e_2 \\
+ \mbox{English} & = \gamma \, \mbox{Int} + e_3,
+\end{align*}
+where the general intelligence is treated as a latent factor.
+
+## Example: Fama–French Three-Factor model
+
+- In capital asset pricing theory, two American economists Eugene Fama and Kenneth French
+developed a very famous three-factor model to describe stock returns.
+- The Fama–French three-factor model explains over 90% of the diversified portfolio returns,
+compared with the average 70% given by the mainstream capital asset pricing model (CAPM).
+- Fama and French proposed a model based on three effective common factors. These factors are easily interpretable and give good model-fitting results. This is an improvement from CAPM, which uses only one factor.
+
+## Example: Customer Survey
+
+- Collecting customer feedback through surveys is very common in marketing studies.
+- Survey questions ask the respondent to rate a product (or descriptions of product concepts) on a range of attributes, e.g., 1 to 5.
+- In order to produce comparable results among different products, the marketing professionals usually design their questions based on some common attributes, like ease of use, weight, accuracy, durability, colourfulness, price, size, etc.
+- Factor analysis assumes that all the rating data on different attributes can be reduced to a
+few important factors. This reduction is possible because some attributes may be related to each other.
+
+## Notation for Factor Analysis
+
+- Suppose we observe a $p$-dimensional random variable 
+\[
+\underline{x} = {[ x_1, \ldots, x_p]}^{\prime},
+\]
+with population mean vector ${\mathbf E} [ \underline{x}] = \underline{\mu}$.
+- Consider $m$ unobservable common factors 
+\[
+\underline{f} = {[ f_1, \ldots, f_m]}^{\prime},
+\]
+where $f_j$ denotes the $j$th common factor ($j = 1, \ldots, m$).
+- Generally, $m$ is substantially smaller than $p$.
+
+## Factor Model
+
+- Our factor model can be thought of as a series of multiple linear regressions, predicting each of the observable variables $x_j$ from the values of the unobservable common factors $\underline{f}$:
+\begin{align*}
+ x_1 & = \mu_1 + \ell_{11} f_1 + \ell_{12} f_2 + \ldots + \ell_{1m} f_m + \epsilon_1 \\
+ x_2 & = \mu_2 + \ell_{21} f_1 + \ell_{22} f_2 + \ldots + \ell_{2m} f_m + \epsilon_2 \\
+  & \vdots \\
+ x_p & = \mu_p + \ell_{p1} f_1 + \ell_{p2} f_2 + \ldots + \ell_{pm} f_m + \epsilon_p. \\
+\end{align*}
+- Here $\mu_1, \ldots, \mu_p$ can be viewed as intercepts, the $\ell_{jk}$s are regression coefficients, and $\epsilon_1, \ldots, \epsilon_p$ are called *specific factors* or *random errors*.
+- The major difference between a factor model and a linear regression model is that $\underline{x}$ is the only observable data in a factor model.
+
+
+## Factor Loadings and Error Vector
+
+- The regression coefficient $\ell_{jk}$$ is called the loading of the $j$th variable on $k$th factor.
+- Collecting the regression coefficients for all the multiple regressions yields a matrix of factor loadings:
+\[
+  {\mathbf L} = \left[ \begin{array}{cccc} 
+    \ell_{11} & \ell_{12} & \ldots & \ell_{1m} \\
+    \ell_{21} & \ell_{22} & \ldots & \ell_{2m} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \ell_{p1} & \ell_{p2} & \ldots & \ell_{pm} \end{array} \right] 
+    \in {\mathbb R}^{p \times m}
+\]
+- ${\mathbf L}$ is called the *factor loading matrix*.
+- In addition, we can write random errors in a vector form:
+\[
+ \underline{\epsilon} = {[ \epsilon_1, \ldots, \epsilon_p ]}^{\prime}.
+\]
+- The factor model can be summarized in a relatively simple matrix format:
+\[
+  \underline{x}= \underline{\mu} + {\mathbf L} \, \underline{f} + \underline{\epsilon}.
+\]
+
+ 
+## Flexibility in Factor Model
+
+- The factor model is a very flexible model, as it holds for any $\underline{\mu}$, ${\mathbf L}$, $\underline{f}$, and $\underline{\epsilon}$ that satisfy the linear form
+\[
+\underline{x}= \underline{\mu} + {\mathbf L} \, \underline{f} + \underline{\epsilon}.
+\]
+- However, $\underline{\mu}$, ${\mathbf L}$, $\underline{f}$, and $\underline{\epsilon}$ 
+are all unobservable to us. This will cause some issues, as the choice of these components are not unique.
+- Mean vector:
+\begin{align*}
+  {\mathbb E}  [ \underline{x}] & = \underline{\mu} + 
+  {\mathbf L} \,  {\mathbb E} [\underline{f}] +  {\mathbb E} [\underline{\epsilon}] \\
+  & = \left( \underline{\mu} + {\mathbf L} \, \underline{\delta} \right)  +
+  {\mathbf L} \,  {\mathbb E} [\underline{f} - \underline{\delta}] 
+  +  {\mathbb E} [\underline{\epsilon}] 
+\end{align*}  
+- Variance-covariance matrix: if $\underline{f}$ and $\underline{\epsilon}$ are uncorrelated with each other,
+\begin{align*}
+  \mbox{Cov}   [ \underline{x}] & =  
+  {\mathbf L} \, \mbox{Cov} [\underline{f}] \,  {\mathbf L}^{\prime} 
+   +   \mbox{Cov}   [\underline{\epsilon}] \\
+   & =   \left( c {\mathbf L} \right) \, \mbox{Cov} [\underline{f}/c] \,  
+    { \left( c {\mathbf L} \right) }^{\prime}    +   \mbox{Cov}   [\underline{\epsilon}]
+\end{align*}
+
+## Model Assumptions
+
+- To restrict the flexibility, we make the following model assumptions. Notice that there is more than one way to impose assumptions.
+- Assumptions on mean vector:
+
+1. The common factors all have mean zero:
+\[
+ {\mathbb E} [ \underline{f} ] = 0.
+\]
+2. The specific factors (or random errors) all have mean zero:
+\[
+ {\mathbb E} [ \underline{f} ] = 0.
+\]
+
+- Assumptions on variance-covariance matrix:
+
+1. Common factors satisfy:
+\[
+ \mbox{Cov} [ \underline{f} ] = I_m,
+ \]
+ where $I_m$ is an $m \times m$-dimensional identity matrix.
+2. Random errors satisfy:
+\[
+ \mbox{Cov} [ \underline{\epsilon} ] = {\mathbf \Psi} = \mbox{diag} (\psi_1, \ldots, \psi_p).
+ \]
+3. Common factors and random errors are uncorrelated:
+\[
+ \mbox{Cov} [ \underline{f}, \underline{\epsilon} ] = 0.
+ \]
+- With the assumptions imposed on the mean vector, we can avoid the flexibility issue of the
+mean vector. Now, the mean vector is fully explained by the intercept:
+\[
+  {\mathbb E}  [ \underline{x}]  = \underline{\mu} + 
+  {\mathbf L} \,  {\mathbb E} [\underline{f}] +  {\mathbb E} [\underline{\epsilon}] 
+  = \underline{\mu}.
+\]
+- With the assumptions imposed on variance-covariance matrix, we can avoid the flexibility issue of ${\mathbf \Sigma}$:
+\[
+ \mbox{Cov} [ \underline{x}] = 
+ {\mathbf L} \, \mbox{Cov} [\underline{f}] \,  {\mathbf L}^{\prime} 
+   +   \mbox{Cov}   [\underline{\epsilon}] = 
+   {\mathbf L} \,  {\mathbf L}^{\prime}    +  {\mathbf \Psi}.
+\]
+ This is the matrix of factor loadings times its transpose, plus a diagonal matrix containing the specific variances.
+ 
+## Dimension Reduction with Factor Analysis
+
+- The expression for the variance-covariance matrix shows how can we reduce the dimensionality with factor analysis.
+
+1. Without any constraint, ${\mathbf \Sigma}$ has $p (p+1)/2$ free parameters.
+2. The factor loading matrix ${\mathbf L}$ contains $pm$ free parameters.
+3. Under assumptions, ${\mathbf \Psi}$ is a diagonal matrix which contains $p$ free parameters.
+
+- Factor analysis use $pm +p$ parameters to approximate $p (p+1)/2$ parameters. We reduce the dimensionality when $m$ is much smaller than $p$.
+- For example, when $p = 100$ and $m=5$, we are estimating 600 parameters instead of 5,050 parameters. 
+
+## Estimation of Factor Model
+
+- How to estimate the factor model?
+- Suppose we observe a sample $\underline{x}_1, \ldots, \underline{x}_n$, with $\underline{x}_i = {[ x_{i1}, \ldots,x_{ip}]}^{\prime}$.
+- We estimate the mean vector ${\mathbb E} [ \underline{x} ] = \underline{\mu}$ by the sample mean vector $\overline{\underline{x}}$.
+- We can estimate the population variance-covariance matrix ${\mathbf \Sigma}$ with ${\mathbf S}$.
+- We then estimate the loadings and covariance of specific factors from the following equation:
+\[
+{\mathbf S} =  \widehat{\mathbf L} \,  \widehat{\mathbf L}^{\prime}    +  
+\widehat{\mathbf \Psi}.
+\]
+- Let $\lambda_1, \ldots, \lambda_p$ denote the eigenvalues of ${\mathbf S}$ in descending order.
+- Let $\underline{e}_1, \ldots, \underline{e}_p$ be the corresponding eigenvectors.
+- Recall the spectral decomposition theorem we discussed in PCA,
+\begin{align*}
+ {\mathbf S} & =\sum_{j=1}^p \lambda_j \underline{e}_j \underline{e}_j^{\prime} \\
+  & = \sum_{j=1}^m \lambda_j \underline{e}_j \underline{e}_j^{\prime}
+   + \sum_{j=m+1}^p \lambda_j \underline{e}_j \underline{e}_j^{\prime} \\
+& =    \widehat{\mathbf L} \,  \widehat{\mathbf L}^{\prime}    +  
+\widehat{\mathbf \Psi}.
+\end{align*}
+- This yields the following estimator for factor loadings:
+\[
+\widehat{\mathbf L} = { [ \sqrt{\lambda_1} \underline{e}_1, \ldots, 
+ \sqrt{\lambda_m} \underline{e}_m ]}.
+\]
+- Then the variance-covariance matrix of specific factors ${\mathbf \Psi}$ can be estimated as
+\[
+ \widehat{\mathbf \Psi} = {\mathbf S} - \widehat{\mathbf L} { \widehat{\mathbf L} }^{\prime}.
+\]
+- In other words, the diagonal elements of ${\mathbf \Psi}$ can be estimated by
+\[
+ \hat{\psi}_j = s_j^2 - \sum_{k=1}^m \widehat{\ell}_{jk}^2 
+  = s_j^2 - \sum_{k=1}^m \lambda_j e_{jk}^2
+\]
+for $j = 1, \ldots, p$, where $\widehat{\ell}_{jk}$ is the $jk$th entry of the estimated factor loading matrix $\widehat{\mathbf L}$.
+- In addition, we call
+\[
+ \sum_{k=1}^m \widehat{\ell}_{jk}^2 
+  =  \sum_{k=1}^m \lambda_j e_{jk}^2
+\]
+the communalities of the $j$th variable. It denotes the amount in the $j$th variable that has been explained by the $m$ common factors.
+ 

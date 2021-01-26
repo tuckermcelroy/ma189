@@ -29,8 +29,8 @@ Each 50-minute lesson will cover theoretical material in an R Markdown Notebook 
 15. **Classification via Discriminant Analysis II** (February 5, 2021) LDA Procedure.
 16. **Logistic Regression I** (February 8, 2021)  Logistic Model.
 17. **Logistic Regression II** (February 10, 2021)  Multiple Logistic Regression.
-18. **Support Vector Machine I** (February 12, 2021) Maximal Margin Classifier, Feature Space. *Mid-Term 2 Due* 
-19. **President's Day Holiday** (February 15, 2021) No Class!
+18. **Support Vector Machine I** (February 12, 2021) Maximal Margin Classifier, Feature Space.
+19. **President's Day Holiday** (February 15, 2021) No Class! *Mid-Term 2 Due* 
 20. **Support Vector Machine II** (February 17, 2021)  Kernel, ROC Curve.
 21. **Principal Components Analysis I** (February 19, 2021) High-dimensional Data, Dimension Reduction, Principal Components.
 22. **Principal Components Analysis II** (February 22, 2021) Spectral Decomposition, Scree Plot.
