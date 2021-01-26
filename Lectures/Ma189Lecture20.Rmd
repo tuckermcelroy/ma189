@@ -6,3 +6,9 @@ output: html_document
 ```{r, setup, include=FALSE}
 knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 ```
+
+## How to Find Principle Components?
+
+- The principle directions can be found by computing the eigenvalues and eigenvectors of the covariance matrix ${\mathbf \Sigma}$.
+- Let $\lambda_1, \ldots, \lambda_p$ denote the eigenvalues of ${\mathbf \Sigma}$ in descending order, i.e.
+
