@@ -1,0 +1,8 @@
+---
+title: 'Math 189: Principal Components Analysis II'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
