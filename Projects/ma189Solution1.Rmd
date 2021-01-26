@@ -1,0 +1,85 @@
+---
+title: "Math 189: Midterm Project 1 Solution"
+output: pdf_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+
+# Introduction
+
+In this first midterm project for Math 189 the Motor Trend Car Road Tests dataset is analyzed. The goal is to answer the question: What is the relationship between weight (wt) and miles per gallon (mpg)? Does this relationship depend on the number of cylinders (cyl)? We will study these questions using techniques learned in the first 6 lectures of the course.
+
+The dataset was provided in the course materials (https://github.com/tuckermcelroy/ma189), and was extracted from the 1974 Motor Trend US magazine. The data contains measurements on several aspects of automobile design and performance for 32 automobiles (1973–74 models).
+ 
+# Analysis
+
+We begin by reading in the data, and taking a look. There are 11 variables, not including the labels of the cars.
+
+```{r}
+cars <- read.table("mtcars.csv",sep = ",", header=TRUE)
+head(cars)
+```
+
+We can estimate the mean and variability of the mpg and wt variables, to get an idea of these features. The sample mean vector and sample variance matrix are unbiased (so long as the data are identically distributed).
+
+```{r}
+cars_all <- cars[,c(7,2)]
+colMeans(cars_all)
+var(cars_all)
+```
+
+We see there is a negative association between wt and mpg, but in order to understand the strength of association we compute the sample correlation.
+
+```{r}
+cor(cars_all)
+```
+
+There seems to be a high negative association between mpg and wt, because the correlation is `r cor(cars_all)[2,1]`. We can also examine a scatterplot.
+
+```{r}
+plot(x = cars$wt, y = cars$mpg,
+     xlab = "Weight", ylab = "Miles per Gallon",	 
+     main = "Weight vs. Miles per Gallon")
+```
+
+However, we have not yet considered the role of cylinders. We can update our analysis by taking these cylinders into account.
+
+```{r}
+cars4 <- cars[cars$cyl==4,c(7,2)]
+cars6 <- cars[cars$cyl==6,c(7,2)]
+cars8 <- cars[cars$cyl==8,c(7,2)]
+cor(cars4)
+cor(cars6)
+cor(cars8)
+```
+
+We see that the correlations are all negative, but differ depending on the cylinders. The updated scatterplot is below. We colored 4-cylinder red, 6-cylinder green, and 8-cylinder blue. The blue and red data are fairly well-separated, although the green is somewhat mingled with both sub-populations.
+
+```{r}
+plot(x = cars$wt, y = cars$mpg,
+     xlab = "Weight", ylab = "Miles per Gallon",	 
+     main = "Weight vs. Miles per Gallon")
+points(x = cars4[,1], y= cars4[,2],col = 2)
+points(x = cars6[,1], y= cars6[,2],col = 3)
+points(x = cars8[,1], y= cars8[,2],col = 4)
+```
+
+We may well expect the population mean vectors for wt and mpg to differ by cylinder. We compute the sample mean vectors for the three sub-populations, and normalize by the standard error (standard deviation divided by square root sample size) to make them easier to compare.
+
+```{r}
+colMeans(cars4)/sqrt(diag(var(cars4))/nrow(cars4))
+colMeans(cars6)/sqrt(diag(var(cars6))/nrow(cars6))
+colMeans(cars8)/sqrt(diag(var(cars8))/nrow(cars8))
+```
+
+These are the t-statistics for wt and mpg, for each sub-population, testing whether the mean is zero. Unsurprisingly, they are all highly significant.  
+
+# Summary
+
+There is empirical evidence that the size of cylinder (whether 4, 6, or 8) has an impact on the relationship between wt and mpg. The scatterplot exhibits three clusters with little overlap, and the sample correlations differ as well. Although we have not tested for significant differences between the estimates, the above analysis indicates that we should treat the data as consisting of three sub-populations. This is also supported by the normalized sample mean vectors for the three cylinder sub-populations. 
+ 
+
+

@@ -3,3 +3,31 @@ title: "Math 189: Homework 3"
 output: pdf_document
 ---
 
+# USDA Women’s Health Survey
+
+The USDA Women’s Health Survey dataset (nutrient.txt) contains five types of women’s nutrient intakes which were measured from a random sample of 737 women aged 25-50 years in the United
+States. 
+
+## Tasks
+
+Analyze the dataset according to the following steps:
+
+1. Calculate sample mean and sample standard deviation of each variable.
+2. The recommended intake amount of each nutrient is given in the table below. For each nutrient, apply a univariate t-test to test if the population mean of that variable equals the
+recommended value. Set the significance level at $\alpha = .05$.
+3. Repeat step 2, now using the Bonferroni and Holm's Methods to control the FWER for the five tests. How does this affect the results?
+4. Based on the results you obtained in steps 2 and 3, how would you interpret your test results? Do you think the US Women meet the recommended nutrient intake amount? If not, what would you suggest to the public?
+
+## Recommended Levels
+
+- Calcium: 1000mg
+- Iron: 15mg
+- Protein: 60g
+- Vitamin A: 800 $\mu$g
+- Vitamin C: 75mg
+
+## Remarks
+
+Your R Markdown Notebook report should have a introduction, body, conclusion (and optional appendix). Importantly, your code should run!
+ 
+
