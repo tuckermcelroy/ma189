@@ -49,7 +49,7 @@ test statistic is a function of ${\mathbf S}^{(1)}$,  ${\mathbf S}^{(2)}$, $n_1$
 \[
   {\mathbf S}_T =  n_1^{-1} {\mathbf S}^{(1)} + n_2^{-1} {\mathbf S}^{(2)},
 \]
-whih i s a weighted-average of sample covariance matrices  ${\mathbf S}^{(1)}$ and
+which is a weighted-average of sample covariance matrices  ${\mathbf S}^{(1)}$ and
 ${\mathbf S}^{(2)}$.
 
 ## Two-Sample Hotelling’s $T^2$ (Large Sample)
@@ -86,7 +86,7 @@ estimating the population covariance matrices by their sample counterparts.
 \[
  \frac{1}{\nu} = \sum_{k=1}^2 \frac{1}{n_k -1}
  { \left( \frac{  {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}^{\prime} 
- {\mathbf S}_T^{(1)}
+ {\mathbf S}_T^{-1}
  \left( n_k^{-1} {\mathbf S}^{(k)} \right)  {\mathbf S}_T^{-1} {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}
   }{ T^2 } \right) }^2.
 \]
@@ -102,6 +102,13 @@ populations share the same variance-covariance matrix, i.e.
 \[
 {\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}.
 \]
+- In this case, we can use the pooled variance estimator
+\[
+  {\mathbf S}_P = \left( \frac{1}{n_1} + \frac{1}{n_2} \right) \,
+    \left( \frac{n_1 -1}{n_1 + n_2 -2} {\mathbf S}^{(1)} + 
+   \frac{n_2 -1}{n_1 + n_2 -2} {\mathbf S}^{(2)} \right).
+\]
+ This gives a slightly different formula from ${\mathbf S}_T$.
 - When the sample sizes $n_1$ and $n_2$ are not large, the $F$-statistic will be
 \[
  F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -1)} \, T^2 \sim \mathcal{F}_{m,n_1+n_2 - m-1}.
@@ -128,9 +135,8 @@ F > \mathcal{F}_{m,n_1+n_2 - m-1,\alpha}.
 
 ### Objective: 
 
-Determine if counterfeit notes can be distinguished from the genuine Swiss bank notes.
-
-One way to answer this question is to test if the genuine and counterfeit notes have different population means.
+- Determine if counterfeit notes can be distinguished from the genuine Swiss bank notes.
+- One way to answer this question is to test if the genuine and counterfeit notes have different population means.
 - Denote the population mean vectors of genuine and counterfeit populations as $\underline{\mu}^{(1)}$ and $\underline{\mu}^{(2)}$ respectively. Denote by $\overline{\underline{x}}^{(1)}$ and $\overline{\underline{x}}^{(2)}$ the sample means, and
 ${\mathbf S}^{(1)}$ and ${\mathbf S}^{(2)}$ the sample variance matrices.
 - We are interested in testing the equivalence of the two population means:
@@ -143,7 +149,7 @@ same population variance-covariance matrices.  **This assumption could be wrong!
 {\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}.
 \]
 
-### A Peek of the Dataset
+### A Peek at the Dataset
 
 First, let us have a peak at the dataset. BN1 to BN100 are genuine banknotes and BN101 to BN200 are counterfeit banknotes. The data is from "Multivariate Statistics: A practical approach", by Bernhard Flury and Hans Riedwyl, Chapman and Hall, 1988.
 
@@ -198,6 +204,29 @@ qf(1-alpha,df1=m,df2=n1+n2-m-1)
 ```
 
 - Decision: reject $H_0$!  Conclusion: the counterfeit notes can be distinguished from the genuine notes on at least one of the measurements.
+
+### Alternative Calculation
+
+- We can use the pooled variance estimator instead:
+\[
+  {\mathbf S}_P = \left( \frac{1}{n_1} + \frac{1}{n_2} \right) \,
+    \left( \frac{n_1 -1}{n_1 + n_2 -2} {\mathbf S}^{(1)} + 
+   \frac{n_2 -1}{n_1 + n_2 -2} {\mathbf S}^{(2)} \right).
+\]
+ (This equals ${\mathbf S}_T$ when $n_1 = n_2$.)
+ 
+```{r}
+var_pooled <- (1/n1 + 1/n2)*(n1+n2-2)^{-1}*
+  ((n1-1)*var_genuine + (n2-1)*var_counterfeit)
+round(var_pooled,digits=6)
+hotel <- t(colMeans(z)) %*% solve(var_pooled) %*% (colMeans(z))
+hotel
+m <- 6
+alpha <- .05
+f_stat <- (n1+n2-m-1)/(m*(n1+n2-2)) * hotel
+f_stat
+qf(1-alpha,df1=m,df2=n1+n2-m-1)
+```
 
 ### Getting Fancy with Packages
 
