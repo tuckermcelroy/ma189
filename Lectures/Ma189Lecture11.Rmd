@@ -37,7 +37,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 3. I: Isle Thorns
 4. A: Ashley Rails
 
-![SwissFrance](images/pottery.jpg)
+![Romano-British Pottery](images/pottery.jpg)
 
 - Each pottery sample was returned to the laboratory for a chemical test. In these tests the concentrations of five different chemicals were measured:
 
@@ -111,7 +111,7 @@ The hypothesis of interest is that all of the means are equal. Mathematically th
  H_0: \ {\mu}^{(1)} = \ldots = \ {\mu}^{(g)} 
  \quad H_a: \ {\mu}^{(i)} \neq \ {\mu}^{(j)} \; \mbox{for some} \, i \neq j.
 \]
-- The alternative hypothesis indicates there exists at least one pair of different
+The alternative hypothesis indicates there exists at least one pair of different
 group population means.
 
 ## Total Sum of Squares
@@ -209,7 +209,7 @@ Both datasets have un-equal population means. Why is this easier to discern in t
 
 ### Distinguish with Colors
 
-Now we use red and blue to discriminate the two samples:
+- Now we use red and blue to discriminate the two samples:
 - The red dashed line denotes the true population mean of each sample.
 - Error sum of squares ($\mbox{SS}_{error}$) measures within-group variability.
 - Treatment sum of squares ($\mbox{SS}_{treat}$) measures between-group variability.
@@ -226,8 +226,8 @@ abline(v = 0.5, col="red", lwd=2, lty=2)
 hist(x2[,1], breaks=20, xlim=c(-5,5),ylim=c(0,0.5),freq = F,
      main="Histogram of Sample 2", xlab="", col=rgb(1,0,0,0.5))
 hist(x2[,2], breaks=20, col=rgb(0,0,1,0.5),freq = F, add=T)
-abline(v = -1, col="red", lwd=2, lty=2)
-abline(v = 1, col="red", lwd=2, lty=2)
+abline(v = -2, col="red", lwd=2, lty=2)
+abline(v = 2, col="red", lwd=2, lty=2)
 ```
 
 ## Design of Test Statistic
@@ -298,7 +298,7 @@ Squares ($\mbox{SS}_{treat}$) is large. Given the same level of total sum of squ
 
 ## Example: Romano-British Pottery Data
 
-Question: Which chemical element varies significantly across sites?
+- Question: Which chemical element varies significantly across sites?
 - As a naive approach to assess the significance of individual variables (chemical elements), we consider the following univariate multisample testing:  
 \[
   H_0^{(j)}:  \mu_{1j} = \mu_{2j} = \ldots = \mu_{gj}

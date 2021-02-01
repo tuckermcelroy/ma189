@@ -1,0 +1,249 @@
+---
+title: 'Math 189: Factor Analysis II'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Maximum Likelihood Estimation Method 
+
+- An alternative approach to estimate the factor model is called the *Maximum Likelihood Estimation* (MLE) method.
+- Using the MLE Method, we must assume that the data are independently sampled from a multivariate normal distribution with mean vector $\underline{\mu}$ and variance-covariance matrix ${\mathbf \Sigma}$ of the form:
+\[
+{\mathbf \Sigma} =
+ {\mathbf L} \,  {\mathbf L}^{\prime}    +  {\mathbf \Psi}.
+ \]
+- In other words, we observe an iid sample $\underline{x}_1, \ldots, \underline{x}_n$ with distribution $\mathcal{N} (\underline{\mu}, {\mathbf L} \, {\mathbf L}^{\prime} + {\mathbf \Psi})$.
+- The multivariate normal assumption allows us to establish a likelihood function for the factor model. However, this assumption can be restrictive in practice, as the real dataset we observe may not obey this assumption.
+- Under the iid normal assumption, the joint density of $\underline{x}_1, \ldots, \underline{x}_n$ is
+\[
+   f ( \underline{x}_1, \ldots, \underline{x}_n) = \prod_{i=1}^n f( \underline{x}_i)
+    = {(2 \pi)}^{-np/2} { \det {\mathbf \Sigma}}^{-n/2}
+     \, \exp \{ - \frac{1}{2} \sum_{i=1}^n {( \underline{x}_i - \underline{\mu} )}^{\prime}
+      {\mathbf \Sigma}^{-1} ( \underline{x}_i - \underline{\mu } ) \}.
+\]
+- Then, the log-likelihood function of $\underline{\mu}$, ${\mathbf L}$, and ${\mathbf \Psi}$ is (up to a constant, which we can ignore)
+\[
+ \ell_n ( \underline{\mu}, {\mathbf L}, {\mathbf \Psi})
+ = - \frac{n}{2} \log \det [  {\mathbf L} \,  {\mathbf L}^{\prime}    +  {\mathbf \Psi} ]
+  - \frac{1}{2}  \sum_{i=1}^n {( \underline{x}_i - \underline{\mu} )}^{\prime}
+       { ( {\mathbf L} \,  {\mathbf L}^{\prime}    +  {\mathbf \Psi} ) }^{-1} 
+       ( \underline{x}_i - \underline{\mu } ).
+\]
+- The maximum likelihood estimator for the mean vector $\underline{\mu}$, the factor loadings ${\mathbf L}$, and the specific variances ${\mathbf \Psi}$ are obtained by finding $\hat{\underline{\mu}}$, $\hat{\mathbf L}$, and $\hat{\mathbf \Psi}$ that maximize the log-likelihood $\ell_n ( \underline{\mu}, {\mathbf L}, {\mathbf \Psi})$.
+- In general, there is no closed-form solution to this maximization problem. In practice, it is usually solved by iterative optimization algorithms.  
+
+# Factor Scores
+
+- The common factors realized at each observation are called *factor scores*.
+- Factor scores are similar to the principal components in the previous lecture. We can plot principal components against each other; a similar scatter plot of factor scores is also helpful.
+- We also might use factor scores as explanatory variables in future analysis. It may even be of interest to use the factor score as the dependent variable in a future analysis.
+- There are a number of different methods for estimating factor scores from the data. These include:
+
+1. Ordinary Least Squares
+2. Weighted Least Squares
+3. Regression method
+
+## Ordinary Least Squares Estimation of Factor
+
+- Suppose we observe a sample $\underline{x}_1, \ldots, \underline{x}_n$. Denote by $\hat{\underline{\mu}}$ and $\hat{\mathbf L}$ the estimators of intercept and factor loading matrix obtained by either the PC method or MLE method.
+- The factor scores can be estimated by solving linear regression problem
+\[
+ \underline{x}_i = \hat{\underline{\mu}} + \hat{\mathbf L} \underline{f}_i + \underline{\epsilon}_i
+\]
+for $i = 1, \ldots, n$.
+- The solution can be found by solving the least square problem:
+\[
+  \hat{\underline{f}}_i = \mbox{arg min}_{\underline{f}}
+    {(  \underline{x}_i - \hat{\underline{\mu}} + \hat{\mathbf L} \underline{f}_i)}^{\prime}
+    (  \underline{x}_i - \hat{\underline{\mu}} + \hat{\mathbf L} \underline{f}_i).
+\]
+- The explicit solution admits the form
+\[
+ \hat{\underline{f}}_i  = { \left[ \hat{\mathbf L}^{\prime} \hat{\mathbf L} \right] }^{-1}
+  \hat{\mathbf L}^{\prime} (  \underline{x}_i - \hat{\underline{\mu}} ).
+\]
+for $i = 1, \ldots, n$.
+
+## Identifiability Issue
+
+- Though we imposed some assumptions to avoid flexibility in factor model, there are still some ambiguities in the model.
+- To explain: let ${\mathbf H}$  be any $m \times m$ orthogonal matrix. A matrix is *orthogonal* if its nverse is equal to its transpose:
+\[
+ {\mathbf H} \, {\mathbf H}^{\prime} = {\mathbf H}^{\prime} \, {\mathbf H} = I_m.
+\]
+- Define ${\mathbf L}^* = {\mathbf L} \, {\mathbf H}$ and $\underline{f}^* = {\mathbf H}^{\prime} \underline{f}$. Then the factor model also holds with factor loading matrix ${\mathbf L}^*$ and factors $\underline{f}^*$, because
+\begin{align}*
+  \underline{x} & =  \underline{\mu} + {\mathbf L} \underline{f} + \underline{\epsilon} \\
+  & = \underline{\mu} + {\mathbf L} \, \mathbf H} {\mathbf H}^{\prime}  \underline{f} + \underline{\epsilon} \\
+    & = \underline{\mu} + {\mathbf L}^* \,  \underline{f}^* + \underline{\epsilon}.
+\end{align*}
+In addition, it is easy to check that $\underline{f}^*$ satisfies all of our assumptions.
+- This means that $\underline{f}$ and ${\mathbf L}$ are only *identifiable* up to an $m \times m$ orthogonal matrix ${\mathbf H}$.
+- What is a non-identifiable model? Say two different values of the parameter vector yield the same distribution; then we have no way of inferring which parameter is true.
+
+## Matrix Rotation
+
+- In linear algebra, an orthogonal matrix with determinant 1 is also called a *rotation matrix*. It serves as a linear operator that rotates a set of orthogonal axes with a certain angle.
+- Let’s consider a two-dimensional toy example. Consider a rotation matrix
+\[
+ {\mathbf H} = \left[ \begin{array}{cc} \cos \theta & -\sin \theta \\
+   \sin \theta & \cos \theta \end{array} \right].
+\]
+Note the determinant equals one.
+- When applied to a vector $\underline{x}$, ${\mathbf H}$ rotates it by an angle $\theta$. Why? Write $\underline{x}$ in polar coordinates:
+\[
+ \underline{x} = \left[ \begin{array}{c} r \cos \phi \\ r \sin \phi \end{array} \right],
+\]
+ where $r$ is the length of the vector and $\phi$ is the angle of the vector with the x-axis. Then
+ \[
+   {\mathbf H} \underline{x} = \left[ \begin{array}{c} r \cos \theta \, \cos \phi
+    - r \sin \theta  \sin \phi \\
+    r \sin \theta \cos \phi + r \cos \theta \sin \phi \end{array} \right]
+   = \left[ \begin{array}{c} r  \cos ( \phi + \theta) \\  r \sin ( \phi + \theta) 
+   \end{array} \right],
+\]
+ which shows that the angle $\phi$ has been rotated to $\phi + \theta$ (a couonter-clockwise rotation of the vector).
+ 
+## Factor Rotation
+
+- Since $\underline{f}$ and ${\mathbf L}$ are only identifiable up to an $m \times m$ orthogonal matrix ${\mathbf H}$, we have the freedom to choose a set of orthogonal axes in the $m$-dimensional linear space spanned by factor loading matrix ${\mathbf L}$.
+- A good choice of rotation matrix ${\mathbf H}$ can yield easily interpretable factors and a clear explanation of the dataset.
+- On the other hand, a bad choice of rotation matrix ${\mathbf H}$ can lead to uninterpretable
+factors and blur the explanation of the dataset.
+- In general, there is no universal "good choice” of ${\mathbf H}$. It usually relies on the 
+researcher'ss domain knowledge and experience to find which ${\mathbf H}$ leads to more
+interpretable factors. 
+
+## Example: Subject Preference Data
+
+- This dataset contains a hypothetical sample of 300 responses on 6 items from a survey of college students' favorite subject matter.
+- In this survey, students are asked to rate their preference of 6 different college subject matter areas, including biology (BIO), geology (GEO), chemistry (CHEM), algebra (ALG), calculus (CALC), and statistics (STAT).
+- For each subject, the response ranges from 1 to 5, which represent a scale from Strongly
+Dislike to Strongly Like.
+
+### A Peek at the Dataset
+
+- Let’s first have a peek at the dataset and some descriptive statistics.
+ 
+```{r} 
+df<- read.csv("dataset_EFA.csv")
+head(df)
+out <- rbind(apply(df, 2, mean),apply(df, 2, var))
+colnames(out) <- c("Biology","Geology","Chemistry","Algebra","Calculus","Statistics")
+rownames(out) <- c("Mean","Varaiance")
+out
+```
+
+### Visualize Correlation of Subjects
+
+- We can visualize the correlation matrix in a level plot.
+- The color and shape of each entry denotes the correlation level between two subjects.
+- BIO, GEO and CHEM are strongly correlated. Is there a common factor for science subjects?
+- ALG, CALC and STAT are strongly correlated. Is there a common factor for math subjects?
+
+```{r}
+library(lattice)
+library(ellipse)
+cor_df <- cor(df)
+
+# Function to generate correlation plot
+panel.corrgram <- function(x, y, z, subscripts, at, level = 0.9, label = FALSE, ...) {
+     require("ellipse", quietly = TRUE)
+     x <- as.numeric(x)[subscripts]
+     y <- as.numeric(y)[subscripts]
+     z <- as.numeric(z)[subscripts]
+     zcol <- level.colors(z, at = at,  ...)
+     for (i in seq(along = z)) {
+         ell=ellipse(z[i], level = level, npoints = 50, 
+                     scale = c(.2, .2), centre = c(x[i], y[i]))
+         panel.polygon(ell, col = zcol[i], border = zcol[i], ...)
+     }
+     if (label)
+         panel.text(x = x, y = y, lab = 100 * round(z, 2), cex = 0.8,
+                    col = ifelse(z < 0, "white", "black"))
+ }
+
+# generate correlation plot
+print(levelplot(cor_df[seq(6,1), seq(6,1)], at = do.breaks(c(-1.01, 1.01), 20),
+           xlab = NULL, ylab = NULL, colorkey = list(space = "top"), col.regions=rev(heat.colors(100)),
+           scales = list(x = list(rot = 90)),
+           panel = panel.corrgram, label = TRUE))
+```
+
+### Scree Plot and Number of Factors
+
+- Next, we can do PCA and examine the scree plot.
+- Note that the "elbow" occurs at $m=3$.
+ 
+```{r}
+# Generate scree plot
+pca_result <- prcomp (df, scale =TRUE)
+eigen_val <- pca_result$sdev^2
+pve <- eigen_val/sum(eigen_val)
+
+plot(eigen_val  , xlab=" Principal Component ", ylab=" Eigenvalue ", 
+     ylim=c(0,3), xaxt="n" ,type='b', col="red", cex=2,
+pch=20, cex.lab=1.5)
+axis(1, at=c(1,2,3,4,5,6),labels=c(1,2,3,4,5,6))
+```
+
+```{r}
+# Cumulative Proportion plot
+plot(cumsum(pve), xlab=" Principal Component ", 
+  ylab ="Cumulative Proportion of Variance Explained ", 
+  ylim=c(0.4,1) , xaxt="n",type='b', col="blue", cex=2, pch=20, cex.lab=1.5)
+axis(1, at=c(1,2,3,4,5,6),labels=c(1,2,3,4,5,6))
+```
+
+### Factor Analysis with $m=2$ 
+
+- We choose $m=2$ and estimate the factor model with MLE method.
+- The estimated factor loadings are reported in the following table.
+- The first factor loads heavily on Biology, Geology and Chemistry.
+- The second factor loads heavily on Algebra, Calculus and Statistics.
+- This gives us a good interpretation of common factors. The first factor indicates the common variation of science subjects, while the second factor indicates the common variation of math subjects.
+
+```{r}
+# Set the number of factors as 2
+n.factors <- 2
+
+# Fit factor model (in base R)
+# The n.factors denotes how many factors used in fitting
+# The scores option denotes how the factor scores are calcualted
+# The rotation option denotes what rotation matrix is used
+fa_fit <- factanal(df, n.factors, rotation="varimax")
+
+# Factor loadings
+loading <- fa_fit$loadings[,1:2]
+t(loading)
+```
+
+### Visualize Factor Loading Matrix
+
+- We can visualize the estimated factor loadings on the two-dimensional plane spanned by the two factors.
+- Each subject is plotted as a point on this plane according to its factor loading values.
+- As suggested by the factor loading results, science subjects load heavily on the first
+factor but lightly on the second.
+- In contrast, math subjects load heavily on the second factor but lightly on the first.
+- We can see that the two types of subjects (science and math) are well separated in the
+plane spanned by two factors.
+- This factor model gives us a good explanation of the dataset.
+- The factor analysis suggests us to model the preference of subjects similarly within each
+type, but differently between these two types.
+
+```{r}
+# Visualize factor loadings
+plot(loading,type="n",cex.axis=1.5,cex.lab=1.5) # set up plot
+text(loading,labels=names(df),cex=1.25)
+```
+
+ 
+
+
+
+
+
+

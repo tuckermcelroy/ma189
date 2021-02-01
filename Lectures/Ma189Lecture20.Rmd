@@ -148,7 +148,7 @@ rownames(out2) <- c("PC1","PC2","PC3","PC4")
 out2
 ```
 
-- Fancy with a package:
+- Fancy with *prcomp*:
 
 ```{r}
 #"scale=True" means the data are standardized first
