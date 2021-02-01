@@ -1,0 +1,217 @@
+---
+title: 'Math 189: Resampling I'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Outline
+
+- In previous lectures we introduced least squares method for linear regression.
+- Now we introduce some resampling methods and their applications in statistical learning.
+- *Cross-validation*
+- *Bootstrap*
+
+## Resampling Method
+
+- The *resampling method* is an indispensable tool in modern statistics.
+- Resampling involves repeatedly drawing samples from a training set, and refitting a model of interest on each sample in order to obtain additional information about the fitted model.
+- Resampling is widely used in many statistical studies:
+
+1. Performance evaluation.
+2. Hyper-parameter selection.
+3. Inference for estimated parameters.
+4. Hypothesis testing.
+5. Model validation.
+
+# Question 1: How to Evaluate a Statistical Model?
+
+"All models are wrong, but some are useful.”
+
+![George Box](images/Box.png)
+
+- All statistical models depend on certain assumptions, and hence are simplifications of reality.
+- Some assumptions are imposed, as we do not know the truth and have to "guess”.
+- Some simplifications are very useful:
+
+1. Ignore nuisance information.
+2. Explain complex phenomena with simple model.
+3. Make computation feasible.
+
+- For a statistical problem, we can establish various statistical models based on different assumptions.
+- Which model should we use?
+- Choose the model that best fits our objective.
+- For a given objective, how to assess various models?
+- Suppose that we want to choose a model that has the best prediction performance. In other words, the smallest *prediction error*.
+
+## Training Error
+
+- Let’s consider a regression model with only one predictor:
+\[
+  y = f(x) + e,
+\]
+where $y$ is the response variable and $x$ is the covariate, and $e$ represents the proportion
+of $y$ that can not be explained by $x$.
+- Suppose we observe a sample $\{ x_i, y_i \}$ for $i =1, \ldots, n$. We estimate the unknown function $f(\cdot)$ by some estimator $\widehat{f} (\cdot)$.
+- Then $y_i$ will be estimated by $\widehat{f} (x_i)$. The training error is defined as
+\[
+  \frac{1}{n} \sum_{i=1}^n {\left( y_i - \widehat{f} (x_i) \right)}^2
+\]
+This training error is usually called *mean squared error* (MSE) or *in-sample error*.
+
+## Test Error
+
+- Suppose we observe additional observations, $\{ x_i^{\mbox{test}} \}$ for $i =1, \ldots, m$, for which we want to predict/classify the response.
+- We can predict the response variable $y_i^{\mbox{test}}$ corresponding to $x_i^{\mbox{test}}$ as $\widehat{f} (x_i^{\mbox{test}})$. The test error is
+\[
+  \frac{1}{m} \sum_{i=1}^m {\left( y_i^{\mbox{test}} - \widehat{f} (x_i^{\mbox{test}}) \right)}^2
+\]
+- The test error is usually called *mean squared prediction error* (MSPE) or *out-of-sample* error.
+- Usually we don’t observe $y_i^{\mbox{test}}$, and hence we can not directly calculate the test error. Hence, we cannot directly select a model that minimizes the test error.
+- The model that minimizes the training error may not be the one that minimizes the test error!
+
+# Question 2: How to Select Hyper-parameters
+
+- The terminology *hyper-parameter* is first used in Bayesian statistics to denote the parameter of prior distributions. In Bayes statistical inference, the priors express one's beliefs about this quantity before any evidence is taken into account.
+- Many statistical methods involved some parameters whose values should be set before the learning process. In a general sense, they can also be called hyper-parameters.
+- Usually, we need to choose these hyper-parameters before we fit a statistical model.
+- Different choices of hyper-parameters lead to different models.
+- How do we choose these hyper-parameters?
+
+## Hyper-parameters Selection
+
+- In practice, we want to choose a set of hyper-parameters that lead to a model with certain advantages:
+
+1. Model accuracy
+2. Computational efficiency
+3. Flexibility
+4. Robustness
+
+- For each objective, we need to choose a set of hyper-parameters that minimizes some loss function:
+
+1. Prediction error.
+2. Computational cost.
+3. Loss when model is mis-specified.
+4. Loss when assumptions are violated.
+
+## The Validation Set Approach
+
+- Suppose we want to estimate the test error associated with fitting a particular statistical model on a sample.
+- The true test/prediction set usually does not have the information of the response variable or true class labels. (Otherwise no need to predict.)
+- We cannot directly assess the test error on the test set.
+- The validation set approach involves randomly dividing the available set of observations into two parts, a *training set* and a *validation set*.
+- We first fit the model on the training set. The fitted model is then used to predict the responses of the observations in the validation set.
+- The resulting validation set error provides an estimate of the test error.
+
+### Normal Learning Process
+
+- Training a statistical model using the observations in the *training set*, and predict the *test set*.
+- Problem: Cannot assess the test error because we do not know the true responses of test set.
+
+### The Validation Set Approach
+
+- Training a statistical model using the observations in the *training set*.
+- Validate trained model by the "test error” in the *validation set*.
+- use the trained model to predict the *test set*.
+- Model accuracy is assessed by the test error in the validation set.
+- Select a model/parameter that minimizes the test error in the validation set.
+
+## Example: Predict MPG with Horsepower
+
+- We collected a dataset of 392 observations (automobiles). For each automobile, we record the miles per gallon (MPG) and horsepower.
+- We are interested in predicting the MPG of an automobile with its horsepower:
+\[
+ \mbox{MPG} = f(\mbox{horsepower}) + \mbox{error},
+\]
+where $f$ is some regression function.
+- Which model gives the best prediction performance?
+
+### Five Candidate Models
+
+- Let $y$ be MPG and $x$ be horsepower.  
+- We consider fitting the model where $f (\cdot)$ is a polynomial of order from 1 to 5:
+\begin{align*}
+\mbox{Model 1}: &  y = a_0  + a_1 x + \epsilon \\
+\mbox{Model 2}: &  y = a_0  + a_1 x + a_2 x^2  + \epsilon \\
+\mbox{Model 3}: &  y = a_0  + a_1 x + a_2 x^2 + a_3 x^3 + \epsilon \\
+\mbox{Model 4}: &  y = a_0  + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + \epsilon \\
+\mbox{Model 5}: &  y = a_0  + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + a_5 x^5 \epsilon
+\end{align*}
+Goal: compare the model that minimizes the training error and the model that minimizes the test error.
+
+### Example: Validation Set Approach
+
+- We randomly divide the observed sample $\{ x_i, y_i \}$ for $i =1, \ldots, 392$ into a training set $\{ x_i^t, y_i^t \}$ for $i =1, \ldots, 196$, and a validation set
+$\{ x_i^v, y_i^v \}$ for $i =1, \ldots, 196$.
+- We use the training set to train an estimator $\widehat{f} (\cdot)$. Then $y_i$ is estimated via $\widehat{f} (x_i)$.
+- The training error is defined as
+\[
+  \frac{1}{196} \sum_{i=1}^{196} {\left( y_i^t - \widehat{f} (x_i^t) \right)}^2.
+\]
+- The test error is estimated by the prediction error of the validation set
+\[
+  \frac{1}{196} \sum_{i=1}^{196} {\left( y_i^v - \widehat{f} (x_i^v) \right)}^2.
+\] 
+- The training error and test error of each model are given in the following table.
+
+```{r}
+library(ISLR)
+head(Auto)
+```
+
+```{r}
+Auto_test <- Auto[1:196,]
+Auto_val <- Auto[197:392,]
+
+# Train
+y <- Auto_test$mpg
+x <- Auto_test$horsepower
+x2 <- x^2
+x3 <- x^3
+x4 <- x^4
+x5 <- x^5
+mdl1 <- lm(y ~ x)
+mdl2 <- lm(y ~ x + x2)
+mdl3 <- lm(y ~ x + x2 + x3)
+mdl4 <- lm(y ~ x + x2 + x3 + x4)
+mdl5 <- lm(y ~ x + x2 + x3 + x4 + x5)
+train_err <- rep(0,5)
+train_err[1] <- mean((y - mdl1$fitted.values)^2)
+train_err[2] <- mean((y - mdl2$fitted.values)^2)
+train_err[3] <- mean((y - mdl3$fitted.values)^2)
+train_err[4] <- mean((y - mdl4$fitted.values)^2)
+train_err[5] <- mean((y - mdl5$fitted.values)^2)
+
+# Test
+y <- Auto_val$mpg
+x <- Auto_val$horsepower
+z1 <- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
+z2 <- (mdl2$coefficients[1] + mdl2$coefficients[2]*x + mdl2$coefficients[3]*x^2)
+z3 <- (mdl3$coefficients[1] + mdl3$coefficients[2]*x + mdl3$coefficients[3]*x^2 +
+       mdl3$coefficients[4]*x^3)
+z4 <- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 +
+       mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
+z5 <- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
+       mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
+test_err <- rep(0,5)
+test_err[1] <- mean((y - z1)^2)
+test_err[2] <- mean((y - z2)^2)
+test_err[3] <- mean((y - z3)^2)
+test_err[4] <- mean((y - z4)^2)
+test_err[5] <- mean((y - z5)^2)
+
+out <- rbind(train_err,test_err)
+rownames(out) <- c("Training Error","Testing Error")
+colnames(out) <- c("Model 1","Model 2","Model 3","Model 4","Model 5")
+out
+```
+
+
+ 
+
+
+
+through slide 17
+ 
