@@ -1,0 +1,26 @@
+---
+title: "Math 189: Homework 4"
+output: pdf_document
+---
+ 
+# Drinking Water
+
+Trace metals in drinking water affect the flavor, and an unusually high concentration can pose a health hazard. The water quality dataset (water.txt) contains ten pairs of data that measure zinc concentration in bottom water and surface water.
+
+## Tasks
+
+Analyze the dataset according to the following steps:
+
+1. Suppose we consider the zinc concentration in bottom water and in surface water as two samples. Denote by $\mu_1$ and $\mu_2$ the underlying population means of the two samples. Test the null and alternative hypotheses
+\[
+  H_0 : \mu_1 = \mu_2 \qquad H_a: \mu_1 \neq \mu_2
+\]
+ using the paired sample test. 
+2. Suppose the data was not paired. Apply the two-sample Hotelling's test. Do you assume the variances are the same? Use the variance estimate that is appropriate for your decision, as to whether the variances are the same or different.
+3. Summarize how the results differ based on whether the samples are paired or unpaired.
+
+## Remarks
+
+Your R Markdown Notebook report should have a introduction, body, conclusion (and optional appendix). Importantly, your code should run!
+ 
+
