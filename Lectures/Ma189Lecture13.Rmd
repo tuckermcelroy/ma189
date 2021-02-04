@@ -17,6 +17,7 @@ So far we have examined how to compare the means of more than two samples:
 - Multivariate analysis of variance (MANOVA)
 
 Next we study **classification**, with a particular focus on the *linear discriminant analysis* method. Some topics:
+
 1. The classification problems
 2. Bayes’ rule in classification
 3. Linear discriminant analysis
@@ -27,6 +28,7 @@ Next we study **classification**, with a particular focus on the *linear discrim
 - When a qualitative variable contains only two outcomes, it is also called a *binary variable*.
 
 Examples of unordered variables:
+
 - Gender, blood type, smoking history, eye color of patients.
 - The political party that a voter might vote for.
 - Four nucleobases (A,G,T,C) of a DNA double helix.
@@ -40,6 +42,7 @@ Examples of unordered variables:
 we classify that observation into a class/group/category. The statistical tools to classify the observations are called *classifiers*.
 
 Examples:
+
 - A patient arrives at the emergency room with a set of symptoms that could possibly be
 attributed to one of the three medical conditions. Which one of the three does this patient
 have?
@@ -104,6 +107,7 @@ Classification problems are different, but connected to regression problems!
 ![Iris-virginica](images/iris-virginica.jpg)
 
 - Four variables were measured on each iris flower:
+
 1. sepal length in cm
 2. sepal width in cm
 3. petal length in cm
@@ -161,7 +165,7 @@ rbind(iris.setosa[1:2,],iris.versi[1:2,],iris.virgi[1:2,])
 \[
  p(Y = k \vert  \underline{X} = \underline{x}) = \frac{ p(Y = k,  \underline{X} = \underline{x})}{ f (\underline{X} = \underline{x})}
  = \frac{ p_k \, f( \underline{X} = \underline{x} \vert Y = k) }{  
- = \sum_{h=1}^g p_h \, f( \underline{X} = \underline{x} \vert Y = h) }.
+  \sum_{h=1}^g p_h \, f( \underline{X} = \underline{x} \vert Y = h) }.
 \]
 - The numerator gives the likelihood that a randomly selected observation $\underline{x}$ comes from population $k$.
 - The denominator is the unconditional likelihood (over all populations) that we could observe $\underline{x}$.
@@ -181,6 +185,7 @@ group with highest log-likelihood:
   d_k (\underline{x}) =  \log \left(  p_k \, f( \underline{X} = \underline{x} \vert Y = k) \right), \quad k = 1, 2, \ldots, g.
 \]
 - Assumptions for the LDA are similar to those for MANOVA:
+
 1. The data from group $k$ has common mean vector $\underline{\mu}^{(k)}$, i.e., 
 \[
   {\mathbb E} [ x_{ij}^{(k)} ] = \underline{\mu}_j^{(k)}.
@@ -207,6 +212,7 @@ normal distribution.
 ### Choose Prior Probability
 
 The prior probability $p_k = {\mathbb P} [ Y = k]$ represents the expected portion of the community that belongs to group $k$. There are three common choices:
+
 1. Equal priors:
 \[
  p_k = 1/g.
@@ -233,6 +239,7 @@ f( \underline{X} = \underline{x} \vert Y = k) =
    {\mathbf \Sigma}^{-1} {( \underline{x} - \underline{\mu}^{(k)})} \right\}.
 \]
 Both $\underline{\mu}^{(k)}$ and ${\mathbf \Sigma}$ are unknown parameters to us. We estimate them using the training data.
+
 - Population means $\underline{\mu}^{(k)}$ are estimated by the sample means $\overline{\underline{x}}^{(k)}$ of the $k$th group. 
 - Population covariance matrix ${\mathbf \Sigma}$ is estimated by the pooled sample covariance matrix
 \[

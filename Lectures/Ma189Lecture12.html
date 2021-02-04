@@ -1648,8 +1648,8 @@ summary {
   2 &amp; x_{21}^{(1)}, \ldots, x_{2m}^{(1)} &amp; x_{21}^{(2)}, \ldots, x_{2m}^{(2)} &amp; 
   \ldots &amp; x_{21}^{(g)}, \ldots, x_{2m}^{(g)}  \\
   \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-  n_k &amp; x_{n_1,1}^{(1)}, \ldots, x_{n_1,m}^{(1)} &amp; x_{n_1,1}^{(2)}, \ldots, x_{n_1,m}^{(2)} &amp;
-  \ldots &amp; x_{n_1,1}^{(g)}, \ldots, x_{n_1,m}^{(g)} 
+  n_k &amp; x_{n_1,1}^{(1)}, \ldots, x_{n_1,m}^{(1)} &amp; x_{n_2,1}^{(2)}, \ldots, x_{n_2,m}^{(2)} &amp;
+  \ldots &amp; x_{n_g,1}^{(g)}, \ldots, x_{n_g,m}^{(g)} 
 \end{array}  \right]
 \]</span></li>
 </ul>
@@ -1694,7 +1694,7 @@ summary {
  \overline{\underline{x}} = \frac{1}{N} \sum_{k=1}^g  \sum_{i=1}^{n_k}  \underline{x}_{i}^{(k)},
 \]</span> which is the Grand mean vector (overall sample mean).</li>
 <li>The multivariate analog is the Total Sum of Squares and is a cross products matrix of size <span class="math inline">\(m \times m\)</span>: <span class="math display">\[
-{\mathbf T} = \sum_{k=1}^g \sum_{i=1}^{n_k} { \left( \underline{x}_i^{(k)} - \overline{\underline{x}}  \right) } &#39;
+{\mathbf T} = \sum_{k=1}^g \sum_{i=1}^{n_k} { \left( \underline{x}_i^{(k)} - \overline{\underline{x}}  \right) } 
 { \left( \underline{x}_i^{(k)} - \overline{\underline{x}}  \right) }^{\prime} 
 \]</span></li>
 <li>The diagonal entries of <span class="math inline">\({\mathbf T}\)</span> are the total sum of squares of each variable.</li>

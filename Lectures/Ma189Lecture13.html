@@ -1640,7 +1640,12 @@ summary {
 <div id="classification" class="section level1">
 <h1>Classification</h1>
 <p>So far we have examined how to compare the means of more than two samples: - Multiple-sample testing - Analysis of variance (ANOVA) - Multivariate analysis of variance (MANOVA)</p>
-<p>Next we study <strong>classification</strong>, with a particular focus on the <em>linear discriminant analysis</em> method. Some topics: 1. The classification problems 2. Bayes’ rule in classification 3. Linear discriminant analysis</p>
+<p>Next we study <strong>classification</strong>, with a particular focus on the <em>linear discriminant analysis</em> method. Some topics:</p>
+<ol style="list-style-type: decimal">
+<li>The classification problems</li>
+<li>Bayes’ rule in classification</li>
+<li>Linear discriminant analysis</li>
+</ol>
 </div>
 <div id="qualitative-variables" class="section level1">
 <h1>Qualitative variables</h1>
@@ -1649,14 +1654,27 @@ summary {
 </li>
 <li>When a qualitative variable contains only two outcomes, it is also called a <em>binary variable</em>.</li>
 </ul>
-<p>Examples of unordered variables: - Gender, blood type, smoking history, eye color of patients. - The political party that a voter might vote for. - Four nucleobases (A,G,T,C) of a DNA double helix. - Nationalities of students in a department. - Authenticity of a bank note (recall the swiss banknotes dataset). - Location of pottery shards (recall the pottery dataset).</p>
+<p>Examples of unordered variables:</p>
+<ul>
+<li>Gender, blood type, smoking history, eye color of patients.</li>
+<li>The political party that a voter might vote for.</li>
+<li>Four nucleobases (A,G,T,C) of a DNA double helix.</li>
+<li>Nationalities of students in a department.</li>
+<li>Authenticity of a bank note (recall the swiss banknotes dataset).</li>
+<li>Location of pottery shards (recall the pottery dataset).</li>
+</ul>
 </div>
 <div id="classification-1" class="section level1">
 <h1>Classification</h1>
 <ul>
 <li>The process to predict a qualitative variable is called <em>classification</em>. Or we can say that we classify that observation into a class/group/category. The statistical tools to classify the observations are called <em>classifiers</em>.</li>
 </ul>
-<p>Examples: - A patient arrives at the emergency room with a set of symptoms that could possibly be attributed to one of the three medical conditions. Which one of the three does this patient have? - An online banking service must be able to determine whether or not a transaction being processed on the site is fraudulent, on the basis of the user’s IP address, transaction history, etc. - On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to determine which DNA mutations are dependent (disease-causing) and which are not.</p>
+<p>Examples:</p>
+<ul>
+<li>A patient arrives at the emergency room with a set of symptoms that could possibly be attributed to one of the three medical conditions. Which one of the three does this patient have?</li>
+<li>An online banking service must be able to determine whether or not a transaction being processed on the site is fraudulent, on the basis of the user’s IP address, transaction history, etc.</li>
+<li>On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to determine which DNA mutations are dependent (disease-causing) and which are not.</li>
+</ul>
 <div id="classification-versus-regression" class="section level2">
 <h2>Classification versus Regression</h2>
 <p>Classification problems are different, but connected to regression problems!</p>
@@ -1756,8 +1774,10 @@ summary {
 <li>Dataset contains <span class="math inline">\(150\)</span> iris flowers from <span class="math inline">\(3\)</span> species.</li>
 <li>For each flower, the label of species is given and four features are measured.</li>
 </ul>
-<pre class="r"><code>library(datasets)
-data(iris)
+<pre class="r"><code>#library(datasets)
+#data(iris)
+iris &lt;- read.csv(&quot;iris.csv&quot;)
+iris$X &lt;- NULL
 iris.setosa &lt;- iris[iris$Species == &quot;setosa&quot;,]
 iris.versi &lt;- iris[iris$Species == &quot;versicolor&quot;,]
 iris.virgi &lt;- iris[iris$Species == &quot;virginica&quot;,]
@@ -1797,7 +1817,7 @@ rbind(iris.setosa[1:2,],iris.versi[1:2,],iris.virgi[1:2,])</code></pre>
 <li>According to Bayes’ rule, we have the following relationship between the prior probability and posterior probability: <span class="math display">\[
  p(Y = k \vert  \underline{X} = \underline{x}) = \frac{ p(Y = k,  \underline{X} = \underline{x})}{ f (\underline{X} = \underline{x})}
  = \frac{ p_k \, f( \underline{X} = \underline{x} \vert Y = k) }{  
- = \sum_{h=1}^g p_h \, f( \underline{X} = \underline{x} \vert Y = h) }.
+\sum_{h=1}^g p_h \, f( \underline{X} = \underline{x} \vert Y = h) }.
 \]</span></li>
 <li>The numerator gives the likelihood that a randomly selected observation <span class="math inline">\(\underline{x}\)</span> comes from population <span class="math inline">\(k\)</span>.</li>
 <li>The denominator is the unconditional likelihood (over all populations) that we could observe <span class="math inline">\(\underline{x}\)</span>.</li>
@@ -1841,13 +1861,18 @@ d_k (\underline{x}) =  \log \left(  p_k \, f( \underline{X} = \underline{x} \ver
 </ol>
 <div id="choose-prior-probability" class="section level3">
 <h3>Choose Prior Probability</h3>
-<p>The prior probability <span class="math inline">\(p_k = {\mathbb P} [ Y = k]\)</span> represents the expected portion of the community that belongs to group <span class="math inline">\(k\)</span>. There are three common choices: 1. Equal priors: <span class="math display">\[
+<p>The prior probability <span class="math inline">\(p_k = {\mathbb P} [ Y = k]\)</span> represents the expected portion of the community that belongs to group <span class="math inline">\(k\)</span>. There are three common choices:</p>
+<ol style="list-style-type: decimal">
+<li>Equal priors: <span class="math display">\[
  p_k = 1/g.
-\]</span> Equal priors are useful if we believe that all of the population sizes are more or less the same. 2. Arbitrary priors: any combination that satisfies <span class="math display">\[
+\]</span> Equal priors are useful if we believe that all of the population sizes are more or less the same.</li>
+<li>Arbitrary priors: any combination that satisfies <span class="math display">\[
  p_1 + p_2 + \ldots + p_g = 1.
-\]</span> Arbitrary priors are usually selected according to the investigator’s beliefs regarding the relative population sizes. 3. Training data priors: <span class="math display">\[
+\]</span> Arbitrary priors are usually selected according to the investigator’s beliefs regarding the relative population sizes.</li>
+<li>Training data priors: <span class="math display">\[
  p_k = n_k/N.
-\]</span> Training data priors are selected if we believe the relative sample sizes in the training data are close to the relative population sizes.</p>
+\]</span> Training data priors are selected if we believe the relative sample sizes in the training data are close to the relative population sizes.</li>
+</ol>
 </div>
 <div id="estimate-the-parameters-of-f-underlinex-underlinex-vert-y-k" class="section level3">
 <h3>Estimate the Parameters of <span class="math inline">\(f( \underline{X} = \underline{x} \vert Y = k)\)</span></h3>
@@ -1856,12 +1881,16 @@ f( \underline{X} = \underline{x} \vert Y = k) =
 \frac{1}{ {(2 \pi)}^{m/2} \det {\mathbf \Sigma}^{1/2}} \,
  \exp \left\{ - \frac{1}{2}  {( \underline{x} - \underline{\mu}^{(k)})}^{\prime} \,
    {\mathbf \Sigma}^{-1} {( \underline{x} - \underline{\mu}^{(k)})} \right\}.
-\]</span> Both <span class="math inline">\(\underline{\mu}^{(k)}\)</span> and <span class="math inline">\({\mathbf \Sigma}\)</span> are unknown parameters to us. We estimate them using the training data. - Population means <span class="math inline">\(\underline{\mu}^{(k)}\)</span> are estimated by the sample means <span class="math inline">\(\overline{\underline{x}}^{(k)}\)</span> of the <span class="math inline">\(k\)</span>th group. - Population covariance matrix <span class="math inline">\({\mathbf \Sigma}\)</span> is estimated by the pooled sample covariance matrix <span class="math display">\[
-  {\mathbf S} = \frac{ \sum_{k=1}^g (n_k -1) {\mathbf S}_k }{ \sum_{k=1}^g (n_k -1)}
-  =  \frac{1}{N-g} \sum_{k=1}^g \sum_{i=1}^{n_k} {   \left( \underline{x}_i^{(k)} - 
+\]</span> Both <span class="math inline">\(\underline{\mu}^{(k)}\)</span> and <span class="math inline">\({\mathbf \Sigma}\)</span> are unknown parameters to us. We estimate them using the training data.</p>
+<ul>
+<li>Population means <span class="math inline">\(\underline{\mu}^{(k)}\)</span> are estimated by the sample means <span class="math inline">\(\overline{\underline{x}}^{(k)}\)</span> of the <span class="math inline">\(k\)</span>th group.</li>
+<li>Population covariance matrix <span class="math inline">\({\mathbf \Sigma}\)</span> is estimated by the pooled sample covariance matrix <span class="math display">\[
+{\mathbf S} = \frac{ \sum_{k=1}^g (n_k -1) {\mathbf S}_k }{ \sum_{k=1}^g (n_k -1)}
+=  \frac{1}{N-g} \sum_{k=1}^g \sum_{i=1}^{n_k} {   \left( \underline{x}_i^{(k)} - 
 \overline{\underline{x}}^{(k)} \right)   } 
 {  \left( \underline{x}_i^{(k)} - \overline{\underline{x}}^{(k)} \right)  }^{\prime},
-\]</span> where <span class="math inline">\({\mathbf S}_k\)</span> is the sample covariance matrix of group <span class="math inline">\(k\)</span> based on the training data.</p>
+\]</span> where <span class="math inline">\({\mathbf S}_k\)</span> is the sample covariance matrix of group <span class="math inline">\(k\)</span> based on the training data.</li>
+</ul>
 </div>
 <div id="calculate-the-discriminant-function" class="section level3">
 <h3>Calculate the Discriminant Function</h3>
@@ -1897,7 +1926,7 @@ d_k^L (\underline{x}) =
 d_k^L (\underline{x}) &amp; = \alpha_k + \underline{\beta}_k^{\prime} \underline{x} \\
  \alpha_k &amp; =  - \frac{1}{2}  {  \underline{\mu}^{(k)}}^{\prime} \,
  {\mathbf \Sigma}^{-1} { \underline{\mu}^{(k)} } + \log p_k \\
- \underline{\beta} &amp; =    {\mathbf \Sigma}^{-1} \,  {  \underline{\mu}^{(k)} }^{\prime}.
+ \underline{\beta}_k &amp; =    {\mathbf \Sigma}^{-1} \,  {  \underline{\mu}^{(k)} }^{\prime}.
 \end{align*}\]</span></p></li>
 <li><p>Classifying <span class="math inline">\(\underline{x}\)</span> into the group with highest linear discriminant function is equivalent to classifying <span class="math inline">\(\underline{x}\)</span> into the group with the highest posterior probability.</p></li>
 </ul>
@@ -1916,7 +1945,7 @@ d_k^L (\underline{x}) &amp; = \alpha_k + \underline{\beta}_k^{\prime} \underline
 \widehat{d}_k^L (\underline{x}) &amp; = \widehat{\alpha}_k + \widehat{\underline{\beta}}_k^{\prime} \underline{x} \\
  \widehat{\alpha}_k &amp; =  - \frac{1}{2}  {  \overline{\underline{x}}^{(k)}}^{\prime} \,
  {\mathbf S}^{-1} { \overline{\underline{x}}^{(k)} } + \log p_k \\
- \widehat{\underline{\beta}} &amp; =    {\mathbf S}^{-1} \, 
+ \widehat{\underline{\beta}}_k &amp; =    {\mathbf S}^{-1} \, 
  {  \overline{\underline{x}}^{(k)} }^{\prime}.
 \end{align*}\]</span></li>
 </ul>
