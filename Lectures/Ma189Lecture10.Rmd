@@ -111,7 +111,7 @@ populations share the same variance-covariance matrix, i.e.
  This gives a slightly different formula from ${\mathbf S}_T$.
 - When the sample sizes $n_1$ and $n_2$ are not large, the $F$-statistic will be
 \[
- F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -1)} \, T^2 \sim \mathcal{F}_{m,n_1+n_2 - m-1}.
+ F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -2)} \, T^2 \sim \mathcal{F}_{m,n_1+n_2 - m-1}.
 \]
 In other words, the degrees of freedom $\nu$ equals $n_1+n_2 - m-1$ in this case. 
 - At a given significance level $\alpha$, we reject the null hypothesis $H_0$ if
