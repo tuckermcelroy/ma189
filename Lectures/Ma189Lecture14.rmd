@@ -114,6 +114,9 @@ beta_iris
 ### Example: LDA on Iris Dataset 
 
 - We calculate the LD function values for each observation in the test dataset. The results are presented in the following 3D scatter plot.
+- For each of the $30$ test records $\underline{x}$, we can plot $\widehat{d}_k^L (\underline{x})$ for $k = 1, 2, 3$. These are plotted on axes for setosa ($k=1$), versicolor ($k=2$), and virginica ($k=3$).
+- In the second scatterplot, we color the records according to their true species: red square for setosa, blue triangle for versicolor, and black dot for virginica. Observe the clustering of discriminant values.
+
 
 ```{r}
 prediction <- c()
@@ -156,27 +159,28 @@ scatterplot3d(x = d_setosa_vec, y = d_versicolor_vec, z = d_virginica_vec,
               color=col_vec, pch=pch_vec, angle = 55 , cex.symbols=2, cex.lab=2)
 ```
 
-
-
-- The classification results versus truth are given in the following table.
+- The classification results versus truth are given in the following output:
 
 ```{r}
 setosa_true <- sum((iris.test$Species == "setosa") & (iris.test$prediction == "setosa"))
 versicolor_true <- sum((iris.test$Species == "versicolor") & (iris.test$prediction == "versicolor"))
 virginica_true <- sum((iris.test$Species == "virginica") & (iris.test$prediction == "virginica"))
-
 iris.test
 ```
 
+- The table summarizes the results.
 
-<!-- class_tab <- c(n_setosa,n_versicolor,n_virginica) -->
-<!-- class_tab <- rbind(class_tab, -->
-<!--        c(setosa_true,versicolor_true,virginica_true)) -->
-<!-- class_tab <- rbind(class_tab,class_tab[1,] - class_tab[2,]) -->
-<!-- colnames(class_tab) <- c("setosa","versicolor","virginica") -->
-<!-- rownames(class_tab) <- c("Number Observations","Number Correct","Number Wrong") -->
-<!-- class_tab -->
-
+```{r}
+class_tab <- c(dim(iris.setosa)[1]-n_setosa,
+               dim(iris.versi)[1]-n_versicolor,
+               dim(iris.virgi)[1]-n_virginica)
+class_tab <- rbind(class_tab,
+       c(setosa_true,versicolor_true,virginica_true))
+class_tab <- rbind(class_tab,class_tab[1,] - class_tab[2,])
+colnames(class_tab) <- c("setosa","versicolor","virginica")
+rownames(class_tab) <- c("Number Observations","Number Correct","Number Wrong")
+class_tab
+```
 
 - **Outstanding!**
 - But:

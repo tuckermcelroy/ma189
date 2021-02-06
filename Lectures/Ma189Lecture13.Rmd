@@ -12,6 +12,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 # Classification
 
 So far we have examined how to compare the means of more than two samples:
+
 - Multiple-sample testing
 - Analysis of variance (ANOVA)
 - Multivariate analysis of variance (MANOVA)
