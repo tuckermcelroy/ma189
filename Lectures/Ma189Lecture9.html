@@ -1665,7 +1665,7 @@ x &lt;- rnorm(10,mean=1)
 n &lt;- length(x)
 t_stat &lt;- (mean(x) - 0)/(sd(x)/n)
 t_stat^2</code></pre>
-<pre><code>## [1] 136.5691</code></pre>
+<pre><code>## [1] 49.11636</code></pre>
 <pre class="r"><code>qf(1-alpha,df1=1,df2=n-1)</code></pre>
 <pre><code>## [1] 5.117355</code></pre>
 </div>
@@ -1711,8 +1711,8 @@ n &lt;- dim(x)[1]
 m &lt;- dim(x)[2]
 f_stat &lt;- (n-m)/(m*(n-1)) * t(colMeans(x)) %*% solve(var(x)) %*% colMeans(x)
 f_stat</code></pre>
-<pre><code>##          [,1]
-## [1,] 2.236868</code></pre>
+<pre><code>##           [,1]
+## [1,] 0.4300341</code></pre>
 <pre class="r"><code>qf(1-alpha,df1=m,df2=n-m)</code></pre>
 <pre><code>## [1] 4.45897</code></pre>
 </div>

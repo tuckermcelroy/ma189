@@ -1704,7 +1704,7 @@ n_2^{-1} {\mathbf \Sigma}^{(2)} \right)}^{-1} \,
 <ul>
 <li>When the sample sizes <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are not large, we cannot ignore the effects of estimating the population covariance matrices by their sample counterparts.</li>
 <li>Instead, we can calculate an <span class="math inline">\(F\)</span> transformation using the formula <span class="math display">\[
- F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -1)} \, T^2 \sim \mathcal{F}_{m,\nu},
+ F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -2)} \, T^2 \sim \mathcal{F}_{m,\nu},
 \]</span> where the degree of freedom <span class="math inline">\(\nu\)</span> is provided by the following complicated formula: <span class="math display">\[
  \frac{1}{\nu} = \sum_{k=1}^2 \frac{1}{n_k -1}
  { \left( \frac{  {( \overline{\underline{x}}^{(1)} - \overline{\underline{x}}^{(2)} )}^{\prime} 
@@ -1734,6 +1734,15 @@ F &gt; \mathcal{F}_{m,\nu,\alpha}.
 <li>At a given significance level <span class="math inline">\(\alpha\)</span>, we reject the null hypothesis <span class="math inline">\(H_0\)</span> if <span class="math display">\[
 F &gt; \mathcal{F}_{m,n_1+n_2 - m-1,\alpha}.
 \]</span></li>
+</ul>
+</div>
+<div id="two-sample-hotellings-t2-summary" class="section level2">
+<h2>Two-Sample Hotelling’s <span class="math inline">\(T^2\)</span> Summary</h2>
+<ul>
+<li>When variances are different (<span class="math inline">\({\mathbf \Sigma}^{(1)} \neq {\mathbf \Sigma}^{(2)}\)</span>), use <span class="math inline">\(S_T\)</span> as the variance estimate.</li>
+<li>When variances are equal (<span class="math inline">\({\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}\)</span>), use <span class="math inline">\(S_P\)</span> as the variance estimate.</li>
+<li>When sample sizes are large enough, there is an asymptotic <span class="math inline">\(\chi^2\)</span> distribution.</li>
+<li>For smaller sample sizes, a rescaled <span class="math inline">\(T^2\)</span> has a F distribution.</li>
 </ul>
 </div>
 <div id="example-swiss-bank-notes" class="section level2">

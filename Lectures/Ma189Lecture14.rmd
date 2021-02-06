@@ -30,7 +30,7 @@ observation $\underline{x}$ that is to be classified into one of the $g$ populat
 5. Calculate coefficients
 \[
   \widehat{\underline{\beta}}_k  =    {\mathbf S}^{-1} \, 
-   {  \overline{\underline{x}}^{(k)} }^{\prime}
+   {  \overline{\underline{x}}^{(k)} }
 \]
 6. Calculate
 \[
@@ -94,9 +94,9 @@ S_pooled
  
 ```{r}
 S_inv <- solve(S_pooled)
-alpha_setosa <- -0.5* t(Mean_setosa) %*% S_inv %*% Mean_setosa
-alpha_versicolor <- -0.5* t(Mean_versicolor) %*% S_inv %*% Mean_versicolor
-alpha_virginica <- -0.5* t(Mean_virginica) %*% S_inv %*% Mean_virginica
+alpha_setosa <- -0.5* t(Mean_setosa) %*% S_inv %*% Mean_setosa + log(p_setosa)
+alpha_versicolor <- -0.5* t(Mean_versicolor) %*% S_inv %*% Mean_versicolor + log(p_versicolor)
+alpha_virginica <- -0.5* t(Mean_virginica) %*% S_inv %*% Mean_virginica + log(p_virginica)
 alpha_iris <- c(alpha_setosa,alpha_versicolor,alpha_virginica)
 alpha_iris
 ```
@@ -164,14 +164,19 @@ scatterplot3d(x = d_setosa_vec, y = d_versicolor_vec, z = d_virginica_vec,
 setosa_true <- sum((iris.test$Species == "setosa") & (iris.test$prediction == "setosa"))
 versicolor_true <- sum((iris.test$Species == "versicolor") & (iris.test$prediction == "versicolor"))
 virginica_true <- sum((iris.test$Species == "virginica") & (iris.test$prediction == "virginica"))
-class_tab <- c(n_setosa,n_versicolor,n_virginica)
-class_tab <- rbind(class_tab,
-       c(setosa_true,versicolor_true,virginica_true))
-class_tab <- rbind(class_tab,class_tab[1,] - class_tab[2,])
-colnames(class_tab) <- c("setosa","versicolor","virginica")
-rownames(class_tab) <- c("Number Observations","Number Correct","Number Wrong")
-class_tab
+
+iris.test
 ```
+
+
+<!-- class_tab <- c(n_setosa,n_versicolor,n_virginica) -->
+<!-- class_tab <- rbind(class_tab, -->
+<!--        c(setosa_true,versicolor_true,virginica_true)) -->
+<!-- class_tab <- rbind(class_tab,class_tab[1,] - class_tab[2,]) -->
+<!-- colnames(class_tab) <- c("setosa","versicolor","virginica") -->
+<!-- rownames(class_tab) <- c("Number Observations","Number Correct","Number Wrong") -->
+<!-- class_tab -->
+
 
 - **Outstanding!**
 - But:
@@ -197,7 +202,7 @@ class_tab
   {( \underline{\mu}_1 - \underline{\mu}_2 )}^{\prime} {\mathbf \Sigma}^{-1} \underline{x}.
 \]
 
-- Letting $\frac{1}{2} \left( \underline{\mu}_1^{\prime} {\mathbf \Sigma}^{-1} \underline{\mu}_1  - \underline{\mu}_2^{\prime} {\mathbf \Sigma}^{-1} \underline{\mu}_2 \right) - \log (p_1 /p_2)$ and $\underline{\omega} = {\mathbf \Sigma}^{-1} {( \underline{\mu}_1 - \underline{\mu}_2 )}$,
+- Letting $c = \frac{1}{2} \left( \underline{\mu}_1^{\prime} {\mathbf \Sigma}^{-1} \underline{\mu}_1  - \underline{\mu}_2^{\prime} {\mathbf \Sigma}^{-1} \underline{\mu}_2 \right) - \log (p_1 /p_2)$ and $\underline{\omega} = {\mathbf \Sigma}^{-1} {( \underline{\mu}_1 - \underline{\mu}_2 )}$,
  the inequality above says that
 \[
  \underline{\omega}^{\prime} \underline{x} > c.

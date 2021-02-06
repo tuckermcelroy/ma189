@@ -80,7 +80,7 @@ freedom, under the null hypothesis.
 estimating the population covariance matrices by their sample counterparts.
 - Instead, we can calculate an $F$ transformation using the formula
 \[
- F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -1)} \, T^2 \sim \mathcal{F}_{m,\nu},
+ F = \frac{ n_1 + n_2 - m -1}{m (n_1 + n_2 -2)} \, T^2 \sim \mathcal{F}_{m,\nu},
 \]
  where the degree of freedom $\nu$  is provided by the following complicated formula:
 \[
@@ -118,6 +118,13 @@ In other words, the degrees of freedom $\nu$ equals $n_1+n_2 - m-1$ in this case
 \[
 F > \mathcal{F}_{m,n_1+n_2 - m-1,\alpha}.
 \]
+
+## Two-Sample Hotelling’s $T^2$ Summary
+
+- When variances are different (${\mathbf \Sigma}^{(1)} \neq {\mathbf \Sigma}^{(2)}$), use $S_T$ as the variance estimate.
+- When variances are equal (${\mathbf \Sigma}^{(1)} = {\mathbf \Sigma}^{(2)}$), use $S_P$ as the variance estimate.
+- When sample sizes are large enough, there is an asymptotic $\chi^2$ distribution.
+- For smaller sample sizes, a rescaled $T^2$ has a F distribution.
 
 ## Example: Swiss Bank Notes
 
