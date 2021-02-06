@@ -1,0 +1,244 @@
+---
+title: 'Math 189: Resampling II'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+## Leave-One-Out Cross Validation
+
+- Leave-one-out cross-validation (LOOCV) is closely related to the validation set approach. It attempts to address the drawbacks ofthe latter.
+- Instead of randomly dividing the sample into a training set and a validation set, LOOCV doesit in an alternating way:
+
+1. Pick the first observation $(x_1, y_1)$ as the validation set, and use the remaining observations $(x_2,y_2), \ldots, (x_n, y_n)$ as the training set. The testing error is measured as 
+\[
+ \mbox{MSPE}_1 = {(y_1 - \widehat{y}_1 )}^2.
+\]
+2. Pick  $(x_2, y_2)$ as the validation set, and use the remaining observations as the training set. The testing error is measured as 
+\[
+ \mbox{MSPE}_2 = {(y_2 - \widehat{y}_2 )}^2.
+\]
+3. Repeat for each observation in the sample and obtain
+\[
+ \mbox{MSPE}_i = {(y_i - \widehat{y}_i )}^2.
+\]
+4. The tesing error is the average of the mean square prediction errors:
+\[
+  \frac{1}{n} \sum_{i=1}^n \mbox{MSPE}_i = \frac{1}{n} \sum_{i=1}^n  
+  {(y_i - \widehat{y}_i )}^2.
+\]
+
+## Leave-one-out CV versus Validation Set
+
+### Leave-one-out CV
+
+- Repeatedly fit the statistical learning method using training sets that contain $n-1$ observations.
+- Less bias, because the training set is close to the whole sample.
+- Avoid overestimating the test error.
+- Yield same results when applied multiple times.
+- Expensive computational cost, as the model has to be fit $n$ times.
+
+### Validation set
+
+- Fit the statistical learning method using a random sub-sample.
+- Large bias, as we used smaller sample size to train the model.
+- May over-estimate the test error.
+- Yield different results when applied repeatedly, due to random training-validation splitting.
+- Fast computation, because model is only trained once.
+
+## $K$-fold Cross Validation
+
+- An alternative to LOOCV is $K$-fold CV. This approach involves randomly dividing the set of observations into $K$ groups, or folds, of approximately equal size.
+- $K$-fold CV also works in a repeated way:
+
+1. Pick the first fold as the validation set, and use the remaining $K-1$ folds as the training set. The test error $\mbox{MSPE}_1$ is computed on the observations in first fold.
+2. Repeat step 1 by using each fold as the validation set and use the remaining $K-1$ folds as the training set. The test errors  $\mbox{MSPE}_2, \ldots, \mbox{MSPE}_K$ are computed on the observations in the held-out fold.
+3. The tesing error is the average of the mean square prediction errors:
+\[
+  \frac{1}{K} \sum_{j=1}^K \mbox{MSPE}_j.
+\]
+- LOOCV can be considered as a special $K$-fold CV with $K = n$.
+- In practice, we usually perform $K$-fold CV using $K=5$ or $K= 10$.
+
+## Advantages of $K$-fold Cross Validation
+
+- Both LOOCV and $K$-fold CV are very general resampling methods, and can be used on many kinds of predictive learning processes.
+- In general, $K$-fold CV (with $K=5$ or $K= 10$) is more popular than LOOCV.
+- What are the advantages of $K$-fold CV?
+
+### First Advantage 
+
+- The most obvious advantage is *computational feasibility*. 
+- LOOCV requires fitting the statistical learning method $n$ times. This has the potential to be computationally expensive when $n$ is large, or fitting is computationally intensive.
+- $K$-fold CV only requires fitting the statistical learning method $K$ times.
+
+### Second Advantage
+
+- A less obvious but potentially more important advantage of $K$-fold CV is that it often gives more accurate estimates of the testing error rate than LOOCV. This has to do with a *bias-variance* trade-off.
+
+
+## Bias-Variance Trade-off in Cross Validation
+
+### Bias:
+
+- The validation set approach tends to have large bias. The model is trained with a smaller sample size. The validation set approach tends to overestimate the test error.
+- Using this logic, the LOOCV will give approximately unbiased estimates of the test error.
+Each training set contains $n-1$ observations, which is almost as many as the number of observations in the full dataset.
+- And performing $K$-fold CV will lead to an intermediate level of bias. Each training set contains $(K-1) n/K$ observations; fewer than in the LOOCV approach, but substantially more than in the validation set approach.
+
+### Variance:
+
+- On the other hand, LOOCV has a high level of variance.
+
+1. When we perform LOOCV, we are in effect averaging the outputs of $n$ fitted models, each of which is trained on an almost identical set of observations; therefore, these outputs are highly (positively) correlated with each other.
+2. The mean of many highly correlated quantities has higher variance than the mean of many variables that are less correlated.
+
+- In contrast, $K$-fold CV with $K < n$ has a smaller variance. We are averaging the outputs of $K$ fitted models that are somewhat less correlated with each other, since the overlap between the training sets in each model is smaller.
+
+### Summary of Trade-off
+
+- To summarize, there is a bias-variance trade-off associated with the choice of $K$ in $K$-fold CV.
+- Typically, given these considerations, popular choices of $K =5$ or $K= 10$ have been shown empirically to yield test error estimates that suffer neither from excessively high bias nor from very high variance.
+
+## Example: Predict MPG with Horsepower
+
+- We return to the automobiles dataset.
+- Now we compare the test errors estimated by LOOCV and $8$-fold CV (I chose $K=8$ because it divides $n = 392$).
+
+```{r}
+library(ISLR)
+head(Auto)
+
+# LOOCV
+perf_loocv <- rep(0,5)
+for(count in 1:392)
+{
+
+test_ind <- setdiff(seq(1,392),count)
+val_ind <- count
+Auto_test <- Auto[test_ind,]
+Auto_val <- Auto[val_ind,]
+
+# Train
+y <- Auto_test$mpg
+x <- Auto_test$horsepower
+x2 <- x^2
+x3 <- x^3
+x4 <- x^4
+x5 <- x^5
+mdl1 <- lm(y ~ x)
+mdl2 <- lm(y ~ x + x2)
+mdl3 <- lm(y ~ x + x2 + x3)
+mdl4 <- lm(y ~ x + x2 + x3 + x4)
+mdl5 <- lm(y ~ x + x2 + x3 + x4 + x5)
+train_err <- rep(0,5)
+train_err[1] <- mean((y - mdl1$fitted.values)^2)
+train_err[2] <- mean((y - mdl2$fitted.values)^2)
+train_err[3] <- mean((y - mdl3$fitted.values)^2)
+train_err[4] <- mean((y - mdl4$fitted.values)^2)
+train_err[5] <- mean((y - mdl5$fitted.values)^2)
+
+# Test
+y <- Auto_val$mpg
+x <- Auto_val$horsepower
+z1 <- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
+z2 <- (mdl2$coefficients[1] + mdl2$coefficients[2]*x + mdl2$coefficients[3]*x^2)
+z3 <- (mdl3$coefficients[1] + mdl3$coefficients[2]*x + mdl3$coefficients[3]*x^2 +
+       mdl3$coefficients[4]*x^3)
+z4 <- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 +
+       mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
+z5 <- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
+       mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
+test_err <- rep(0,5)
+test_err[1] <- mean((y - z1)^2)
+test_err[2] <- mean((y - z2)^2)
+test_err[3] <- mean((y - z3)^2)
+test_err[4] <- mean((y - z4)^2)
+test_err[5] <- mean((y - z5)^2)
+
+perf_loocv <- perf_loocv + test_err/392
+}
+
+plot.ts(perf_loocv,xlab="Model Number",ylab="Testing Error",ylim=c(15,35))
+```
+
+```{r}
+# K-fold CV
+k <- 8
+folds <- matrix(seq(1,392),ncol=8)
+perf_kcv <- rep(0,5)
+for(count in 1:k)
+{
+test_ind <- folds[,-count]
+val_ind <- folds[,count]
+Auto_test <- Auto[test_ind,]
+Auto_val <- Auto[val_ind,]
+
+# Train
+y <- Auto_test$mpg
+x <- Auto_test$horsepower
+x2 <- x^2
+x3 <- x^3
+x4 <- x^4
+x5 <- x^5
+mdl1 <- lm(y ~ x)
+mdl2 <- lm(y ~ x + x2)
+mdl3 <- lm(y ~ x + x2 + x3)
+mdl4 <- lm(y ~ x + x2 + x3 + x4)
+mdl5 <- lm(y ~ x + x2 + x3 + x4 + x5)
+train_err <- rep(0,5)
+train_err[1] <- mean((y - mdl1$fitted.values)^2)
+train_err[2] <- mean((y - mdl2$fitted.values)^2)
+train_err[3] <- mean((y - mdl3$fitted.values)^2)
+train_err[4] <- mean((y - mdl4$fitted.values)^2)
+train_err[5] <- mean((y - mdl5$fitted.values)^2)
+
+# Test
+y <- Auto_val$mpg
+x <- Auto_val$horsepower
+z1 <- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
+z2 <- (mdl2$coefficients[1] + mdl2$coefficients[2]*x + mdl2$coefficients[3]*x^2)
+z3 <- (mdl3$coefficients[1] + mdl3$coefficients[2]*x + mdl3$coefficients[3]*x^2 +
+       mdl3$coefficients[4]*x^3)
+z4 <- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 +
+       mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
+z5 <- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
+       mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
+test_err <- rep(0,5)
+test_err[1] <- mean((y - z1)^2)
+test_err[2] <- mean((y - z2)^2)
+test_err[3] <- mean((y - z3)^2)
+test_err[4] <- mean((y - z4)^2)
+test_err[5] <- mean((y - z5)^2)
+
+perf_kcv <- perf_kcv + test_err/k
+}
+
+plot.ts(perf_kcv,xlab="Model Number",ylab="Testing Error",ylim=c(15,35))
+```
+
+```{r}
+plot.ts(perf_loocv,xlab="Model Number",ylab="Testing Error",ylim=c(15,35))
+lines(perf_kcv,col=2)
+```
+
+## Cross Validation on Classification Problems
+
+- We have illustrated the use of cross-validation in the regression setting where the outcome
+$y$ is quantitative. The test error is quantified by the $\mbox{MSPE}$.
+- Cross-validation can also be a very useful approach in the classification setting, when $y$ is qualitative (or categorical).
+- In classification problems, we can quantify test error by the number of misclassified observations.
+- For instance, in the classification setting, the LOOCV error takes the form
+\[
+ \mbox{CV}_{(n)} = \frac{1}{n} \sum_{i=1}^n 1_{ \{ y_i \neq \widehat{y}_i \}},
+\]
+  where $1_{ \{ y_i \neq \widehat{y}_i \}}$ equals $1$ if $y_i \neq \widehat{y}_i$ and is zero if $y_i = \widehat{y}_i$.
+- The $K$-fold CV error takes the form
+\[
+ \mbox{CV}_{(K)} = \frac{1}{K} \sum_{i=1}^K  \sum_{j=1}^{n_i}
+    1_{ \{ y_j \neq \widehat{y}_j \}},
+\]
+where $n_i$ is the sample size of the $i$th fold.
+ 

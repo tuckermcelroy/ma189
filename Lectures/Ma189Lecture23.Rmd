@@ -162,8 +162,11 @@ head(Auto)
 ```
 
 ```{r}
-Auto_test <- Auto[1:196,]
-Auto_val <- Auto[197:392,]
+set.seed(777)
+test_ind <- sample(392,size=196)
+val_ind <- setdiff(seq(1,392),test_ind)
+Auto_test <- Auto[test_ind,]
+Auto_val <- Auto[val_ind,]
 
 # Train
 y <- Auto_test$mpg
@@ -208,10 +211,78 @@ colnames(out) <- c("Model 1","Model 2","Model 3","Model 4","Model 5")
 out
 ```
 
+- Training error is decreasing in model complexity. (Always true!)
+- Testing error may decrease as a function of model complexity up to a point; balance over-fitting (high model order) versus under-fitting (low model order).
+- Here, Model 2 has the best testing error.
+- The model that minimizes training error (Model 5) is more complicated than the model that minimizes testing error (Model 2).
+- This is a common phenomena in statistical learning.
 
- 
+### Repeat Validation
+
+- We can repeat the validation set approach for 10 times and plot the test errors in the following figure.
+
+```{r}
+out <- c()
+for(count in 1:10)
+{
+
+test_ind <- sample(392,size=196)
+val_ind <- setdiff(seq(1,392),test_ind)
+Auto_test <- Auto[test_ind,]
+Auto_val <- Auto[val_ind,]
+
+# Train
+y <- Auto_test$mpg
+x <- Auto_test$horsepower
+x2 <- x^2
+x3 <- x^3
+x4 <- x^4
+x5 <- x^5
+mdl1 <- lm(y ~ x)
+mdl2 <- lm(y ~ x + x2)
+mdl3 <- lm(y ~ x + x2 + x3)
+mdl4 <- lm(y ~ x + x2 + x3 + x4)
+mdl5 <- lm(y ~ x + x2 + x3 + x4 + x5)
+train_err <- rep(0,5)
+train_err[1] <- mean((y - mdl1$fitted.values)^2)
+train_err[2] <- mean((y - mdl2$fitted.values)^2)
+train_err[3] <- mean((y - mdl3$fitted.values)^2)
+train_err[4] <- mean((y - mdl4$fitted.values)^2)
+train_err[5] <- mean((y - mdl5$fitted.values)^2)
+
+# Test
+y <- Auto_val$mpg
+x <- Auto_val$horsepower
+z1 <- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
+z2 <- (mdl2$coefficients[1] + mdl2$coefficients[2]*x + mdl2$coefficients[3]*x^2)
+z3 <- (mdl3$coefficients[1] + mdl3$coefficients[2]*x + mdl3$coefficients[3]*x^2 +
+       mdl3$coefficients[4]*x^3)
+z4 <- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 +
+       mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
+z5 <- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
+       mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
+test_err <- rep(0,5)
+test_err[1] <- mean((y - z1)^2)
+test_err[2] <- mean((y - z2)^2)
+test_err[3] <- mean((y - z3)^2)
+test_err[4] <- mean((y - z4)^2)
+test_err[5] <- mean((y - z5)^2)
+
+out <- rbind(out,test_err)
+}
+
+plot.ts(t(out),plot.type="single",col=seq(1,10),
+        xlab="Model Number",ylab="Testing Error")
+```
+
+- The testing error estimated by the validation set approach can be highly variable.
+- It depends on the random partition of training and validation sets
+
+## Some Issues with the Validation Set Approach
+
+- The testing error estimated by the validation set approach can be highly variable, depending on precisely which observations are included in the training set and which observations are included in the validation set.
+- In the validation set approach, only a subset of the observations, which are included in the training set rather than in the validation set, are used to fit the model.
+- Since statistical methods tend to perform worse when trained on fewer observations, this suggests that the validation set error may tend to over-estimate the test error for the model fitted on the entire data set.
 
 
-
-through slide 17
  
