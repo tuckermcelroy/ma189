@@ -1,0 +1,120 @@
+---
+title: "Math 189: hw 3 solution"
+output: pdf_document
+author: "TA"
+date: "Feb 2021"
+---
+
+## USDA Women’s Health Survey
+
+Data:
+
+The USDA Women’s Health Survey dataset, collected in 1985, (nutrient.txt) contains five types of women’s nutrient intakes which were measured from a random sample of 737 women aged 25-50 years in the United States. 
+
+References: 
+
+Math 189: Exploratory Data Analysis II Descriptive Statistics, Professor Tucker S. McElroy, 2021 Winter.
+Math 189: Exploratory Data Analysis III Measures of Dispersion, Professor Tucker S. McElroy, 2021 Winter.
+Math 189: Multiple Testing I Hypothesis Testing for Multivariate Mean, Professor Tucker S. McElroy, 2021 Winter.
+
+```{r}
+fpath = paste0(getwd(), "/nutrient.txt")
+nutrient = read.table(fpath)
+head(nutrient)
+nutrient$V1 = NULL
+colnames(nutrient) = c("Calcium", "Iron", "Protein", "Vitamin A", "Vitamin C")
+```
+
+
+
+## Tasks
+
+Analyze the dataset according to the following steps:
+
+1. Calculate sample mean and sample standard deviation of each variable.
+```{r}
+cbind(apply(nutrient,2,mean), apply(nutrient,2,sd))
+```
+
+2. The recommended intake amount of each nutrient is given in the table below. For each nutrient, apply a univariate t-test to test if the population mean of that variable equals the recommended value. Set the significance level at alpha = 0.05.
+
+There are five H_0 in this situation, they are: 
+
+H_0: the population mean of Calcium equals the recommended value
+
+H_1: the population mean of Calcium does not equal (two-sided alternative) the recommended value
+
+H_0: the population mean of Iron equals the recommended value
+
+H_1: the population mean of Iron does not equal (two-sided alternative) the recommended value
+
+and three more H_0 and H_1 on Protein, Vitamin A, Vitamin C.
+```{r}
+alpha = 0.05
+recom_lev = c(1000, 15, 60, 800, 75)
+p_val = numeric(5)
+for (j in 1:5){
+  p_val[j] = t.test(nutrient[,j], alternative = "two.sided", mu = recom_lev[j])$p.value
+}
+p_val <= alpha
+```
+We can see that for the first three variables, i.e. Calcium, Iron, Protein, we reject the null that the population mean is equal to the recommended level at 0.05 level.
+
+
+3. Repeat step 2, now using the Bonferroni and Holm's Methods to control the FWER for the five tests. How does this affect the results?
+```{r}
+p_val_bon = p.adjust(p_val, "bon")
+p_val_holm = p.adjust(p_val, "holm")
+
+p_val_bon <= alpha
+p_val_holm <= alpha
+```
+The rejection stays the same.
+
+
+4. Based on the results you obtained in steps 2 and 3, how would you interpret your test results? Do you think the US Women (the public) meet the recommended nutrient intake amount? If not, what would you suggest to the public?
+
+Both test results show that we do not have enough evidence to believe that the public's intake amount of Vitamin A and Vitamin C are different from their recommended values. However, there is significant evidence that the public's intake amount of Calcium, Iron, Protein are not the same as the recommended intake. To see whether they should increase or decrease their intake amount, we carry out one-sided T tests.
+```{r}
+alpha = 0.05
+recom_lev = c(1000, 15, 60, 800, 75)
+p_val = numeric(5)
+for (j in 1:5){
+  p_val[j] = t.test(nutrient[,j], alternative = "less", mu = recom_lev[j])$p.value
+}
+p_val <= alpha
+
+p_val_bon = p.adjust(p_val, "bon")
+p_val_holm = p.adjust(p_val, "holm")
+
+p_val_bon <= alpha
+p_val_holm <= alpha
+```
+
+```{r}
+alpha = 0.05
+recom_lev = c(1000, 15, 60, 800, 75)
+p_val = numeric(5)
+for (j in 1:5){
+  p_val[j] = t.test(nutrient[,j], alternative = "greater", mu = recom_lev[j])$p.value
+}
+p_val <= alpha
+
+p_val_bon = p.adjust(p_val, "bon")
+p_val_holm = p.adjust(p_val, "holm")
+
+p_val_bon <= alpha
+p_val_holm <= alpha
+```
+It could be seen from the one-sided test results that we have significant evidence that the public are not taking enough Calcium and Iron, and that we have significant evidence that the public are taking too much Protein. Therefore, we recommend the public to take more Calcium and Iron, and take less Protein.
+
+
+## Recommended Levels
+
+- Calcium: 1000mg
+- Iron: 15mg
+- Protein: 60g
+- Vitamin A: 800 $\mu$g
+- Vitamin C: 75mg
+
+

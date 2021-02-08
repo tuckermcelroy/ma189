@@ -1,0 +1,43 @@
+---
+title: "Math 189: Midterm Project 2"
+output: pdf_document
+---
+
+#  Romano-British Pottery Data 
+
+Working alone, prepare a R Markdown Notebook report based on examining the Romano-British Pottery dataset (available from GitHub). The dataset contains measurements on pottery shards that were collected from five sites in the British Isles. Note: in class we focused on four of the sites, corresponding to Kiln equaling 2, 3, 4, or 5. Here you will also study Kiln site 1 (which corresponds to "Gloucester"). The dataset contains 48 observations on 9 chemical variables:
+
+1. Al2O3: aluminium trioxide
+2. Fe2O3: iron trioxide
+3. MgO: magnesium oxide
+4. CaO: calcium oxide
+5. Na2O: natrium oxide
+6. K2O: kalium oxide
+7. TiO2: titanium oxide
+8. MnO: mangan oxide
+9. BaO: barium oxide
+
+## Analysis
+
+Is there a significant difference among the 5 group means for these 9 variables? Formulate the appropriate null hypothesis; choose a method of analysis (from the techniques discussed in class, using material up through Lecture 12); discuss the assumptions needed (and justify those assumptions, if possible); perform the analysis using R code (if you use a package, it is your responsibility to ensure their code does what you intend it to do); summarize the results with appropriate displays (figures and/or tables).
+ 
+
+## Components to Your Report
+
+This is your report, but consider including the following:
+
+1. Introduction, Body, and conclusion.
+2. Data citation.
+3. Any relevant tools learned in lectures 1 through 12.  
+4. Justify your analysis.
+
+## Ethics
+
+*Work alone!!!*
+
+## Submission
+
+Write an rmd file, render to pdf and submit the pdf.
+
+
+

@@ -35,7 +35,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 alpha <- .05
 x <- rnorm(10,mean=1)
 n <- length(x)
-t_stat <- (mean(x) - 0)/(sd(x)/n)
+t_stat <- (mean(x) - 0)/(sd(x)/sqrt(n))
 t_stat^2
 qf(1-alpha,df1=1,df2=n-1)
 ```
