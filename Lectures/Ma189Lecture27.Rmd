@@ -1,0 +1,255 @@
+---
+title: 'Math 189: Time Series III'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Linear Filters
+
+- A *linear filter* maps an input time series $\{ X_t \}$ to an output time series $\{ Y_t \}$ by taking a linear combination of past, present, and future observations:
+\[
+  Y_t = \sum_{k \in {\mathbb Z}} \psi_k \, X_{t-k}.
+\]
+ The *filter coefficients* (or *filter weights*) are $\{ \psi_k \}$. Note the convention that $\psi_k$ weights an observation occuring $k$ time points in the past (viewing time $t$ as the present). 
+ 
+## Example:  Simple Moving Average
+
+- In nonparametric regression we may estimate a slowly-changing mean via averaging over neighboring values, e.g.,
+\[
+   \frac{1}{2m+1} \sum_{k = -m}^m \psi_k \, X_{t-k}.
+\]
+ This weights the past $m$ and the future $m$ observations equally, and is an example of a linear filter.  It also called a *moving average*, because the observations are averaged (over a window of $2m+1$ time points) in a way that moves over the time series. A *simple moving average* has equal weights (a general moving average could have unequal weights).
+ 
+## Example: Smoothers Applied to Gasoline Sales
+
+- Linear filters that suppress oscillations and reveal long-term trends are called *smoothers*. A simple moving average is an example of a smoother.
+- We apply a simple moving average with $m=10$ to the logged seasonally adjusted gasoline series.
+
+```{r}
+gassa <- read.table("GasSA_2-11-13.dat")
+gassa.log <- ts(log(gassa),start=1992,frequency=12)
+
+h <- 10
+simple.ma <- rep(1,2*h+1)/(2*h+1)
+gas.trend <- filter(gassa.log,simple.ma,method="convolution",sides=2)
+gas.trend <- ts(gas.trend,start=1992,frequency=12)
+
+### Movie
+delay <- 0
+flex <- 0
+siglen <- length(gas.trend) - 2*h
+range <- seq(1,siglen,1)
+for(t in range)
+{
+	Sys.sleep(delay)
+	filterweight <- c(rep(NA,t-1),simple.ma + gas.trend[h+t] + flex,
+		rep(NA,siglen-t))
+	plot(ts(gassa.log,start=1992,frequency=12),col=1,ylab="",xlab="Year",lwd=2)
+	lines(ts(gas.trend[1:(h+t)],start=1992,frequency=12),col=2,lwd=2)
+	lines(ts(filterweight,start=1992,frequency=12),col="#00FF0090",lwd=2)
+}
+```
+
+## Paradigm:  Difference Filter
+
+- To suppress long-term dynamics, we can *difference*: 
+\[
+   Y_t = X_t - X_{t-1}.
+\]
+ This is a filter with weights $\psi_0 = 1$, $\psi_1 = -1$, and zero otherwise. It is called the *differencing filter*. This filter reduces polynomials in time by one degree; lines are reduced to constants.
+ 
+## Example: Differencing Applied to Gasoline Sales
+
+- We apply differencing to logged seasonally adjusted gasoline sales. The result can be interpreted as a *growth rate*. 
+
+```{r}
+gas.diff <- diff(gassa.log)
+par(oma=c(2,0,0,0),mar=c(2,4,2,2)+0.1,mfrow=c(2,1),cex.lab=.8)
+plot(gassa.log,xlab="",ylab="Log Gas  Sales",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+plot(gas.diff,xlab="",ylab = "Gas Growth Rate",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+mtext(text="Year",side=1,line=1,outer=TRUE)
+```
+
+## The Backward Shift
+
+- We define the *backward shift* (or *lag*) operator $B$, which shifts a time series back one time unit. This is a linear filter that lags time by one unit:
+\[
+    Y_t = X_{t-1}.
+\]
+ So the filter weights are $\psi_1 = 1$ and zero otherwise. Informally we write $B X_t = X_{t-1}$.
+ 
+## Powers of Backward Shift
+
+- Then $X_{t-k} = B^k X_t$, and a general filter is expressed as
+\[
+  Y_t = \sum_{k \in {\mathbb Z}} \psi_k \, X_{t-k}
+   =  \sum_{k \in {\mathbb Z}} \psi_k B^k \, X_{t},
+\]
+ so we write the filter as  $\sum_{k \in {\mathbb Z}} \psi_k B^k$. Call this $\Psi (B)$. (Mathematically, $\Psi (z)$ is a Laurent series.)
+ 
+### Simple Moving Average Filter
+
+- Expressed as $\Psi (B) = {(2m+1)} \sum_{k = -m}^m B^k$.
+
+## Differencing Filter
+
+- Expressed as $\Psi (B) = 1 -B$.
+  
+# Trends
+
+- Trends measure the long-term behavior of a time series.
+- Trends are steady movements in the level of a time series.
+- We can use smoothers to estimate trends.
+- Removing a trend by subtraction allows us to see other features.
+
+## Example: Western Housing Starts Cycle
+
+- We estimate and eliminate the trend in the Westing Housing Starts data, so that we can more clearly see the business cycle movements.
+
+```{r}
+hpsa <- function(n,period,q,r)
+{
+	# hpsa
+	#     gives an HP filter for seasonal data
+	#	presumes trend+seas+irreg structure
+	#		trend is integrated rw
+	#		seas is seasonal rw
+	#		irreg is wn
+	#	q is snr for trend to irreg
+	#	r is snr for seas to irreg
+
+# define trend differencing matrix
+
+delta.mat <- diag(n)
+temp.mat <- 0*diag(n)
+temp.mat[-1,-n] <- -2*diag(n-1)
+delta.mat <- delta.mat + temp.mat
+temp.mat <- 0*diag(n)
+temp.mat[c(-1,-2),c(-n,-n+1)] <- 1*diag(n-2)
+delta.mat <- delta.mat + temp.mat
+diff.mat <- delta.mat[3:n,]
+
+# define seasonal differencing matrix
+
+delta.mat <- diag(n)
+temp.mat <- 0*diag(n)
+inds <- 0
+for(t in 1:(period-1))
+{
+	temp.mat <- 0*diag(n)
+	temp.mat[-(1+inds),-(n-inds)] <- 1*diag(n-t)
+	delta.mat <- delta.mat + temp.mat
+	inds <- c(inds,t)
+}
+sum.mat <- delta.mat[period:n,]
+
+# define two-comp sig ex matrices
+
+#trend.mat <- solve(diag(n) + t(diff.mat) %*% diff.mat/q)
+#seas.mat <- solve(diag(n) + t(sum.mat) %*% sum.mat/r)
+trend.mat <- diag(n) - t(diff.mat) %*% solve(q*diag(n-2) + diff.mat %*% 
+	t(diff.mat)) %*% diff.mat
+seas.mat <- diag(n) - t(sum.mat) %*% solve(r*diag(n-period+1) + sum.mat %*% 
+	t(sum.mat)) %*% sum.mat
+
+# define three-comp sig ex matrices
+
+trend.filter <- solve(diag(n) - trend.mat %*% seas.mat) %*%
+	trend.mat %*% (diag(n) - seas.mat)
+seas.filter <- solve(diag(n) - seas.mat %*% trend.mat) %*%
+	seas.mat %*% (diag(n) - trend.mat)
+irreg.filter <- diag(n) - (trend.filter + seas.filter)
+
+filters <- list(trend.filter,seas.filter,irreg.filter)
+return(filters)
+}
+
+Wstarts <- read.table("Wstarts.b1",skip=2)[,2]
+Wstarts <- ts(Wstarts,start = 1964,frequency=12)
+n <- length(Wstarts)
+q <- .0001
+r <- 1
+hp.filters <- hpsa(n,12,q,r)
+
+wstarts.trend <- hp.filters[[1]] %*% Wstarts
+wstarts.seas <- hp.filters[[2]] %*% Wstarts
+wstarts.cycle <- hp.filters[[3]] %*% Wstarts
+wstarts.sa <- wstarts.trend + wstarts.cycle
+
+comps <- ts(cbind(wstarts.trend,wstarts.seas,wstarts.cycle),start=1964,frequency=12)
+trend <- ts(wstarts.trend,start=1964,frequency=12)
+cycle <- ts(wstarts.cycle,start=1964,frequency=12)
+
+par(oma=c(2,0,0,0),mar=c(2,4,2,2)+0.1,mfrow=c(3,1),cex.lab=.8)
+plot(Wstarts, ylab="West Starts",xlab="",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+plot(trend,xlab="",ylab = "Trend",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+plot(cycle,xlab="",ylab = "Business Cycle",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+mtext(text="Year",side=1,line=1,outer=TRUE)
+```
+
+## Paradigm: Nonparametric Trend Estimation
+
+- We consider trends $\mu_t$ to be either a deterministic (but unknown) function of time, or are an unobserved stochastic process:
+\[
+  X_t = \mu_t + Z_t.
+\]
+ Here ${\mathbb E} [ X_t ] = \mu_t$ and $\{ Z_t \}$ is a mean zero time series.
+- A *two-sided moving average* is a linear filter that can be used to estimate trends:
+\[
+  \Psi (B) = \sum_{k = -m}^m \psi_k B^k.
+\]
+ When all the weights are equal, this is a simple moving average. It is two-sided because the moving average uses past and future data:
+ \[
+  \widehat{\mu}_t = \Psi (B)  X_t = \sum_{k= -m}^m \psi_k X_{t-k}.
+\]
+- A *symmetric moving average* weights future and past equally, i.e., $\psi_k = \psi_{-k}$.
+- Because the filter uses $m$ past and $m$ future observations, we can only compute trend estimates for times $m+1 \leq t \leq T-m$, where the sample consists of times $1,2, \ldots,T$.
+- As an estimator $\widehat{\mu}_t$ of the unknown trend $\mu_t$, there is less bias if $m$ is small, and less variance if $m$ is large. This is a **Bias-Variance Dilemma**.
+- Example with US population, and $m = 10$ for a simple moving average.
+
+```{r}
+pop <- read.table("USpop.dat")
+pop <- ts(pop, start = 1901)
+
+p <- 10
+mu.smooth <- filter(pop,rep(1,2*p+1)/(2*p+1),method="convolution")
+mu.smooth <- ts(mu.smooth,start= 1901)
+
+par(mar=c(4,4,2,2)+0.1,cex.lab=.8)
+plot(ts(pop,start=1901),lwd=3,lty=1,col=gray(.8),
+	ylab="U.S. Population",xlab="Year",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+lines(ts(mu.smooth,start=1901),lwd=1,lty=3,col=1)
+```
+
+## Paradigm: Trend Elimination
+
+- We can remove a trend by subtracting off its estimate.
+- We can also apply the differencing filter.
+- Example with US population, detrended by a $m = 10$ simple moving average and by the difference filter.
+
+```{r}
+pop.diff <- diff(pop)
+
+par(mar=c(4,4,2,2)+0.1,cex.lab=.8)
+plot(ts(pop - mu.smooth,start=1901),lwd=1,lty=3,ylim=c(-3.5*10^6,3.5*10^6),
+	ylab="U.S. Population",xlab="Year",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+lines(pop.diff,col=gray(.8),lwd=2)
+```
+  

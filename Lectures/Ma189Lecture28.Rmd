@@ -1,0 +1,22 @@
+---
+title: 'Math 189: Time Series IV'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+
+
+# Forecasting 
+
+- Given a time series sample $X_t$ for times $1 \leq t \leq n$, we want to predict $X_{n+1}$. This is the *forecasting* problem.
+- The multi-step ahead forecasting problem is to predict $X_{n+h}$ for $h \geq 1$. When $h=1$, this is one-step ahead forecasting.
+ 
+## One-Step Ahead for AR(p)
+
+# Conditional Heteroscedasticity
+
+
+# Volatility Filtering.

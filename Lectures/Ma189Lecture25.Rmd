@@ -1,0 +1,141 @@
+---
+title: 'Math 189: Time Series I'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Time Series Data
+
+- A *time series* is a dataset where the observations are recorded at discrete time intervals.
+- We denote the obervation a time $t$ by $x_t$, and the random variable by $X_t$.
+- We have times $t = 1, 2, \ldots, n$ for the *sample* $X_1, X_2, \ldots, X_n$.
+- Time series data might not be i.i.d. (Independent and Identically Distributed)!
+
+## Example: U.S. Population
+
+- U.S. Population growth over the twentieth century.
+
+```{r}
+pop <- read.table("USpop.dat")
+pop <- ts(pop, start = 1901)
+plot(pop*10e-7,xlab="Year",ylab="U.S. Population",lwd=1)
+``` 
+
+## Example: Urban World Population
+
+- Urban World Population trends upwards more strongly after WWII.
+
+```{r}
+urban <- read.table("urbanpop.dat")
+urban <- ts(urban[67:1,], start = 1951)
+plot(urban*1e-9,xlab="Year",ylab="Urban Population",lwd=1)
+```
+
+## Example: Non-Defense Capitalization
+
+- Non-Defense Capitalization (New Orders) shows non-monotonic trend, and is more *noisy*.
+
+```{r}
+ndc <- read.table("Nondefcap.dat")
+ndc <- ts(ndc[,2],start=c(1992,3),frequency=12,names= "NewOrders")
+plot(ndc,xlab="Year",ylab="Non-defense Cap")
+```
+
+## Serial Dependence and Forecasting
+
+- Smoothness corresponds to high positive association (correlation) between adjacent variables.
+- High association means forecasting (prediction of future values) is easier.
+
+## Example: Dow Jones Industrial Average
+
+- Dow Jones Industrial Average has trend, but is hard to forecast.
+
+```{r}
+dow <- read.table("dow.dat")
+dow <- ts(dow,start=c(2008,164),frequency=252)
+plot(dow,xlab="Year",ylab="Dow Levels")
+```
+
+- We can plot the log returns (consecutive difference of logged data), which shows how volatility is changing.
+
+```{r}
+dow.diff <- diff(log(dow[,1]))
+plot(dow.diff,xlab="Year",ylab="Dow Log Returns")
+```
+
+
+# Cycles and Transforms
+
+- High association can occur for non-adjacent random variables. 
+- For some fixed $h > 1$, we may have $X_t$ and $X_{t-h}$ associated for all $t$.
+- This is a *periodic* effect, called a *cycle*, of period $h$.
+
+## Example: Sunspots
+
+- Wolfer sunspots series measures number of sunspots recorded each month.
+- Cycles are roughly 11 years (so $h \approx 132$).
+
+```{r}
+wolfer <- read.table("wolfer.dat")
+wolfer <- ts(wolfer,start=1749,frequency=12)
+plot(wolfer,xlab="Year",ylab="Sunspots")
+```
+
+## Example: Unemployment Insurance Claims
+
+- Weekly measurements of claims for unemployment insurance (pre-Covid).
+- There is a weekly ($h=7$) cycle.
+
+```{r}
+ui <- read.table("ui.dat")
+ui <- ts(ui,start=1967,frequency=52)
+plot(ui,ylab="UI Claims",xlab="Year")
+```
+
+## Example: Mauna Loa carbon Dioxide
+
+- Monthly measurements of CO2 levels on mount Mauna Loa.
+- Apparent upward trend and monthly ($h=12$) cycle.
+
+```{r}
+mau <- read.table("mauna.dat",header=TRUE,sep="")
+mau <- ts(mau,start=1958,frequency=12)
+plot(mau,ylab="Mauna Loa CO2",xlab="Year")
+```
+
+## Example: Retail Sales of Motor Vehicles and Parts Dealers
+
+- Monthly measurements of retail sales.
+- Shows trend, monthly ($h=12$) cycle, and Great Recession.
+
+```{r}
+Ret441 <- read.table("retail441.b1",header=TRUE,skip=2)[,2]
+Ret441 <- ts(Ret441,start = 1992,frequency=12)
+plot(Ret441, ylab="Motor Retail Sales",xlab="Year")
+```
+
+## Example: Housing Starts
+
+- Monthly measurements of housing construction started (West Region).
+- Shows trend, monthly ($h=12$) cycle, and some recessions/expansions.
+
+```{r}
+Wstarts <- read.table("Wstarts.b1",header=TRUE,skip=2)[,2]
+Wstarts <- ts(Wstarts,start = 1964,frequency=12)
+plot(Wstarts, ylab="West Starts",xlab="Year")
+```
+
+## Log Transformation
+
+- To visualize time series better, sometimes we apply a log transform (if the data is positive).
+- If cycle amplitude depends on trend level, applying a log may separate this effect so that cycle amplitude is no longer growing.
+
+```{r}
+Ret441_trans <- ts(cbind(Ret441,log(Ret441)),start = 1992,frequency=12)
+plot(Ret441_trans, ylab="Motor Retail Sales",xlab="Year",main="")
+```
+
+

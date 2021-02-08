@@ -42,7 +42,7 @@ Each 50-minute lesson will cover theoretical material in an R Markdown Notebook 
 26. **Resampling II** (March 3, 2021) K-fold Cross Validation
 27. **Time Series I** (March 5, 2021) Cycles, Spans, Transformations.
 28. **Time Series II** (March 8, 2021) Time Series Regression, Autoregression.
-29. **Time Series III** (March 10, 2021) Nonparametric Regression, Moving Average Filters, Smoothers. 
+29. **Time Series III** (March 10, 2021) Linear Filters, Moving Average Filters, Smoothers. 
 30. **Time Series IV** (March 12, 2021) Forecasting, Conditional Heteroscedasticity, Volatility Filtering.
   
 

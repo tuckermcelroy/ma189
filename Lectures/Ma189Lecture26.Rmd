@@ -1,0 +1,204 @@
+---
+title: 'Math 189: Time Series II'
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Time Series Regression and Autoregression
+
+- It is tempting to regress time series data on time $t=1, \ldots, n$, as a covariate. Rarely does this provide satisfactory results (when used alone). 
+
+## Regression on Time Trend
+
+- Regression model with time trend:
+\[
+ X_t = \beta_0 + \beta_1 t + Z_t.
+\]
+ Is $\{ Z_t \}$ i.i.d.? Usually: **No**.
+
+### Example: U.S. Population
+
+- Try  out time trend regression for U.S. population.
+
+```{r}
+pop <- read.table("USpop.dat")
+pop <- ts(pop, start = 1901)
+n <- length(pop)
+time <- seq(1,n)
+model1 <- lm(pop ~ time)
+summary(model1)
+plot(ts(model1$residuals))
+```
+
+- Highly structured residuals! We could add higher order polynomial effects to time trend, but it won't really help.
+
+## Regression on Past of Self
+
+- Let past values of the time series be the covariates. Called *Autoregression*.
+- Autoregressive model:
+\[
+  X_t = \rho \, X_{t-1} + Z_t.
+\]
+Assume $\{ Z_t \}$ i.i.d. 
+
+### Example: U.S. Population
+
+- Try  out autoregression for U.S. population.
+
+```{r}
+model2 <- lm(pop[-1] ~ pop[-n])
+summary(model2)
+plot(ts(model2$residuals))
+```
+
+- Residuals are less structured, though maybe still not i.i.d.
+- Why does this seem to work?
+
+```{r}
+cor(pop[-1],pop[-n])
+plot(pop[-1],pop[-n],xlab="X Past",ylab="X Present")
+```
+
+## Incorporate Time Trend
+
+- We can incorporate time trend into an autoregression.
+- Do not do it this way
+\[
+ X_t = \rho X_{t-1} + \beta_0 + \beta_1 t + Z_t,
+\]
+ since this makes the mean ${\mathbf E} [ X_t ]$ depend on $\rho$.
+- Instead, set up the model this way:
+\begin{align*}
+ Y_t & = \beta_0 + \beta_1 t + X_t \\
+  X_t & = \rho \, X_{t-1} + Z_t.
+\end{align*}
+
+```{r}
+model3 <- lm(pop[-1] ~ pop[-n] + time[-1])
+summary(model3)
+plot(ts(model3$residuals))
+```
+
+- Notice slope coefficient $\beta_1$ is not significant, and residuals resemble those of the pure autoregressive model. So not much benefit to using time covariate.
+
+
+# The AR(1) Process
+
+## Defining the Process
+
+- Let $Z_t \sim \mbox{i.i.d.} (0,\sigma^2)$ and $\{ X_t \}$ defined via
+\[
+ X_t = \phi \, X_{t-1} + Z_t
+\]
+for $t \geq 1$, where $|\phi| < 1$.
+- This is a recursion, called an *order 1 autoregression*, or AR(1).
+- How to define $X_0$? If $X_0 \sim (0, \sigma^2/(1-\phi^2) )$, then $\mbox{Var} [X_t] = \mbox{Var}[ X_{t-1}]$! 
+- This is an example of **stationarity** of a process.
+ 
+```{r}
+n <- 100
+set.seed(123)
+z <- rnorm(n)
+x <- rep(0,n)
+phi <- .9
+x0 <- rnorm(1)/sqrt(1-phi^2)
+x[1] <- phi*x0 + z[1]
+for(t in 2:n) { x[t] <- phi*x[t-1] + z[t] }
+plot(ts(x),xlab="Time",ylab="")
+```
+
+## What is the Mean?
+
+- Suppose we put a constant in the autoregression:
+\[
+  X_t = \mu +  \phi \, X_{t-1} + Z_t.
+\]
+- Then the mean is
+\[
+  {\mathbb E} [ X_t ] = \mu + \phi \, {\mathbb E} [ X_{t-1} ].
+\]
+- If we assume *stationarity*, that the mean and variance don't depend on time $t$, then 
+\[
+ {\mathbb E} [ X ] = \mu + \phi \, {\mathbb E} [ X ].
+\]
+ This implies that 
+\[
+ {\mathbb E} [ X ] = \frac{\mu}{1 - \phi}.
+\]
+- So putting a constant $\mu$ in the regression is **not** the mean; we have to divide by $1 - \phi$ to get the mean.
+
+## Fitting to Data
+
+- Code the autoregression using linear regression.
+
+```{r}
+ar_mdl1 <- lm(x[-1] ~ x[-n])
+summary(ar_mdl1)
+```
+
+- We can also use time series packages.
+- OLS is *Ordinary Least Squares*, and yields the same results. (Here the mean is the sample mean of the data, and does not equal the intercept coefficient in the regression.)
+
+```{r}
+ar_mdl2 <- ar.ols(x,order=1)
+ar_mdl2$ar[,1,1]
+ar_mdl2$x.mean
+ar_mdl2$var.pred
+```
+
+- Another method is *Yule-Walker*, which is based on estimating so-called *autocovariances*.
+
+```{r}
+ar_mdl3 <- ar.yw(x,order=1)
+ar_mdl3$ar
+ar_mdl3$x.mean
+ar_mdl3$var.pred
+```
+
+# The AR(p) Process
+
+## Defining the Process
+
+- Let $Z_t \sim \mbox{i.i.d.} (0,\sigma^2)$ and $\{ X_t \}$ defined via
+\[
+ X_t = \phi_1 \, X_{t-1} + \ldots \phi_p \, X_{t-p} + Z_t
+\]
+for $t \geq 1$.
+- The coefficients $\phi_1,\ldots, \phi_p$ satisfy complicated *stability conditions*.
+- This is a recursion, called an *order p autoregression*, or AR(p).
+- There is also a stationary initialization involving the first $p$ observations, but this is covered in a full time series course.
+
+## Simulation
+
+- We can initialize with zeroes and utilize *burn-in*, which refers to an initial stretch of the simulation that is later discarded.
+- Here is an example of an AR(2) with cyclic structure.
+
+```{r}
+n <- 100
+burn <- 500
+set.seed(444)
+z <- rnorm(n+burn)
+x <- rep(0,n+burn)
+phi <- c(.9,-.81)
+for(t in 3:(n+burn)) { x[t] <- phi[1]*x[t-1] + phi[2]*x[t-2] + z[t] }
+x <- x[(burn+1):(burn+n)]
+plot(ts(x),xlab="Time",ylab="")
+```
+
+## Fitting
+
+- If we want to fit an AR model, what order should we use? 
+- We could try resampling techniques, but they don't work so well with time series (unless they are modified).
+- It is popular to use *information criteria*, which balance model fit against the number of model parameters.
+- There is an information criterion (called AIC, for Akaike Information Criterion) in R.
+
+```{r}
+ar_mdl <- ar.ols(x)
+ar_mdl$order
+ar_mdl$ar[,1,1]
+ar_mdl$x.mean
+ar_mdl$var.pred
+```
