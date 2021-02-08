@@ -16,7 +16,182 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
  
 ## One-Step Ahead for AR(p)
 
-# Conditional Heteroscedasticity
+- Suppose we have fitted an AR(p) model to the sample.
+- This means the mean zero process $Y_t =  X_t - {\mathbb E} [ X_t ]$ satisfies
+\[
+  Y_t = \sum_{j=1}^p \phi_j \, Y_{t-j} + Z_t,
+\]
+ where $\{ Z_t \}$ is i.i.d. The coefficients $\phi_1, \ldots, \phi_p$ are the model parameters.
+- The forecast formula is
+\[
+  \widehat{Y}_{n+1} = \sum_{j=1}^p \phi_j \, Y_{n+1-j}.
+\]
+ Since the coefficients are unknown, we must estimate them and plug in.
+ 
+
+```{r}
+pop <- read.table("USpop.dat")
+pop <- ts(pop, start = 1901)
+mu <- mean(pop[1:90])
+data <- pop[1:90] - mu
+ar_mdl <- ar.ols(data)
+ar_mdl$ar[,1,1]
+forecast <- mu + sum(ar_mdl$ar[,1,1]*data[90:(91-ar_mdl$order)])
+c(forecast,pop[91])
+```
+ 
+## Multi-Step Ahead for AR(p)
+
+- For the AR(p) we want to forecast $h$ steps ahead.
+- We can recursively to one-step ahead forecasts:
+
+1. Given the $h-1$-step ahead forecast, append to the end of the series
+2. Now apply the $1$-step ahead forecast formula
+
+```{r}
+data <- pop[1:90]
+forecasts <- data
+ar_mdl <- ar.ols(data)
+for(h in 1:10)
+{
+  nn <- length(forecasts)
+  forecast <- sum(ar_mdl$ar[,1,1]*forecasts[nn:(nn+1-ar_mdl$order)])
+  forecasts <- c(forecasts,forecast)
+}
+plot(pop,ylab="US Pop") 
+lines(ts(forecasts,start=1901),col=2)
+```
+
+## More!!
+
+- Quantify forecast uncertainty (yes!)
+- More complicated models (yes!)
+- Handle missing values!
+- Add multiple variables (multiple time series)!
+- Requires a whole time series course (2-3 quarters) to explore.
 
 
-# Volatility Filtering.
+# Volatile Time Series
+
+- Some time series have variability that changes over time; this is different from time series with changing mean (trends).
+- Recall the Dow Log Returns.
+
+```{r}
+dow <- read.table("dow.dat")
+dow <- ts(dow,start=c(2008,164),frequency=252)
+dow.diff <- diff(log(dow[,1]))
+plot(dow.diff,xlab="Year",ylab="Dow Log Returns")
+```
+
+- This displays *volatility clustering*, where periods of high variability are followed by periods of low variability. 
+- The beginning and end of a trading day usually exhibits higher volatility.
+- Volatility may be higher at beginning of expansion, recession, or crisis event.
+- We wish to model volatility, to understand its movements and help price options.
+
+## Autoregressive Conditional Heteroscedasticity
+
+- The so-called ARCH (Autoregressive Conditional Heteroscedasticity) Process models such data:
+\begin{align*}
+ X_t & = \sigma_t \, Z_t \\
+ \sigma^2_t & = a_0 + a_1 \, X_{t-1}^2.
+\end{align*}
+ Note that the *volatility* $\sigma_t^2$ depends on the square of previous observation.
+- This is a *nonlinear* time series, which means it cannot be expressed as a linear filter acting on i.i.d. inputs.
+- We can generalize this to an ARCH(p) process:
+\begin{align*}
+ X_t & = \sigma_t \, Z_t \\
+ \sigma^2_t & = a_0 + a_1 \, X_{t-1}^2 + \ldots + a_p \, X_{t-p}^2.
+\end{align*}
+ The coefficients $a_0, a_1, \ldots, a_p$ are the ARCH parameters.
+- We assume that the volatility $\sigma_t^2$ is random, but has constant mean ${\mathbb E} [ \sigma_t^2]$. This implies that
+\[
+  {\mathbb E} [ \sigma^2 ] = \frac{a_0}{1 - \sum_{j=1}^p a_j}.
+\]
+So it is necessary that $a_0 > 0$ and $0 \leq \sum_{j=1}^p a_j < 1$.
+
+## Fitting an ARCH(p)
+
+- We can fit log returns by OLS, by regressing the squared data on its past lags. This is crude, because it replaces $\sigma_t^2$ by $X_t^2$ to do the regression.
+- A better method is to do maximum likelihood estimation...
+- We can decide on order $p$ using AIC, like for AR processes.
+
+```{r}
+sigt <- dow.diff^2
+ar_mdl <- ar.ols(sigt)
+ar_mdl$order
+ar_mdl$ar[,1,1]
+```
+
+- The problem here is that the coefficient estimates are not positive.
+- We can use a variety of packages.
+
+```{r}
+library(tseries)
+arch.fit <- garch(dow.diff, order = c(0, ar_mdl$order))
+round(arch.fit$coef,digits=6)
+```
+
+
+
+# Volatility Filtering
+
+- ARCH models and their generalizations do not *fully* capture volatility clustering and *fat tails* (i.e., extreme observations).
+- Considering a moving average of squared returns:
+\[
+  \Pi (B) X_t^2 = \sum_{j= -\infty}^{\infty} \pi_j \, X_{t-j}^2
+\]
+ is a *volatility filter*, if all $\pi_j \geq 0$.  
+- A volatility filter can be causal, symmetric, etc.
+- We consider estimating volatility $\sigma_t^2 = {\mathbb E} [ X_t^2]$ by a volatility filter, just like we did for estimating the mean $\mu_t = {\mathbb E} [ X_t]$:
+\[
+ \widehat{\sigma}_t^2 = \Pi (B) X_t^2.
+\]
+ Same bias-variance trade-off applies as with mean estimation.
+ 
+## Example: Volatility Filtering of Dow
+
+- Consider the volatility filter $\pi_j = 1/11$ for $|j| \leq 5$.
+- Observe the increased volatility in more recent years.
+
+```{r}
+p <- 5
+dow.vol <- filter(dow.diff^2,rep(1,2*p+1)/(2*p+1),method="convolution",sides=2)
+plot(dow.vol,xlab="Year",ylab="",lwd=1)
+```
+
+## The NoVaS Transformation
+
+- When $\Pi (B)$ is causal, then $\widehat{\sigma}^2_t$ depends only on present and past data.
+- Then we can divide out by the (square root) volatility, getting a *pseudo-residual*:
+\[
+   W_t = \frac{ X_t}{ \widehat{\sigma}_t}.
+\]
+ This is called the *Normalizing and Variance Stabilizing* (NoVaS) transform.
+- Due to Professor D.N. Politis, one of our own!
+- NoVaS is unbiased if $\Pi (1) = 1$, i.e., the sum of all coefficients equals one.
+
+## NoVaS Methodology
+
+- The idea is to choose a NoVaS transform $\Pi (B)$ such that $\{ W_t \}$ is close to i.i.d. Gaussian. 
+- We want light tails and no serial correlation.
+- We can search over volatility filters to find pseudo-residuals with this property.
+
+### NoVaS with Simple Weights
+
+- NoVaS with simple weights: take $\Pi (B)$ causal with $\pi_0 = \pi_1 = \ldots = \pi_p= 1/(p+1)$.
+- We just need to choose $p$.
+- Test it out on Dow.
+- It turns out, the serial correlation is low and the kurtosis is close to three (the Gaussian case)!
+
+```{r}
+p <- 9
+psi <- rep(1,p+1)/(p+1)
+n <- length(dow.diff)
+dow.vol <- filter(dow.diff^2,psi,method="convolution",sides=1)[(p+1):n]
+z <- dow.diff[(p+1):n]/sqrt(dow.vol)
+m <- length(z)
+plot(ts(z))
+```
+
+
+
