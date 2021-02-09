@@ -475,12 +475,12 @@ summary(balance.fit)</code></pre>
 ## 
 ## Number of Fisher Scoring iterations: 8</code></pre>
 <ul>
-<li>The glm() function fits generalized linear models, a class of models that includes logistic regression. When use it this way, we must pass in the argument <em>family=binomial</em> in order to tell R to run a logistic regression rather than some other type of generalized linear model.</li>
+<li>The glm() function fits generalized linear models, a class of models that includes logistic regression. When we use it in this way, we must pass in the argument <em>family=binomial</em> in order to tell R to run a logistic regression rather than some other type of generalized linear model.</li>
 <li>The <span class="math inline">\(Z\)</span>-statistic here plays the same role as the <span class="math inline">\(t\)</span>-statistic. For example, the <span class="math inline">\(Z\)</span>-statistic associated with <span class="math inline">\(\beta_1\)</span> is <span class="math inline">\(\widehat{\beta}_1/\mbox{se}(\widehat{\beta}_1)\)</span>. Large (absolute) values of the <span class="math inline">\(Z\)</span>-statistic indicate evidence against the null hypothesis <span class="math inline">\(H_0: \beta_1 = 0\)</span>.</li>
 <li>The null hypothesis <span class="math inline">\(H_0: \beta_1 = 0\)</span> implies that <span class="math display">\[
  p(X) = {\mathbf P} [ Y = 1 \vert X = x] = 
  \frac{ \exp \{ \beta_0   \} }{ 1 +  \exp \{ \beta_0   \} }
-\]</span> In other words, the probability of default does not depend on balance under the null hypothesis. Since the <span class="math inline">\(Z\)</span>-value associated with balance is tiny, we can reject <span class="math inline">\(H_0\)</span>. We conclude that there is indeed an association between balance and the probability of default.</li>
+\]</span> In other words, the probability of default does not depend on balance under the null hypothesis. Since the p-value associated with balance is tiny, we can reject <span class="math inline">\(H_0\)</span>. We conclude that there is indeed an association between balance and the probability of default.</li>
 </ul>
 </div>
 </div>

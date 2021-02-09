@@ -32,18 +32,18 @@ where is $\underline{X}$ is a $p$-vector of covariates.
 - Then the logistic regression model for ${(Y,\underline{X})}$ is
 \[
  p( \underline{x}) = {\mathbb P} [ Y = 1 \vert \underline{X} = \underline{x} ] 
-  \phi ( \beta_0 + \underline{x}^{\prime} \underline{\beta})
+  = \phi ( \beta_0 + \underline{x}^{\prime} \underline{\beta})
 \]
 - On the other hand
 \[
  {\mathbb P} [ Y = 0 \vert \underline{X} = \underline{x} ] 
-  1 - \phi ( \beta_0 + \underline{x}^{\prime} \underline{\beta})
+  = 1 - \phi ( \beta_0 + \underline{x}^{\prime} \underline{\beta})
 \]
  
 ```{r}
 x <- seq(-10,10,.1)
 y <- (1+exp(-x))^{-1}
-plot(ts(y),xlab="x",ylab="")
+plot(ts(y,start=-10,frequency=10),xlab="x",ylab="")
 ```
 
 ## Likelihood Function

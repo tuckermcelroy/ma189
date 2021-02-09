@@ -103,14 +103,14 @@ balance.fit <- glm(y~balance, data=Default,family=binomial)
 summary(balance.fit)
 ```
 
-- The glm() function fits generalized linear models, a class of models that includes logistic regression. When use it this way, we must pass in the argument *family=binomial* in order to tell R to run a logistic regression rather than some other type of generalized linear model.
+- The glm() function fits generalized linear models, a class of models that includes logistic regression. When we use it in this way, we must pass in the argument *family=binomial* in order to tell R to run a logistic regression rather than some other type of generalized linear model.
 - The $Z$-statistic here plays the same role as the $t$-statistic. For example, the $Z$-statistic associated with $\beta_1$ is $\widehat{\beta}_1/\mbox{se}(\widehat{\beta}_1)$. Large (absolute) values of the $Z$-statistic indicate evidence against the null hypothesis $H_0: \beta_1 = 0$.
 - The null hypothesis $H_0: \beta_1 = 0$ implies that
 \[
  p(X) = {\mathbf P} [ Y = 1 \vert X = x] = 
  \frac{ \exp \{ \beta_0   \} }{ 1 +  \exp \{ \beta_0   \} }
 \]
-In other words, the probability of default does not depend on balance under the null hypothesis. Since the $Z$-value associated with balance is tiny, we can reject $H_0$. We conclude that there is indeed an association between balance and the probability of default.
+In other words, the probability of default does not depend on balance under the null hypothesis. Since the p-value associated with balance is tiny, we can reject $H_0$. We conclude that there is indeed an association between balance and the probability of default.
 
 # Making Predictions
 
