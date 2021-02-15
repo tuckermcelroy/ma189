@@ -204,6 +204,8 @@ data.test <- data.frame(x=x.test, y=as.factor(y.test))
 
 Library `e1071` contains the code to implement SVM. `svm` function will fit a support vector classifier. `kernel` option sets the kernel funciton for svm, linear kernel equals simple inner products. `cost` function sets the value for `C` which is the budget of violation.
 
+- We begin with $C=10$. Relative to sample size, this keeps budget fairly low.
+
 ```{r}
 library(e1071)
 svmfit.linear <- svm(y~.,data=data.train,kernel="linear",cost=10,scale=FALSE)
@@ -214,7 +216,11 @@ summary(svmfit.linear)
 svmfit.linear$index
 # Plot the classifier on the training set
 plot(svmfit.linear, data.train)
+```
 
+- Let's try $C= .1$. This should shrink the margin a lot.
+
+```{r}
 # Try a smaller cost function
 svmfit.linear2 <- svm(y~.,data=data.train,kernel="linear",cost=0.1,scale=FALSE)
 # Check the classifier
@@ -223,11 +229,15 @@ summary(svmfit.linear2)
 svmfit.linear2$index
 # Plot the classifier on the training set
 plot(svmfit.linear2, data.train)
+```
 
+- Suppose we try a range of $C$ values, and choose the best one by cross-validation. (This is automatically managed by the *tune* function.)
+
+```{r}
 # Choose cost C by cross-validation
 tune.linear <- tune(svm,y~.,data=data.train,kernel="linear",
                     ranges=list(cost=c(0.001,0.01,0.1,1,5,10,100)))
-# Check the selection resutls
+# Check the selection results
 summary(tune.linear)
 # Choose the best model (classifier with optimal C)
 bestmod.linear <- tune.linear$best.model
@@ -237,8 +247,11 @@ summary(bestmod.linear)
 bestmod.linear$index
 # Plot the classifier on the training set
 plot(bestmod.linear, data.train)
+```
 
+- The best model corresponds to $C = 1$. Let's use it to do predictions.
 
+```{r}
 # Prediction on test set
 ypred.linear <- predict(bestmod.linear,data.test)
 # Check the prediction accuracy
@@ -249,6 +262,8 @@ test.error
  
  
 ### Fit a Support Vector Classifier with Gaussian kernel
+
+We can repeat some of this analysis using a Gaussian kernel instead of a hyperplane.
 
 ```{r}
 # Set kernel="radial" and gamma=1 to fit Gaussian kernel SVM with tuning parameter 1
@@ -280,6 +295,7 @@ test.error # classification errors for linear SVM and Gaussian kernel SVM
 
 ### Fit a Support Vector Classifier  with Polynomial kernel
 
+Here we use a cubic polynomial kernel for the SVM.
 
 ```{r}
 # Set kernel="polynomial" and degree=3 to fit polynomial kernel SVM with degree 3
@@ -324,51 +340,48 @@ rocplot <- function (pred, truth, ...){
 
 
 # Prepare the training and testing predictions for ROC curve
-# optimal cost for linear kernel is C=0.5
+# optimal cost for linear kernel is C=1
 summary(tune.linear)
-linear.opt<-svm(y~., data.train, kernel="linear", cost=0.5, decision.values=TRUE)
-linear.train<- attributes(predict(linear.opt, data.train, decision.values=TRUE))$decision.values
-linear.test<- attributes(predict(linear.opt, data.test, decision.values=TRUE))$decision.values
+linear.opt <- svm(y~., data.train, kernel="linear", cost=1, decision.values=TRUE)
+linear.train <- attributes(predict(linear.opt, data.train,
+                                   decision.values=TRUE))$decision.values
+linear.test<- attributes(predict(linear.opt, data.test, 
+                                 decision.values=TRUE))$decision.values
 
 # Prepare the training and testing predictions for ROC curve
-# optimal cost for gaussian kernel is gamma=0.5, C=1
+# optimal cost for gaussian kernel is gamma=1, C=.5
 summary(tune.gaussian)
-gaussian.opt<-svm(y~., data.train, kernel="radial", gamma=0.5, cost=1, decision.values=TRUE)
-gaussian.train<-attributes(predict(gaussian.opt, data.train, decision.values=TRUE))$decision.values
-gaussian.test<-attributes(predict(gaussian.opt, data.test, decision.values=TRUE))$decision.values
+gaussian.opt <- svm(y~., data.train, kernel="radial", gamma=.1, cost=.5, decision.values=TRUE)
+gaussian.train <- attributes(predict(gaussian.opt, data.train,
+                                     decision.values=TRUE))$decision.values
+gaussian.test<-attributes(predict(gaussian.opt, data.test,
+                                  decision.values=TRUE))$decision.values
 
 # Prepare the training and testing predictions for ROC curve
-# optimal cost for gaussian kernel is gamma=0.5, C=1
-summary(tune.gaussian)
-gaussian.opt=svm(y~., data.train, kernel ="radial", gamma=0.5, cost=1, decision.values=TRUE)
-gaussian.train=attributes(predict(gaussian.opt, data.train, decision.values=TRUE))$decision.values
-gaussian.test=attributes(predict(gaussian.opt, data.test, decision.values=TRUE))$decision.values
-
-
-# Prepare the training and testing predictions for ROC curve
-# optimal cost for poly kernel is degree=3, C=1
+# optimal cost for poly kernel is degree=3, C=.5
 summary(tune.poly)
-poly.opt=svm(y~., data.train, kernel ="polynomial", degree=3, cost=1, decision.values=TRUE)
-poly.train=attributes(predict(poly.opt, data.train, decision.values=TRUE))$decision.values
-poly.test=attributes(predict(poly.opt, data.test, decision.values=TRUE))$decision.values
+poly.opt <- svm(y~., data.train, kernel ="polynomial", degree=3, cost=.5,
+                decision.values=TRUE)
+poly.train <- attributes(predict(poly.opt, data.train, 
+                                 decision.values=TRUE))$decision.values
+poly.test <- attributes(predict(poly.opt, data.test, 
+                                decision.values=TRUE))$decision.values
 
 
 # Plot ROC curves for training set
-#png(file = "ROC_training.png", width=640, height=480)
 rocplot(-linear.train, data.train[,"y"], main="ROC for Training Set", col="red")
 rocplot(-gaussian.train, data.train[,"y"], add=T, col="blue")
 rocplot(-poly.train, data.train[,"y"], add=T, col="green")
-legend("bottomright",legend=c("Linear","Gaussian","Polynomial"),col=c("red", "blue", "green"),lty=c(1,1,1),cex=1.5)
-#dev.off()
+legend("bottomright",legend=c("Linear","Gaussian","Polynomial"),
+       col=c("red", "blue", "green"),lty=c(1,1,1),cex=1.5)
 
 
 # Plot ROC curves for testing set
-#png(file ="ROC_testing.png", width=640, height=480)
 rocplot(-linear.test, data.test[,"y"], main="ROC for Testing Set", col="red")
 rocplot(-gaussian.test, data.test[,"y"], add=T, col="blue")
 rocplot(-poly.test, data.test[,"y"], add=T, col="green")
-legend("bottomright",legend=c("Linear","Gaussian","Polynomial"),col=c("red", "blue","green"),lty=c(1,1,1),cex=1.5)
-#dev.off()
+legend("bottomright",legend=c("Linear","Gaussian","Polynomial"),
+       col=c("red", "blue","green"),lty=c(1,1,1),cex=1.5)
 ```
  
  

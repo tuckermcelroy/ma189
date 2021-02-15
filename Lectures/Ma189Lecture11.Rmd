@@ -418,7 +418,7 @@ F5 <- TSS5/ESS5 * (N-4)/(4-1)
 ```
 
 
-- The testing results are listed below. As all $F$ statistics `r c(F1,F2,F3,F4,F5)` exceed the critical value `r qf(.99,df=3,df2=22)`, we reject all the null hypotheses. 
+- The testing results are listed below. As all $F$ statistics `r c(F1,F2,F3,F4,F5)` exceed the critical value `r qf(.99,df1=3,df2=22)`, we reject all the null hypotheses. 
 
 **Conclusion**: All chemical elements differ significantly among the sites. Each element is significantly different between at least one pair of sites.
 
