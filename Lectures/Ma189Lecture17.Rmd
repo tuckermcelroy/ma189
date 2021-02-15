@@ -36,7 +36,7 @@ hyperplane is a plane.
 \[
  \{ \underline{X} \in {\mathbb R}^p :    \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p = 0 \}
 \]
-- For a $p$-vector $\underlie{X}$, we say $\underline{X}$ lies on the hyperplane if $\underline{X}$ satisfies the above equation.
+- For a $p$-vector $\underline{X}$, we say $\underline{X}$ lies on the hyperplane if $\underline{X}$ satisfies the above equation.
 - A $p-1$-dimensional hyperplane cuts a $p$-dimensional space into two "sides”.
 - For a $p$-vector $\underline{X}$ that does not lie on the hyperplane, it either lies on the positive side or the negative side of the hyperplane.  
 - The positive side:
@@ -139,7 +139,7 @@ for all $i = 1, \ldots, n$.
 - If a separating hyperplane exists, we can use it to construct a very natural classifier: a test observation is assigned to a class depending on which side of the hyperplane it is located.
 - That is, we classify the test observation $x^*$ based on the sign of
 \[
- y_i (\beta_0 + \beta_1 x_{1}^* + \ldots + \beta_p x_{p}^*) > 0. 
+ \beta_0 + \beta_1 x_{1}^* + \ldots + \beta_p x_{p}^*
 \]
 
 ### Example: Separating Hyperplane
@@ -259,7 +259,7 @@ when the data is non-separating, such a situation is inevitable.
 - This generalization of the maximal margin classifier to the non-separable case is known as
 the *support vector classifier*. 
 
-### EXample: Support Vector Classifier
+### Example: Support Vector Classifier
 
 - Suppose we fit a support vector classifier on a small toy dataset. The hyperplane is shown as a solid line and the margins are shown as dashed lines.
 - Purple observations 3,4,5,6 and blue observation 10 are on the correct sides of
@@ -339,7 +339,7 @@ of the margin, and so the margin will be large.
 "Loss plus Penalty” form:
 \begin{align*}
   & \mbox{minimize}_{ \beta_0, \beta_1, \ldots, \beta_p}
-  \{ L ( {\mathbb X}, \underline{y}, \underline{\beta}, \beta_0) +
+  \{ L ( {\mathbf X}, \underline{y}, \underline{\beta}, \beta_0) +
    \lambda P (\underline{\beta}) \} \\
      = & \mbox{minimize}_{ \beta_0, \beta_1, \ldots, \beta_p}
      \{ \sum_{i=1}^n \mbox{max} [0, 

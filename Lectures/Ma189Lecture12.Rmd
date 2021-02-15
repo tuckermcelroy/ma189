@@ -141,7 +141,7 @@ where ${\mathbf E}$ is the Error Sum of Squares and Cross Products and ${\mathbf
   r & = (N-g -p -1)/2 \\
   d_1 & = 2 r + s + 1\\
   d_2 & = 2 m + s + 1 \\
-  \frac{ d_1 V }{ d_2 ( s- V)} & \sim \mathcal{F}_{s d_1, s d_2 }
+  \frac{ d_1 V }{ d_2 ( s- V)} & \sim \mathcal{F}_{s d_2, s d_1 }
 \end{align*}
 
 ## Hotelling-Lawley Trace (Trace of Ratio)
