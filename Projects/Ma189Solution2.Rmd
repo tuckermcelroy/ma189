@@ -1,0 +1,236 @@
+---
+title: "Math 189: Midterm Project 2 Solution"
+output: pdf_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Introduction
+
+In this second midterm project for Math 189 the Romano-British Pottery dataset is analyzed. We wish to know whether there is a significant difference among the 5 group means for the 9 variables in the dataset. This will be examined using techniques learned from the first 12 lectures of the course. 
+
+The dataset was provided in the course materials (https://github.com/tuckermcelroy/ma189), and
+contains measurements on pottery shards that were collected from five sites in the British Isles. These sites correspond to five values of the *Kiln* variable:
+
+1. G: Gloucester
+2. L: Llanedeyrn
+3. C: Caldicot
+4. I: Isle Thorns
+5. A: Ashley Rails
+
+The dataset contains 48 observations on 9 chemical variables:
+
+1. Al2O3: aluminium trioxide
+2. Fe2O3: iron trioxide
+3. MgO: magnesium oxide
+4. CaO: calcium oxide
+5. Na2O: natrium oxide
+6. K2O: kalium oxide
+7. TiO2: titanium oxide
+8. MnO: mangan oxide
+9. BaO: barium oxide 
+ 
+Each of the nine variables might differ across the sites, and we will investigate whether these differences are significant. 
+ 
+# Analysis
+
+## A First Peek
+
+We begin by reading in the data, and taking a look. There are 9 variables, besides an index, an identifier, and the Kiln variable.
+
+```{r}
+pottery <- read.csv("RBPottery.csv")
+colnames(pottery) <- c("No", "ID", "Kiln", "Al", "Fe", "Mg", "Ca", "Na", "K2O", "TiO2", "MnO", "BaO")
+head(pottery)
+```
+
+We separate the data into five sub datasets according to the Kiln sites.
+
+```{r}
+pot_glou <- pottery[pottery$Kiln==1,]
+pot_llan <- pottery[pottery$Kiln==2,]
+pot_cald <- pottery[pottery$Kiln==3,]
+pot_is <- pottery[pottery$Kiln==4,]
+pot_ar <- pottery[pottery$Kiln==5,]
+```
+
+Note that the third Kiln site, for  Caldicot, only has 2 observations. Such a small sample size renders our conclusions somewhat dubious, and we return to this concern below.
+
+## Visualization
+
+Before formulating our test hypothesis, we just examine the data. We are not principally concerned with correlations between the variables, but rather want to see if Kiln site has an impact. So we choose to plot each of the nine variables separately, each by Kiln. We could do this with a histogram, but the sample sizes are small so a scatterplot will suffice.
+
+```{r}
+plot(pottery$Al,pottery$Kiln, xlab="Al",ylab="Kiln")
+plot(pottery$Fe,pottery$Kiln, xlab="Fe",ylab="Kiln")
+plot(pottery$Mg,pottery$Kiln, xlab="Mg",ylab="Kiln")
+plot(pottery$Ca,pottery$Kiln, xlab="Ca",ylab="Kiln")
+plot(pottery$Na,pottery$Kiln, xlab="Na",ylab="Kiln")
+plot(pottery$K2O,pottery$Kiln, xlab="K2O",ylab="Kiln")
+plot(pottery$TiO2,pottery$Kiln, xlab="TiO2",ylab="Kiln")
+plot(pottery$MnO,pottery$Kiln, xlab="MnO",ylab="Kiln")
+plot(pottery$BaO,pottery$Kiln, xlab="BaO",ylab="Kiln")
+```
+
+For Fe, Mg, and Ca there seems to be some clear clustering of records by Kiln site, whereas for BaO it is hard to discriminate site. Both the center and the dispersion of the records will play a key role in discerning whether we can discriminate between sites. For instance, in Mg the within-group variability is very small for Kiln sites 1, 4, and 5, which makes the separation somewhat easier. The large variability in BaO is opposite, making it harder to discern sites. 
+
+## Formulating the Null Hypothesis
+
+Our notation is $X_{ij}^{(k)}$ for the $i$th record of the $j$th variable ($1 \leq j \leq 9$) in the $k$th population ($1 \leq k \leq 5$). The population mean vector is $\underline{\mu}^{(k)}$, where $\mu_j^{(k)} = {\mathbb E} [ X_{ij}^{(k)} ]$. Assuming homoscedasticity (i.e., that the variance-covariance matrix of $\underline{x}^{(k)}$ does not depend on $k$), in addition to independence and normality, we can use the ANOVA/MANOVA framework to test
+\[
+ H_0:  \underline{\mu}^{(1)} = \underline{\mu}^{(2)} = \underline{\mu}^{(3)} = 
+  \underline{\mu}^{(4)} = \underline{\mu}^{(5)}. 
+\]
+ The alternative is that any of these five vectors are unequal to one of the others. Recall that two vectors are unequal if any of their nine components are not the same. We will use MANOVA to do the testing.
+
+We could also consider 9 separate null hypotheses, one for each variable. Then we could use ANOVA for each of the 9 cases. However, this would involve us in a multiple testing situation, since the overall question of interest is whether *any* of the variables are different across groups. Then we would need to combine the 9 ANOVA analyses using FWER or FDR methodology. Instead we use MANOVA, which automatically combines the 9 individual tests by taking into account cross-correlations between variables.
+
+However, there may be value to doing an ANOVA *after* finishing the MANOVA. Once we have determined *whether* there are significant differences, we may want to know *which* variables are really the most important.
+ 
+## Discussing Assumptions
+
+Because sample sizes are so small, there seems to be little value in judging the normality of each variable. On scientific grounds, normality seems a reasonable distribution to use, given that chemical concentrations cannot be arbitrarily large in a given ceramic shard. The independence assumption seems more shaky, given that we don't know if the shards from a particular site were collected from different jars or from the same object. Moreover, which shards were accessible to archaeologists (and which ones survived through the eons) may be correlated with particular attributes. The best we can say is that independence is an unverified working assumption, and its dubiousness should temper the reliability of our final results accordingly.
+
+Assuming the records have common distribution within a site is not really an assumption, but more like a statistical axiom: without it, very little inference can be done. For the homoskedastic assumption, we form estimates of the variance-covariance matrix for each of the five groups, and make numerical comparisons; more sophisticated testing is beyong the scope of the course.
+
+```{r}
+var_glou <- var(pot_glou[,4:12])
+round(var_glou,digits=6)
+var_llan <- var(pot_llan[,4:12])
+round(var_llan,digits=6)
+var_cald <- var(pot_cald[,4:12])
+round(var_cald,digits=6)
+var_is <- var(pot_is[,4:12])
+round(var_is,digits=6)
+var_ar <- var(pot_ar[,4:12])
+round(var_ar,digits=6)
+```
+
+The numbers come out fairly different, so that homoskedasticity might not seem plausible. However, samples are small which means that there will be more variability in the estimates of these variance-covariance matrices. So we shall proceed with these assumptions, but with one exception: we decide to excise the third Kiln site (Caldicot) completely. With only 2 observations, it seems very weak to include this data: if there really are significant differences among the four other sites, the presence of Caldicot will hardly make this more apparent. Conversely, if there was no significant discrepancy based on the other four sites, but the addition of Caldicot were to alter those results, then we would still be skeptical. 
+
+## MANOVA 
+
+We now proceed with MANOVA on 9 variables for Kilns 1, 2, 4, and 5. We choose to adapt the R code from class, because it is easy to do and is transparent.
+
+- First obtain the group means and the grand mean.  We print these out to take a look.
+
+```{r}
+pot <- NULL
+pot <- rbind(pot,pot_glou)
+pot <- rbind(pot,pot_llan)
+pot <- rbind(pot,pot_is)
+pot <- rbind(pot,pot_ar)
+
+# Group: kiln 1
+x1 <- pot[pot$Kiln==1,4:12]
+m1 <- colMeans(x1)
+n1 <- dim(x1)[1]
+# Group: kiln 2
+x2 <- pot[pot$Kiln==2,4:12]
+m2 <- colMeans(x2)
+n2 <- dim(x2)[1]
+# Group: kiln 4
+x4 <- pot[pot$Kiln==4,4:12]
+m4 <- colMeans(x4)
+n4 <- dim(x4)[1]
+# Group: kiln 5
+x5 <- pot[pot$Kiln==5,4:12]
+m5 <- colMeans(x5)
+n5 <- dim(x5)[1]
+# Grand Mean
+mg <- (m1*n1 + m2*n2 + m4*n4 + m5*n5)/(n1+n2+n4+n5)
+all_means <- rbind(m1,m2,m4,m5,mg)
+print(all_means)
+```
+
+- Next, get the ESS and HSS matrices. We print these out to take a look.
+
+```{r}
+ESS <- cov(x1)*(n1-1) + cov(x2)*(n2-1) + cov(x4)*(n4-1) + cov(x5)*(n5-1)
+HSS <- n1*(m1 - mg) %*% t(m1 - mg) + n2*(m2 - mg) %*% t(m2 - mg) + 
+  n4*(m4 - mg) %*% t(m4 - mg) + n5*(m5 - mg) %*% t(m5 - mg)
+round(ESS,digits=4)
+round(HSS,digits=4)
+```
+
+- We decide to examine all four statistics discussed in class. Note that for the Roy maximum root statistic we wrap the eigenvalue output with the Re() function, since the imaginary parts are all zeroes anyways for a symmetric non-negative definite matrix.
+
+```{r}
+library(rootWishart)
+N <- n1+n2+n4+n5
+g <- 4
+p <- 9
+output <- NULL
+
+# Wilks Lambda
+wilks <- det(ESS)/det(ESS + HSS)
+wilk_f <- ((N - g) - (p - g + 2)/2)
+wilk_xi <- 1
+if((p^2 + (g-1)^2 - 5) > 0) 
+{
+  wilk_xi <- sqrt((p^2*(g-1)^2 - 4)/(p^2 + (g-1)^2 - 5))
+}
+wilk_omega <- (p*(g-1)-2 )/2
+wilks_stat <- (wilk_f*wilk_xi - wilk_omega)*
+  (1 - wilks^(1/wilk_xi))/(p*(g-1)*wilks^(1/wilk_xi))
+output <- rbind(output,c(wilks,wilks_stat,
+  1 - pf(wilks_stat,df1 = p*(g-1), df2 = (wilk_f*wilk_xi - wilk_omega))))
+
+# Pillai's Trace
+pillai <- sum(diag(HSS %*% solve(ESS + HSS)))
+pillai_s <- min(p,g-1)
+pillai_m <- (abs(p-g+1)-1)/2
+pillai_r <- (N-g-p-1)/2
+pillai_stat <- (2*pillai_r + pillai_s + 1)*pillai/
+  ((2*pillai_m + pillai_s + 1)*(pillai_s - pillai))
+output <- rbind(output,c(pillai,pillai_stat,
+  1 - pf(pillai_stat,df1 = pillai_s*(2*pillai_m + pillai_s + 1),
+       df2 = pillai_s*(2*pillai_r + pillai_s + 1))))
+
+# Hotelling-Lawley
+hotel <- sum(diag(HSS %*% solve(ESS)))
+hotel_b <- (N-p-2)*(N-g-1)/((N-g-p-3)*(N-g-p))
+hotel_df1 <- p*(g-1)
+hotel_df2 <- 4 + (hotel_df1 + 2)/(hotel_b - 1)
+hotel_c <- hotel_df1*(hotel_df2 - 2)/(hotel_df2*(N-g-p-1))
+hotel_stat <- hotel/hotel_c
+output <- rbind(output,c(hotel,hotel_stat,
+  1 - pf(hotel_stat,df1 = hotel_df1,df2 = hotel_df2)))
+
+# Roy
+roy <- max(Re(eigen(HSS %*% solve(ESS))$values))
+roy_stat <- roy/(1+roy)
+output <- rbind(output,c(roy,roy_stat,
+  1 - doubleWishart(roy_stat,p=p,m=N-g,n=g-1)))
+
+colnames(output) <- c("Statistic","Test Statistic","P-value")
+rownames(output) <- c("Wilks","Pillai","Hotelling-Lawley","Roy")
+output
+```
+
+- The four statistics provide a similar message: $H_0$ is rejected in the strongest possible terms. Indeed, the population means differ across the four sites.
+
+## ANOVA
+
+At this point our project is done. But we may want to push further: which variables seem to be driving the discrepancy across sites?  We could consider dropping out variables until some of the four test statistics are no longer significant. Instead we do something that is less laborious but still insightful: 9 ANOVA analyses.
+
+- To do this, recall the test statistics are obtained from the diagonal entries of the ESS and HSS matrices that we've already computed.
+
+```{r}
+df1 <- 4-1
+df2 <- N-4
+F_stats <- (df2/df1) * diag(HSS)/diag(ESS)
+1 - pf(F_stats,df1=df1,df2=df2) 
+```
+
+- Judging by the p-values, TiO2 and BaO are not as compelling (the latter is not significant at a $.05$ level), but Fe and Mg are very good *predictors* for Kiln. 
+
+# Summary
+
+We have found very strong evidence of a discrepancy between the sites on the basis of the 9 variables. All four MANOVA statistics (Wilks' Lambda, Pillai's Trace, Hotelling-Lawley, and Roy's Maximum Root) rejected the null hypothesis that the population mean vectors were equal. These findings are tempered by some noted limitations of the data: small sample sizes (we even eliminated the Caldicot Kiln site data, because of the paucity) and inability to verify the independence, normality, or homoskedasticity assumptions. Yet, given the available tools from the course, these findings seem reasonable for a preliminary exploration. Moreover, of the 9 variables it seems that Fe and Mg are very powerful for discriminating between sites; however, we don't know which sites (of the four considered). Therefore, future research could explore which variables are best for predicting discrepancies between particular sites. This could be treated as a classification problem.
+ 
+ 
+
+
