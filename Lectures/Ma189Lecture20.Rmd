@@ -28,7 +28,7 @@ for $j = 1, \ldots, p$.
   = \lambda_j \underline{e}_j^{\prime} \underline{e}_j = \lambda_j,
 \]
   we see that $\mbox{Var} [ y_1] \geq  \mbox{Var} [ y_2] \geq 
-  \ldots \geq  \mbox{Var} [ y_1]$.
+  \ldots \geq  \mbox{Var} [ y_p]$.
 3. Also for $j \neq k$
 \[
  \mbox{Cov} [ y_j, y_k] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_k
@@ -67,13 +67,13 @@ for some $k < p$.
 \[
  \mbox{tr} {\bf \Sigma} = \sum_{j=1}^p \lambda_j.
 \]
-- The proportion of variation explained by the $j$th principal component is
+- The proportion of variation explained by the $k$th principal component is
 \[
-  \frac{ \lambda_j}{ \sum_{k=1}^p \lambda_k}
+  \frac{ \lambda_k}{ \sum_{j=1}^p \lambda_j}
 \]
-- The proportion of variation explained by the first $j$ principal components is
+- The proportion of variation explained by the first $k$ principal components is
 \[
-  \frac{ \sum_{k=1}^j \lambda_k}{ \sum_{k=1}^p \lambda_k}.
+  \frac{ \sum_{j=1}^k \lambda_j}{ \sum_{j=1}^p \lambda_j}.
 \]
 - Naturally, if the proportion of variation explained by the first $k$ principal components is large, then not much information is lost by considering only the first $k$ principal components.
 
@@ -85,7 +85,7 @@ for some $k < p$.
 1. To obtain the simplest possible interpretation, we want $k$ to be as small as possible. If we can explain most of the variation by just looking at the first few principal components, then it would give us a simpler description of the data.
 2. To reduce loss of information, we want the proportion of variation explained by the first $k$ principal components to be large (ideally close to 1):
 \[
-  \frac{ \sum_{k=1}^j \lambda_k}{ \sum_{k=1}^p \lambda_k} \approx 1
+  \frac{ \sum_{j=1}^k \lambda_j}{ \sum_{j=1}^p \lambda_j} \approx 1
 \]
  
 ## Estimate Principal Components From a Sample
@@ -102,8 +102,8 @@ for some $k < p$.
 3. Calculate eigenvalues and eigenvectors of ${\mathbf S}$. Let $\hat{\lambda}_1, \ldots, \hat{\lambda}_p$ denote the eigenvalues of ${\mathbf S}$ in descending order, and let $\hat{\underline{e}}_1, \ldots, \hat{\underline{e}}_p$ be the corresponding eigenvectors.
 4. The estimated principal components are
 \[
-  \hat{y}_{i1} = \hat{\underline{e}}_1 \underline{x}_i,
-  \ldots,  \hat{y}_{ip} = \hat{\underline{e}}_p \underline{x}_i.
+  \hat{y}_{i1} = \hat{\underline{e}}_1^{\prime} \underline{x}_i,
+  \ldots,  \hat{y}_{ip} = \hat{\underline{e}}_p^{\prime} \underline{x}_i.
 \]
 
 ## Example: Violent Crime Rates by US State

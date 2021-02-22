@@ -383,7 +383,7 @@ summary {
 <li>Because <span class="math display">\[
  \mbox{Var} [ y_j] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_j
   = \lambda_j \underline{e}_j^{\prime} \underline{e}_j = \lambda_j,
-\]</span> we see that <span class="math inline">\(\mbox{Var} [ y_1] \geq \mbox{Var} [ y_2] \geq  \ldots \geq \mbox{Var} [ y_1]\)</span>.</li>
+\]</span> we see that <span class="math inline">\(\mbox{Var} [ y_1] \geq \mbox{Var} [ y_2] \geq  \ldots \geq \mbox{Var} [ y_p]\)</span>.</li>
 <li>Also for <span class="math inline">\(j \neq k\)</span> <span class="math display">\[
  \mbox{Cov} [ y_j, y_k] = \underline{e}_j^{\prime} {\mathbf \Sigma} \underline{e}_k
   = \lambda_k \underline{e}_j^{\prime} \underline{e}_k = 0
@@ -419,11 +419,11 @@ summary {
 <li>The total variation of <span class="math inline">\(\underline{X}\)</span> is the trace of its covariance matrix <span class="math inline">\({\mathbf \Sigma}\)</span>. This is also the sum of all the eigenvalues: <span class="math display">\[
  \mbox{tr} {\bf \Sigma} = \sum_{j=1}^p \lambda_j.
 \]</span></li>
-<li>The proportion of variation explained by the <span class="math inline">\(j\)</span>th principal component is <span class="math display">\[
-\frac{ \lambda_j}{ \sum_{k=1}^p \lambda_k}
+<li>The proportion of variation explained by the <span class="math inline">\(k\)</span>th principal component is <span class="math display">\[
+\frac{ \lambda_k}{ \sum_{j=1}^p \lambda_j}
 \]</span></li>
-<li>The proportion of variation explained by the first <span class="math inline">\(j\)</span> principal components is <span class="math display">\[
-\frac{ \sum_{k=1}^j \lambda_k}{ \sum_{k=1}^p \lambda_k}.
+<li>The proportion of variation explained by the first <span class="math inline">\(k\)</span> principal components is <span class="math display">\[
+\frac{ \sum_{j=1}^k \lambda_j}{ \sum_{j=1}^p \lambda_j}.
 \]</span></li>
 <li>Naturally, if the proportion of variation explained by the first <span class="math inline">\(k\)</span> principal components is large, then not much information is lost by considering only the first <span class="math inline">\(k\)</span> principal components.</li>
 </ul>
@@ -437,7 +437,7 @@ summary {
 <ol style="list-style-type: decimal">
 <li>To obtain the simplest possible interpretation, we want <span class="math inline">\(k\)</span> to be as small as possible. If we can explain most of the variation by just looking at the first few principal components, then it would give us a simpler description of the data.</li>
 <li>To reduce loss of information, we want the proportion of variation explained by the first <span class="math inline">\(k\)</span> principal components to be large (ideally close to 1): <span class="math display">\[
-  \frac{ \sum_{k=1}^j \lambda_k}{ \sum_{k=1}^p \lambda_k} \approx 1
+  \frac{ \sum_{j=1}^k \lambda_j}{ \sum_{j=1}^p \lambda_j} \approx 1
 \]</span></li>
 </ol>
 </div>
@@ -455,8 +455,8 @@ summary {
   \]</span></li>
 <li>Calculate eigenvalues and eigenvectors of <span class="math inline">\({\mathbf S}\)</span>. Let <span class="math inline">\(\hat{\lambda}_1, \ldots, \hat{\lambda}_p\)</span> denote the eigenvalues of <span class="math inline">\({\mathbf S}\)</span> in descending order, and let <span class="math inline">\(\hat{\underline{e}}_1, \ldots, \hat{\underline{e}}_p\)</span> be the corresponding eigenvectors.</li>
 <li>The estimated principal components are <span class="math display">\[
-  \hat{y}_{i1} = \hat{\underline{e}}_1 \underline{x}_i,
-  \ldots,  \hat{y}_{ip} = \hat{\underline{e}}_p \underline{x}_i.
+  \hat{y}_{i1} = \hat{\underline{e}}_1^{\prime} \underline{x}_i,
+  \ldots,  \hat{y}_{ip} = \hat{\underline{e}}_p^{\prime} \underline{x}_i.
 \]</span></li>
 </ol>
 </div>
@@ -514,7 +514,7 @@ out2</code></pre>
 ## PC3  0.3565632 0.08914080  0.9566425
 ## PC4  0.1734301 0.04335752  1.0000000</code></pre>
 <ul>
-<li>Fancy with a package:</li>
+<li>Fancy with <em>prcomp</em>:</li>
 </ul>
 <pre class="r"><code>#&quot;scale=True&quot; means the data are standardized first
 pca_result &lt;- prcomp(USArrests, scale = TRUE)
