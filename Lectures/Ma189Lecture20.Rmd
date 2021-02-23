@@ -148,6 +148,15 @@ rownames(out2) <- c("PC1","PC2","PC3","PC4")
 out2
 ```
 
+- We can get the transformed data as well!
+
+```{r}
+z <- (t(USArrests) - out1[1,])/sqrt(out1[2,])
+e_mat <- pca_result$vectors
+y <- t(e_mat) %*% z
+y[1:2,]
+``` 
+
 - Fancy with *prcomp*:
 
 ```{r}
@@ -246,7 +255,7 @@ out3
 
 - The first principal component vector highly weights Assault, since this variable has the
 highest variance.
-- The second principal component loading vector places almost all of its weight on UrpanPop. - - So we see that scaling does indeed have a substantial effect on the results.
+- The second principal component loading vector places almost all of its weight on UrpanPop.  - So we see that scaling does indeed have a substantial effect on the results.
 
 
 

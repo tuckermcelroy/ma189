@@ -514,6 +514,40 @@ out2</code></pre>
 ## PC3  0.3565632 0.08914080  0.9566425
 ## PC4  0.1734301 0.04335752  1.0000000</code></pre>
 <ul>
+<li>We can get the transformed data as well!</li>
+</ul>
+<pre class="r"><code>z &lt;- (t(USArrests) - out1[1,])/sqrt(out1[2,])
+e_mat &lt;- pca_result$vectors
+y &lt;- t(e_mat) %*% z
+y[1:2,]</code></pre>
+<pre><code>##         Alabama    Alaska    Arizona  Arkansas California   Colorado
+## [1,] -0.9756604 -1.930538 -1.7454429 0.1399989  -2.498613 -1.4993407
+## [2,]  1.1220012  1.062427 -0.7384595 1.1085423  -1.527427 -0.9776297
+##      Connecticut    Delaware     Florida   Georgia     Hawaii     Idaho
+## [1,]    1.344992 -0.04722981 -2.98275967 -1.622807  0.9034845 1.6233190
+## [2,]   -1.077984 -0.32208890  0.03883425  1.266088 -1.5546761 0.2088525
+##        Illinois    Indiana       Iowa     Kansas  Kentucky  Louisiana     Maine
+## [1,] -1.3650520  0.5003812  2.2309958  0.7888721 0.7433126 -1.5490908 2.3727401
+## [2,] -0.6749883 -0.1500393 -0.1030083 -0.2674494 0.9488075  0.8623001 0.3726087
+##       Maryland Massachusetts  Michigan  Minnesota Mississippi   Missouri
+## [1,] -1.745647     0.4812801 -2.087250  1.6756695  -0.9864792 -0.6897843
+## [2,]  0.423357    -1.4596771 -0.153835 -0.6259067   2.3697371 -0.2607079
+##        Montana   Nebraska    Nevada New Hampshire New Jersey New Mexico
+## [1,] 1.1735375  1.2529163 -2.845505    2.35995585 -0.1797413 -1.9601235
+## [2,] 0.5314785 -0.1920044 -0.767805   -0.01790055 -1.4349374  0.1414131
+##        New York North Carolina North Dakota       Ohio   Oklahoma      Oregon
+## [1,] -1.6656666      -1.112088    2.9621522  0.2236944  0.3086493 -0.05852787
+## [2,] -0.8149107       2.205611    0.5930974 -0.7347784 -0.2849611 -0.53596999
+##      Pennsylvania Rhode Island South Carolina South Dakota  Tennessee
+## [1,]    0.8794868    0.8550907      -1.307450    1.9677967 -0.9896938
+## [2,]   -0.5653605   -1.4769833       1.913973    0.8150682  0.8516053
+##           Texas       Utah  Vermont  Virginia Washington West Virginia
+## [1,] -1.3415184  0.5450318 2.773256 0.0953667  0.2147234      2.087393
+## [2,] -0.4083352 -1.4567152 1.388194 0.1977278 -0.9603739      1.410526
+##       Wisconsin   Wyoming
+## [1,]  2.0588120 0.6231006
+## [2,] -0.6051251 0.3177866</code></pre>
+<ul>
 <li>Fancy with <em>prcomp</em>:</li>
 </ul>
 <pre class="r"><code>#&quot;scale=True&quot; means the data are standardized first
@@ -629,7 +663,7 @@ out3</code></pre>
 ## PC4  0.99492173 -0.03893830  0.05816914 -0.07232502</code></pre>
 <ul>
 <li>The first principal component vector highly weights Assault, since this variable has the highest variance.</li>
-<li>The second principal component loading vector places almost all of its weight on UrpanPop. - - So we see that scaling does indeed have a substantial effect on the results.</li>
+<li>The second principal component loading vector places almost all of its weight on UrpanPop. - So we see that scaling does indeed have a substantial effect on the results.</li>
 </ul>
 </div>
 </div>
