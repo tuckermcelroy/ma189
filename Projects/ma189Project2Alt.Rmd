@@ -1,0 +1,33 @@
+---
+title: "Math 189: Midterm Project 2 (Make-up)"
+output: pdf_document
+---
+
+#  Iris Data 
+
+Working alone, prepare a R Markdown Notebook report based on examining *Fisher’s Iris Data* (available from GitHub). The iris dataset contains four measurements for $150$ iris flowers from three different species: setosa, versicolor, and virginica.  
+
+## Analysis
+
+Is there a significant difference among the 3 group means for these 4 variables? Formulate the appropriate null hypothesis; choose a method of analysis (from the techniques discussed in class, using material up through Lecture 12); discuss the assumptions needed (and justify those assumptions, if possible); perform the analysis using R code (if you use a package, it is your responsibility to ensure their code does what you intend it to do); summarize the results with appropriate displays (figures and/or tables).
+ 
+
+## Components to Your Report
+
+This is your report, but consider including the following:
+
+1. Introduction, Body, and conclusion.
+2. Data citation.
+3. Any relevant tools learned in lectures 1 through 12.  
+4. Justify your analysis.
+
+## Ethics
+
+*Work alone!!!*
+
+## Submission
+
+Write an rmd file, render to pdf and submit the pdf.
+
+
+

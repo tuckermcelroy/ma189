@@ -144,7 +144,7 @@ are all unobservable to us. This will cause some issues, as the choice of these 
 \]
 2. The specific factors (or random errors) all have mean zero:
 \[
- {\mathbb E} [ \underline{f} ] = 0.
+ {\mathbb E} [ \underline{\epsilon} ] = 0.
 \]
 
 - Assumptions on variance-covariance matrix:
