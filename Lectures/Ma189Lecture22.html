@@ -431,7 +431,11 @@ summary {
 <li>To explain: let <span class="math inline">\({\mathbf H}\)</span> be any <span class="math inline">\(m \times m\)</span> orthogonal matrix. A matrix is <em>orthogonal</em> if its nverse is equal to its transpose: <span class="math display">\[
  {\mathbf H} \, {\mathbf H}^{\prime} = {\mathbf H}^{\prime} \, {\mathbf H} = I_m.
 \]</span></li>
-<li>Define <span class="math inline">\({\mathbf L}^* = {\mathbf L} \, {\mathbf H}\)</span> and <span class="math inline">\(\underline{f}^* = {\mathbf H}^{\prime} \underline{f}\)</span>. Then the factor model also holds with factor loading matrix <span class="math inline">\({\mathbf L}^*\)</span> and factors <span class="math inline">\(\underline{f}^*\)</span>, because \begin{align}<em>  &amp; =  + {L}  +  \ &amp; =  + {L} , H} {H}^{}  +  \ &amp; =  + {L}^</em> , ^* + . \end{align*} In addition, it is easy to check that <span class="math inline">\(\underline{f}^*\)</span> satisfies all of our assumptions.</li>
+<li>Define <span class="math inline">\({\mathbf L}^* = {\mathbf L} \, {\mathbf H}\)</span> and <span class="math inline">\(\underline{f}^* = {\mathbf H}^{\prime} \underline{f}\)</span>. Then the factor model also holds with factor loading matrix <span class="math inline">\({\mathbf L}^*\)</span> and factors <span class="math inline">\(\underline{f}^*\)</span>, because <span class="math display">\[\begin{align*}
+\underline{x} &amp; =  \underline{\mu} + {\mathbf L} \underline{f} + \underline{\epsilon} \\
+&amp; = \underline{\mu} + {\mathbf L} \, {\mathbf H} {\mathbf H}^{\prime}  \underline{f} + \underline{\epsilon} \\
+  &amp; = \underline{\mu} + {\mathbf L}^* \,  \underline{f}^* + \underline{\epsilon}.
+\end{align*}\]</span> In addition, it is easy to check that <span class="math inline">\(\underline{f}^*\)</span> satisfies all of our assumptions.</li>
 <li>This means that <span class="math inline">\(\underline{f}\)</span> and <span class="math inline">\({\mathbf L}\)</span> are only <em>identifiable</em> up to an <span class="math inline">\(m \times m\)</span> orthogonal matrix <span class="math inline">\({\mathbf H}\)</span>.</li>
 <li>What is a non-identifiable model? Say two different values of the parameter vector yield the same distribution; then we have no way of inferring which parameter is true.</li>
 </ul>

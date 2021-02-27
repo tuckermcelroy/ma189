@@ -75,9 +75,9 @@ for $i = 1, \ldots, n$.
  {\mathbf H} \, {\mathbf H}^{\prime} = {\mathbf H}^{\prime} \, {\mathbf H} = I_m.
 \]
 - Define ${\mathbf L}^* = {\mathbf L} \, {\mathbf H}$ and $\underline{f}^* = {\mathbf H}^{\prime} \underline{f}$. Then the factor model also holds with factor loading matrix ${\mathbf L}^*$ and factors $\underline{f}^*$, because
-\begin{align}*
+\begin{align*}
   \underline{x} & =  \underline{\mu} + {\mathbf L} \underline{f} + \underline{\epsilon} \\
-  & = \underline{\mu} + {\mathbf L} \, \mathbf H} {\mathbf H}^{\prime}  \underline{f} + \underline{\epsilon} \\
+  & = \underline{\mu} + {\mathbf L} \, {\mathbf H} {\mathbf H}^{\prime}  \underline{f} + \underline{\epsilon} \\
     & = \underline{\mu} + {\mathbf L}^* \,  \underline{f}^* + \underline{\epsilon}.
 \end{align*}
 In addition, it is easy to check that $\underline{f}^*$ satisfies all of our assumptions.
