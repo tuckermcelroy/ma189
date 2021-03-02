@@ -371,8 +371,6 @@ summary {
 <ul>
 <li>In previous lectures we introduced least squares method for linear regression.</li>
 <li>Now we introduce some resampling methods and their applications in statistical learning.</li>
-<li><em>Cross-validation</em></li>
-<li><em>Bootstrap</em></li>
 </ul>
 <div id="resampling-method" class="section level2">
 <h2>Resampling Method</h2>
@@ -468,7 +466,215 @@ y = f(x) + e,
 <li>Loss when model is mis-specified.</li>
 <li>Loss when assumptions are violated.</li>
 </ol>
-<p>through slide 17</p>
+</div>
+<div id="the-validation-set-approach" class="section level2">
+<h2>The Validation Set Approach</h2>
+<ul>
+<li>Suppose we want to estimate the test error associated with fitting a particular statistical model on a sample.</li>
+<li>The true test/prediction set usually does not have the information of the response variable or true class labels. (Otherwise no need to predict.)</li>
+<li>We cannot directly assess the test error on the test set.</li>
+<li>The validation set approach involves randomly dividing the available set of observations into two parts, a <em>training set</em> and a <em>validation set</em>.</li>
+<li>We first fit the model on the training set. The fitted model is then used to predict the responses of the observations in the validation set.</li>
+<li>The resulting validation set error provides an estimate of the test error.</li>
+</ul>
+<div id="normal-learning-process" class="section level3">
+<h3>Normal Learning Process</h3>
+<ul>
+<li>Training a statistical model using the observations in the <em>training set</em>, and predict the <em>test set</em>.</li>
+<li>Problem: Cannot assess the test error because we do not know the true responses of test set.</li>
+</ul>
+</div>
+<div id="the-validation-set-approach-1" class="section level3">
+<h3>The Validation Set Approach</h3>
+<ul>
+<li>Training a statistical model using the observations in the <em>training set</em>.</li>
+<li>Validate trained model by the “test error” in the <em>validation set</em>.</li>
+<li>Use the trained model to predict the <em>test set</em>.</li>
+<li>Model accuracy is assessed by the test error in the validation set.</li>
+<li>Select a model/parameter that minimizes the test error in the validation set.</li>
+</ul>
+</div>
+</div>
+<div id="example-predict-mpg-with-horsepower" class="section level2">
+<h2>Example: Predict MPG with Horsepower</h2>
+<ul>
+<li>We collected a dataset of 392 observations (automobiles). For each automobile, we record the miles per gallon (MPG) and horsepower.</li>
+<li>We are interested in predicting the MPG of an automobile with its horsepower: <span class="math display">\[
+ \mbox{MPG} = f(\mbox{horsepower}) + \mbox{error},
+\]</span> where <span class="math inline">\(f\)</span> is some regression function.</li>
+<li>Which model gives the best prediction performance?</li>
+</ul>
+<div id="five-candidate-models" class="section level3">
+<h3>Five Candidate Models</h3>
+<ul>
+<li>Let <span class="math inline">\(y\)</span> be MPG and <span class="math inline">\(x\)</span> be horsepower.<br />
+</li>
+<li>We consider fitting the model where <span class="math inline">\(f (\cdot)\)</span> is a polynomial of order from 1 to 5: <span class="math display">\[\begin{align*}
+\mbox{Model 1}: &amp;  y = a_0  + a_1 x + \epsilon \\
+\mbox{Model 2}: &amp;  y = a_0  + a_1 x + a_2 x^2  + \epsilon \\
+\mbox{Model 3}: &amp;  y = a_0  + a_1 x + a_2 x^2 + a_3 x^3 + \epsilon \\
+\mbox{Model 4}: &amp;  y = a_0  + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + \epsilon \\
+\mbox{Model 5}: &amp;  y = a_0  + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + a_5 x^5 \epsilon
+\end{align*}\]</span> Goal: compare the model that minimizes the training error and the model that minimizes the test error.</li>
+</ul>
+</div>
+<div id="example-validation-set-approach" class="section level3">
+<h3>Example: Validation Set Approach</h3>
+<ul>
+<li>We randomly divide the observed sample <span class="math inline">\(\{ x_i, y_i \}\)</span> for <span class="math inline">\(i =1, \ldots, 392\)</span> into a training set <span class="math inline">\(\{ x_i^t, y_i^t \}\)</span> for <span class="math inline">\(i =1, \ldots, 196\)</span>, and a validation set <span class="math inline">\(\{ x_i^v, y_i^v \}\)</span> for <span class="math inline">\(i =1, \ldots, 196\)</span>.</li>
+<li>We use the training set to train an estimator <span class="math inline">\(\widehat{f} (\cdot)\)</span>. Then <span class="math inline">\(y_i\)</span> is estimated via <span class="math inline">\(\widehat{f} (x_i)\)</span>.</li>
+<li>The training error is defined as <span class="math display">\[
+\frac{1}{196} \sum_{i=1}^{196} {\left( y_i^t - \widehat{f} (x_i^t) \right)}^2.
+\]</span></li>
+<li>The test error is estimated by the prediction error of the validation set <span class="math display">\[
+\frac{1}{196} \sum_{i=1}^{196} {\left( y_i^v - \widehat{f} (x_i^v) \right)}^2.
+\]</span></li>
+<li>The training error and test error of each model are given in the following table.</li>
+</ul>
+<pre class="r"><code>library(ISLR)
+head(Auto)</code></pre>
+<pre><code>##   mpg cylinders displacement horsepower weight acceleration year origin
+## 1  18         8          307        130   3504         12.0   70      1
+## 2  15         8          350        165   3693         11.5   70      1
+## 3  18         8          318        150   3436         11.0   70      1
+## 4  16         8          304        150   3433         12.0   70      1
+## 5  17         8          302        140   3449         10.5   70      1
+## 6  15         8          429        198   4341         10.0   70      1
+##                        name
+## 1 chevrolet chevelle malibu
+## 2         buick skylark 320
+## 3        plymouth satellite
+## 4             amc rebel sst
+## 5               ford torino
+## 6          ford galaxie 500</code></pre>
+<pre class="r"><code>set.seed(777)
+train_ind &lt;- sample(392,size=196)
+val_ind &lt;- setdiff(seq(1,392),train_ind)
+Auto_train &lt;- Auto[train_ind,]
+Auto_val &lt;- Auto[val_ind,]
+
+# Train
+y &lt;- Auto_train$mpg
+x &lt;- Auto_train$horsepower
+x2 &lt;- x^2
+x3 &lt;- x^3
+x4 &lt;- x^4
+x5 &lt;- x^5
+mdl1 &lt;- lm(y ~ x)
+mdl2 &lt;- lm(y ~ x + x2)
+mdl3 &lt;- lm(y ~ x + x2 + x3)
+mdl4 &lt;- lm(y ~ x + x2 + x3 + x4)
+mdl5 &lt;- lm(y ~ x + x2 + x3 + x4 + x5)
+train_err &lt;- rep(0,5)
+train_err[1] &lt;- mean((y - mdl1$fitted.values)^2)
+train_err[2] &lt;- mean((y - mdl2$fitted.values)^2)
+train_err[3] &lt;- mean((y - mdl3$fitted.values)^2)
+train_err[4] &lt;- mean((y - mdl4$fitted.values)^2)
+train_err[5] &lt;- mean((y - mdl5$fitted.values)^2)
+
+# Validate
+y &lt;- Auto_val$mpg
+x &lt;- Auto_val$horsepower
+z1 &lt;- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
+z2 &lt;- (mdl2$coefficients[1] + mdl2$coefficients[2]*x + mdl2$coefficients[3]*x^2)
+z3 &lt;- (mdl3$coefficients[1] + mdl3$coefficients[2]*x + mdl3$coefficients[3]*x^2 +
+       mdl3$coefficients[4]*x^3)
+z4 &lt;- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 +
+       mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
+z5 &lt;- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
+       mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
+val_err &lt;- rep(0,5)
+val_err[1] &lt;- mean((y - z1)^2)
+val_err[2] &lt;- mean((y - z2)^2)
+val_err[3] &lt;- mean((y - z3)^2)
+val_err[4] &lt;- mean((y - z4)^2)
+val_err[5] &lt;- mean((y - z5)^2)
+
+out &lt;- rbind(train_err,val_err)
+rownames(out) &lt;- c(&quot;Training Error&quot;,&quot;Validation Error&quot;)
+colnames(out) &lt;- c(&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;,&quot;Model 5&quot;)
+out</code></pre>
+<pre><code>##                   Model 1  Model 2  Model 3  Model 4  Model 5
+## Training Error   25.16955 18.60159 18.15857 18.12585 18.12438
+## Validation Error 23.93545 20.89327 21.72063 22.11040 21.97974</code></pre>
+<ul>
+<li>Training error is decreasing in model complexity. (Always true!)</li>
+<li>Validation error may decrease as a function of model complexity up to a point; balance over-fitting (high model order) versus under-fitting (low model order).</li>
+<li>Here, Model 2 has the best validation error.</li>
+<li>The model that minimizes training error (Model 5) is more complicated than the model that minimizes validation error (Model 2).</li>
+<li>This is a common phenomena in statistical learning.</li>
+</ul>
+</div>
+<div id="repeat-validation" class="section level3">
+<h3>Repeat Validation</h3>
+<ul>
+<li>We can repeat the validation set approach for 10 times and plot the test errors in the following figure.</li>
+</ul>
+<pre class="r"><code>out &lt;- c()
+for(count in 1:10)
+{
+
+train_ind &lt;- sample(392,size=196)
+val_ind &lt;- setdiff(seq(1,392),train_ind)
+Auto_train &lt;- Auto[train_ind,]
+Auto_val &lt;- Auto[val_ind,]
+
+# Train
+y &lt;- Auto_train$mpg
+x &lt;- Auto_train$horsepower
+x2 &lt;- x^2
+x3 &lt;- x^3
+x4 &lt;- x^4
+x5 &lt;- x^5
+mdl1 &lt;- lm(y ~ x)
+mdl2 &lt;- lm(y ~ x + x2)
+mdl3 &lt;- lm(y ~ x + x2 + x3)
+mdl4 &lt;- lm(y ~ x + x2 + x3 + x4)
+mdl5 &lt;- lm(y ~ x + x2 + x3 + x4 + x5)
+train_err &lt;- rep(0,5)
+train_err[1] &lt;- mean((y - mdl1$fitted.values)^2)
+train_err[2] &lt;- mean((y - mdl2$fitted.values)^2)
+train_err[3] &lt;- mean((y - mdl3$fitted.values)^2)
+train_err[4] &lt;- mean((y - mdl4$fitted.values)^2)
+train_err[5] &lt;- mean((y - mdl5$fitted.values)^2)
+
+# Validation
+y &lt;- Auto_val$mpg
+x &lt;- Auto_val$horsepower
+z1 &lt;- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
+z2 &lt;- (mdl2$coefficients[1] + mdl2$coefficients[2]*x + mdl2$coefficients[3]*x^2)
+z3 &lt;- (mdl3$coefficients[1] + mdl3$coefficients[2]*x + mdl3$coefficients[3]*x^2 +
+       mdl3$coefficients[4]*x^3)
+z4 &lt;- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 +
+       mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
+z5 &lt;- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
+       mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
+val_err &lt;- rep(0,5)
+val_err[1] &lt;- mean((y - z1)^2)
+val_err[2] &lt;- mean((y - z2)^2)
+val_err[3] &lt;- mean((y - z3)^2)
+val_err[4] &lt;- mean((y - z4)^2)
+val_err[5] &lt;- mean((y - z5)^2)
+
+out &lt;- rbind(out,val_err)
+}
+
+plot.ts(t(out),plot.type=&quot;single&quot;,col=seq(1,10),
+        xlab=&quot;Model Number&quot;,ylab=&quot;Validation Error&quot;)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<ul>
+<li>The testing error estimated by the validation set approach can be highly variable.</li>
+<li>It depends on the random partition of training and validation sets</li>
+</ul>
+</div>
+</div>
+<div id="some-issues-with-the-validation-set-approach" class="section level2">
+<h2>Some Issues with the Validation Set Approach</h2>
+<ul>
+<li>The testing error estimated by the validation set approach can be highly variable, depending on precisely which observations are included in the training set and which observations are included in the validation set.</li>
+<li>In the validation set approach, only a subset of the observations, which are included in the training set rather than in the validation set, are used to fit the model.</li>
+<li>Since statistical methods tend to perform worse when trained on fewer observations, this suggests that the validation set error may tend to over-estimate the test error for the model fitted on the entire data set.</li>
+</ul>
 </div>
 </div>
 

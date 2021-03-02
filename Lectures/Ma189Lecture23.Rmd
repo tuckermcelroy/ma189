@@ -11,8 +11,6 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 
 - In previous lectures we introduced least squares method for linear regression.
 - Now we introduce some resampling methods and their applications in statistical learning.
-- *Cross-validation*
-- *Bootstrap*
 
 ## Resampling Method
 
@@ -114,7 +112,7 @@ This training error is usually called *mean squared error* (MSE) or *in-sample e
 
 - Training a statistical model using the observations in the *training set*.
 - Validate trained model by the "test error” in the *validation set*.
-- use the trained model to predict the *test set*.
+- Use the trained model to predict the *test set*.
 - Model accuracy is assessed by the test error in the validation set.
 - Select a model/parameter that minimizes the test error in the validation set.
 
@@ -163,14 +161,14 @@ head(Auto)
 
 ```{r}
 set.seed(777)
-test_ind <- sample(392,size=196)
-val_ind <- setdiff(seq(1,392),test_ind)
-Auto_test <- Auto[test_ind,]
+train_ind <- sample(392,size=196)
+val_ind <- setdiff(seq(1,392),train_ind)
+Auto_train <- Auto[train_ind,]
 Auto_val <- Auto[val_ind,]
 
 # Train
-y <- Auto_test$mpg
-x <- Auto_test$horsepower
+y <- Auto_train$mpg
+x <- Auto_train$horsepower
 x2 <- x^2
 x3 <- x^3
 x4 <- x^4
@@ -187,7 +185,7 @@ train_err[3] <- mean((y - mdl3$fitted.values)^2)
 train_err[4] <- mean((y - mdl4$fitted.values)^2)
 train_err[5] <- mean((y - mdl5$fitted.values)^2)
 
-# Test
+# Validate
 y <- Auto_val$mpg
 x <- Auto_val$horsepower
 z1 <- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
@@ -198,23 +196,23 @@ z4 <- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 
        mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
 z5 <- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
        mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
-test_err <- rep(0,5)
-test_err[1] <- mean((y - z1)^2)
-test_err[2] <- mean((y - z2)^2)
-test_err[3] <- mean((y - z3)^2)
-test_err[4] <- mean((y - z4)^2)
-test_err[5] <- mean((y - z5)^2)
+val_err <- rep(0,5)
+val_err[1] <- mean((y - z1)^2)
+val_err[2] <- mean((y - z2)^2)
+val_err[3] <- mean((y - z3)^2)
+val_err[4] <- mean((y - z4)^2)
+val_err[5] <- mean((y - z5)^2)
 
-out <- rbind(train_err,test_err)
-rownames(out) <- c("Training Error","Testing Error")
+out <- rbind(train_err,val_err)
+rownames(out) <- c("Training Error","Validation Error")
 colnames(out) <- c("Model 1","Model 2","Model 3","Model 4","Model 5")
 out
 ```
 
 - Training error is decreasing in model complexity. (Always true!)
-- Testing error may decrease as a function of model complexity up to a point; balance over-fitting (high model order) versus under-fitting (low model order).
-- Here, Model 2 has the best testing error.
-- The model that minimizes training error (Model 5) is more complicated than the model that minimizes testing error (Model 2).
+- Validation error may decrease as a function of model complexity up to a point; balance over-fitting (high model order) versus under-fitting (low model order).
+- Here, Model 2 has the best validation error.
+- The model that minimizes training error (Model 5) is more complicated than the model that minimizes validation error (Model 2).
 - This is a common phenomena in statistical learning.
 
 ### Repeat Validation
@@ -226,14 +224,14 @@ out <- c()
 for(count in 1:10)
 {
 
-test_ind <- sample(392,size=196)
-val_ind <- setdiff(seq(1,392),test_ind)
-Auto_test <- Auto[test_ind,]
+train_ind <- sample(392,size=196)
+val_ind <- setdiff(seq(1,392),train_ind)
+Auto_train <- Auto[train_ind,]
 Auto_val <- Auto[val_ind,]
 
 # Train
-y <- Auto_test$mpg
-x <- Auto_test$horsepower
+y <- Auto_train$mpg
+x <- Auto_train$horsepower
 x2 <- x^2
 x3 <- x^3
 x4 <- x^4
@@ -250,7 +248,7 @@ train_err[3] <- mean((y - mdl3$fitted.values)^2)
 train_err[4] <- mean((y - mdl4$fitted.values)^2)
 train_err[5] <- mean((y - mdl5$fitted.values)^2)
 
-# Test
+# Validation
 y <- Auto_val$mpg
 x <- Auto_val$horsepower
 z1 <- (mdl1$coefficients[1] + mdl1$coefficients[2]*x)
@@ -261,18 +259,18 @@ z4 <- (mdl4$coefficients[1] + mdl4$coefficients[2]*x + mdl4$coefficients[3]*x^2 
        mdl4$coefficients[4]*x^3 + mdl4$coefficients[5]*x^4)
 z5 <- (mdl5$coefficients[1] + mdl5$coefficients[2]*x + mdl5$coefficients[3]*x^2 +
        mdl5$coefficients[4]*x^3 + mdl5$coefficients[5]*x^4 + mdl5$coefficients[6]*x^5)
-test_err <- rep(0,5)
-test_err[1] <- mean((y - z1)^2)
-test_err[2] <- mean((y - z2)^2)
-test_err[3] <- mean((y - z3)^2)
-test_err[4] <- mean((y - z4)^2)
-test_err[5] <- mean((y - z5)^2)
+val_err <- rep(0,5)
+val_err[1] <- mean((y - z1)^2)
+val_err[2] <- mean((y - z2)^2)
+val_err[3] <- mean((y - z3)^2)
+val_err[4] <- mean((y - z4)^2)
+val_err[5] <- mean((y - z5)^2)
 
-out <- rbind(out,test_err)
+out <- rbind(out,val_err)
 }
 
 plot.ts(t(out),plot.type="single",col=seq(1,10),
-        xlab="Model Number",ylab="Testing Error")
+        xlab="Model Number",ylab="Validation Error")
 ```
 
 - The testing error estimated by the validation set approach can be highly variable.

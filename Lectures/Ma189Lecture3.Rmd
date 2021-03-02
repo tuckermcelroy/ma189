@@ -59,7 +59,7 @@ Used to check the relationship between two variables:
 3. Joint normality
 4. Groups
 
-## Example 1:USDA Women's Health Survey
+## Example 1: USDA Women's Health Survey
 
 - In 1985, the USDA commissioned a study of women’s nutrition. Nutrient intake was measured for a random sample of 737 women aged 25-50 years.
 - The following variables were measured:
