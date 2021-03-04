@@ -9,7 +9,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 
 ## Leave-One-Out Cross Validation
 
-- Leave-one-out cross-validation (LOOCV) is closely related to the validation set approach. It attempts to address the drawbacks ofthe latter.
+- Leave-one-out cross-validation (LOOCV) is closely related to the validation set approach. It attempts to address the drawbacks of the latter.
 - Instead of randomly dividing the sample into a training set and a validation set, LOOCV doesit in an alternating way:
 
 1. Pick the first observation $(x_1, y_1)$ as the validation set, and use the remaining observations $(x_2,y_2), \ldots, (x_n, y_n)$ as the training set. The testing error is measured as 
