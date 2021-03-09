@@ -135,7 +135,7 @@ plot(ts(x),xlab="Time",ylab="")
 - Code the autoregression using linear regression.
 
 ```{r}
-ar_mdl1 <- lm(x[-1] ~ x[-n])
+ar_mdl1 <- lm(x[-1] ~ x[-n] -1)
 summary(ar_mdl1)
 ```
 
@@ -143,7 +143,7 @@ summary(ar_mdl1)
 - OLS is *Ordinary Least Squares*, and yields the same results. (Here the mean is the sample mean of the data, and does not equal the intercept coefficient in the regression.)
 
 ```{r}
-ar_mdl2 <- ar.ols(x,order=1)
+ar_mdl2 <- ar.ols(x,order=1,aic=FALSE)
 ar_mdl2$ar[,1,1]
 ar_mdl2$x.mean
 ar_mdl2$var.pred
@@ -152,7 +152,7 @@ ar_mdl2$var.pred
 - Another method is *Yule-Walker*, which is based on estimating so-called *autocovariances*.
 
 ```{r}
-ar_mdl3 <- ar.yw(x,order=1)
+ar_mdl3 <- ar.yw(x,order=1,aic=FALSE)
 ar_mdl3$ar
 ar_mdl3$x.mean
 ar_mdl3$var.pred

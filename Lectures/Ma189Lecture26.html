@@ -544,31 +544,30 @@ X_t = \mu +  \phi \, X_{t-1} + Z_t.
 <ul>
 <li>Code the autoregression using linear regression.</li>
 </ul>
-<pre class="r"><code>ar_mdl1 &lt;- lm(x[-1] ~ x[-n])
+<pre class="r"><code>ar_mdl1 &lt;- lm(x[-1] ~ x[-n] -1)
 summary(ar_mdl1)</code></pre>
 <pre><code>## 
 ## Call:
-## lm(formula = x[-1] ~ x[-n])
+## lm(formula = x[-1] ~ x[-n] - 1)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -2.32808 -0.53784 -0.05413  0.59265  2.19750 
+## -2.23871 -0.44521  0.04144  0.69570  2.27754 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  0.12268    0.09519   1.289    0.201    
-## x[-n]        0.84285    0.05489  15.354   &lt;2e-16 ***
+##       Estimate Std. Error t value Pr(&gt;|t|)    
+## x[-n]  0.86119    0.05319   16.19   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9147 on 97 degrees of freedom
-## Multiple R-squared:  0.7085, Adjusted R-squared:  0.7055 
-## F-statistic: 235.8 on 1 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.9178 on 98 degrees of freedom
+## Multiple R-squared:  0.7279, Adjusted R-squared:  0.7251 
+## F-statistic: 262.1 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ul>
 <li>We can also use time series packages.</li>
 <li>OLS is <em>Ordinary Least Squares</em>, and yields the same results. (Here the mean is the sample mean of the data, and does not equal the intercept coefficient in the regression.)</li>
 </ul>
-<pre class="r"><code>ar_mdl2 &lt;- ar.ols(x,order=1)
+<pre class="r"><code>ar_mdl2 &lt;- ar.ols(x,order=1,aic=FALSE)
 ar_mdl2$ar[,1,1]</code></pre>
 <pre><code>## [1] 0.8428458</code></pre>
 <pre class="r"><code>ar_mdl2$x.mean</code></pre>
@@ -578,7 +577,7 @@ ar_mdl2$ar[,1,1]</code></pre>
 <ul>
 <li>Another method is <em>Yule-Walker</em>, which is based on estimating so-called <em>autocovariances</em>.</li>
 </ul>
-<pre class="r"><code>ar_mdl3 &lt;- ar.yw(x,order=1)
+<pre class="r"><code>ar_mdl3 &lt;- ar.yw(x,order=1,aic=FALSE)
 ar_mdl3$ar</code></pre>
 <pre><code>## [1] 0.8216754</code></pre>
 <pre class="r"><code>ar_mdl3$x.mean</code></pre>
