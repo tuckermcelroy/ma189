@@ -19,7 +19,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 
 - In nonparametric regression we may estimate a slowly-changing mean via averaging over neighboring values, e.g.,
 \[
-   \frac{1}{2m+1} \sum_{k = -m}^m \psi_k \, X_{t-k}.
+   \frac{1}{2m+1} \sum_{k = -m}^m   X_{t-k}.
 \]
  This weights the past $m$ and the future $m$ observations equally, and is an example of a linear filter.  It also called a *moving average*, because the observations are averaged (over a window of $2m+1$ time points) in a way that moves over the time series. A *simple moving average* has equal weights (a general moving average could have unequal weights).
  
@@ -32,7 +32,7 @@ knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
 gassa <- read.table("GasSA_2-11-13.dat")
 gassa.log <- ts(log(gassa),start=1992,frequency=12)
 
-h <- 10
+h <- 20
 simple.ma <- rep(1,2*h+1)/(2*h+1)
 gas.trend <- filter(gassa.log,simple.ma,method="convolution",sides=2)
 gas.trend <- ts(gas.trend,start=1992,frequency=12)
@@ -96,7 +96,7 @@ mtext(text="Year",side=1,line=1,outer=TRUE)
  
 ### Simple Moving Average Filter
 
-- Expressed as $\Psi (B) = {(2m+1)} \sum_{k = -m}^m B^k$.
+- Expressed as $\Psi (B) = {(2m+1)}^{-1} \sum_{k = -m}^m B^k$.
 
 ## Differencing Filter
 
@@ -186,8 +186,9 @@ wstarts.sa <- wstarts.trend + wstarts.cycle
 comps <- ts(cbind(wstarts.trend,wstarts.seas,wstarts.cycle),start=1964,frequency=12)
 trend <- ts(wstarts.trend,start=1964,frequency=12)
 cycle <- ts(wstarts.cycle,start=1964,frequency=12)
+seas <- ts(wstarts.seas,start=1964,frequency=12)
 
-par(oma=c(2,0,0,0),mar=c(2,4,2,2)+0.1,mfrow=c(3,1),cex.lab=.8)
+par(oma=c(2,0,0,0),mar=c(2,4,2,2)+0.1,mfrow=c(4,1),cex.lab=.8)
 plot(Wstarts, ylab="West Starts",xlab="",yaxt="n",xaxt="n")
 axis(1,cex.axis=.5)
 axis(2,cex.axis=.5)
@@ -195,6 +196,9 @@ plot(trend,xlab="",ylab = "Trend",yaxt="n",xaxt="n")
 axis(1,cex.axis=.5)
 axis(2,cex.axis=.5)
 plot(cycle,xlab="",ylab = "Business Cycle",yaxt="n",xaxt="n")
+axis(1,cex.axis=.5)
+axis(2,cex.axis=.5)
+plot(seas,xlab="",ylab = "Seasonal",yaxt="n",xaxt="n")
 axis(1,cex.axis=.5)
 axis(2,cex.axis=.5)
 mtext(text="Year",side=1,line=1,outer=TRUE)

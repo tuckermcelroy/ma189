@@ -164,7 +164,7 @@ ar_mdl3$var.pred
 
 - Let $Z_t \sim \mbox{i.i.d.} (0,\sigma^2)$ and $\{ X_t \}$ defined via
 \[
- X_t = \phi_1 \, X_{t-1} + \ldots \phi_p \, X_{t-p} + Z_t
+ X_t = \phi_1 \, X_{t-1} + \ldots + \phi_p \, X_{t-p} + Z_t
 \]
 for $t \geq 1$.
 - The coefficients $\phi_1,\ldots, \phi_p$ satisfy complicated *stability conditions*.
