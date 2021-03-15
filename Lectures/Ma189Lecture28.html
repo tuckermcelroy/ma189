@@ -652,7 +652,7 @@ ar_mdl$order</code></pre>
 <h2>Example: Volatility Filtering of Dow</h2>
 <ul>
 <li>Consider the volatility filter <span class="math inline">\(\pi_j = 1/11\)</span> for <span class="math inline">\(|j| \leq 5\)</span>.</li>
-<li>Observe the increasd volatility in more recent years.</li>
+<li>Observe the increased volatility in more recent years.</li>
 </ul>
 <pre class="r"><code>p &lt;- 5
 dow.vol &lt;- filter(dow.diff^2,rep(1,2*p+1)/(2*p+1),method=&quot;convolution&quot;,sides=2)
