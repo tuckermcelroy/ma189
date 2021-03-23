@@ -1,0 +1,442 @@
+---
+title: "Math 189: Final Exam Solution"
+output: pdf_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = 'C:/Users/neide/Documents/GitHub/ma189/Data')
+```
+
+# Introduction
+
+In this final exam project for Math 189 the Swiss bank notes dataset is analyzed. We wish to predict whether a note is false or counterfeit using supervised learning. The dataset was provided in the course materials (https://github.com/tuckermcelroy/ma189), and is taken from "Multivariate Statistics: A practical approach", by Bernhard Flury and Hans Riedwyl, Chapman and Hall, 1988.
+
+The data contains six variables measured on 100 genuine and 100 counterfeit old Swiss 1000-franc bank notes. In particular, BN1 to BN100 are genuine banknotes and BN101 to BN200 are counterfeit banknotes. 
+The six features are:
+  
+1. Length of the note
+2. Width of the Left-Hand side of the note
+3. Width of the Right-Hand side of the note
+4. Width of the Bottom Margin
+5. Width of the Top Margin
+6. Diagonal Length of Printed Area
+ 
+There will be several elements to our analysis, utilizing many of the concepts from the course. In particular, we will use $K$-fold cross-validation to determine and fit the best models, and we will compare both Linear Discriminant Analysis and Logistic Regression. Also we will consider whether a factor model on the $6$ explanatory variables can be used to refine the predictive models. 
+
+# Analysis
+
+## Overview 
+
+The general approach we take is to first load and explore the data.  Then we wish to compare Linear Discriminant Analysis (LDA) with Logistic Regression (LR), in regards to their ability to discern real versus fake bills.  In order to assess which performs better, we will use concepts from cross-validation, examining which method performs better on a validation set. Thus, each method will be trained on a training set.
+
+In order to guard against biases that might arise from a single split of the data, we will use the $K$-fold Cross Validation method, where we choose $K = 5$. This will allow us to essentially make $K=5$ comparisons of LDA and LR, so that our assessment is not contingent on a single splitting. However, note that certain modeling features are particular to each split, and will be in essence "averaged out."  
+
+For instance, in LDA the determination of $\alpha$ and $\beta$ depends on estimates obtained from the particular split of the data; likewise in LR the choice of significant covariates may vary from fold to fold. These model parameters and settings are not determined outside of the cross-validation loop, and are incorporated into the overall comparison between LDA and LR. 
+
+A further element of our analysis involves examining the $6$ covariates to see whether they can be culled via factor modeling.  Note that the selection of a subset of variables is also associated to predictive ability (for the binary variable indicating counterfeit status), in the sense that a dimension reduction will only be entertained if there is not substantial decrease in predictive performance. A nuance is that this factor analysis is also performed within the cross-validation loop, for each split of the data, and hence the selection of dimension (as well as determination of the factor scores) is contingent on each particular fold.
+
+## Loading and Exploring the Data
+
+- We begin by loading the data, and examining the relationships via scatterplot.
+
+```{r}
+swiss <- read.table("SBN.txt")
+n_real <- 100
+n_fake <- 100
+swiss$real <- c(rep(1,n_real),rep(0,n_fake))
+```
+ 
+- The red dots are real francs, and blue dots are fake francs. 
+- There seems to be a fair amount of mingling.
+
+```{r}
+pairs(rbind(swiss[swiss$real==1,1:6],swiss[swiss$real==0,1:6]),
+      pch=20,col=c(2,4))
+```
+
+## Spliting the Data  
+
+Our purpose now is to split the data into $K=5$ folds.  This means taking $20 \%$ of the real and fake notes as a validation set, and the other $80 \%$ (consisting of the other $4$ folds) as the training set. Since there is no reason to think the data has any ordering, we deterministically split the data.  Our first fold is obtained from the first $20$ records for both real and fake bills, and this will be the *validation* (or test) set. We walk through this analysis explicitly for the first fold; later in the report, all the code is repeated for all $5$ folds.
+
+```{r}
+fold1.ind <- seq(1,20)
+fold1.ind <- c(fold1.ind,100+fold1.ind)
+swiss.train <- swiss[-fold1.ind,]
+swiss.test <- swiss[fold1.ind,]
+```
+
+## Linear Discriminant Analysis
+
+We take a straightforward implementation of LDA.  The prior probabilities are set to the respective proportions of real and fake bills, or $p = .5$ for both. The following code estimates the parameters on the training set, and computes estimates of $\alpha$ and $\beta$.
+
+### Train
+
+We fit the LDA procedure to the training data, outputting the $\alpha$ (intercept) and $\beta$ (slope) coefficients.
+
+```{r}
+# set priors
+p_real <- 1/2
+p_fake <- 1/2
+
+# mean vectors 
+Mean_real <- colMeans(swiss.train[swiss.train$real == 1,1:6])
+Mean_fake <- colMeans(swiss.train[swiss.train$real == 0,1:6])
+#rbind(Mean_real,Mean_fake)
+
+# pooled covariance
+S_real <- cov(swiss.train[swiss.train$real == 1,1:6])
+S_fake <- cov(swiss.train[swiss.train$real == 0,1:6])
+S_pooled <- ((n_real-1)*S_real +(n_fake-1)*S_fake)/(n_real+n_fake-2)
+#S_pooled
+
+# intercepts
+S_inv <- solve(S_pooled)
+alpha_real <- -0.5* t(Mean_real) %*% S_inv %*% Mean_real + log(p_real)
+alpha_fake <- -0.5* t(Mean_fake) %*% S_inv %*% Mean_fake + log(p_fake)
+alpha <- c(alpha_real,alpha_fake)
+alpha
+
+# slopes
+beta_real <- S_inv %*% Mean_real
+beta_fake <- S_inv %*% Mean_fake
+beta <- cbind(beta_real,beta_fake)
+beta
+```
+
+### Evaluate
+
+In order to assess performance, we obtain the confusion matrix, or the tally of correct and incorrect classifications.  The off-diagonal entries in the confusion matrix correspond to tallies of incorrect classifications, so by summing these cells we get a measure of performance, lower values being better.  We see that classification is perfect, which may be a fluke due to the splitting.
+
+```{r}
+predictions <- NULL
+
+for(i in 1:nrow(swiss.test)){
+    #Read an ovservation in test data
+    x <- t(swiss.test[i,1:6])
+
+    #Calculate linear discriminant functions for each 
+    d_real <- alpha_real + t(beta_real) %*% x
+    d_fake <- alpha_fake + t(beta_fake) %*% x
+
+    prediction <- 0
+    if(d_real >= d_fake) { prediction <- 1 }
+    predictions <- c(predictions,prediction)
+}
+#predictions
+
+# Check the prediction accuracy
+table(predict=predictions, truth=swiss.test$real)
+```
+
+### Factor Analysis
+
+We now have a LDA model that works quite well on the first fold, and we could consider refining it.  Are all $6$ variables really necessary?  That is perhaps some linear combination of the $6$ variables is really sufficient to get good classification. Reflecting on this a bit, we realize that if a factor model can be fitted to the $6$ variables, then the factor scores can then be passed into the LDA framework. If the dimension is reduced from $6$ to some $m < 6$, then the factor scores will be a new $n \times m$-dimensional data set (here $n = 160$, due to the splitting) with the associated binary variable indicating counterfeit status.
+
+
+```{r}
+pca_result <- eigen(cor(swiss.train[,1:6]))
+pca_var <- pca_result$values
+pve <- pca_var/sum(pca_var)
+out2 <- cbind(pca_var,pve,cumsum(pve))
+colnames(out2) <- c("Eigenvalue","Proportion","Cumulative")
+rownames(out2) <- c("PC1","PC2","PC3","PC4","PC5","PC6")
+out2
+```
+
+We use PCA to do the estimation and analysis, since this is more timely than running a full MLE routine. We see above that using $m=4$ components still explains $92 \%$ of the variation.  Hence we pursue a factor analysis with $4$ factors.
+
+```{r}
+factor.dim <- 4
+load.mat <- pca_result$vector[,seq(1,factor.dim)]
+factor.scores <- solve(t(load.mat) %*% load.mat) %*% t(load.mat) %*% t(swiss.train[,1:6])
+```
+
+### Repeat LDA with Factor Scores
+
+We now repeat the training and evaluation of the LDA method, using this new dataset.
+
+```{r}
+swiss.subtrain <- cbind(t(factor.scores),swiss.train$real)
+
+# set priors
+p_real <- 1/2
+p_fake <- 1/2
+
+# mean vectors 
+Mean_real <- colMeans(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 1,1:factor.dim])
+Mean_fake <- colMeans(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 0,1:factor.dim])
+#rbind(Mean_real,Mean_fake)
+
+# pooled covariance
+S_real <- cov(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 1,1:factor.dim])
+S_fake <- cov(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 0,1:factor.dim])
+S_pooled <- ((n_real-1)*S_real +(n_fake-1)*S_fake)/(n_real+n_fake-2)
+#S_pooled
+
+# intercepts
+S_inv <- solve(S_pooled)
+alpha_real <- -0.5* t(Mean_real) %*% S_inv %*% Mean_real + log(p_real)
+alpha_fake <- -0.5* t(Mean_fake) %*% S_inv %*% Mean_fake + log(p_fake)
+alpha <- c(alpha_real,alpha_fake)
+#alpha
+
+# slopes
+beta_real <- S_inv %*% Mean_real
+beta_fake <- S_inv %*% Mean_fake
+beta <- cbind(beta_real,beta_fake)
+#beta
+
+predictions <- NULL
+
+for(i in 1:nrow(swiss.test)){
+    #Read an ovservation in test data
+    x <- t(swiss.test[i,1:6])
+    z <- solve(t(load.mat) %*% load.mat) %*% t(load.mat) %*% x
+    
+    #Calculate linear discriminant functions for each 
+    d_real <- alpha_real + t(beta_real) %*% z
+    d_fake <- alpha_fake + t(beta_fake) %*% z
+
+    prediction <- 0
+    if(d_real >= d_fake) { prediction <- 1 }
+    predictions <- c(predictions,prediction)
+}
+#predictions
+
+# Check the prediction accuracy
+table(predict=predictions, truth=swiss.test$real)
+```
+
+On this first split, LDA works perfectly, and we can reduce the dimension of the covariates from $6$ to $4$ without any loss to our results.
+
+### Combining LDA Results Over $K=5$ Splits
+
+Now we combine all this analysis over the splits by writing a small loop. We will automatically select a factor dimension in the following way: we want to explain at least $90 \%$ of the variation.
+
+```{r}
+mspe.lda <- 0
+for (fold in 1:5)
+{
+  
+fold.ind <- matrix(seq(1,100),ncol=5)[,fold]
+fold.ind <- c(fold.ind,100+fold.ind)
+swiss.train <- swiss[-fold.ind,]
+swiss.test <- swiss[fold.ind,]
+
+pca_result <- eigen(cor(swiss.train[,1:6]))
+pca_var <- pca_result$values
+pve <- pca_var/sum(pca_var)
+factor.dim <- min(seq(1,6)[cumsum(pve) >= .90])
+load.mat <- pca_result$vector[,seq(1,factor.dim),drop=FALSE]
+factor.scores <- solve(t(load.mat) %*% load.mat) %*% t(load.mat) %*% t(swiss.train[,1:6])
+ 
+swiss.subtrain <- cbind(t(factor.scores),swiss.train$real)
+
+# set priors
+p_real <- 1/2
+p_fake <- 1/2
+
+# mean vectors 
+Mean_real <- colMeans(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 1,1:factor.dim])
+Mean_fake <- colMeans(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 0,1:factor.dim])
+#rbind(Mean_real,Mean_fake)
+
+# pooled covariance
+S_real <- cov(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 1,1:factor.dim])
+S_fake <- cov(swiss.subtrain[swiss.subtrain[,factor.dim+1] == 0,1:factor.dim])
+S_pooled <- ((n_real-1)*S_real +(n_fake-1)*S_fake)/(n_real+n_fake-2)
+#S_pooled
+
+# intercepts
+S_inv <- solve(S_pooled)
+alpha_real <- -0.5* t(Mean_real) %*% S_inv %*% Mean_real + log(p_real)
+alpha_fake <- -0.5* t(Mean_fake) %*% S_inv %*% Mean_fake + log(p_fake)
+alpha <- c(alpha_real,alpha_fake)
+#alpha
+
+# slopes
+beta_real <- S_inv %*% Mean_real
+beta_fake <- S_inv %*% Mean_fake
+beta <- cbind(beta_real,beta_fake)
+#beta
+
+predictions <- NULL
+
+for(i in 1:nrow(swiss.test)){
+    #Read an ovservation in test data
+    x <- t(swiss.test[i,1:6])
+    z <- solve(t(load.mat) %*% load.mat) %*% t(load.mat) %*% x
+    
+    #Calculate linear discriminant functions for each 
+    d_real <- alpha_real + t(beta_real) %*% z
+    d_fake <- alpha_fake + t(beta_fake) %*% z
+
+    prediction <- 0
+    if(d_real >= d_fake) { prediction <- 1 }
+    predictions <- c(predictions,prediction)
+}
+#predictions
+
+# Check the prediction accuracy
+out <- table(predict=predictions, truth=swiss.test$real)
+#print(out)
+mspe.lda <- mspe.lda + out[1,2] + out[2,1]
+
+}
+mspe.lda <- mspe.lda/5
+```
+
+The $K$-fold cross-validation MSPE is `r mspe.lda`. This is quite low, and could be even better if we didn't do dimension reduction.  We note that another approach would be to do factor analysis at the outset, before splitting, in which case we would obtain a best set of factor scores for LDA. This is an appealing alternative analysis to what we have done here, which in a sense incorporates dimension reduction within the LDA analysis.
+
+## Logistic Regression
+
+We now consider the Logistic Regression (LR) approach to the classification problem. The basic setting involves using all $6$ variables as covariates in the regression equation, and we mimic the discussion of LDA by first considering a single split. 
+
+```{r}
+fold1.ind <- seq(1,20)
+fold1.ind <- c(fold1.ind,100+fold1.ind)
+swiss.train <- swiss[-fold1.ind,]
+swiss.test <- swiss[fold1.ind,]
+```
+
+### Train
+
+First we examine all the variables, but the algorithm does not converge. This is indicative of either redundancy among covariates (quasi-linear dependence) or a close association of some covariates with the dependent variables; ironically, if the binary is highly predictable from some of the covariates, this can cause numerical problems. 
+
+```{r}
+library(ISLR)
+y <- swiss.train$real
+x <- cbind(swiss.train$Length,swiss.train$Left,swiss.train$Right,
+            swiss.train$Bottom,swiss.train$Top,swiss.train$Diagonal)
+all.fit <- glm(y~x,family=binomial)
+summary(all.fit)
+```
+
+Examining the correlation matrix, it seems the Diagonal variable has a tight association with the categorical.
+
+```{r}
+cor(swiss.train)
+```
+
+Therefore we could consider a LR model with only this covariate. With a bit of experimentation, we get convergence with all variables except *Bottom* included. However, only *Diagonal* is significant, and even the constant can be dropped. (However, we retain the constant because this is important for prediction.)
+
+```{r}
+y <- swiss.train$real
+x <- cbind(swiss.train$Length,swiss.train$Top,swiss.train$Right,
+           swiss.train$Left,swiss.train$Diagonal)
+sub.fit <- glm(y~x,family=binomial)
+summary(sub.fit)
+```
+
+So we finish this step with a refined model, with just the single covariate plus a constant.
+
+```{r}
+y <- swiss.train$real
+x <- swiss.train$Diagonal
+best.fit <- glm(y~x,family=binomial)
+summary(best.fit)
+```
+
+
+### Evaluate
+
+Like LDA, we assess performance through tallies drawn from the confusion matrix. We will consider results both from the larger model (with $5$ covariates and a constant) as well as the refined model. The larger model generates predictions that each bill is genuine, regardless of the values of covariates, and hence its performance is terrible ($50 \%$ success).  The refined model performs quite well.
+  
+
+```{r}
+pred_lr <- function(x,coefs){
+  pred <- as.numeric(as.numeric(x %*% coefs))
+  pred <- 1/(1+exp(-pred))
+  return(pred)
+}
+
+predictions.sub <- NULL
+predictions.best <- NULL
+
+for(i in 1:nrow(swiss.test)){
+    #Read an ovservation in test data
+    x <- t(swiss.test[i,c(1,2,3,5,6)])
+    pred.sub <- pred_lr(c(1,x),sub.fit$coefficients)
+    x <- t(swiss.test[i,6])
+    pred.best <- pred_lr(c(1,x),best.fit$coefficients)
+    prediction <- 0
+    if(pred.sub > .5) { prediction <- 1 }
+    predictions.sub <- c(predictions.sub,prediction)
+    prediction <- 0
+    if(pred.best > .5) { prediction <- 1 }
+    predictions.best <- c(predictions.best,prediction)
+}
+#predictions.sub
+#predictions.best
+
+# Check the prediction accuracy
+table(predict=predictions.sub, truth=swiss.test$real)
+table(predict=predictions.best, truth=swiss.test$real)
+```
+
+
+### Factor Analysis
+
+Given the preceding results, it is unlikely that factor analysis will be helpful at all. For one thing, the best model seems to involve a single covariate, for which no dimension reduction is possible.  However, we proceed by considering various possible reductions of dimension, noting that the cumulative variability results have already been discussed above.
+
+```{r}
+pca_result <- eigen(cor(swiss.train[,1:6]))
+factor.dim <- 4
+load.mat <- pca_result$vector[,seq(1,factor.dim)]
+factor.scores <- solve(t(load.mat) %*% load.mat) %*% t(load.mat) %*% t(swiss.train[,1:6])
+
+y <- swiss.train$real
+x <- t(factor.scores)
+factor.fit <- glm(y~x,family=binomial)
+summary(factor.fit)
+```
+
+Having also tried other factor dimensions (from $5$ down to $1$), we find that the LR model does not fit the factor scores well.  This approach shall be abandoned henceforth.
+
+### Combining LR Results Over $K=5$ Splits
+
+Like the LDA, we now combine the LR analysis over the splits by writing a small loop. There will be no factor analysis, and we instead use the single covariate *Diagonal*.
+
+```{r}
+mspe.lr <- 0
+for (fold in 1:5)
+{
+  
+fold.ind <- matrix(seq(1,100),ncol=5)[,fold]
+fold.ind <- c(fold.ind,100+fold.ind)
+swiss.train <- swiss[-fold.ind,]
+swiss.test <- swiss[fold.ind,]
+
+y <- swiss.train$real
+x <- swiss.train$Diagonal
+best.fit <- glm(y~x,family=binomial)
+
+predictions.best <- NULL
+
+for(i in 1:nrow(swiss.test)){
+    #Read an ovservation in test data
+    x <- t(swiss.test[i,6])
+    pred.best <- pred_lr(c(1,x),best.fit$coefficients)
+    prediction <- 0
+    if(pred.best > .5) { prediction <- 1 }
+    predictions.best <- c(predictions.best,prediction)
+}
+
+# Check the prediction accuracy
+out <- table(predict=predictions.best, truth=swiss.test$real)
+#print(out)
+mspe.lr <- mspe.lr + out[1,2] + out[2,1]
+
+}
+mspe.lr <- mspe.lr/5
+```
+
+The $K$-fold cross-validation MSPE is `r mspe.lr`. In the third split there was a problem with the fitting, although the predictions came out perfect anyways. In fact, there was a single error in $2$ of the $5$ splits, so performance is quite good overall. 
+
+# Summary
+
+We have proposed two different approaches for categorizing counterfeit status. First, LDA with factor modeling (to dimension reduce the covariates) is explored, and secondly we examine LR with only using the sixth variable (*Diagonal*) along with a constant.  Because there is a high degree of predictability on the basis of different characteristics, the error rate for both methods is extremely low. We have assessed both methods by using $K$-fold cross-validation (with $K=5$), essentially making certain modeling decisions within the loop over the splits.  It seems that the *Diagonal* variable is really driving most of the differentiation between real and fake notes, in the sense that once the *Diagonal* variable is included in the LR model, the other covariates become irrelevant.  However, such a finding is not readily apparent from the LDA approach, which in some sense is more robust as an algorithm, since there is no issue of failed convergence of nonlinear optimization as occurred with LR.
+
+Both approaches achieve excellent results on the validation set, which estimates a test set by doing out-of-sample prediction.  So, either method could be reliably used. If a choice is to be made, we note that the LR method had more error and also can run into numerical problems. The LDA in contrast is more numerically stable, but does rely on tuning parameters such as the prior probabilities, and the threshold variability for the factor dimension. Regarding the dimension reduction due to factor analysis, there seems to be no pressing need to utilize this in the LDA approach, and it is actually unhelpful in LR.  These considerations may lead us to prefer LDA, while noting the insights available from LR (such as the predicted probabilities of group membership) are an asset of that method.
+
+
